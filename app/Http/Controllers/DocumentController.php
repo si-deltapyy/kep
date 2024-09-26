@@ -16,6 +16,13 @@ use PHPUnit\Event\TypeMap;
 class DocumentController extends Controller
 {
 
+    public function index(){
+        $doc = Dummy::where('user_id', Auth::user()->id)
+        ->get();
+
+        return view('user.dokumen.index', compact('doc'));
+    }
+
     public function show(){
         // $doc = Submission::where('user_id', Auth::user()->id)->with([
         //     'user',
@@ -26,7 +33,7 @@ class DocumentController extends Controller
         $doc = Dummy::where('user_id', Auth::user()->id)
         ->get();
 
-        return view('user.dokumen.index', compact('doc', 'user'));
+        return view('user.dokumen.index', compact('doc'));
     }
 
     public function create(){
@@ -68,13 +75,13 @@ class DocumentController extends Controller
 
                 // Handle the file upload
                 $file = $request->file($inputName);
-                $fileName = $x->name . '.' . $file->getClientOriginalExtension(); // Menggunakan timestamp untuk nama unik
-                $pathDoc = $file->storeAs('document', Auth::user()->name.'_'.$fileName, 'public'); // Store the file in the 'public/documents' directory
+                $fileName = Auth::user()->name.'_'.$x->name .'.' . $file->getClientOriginalExtension(); // Menggunakan timestamp untuk nama unik
+                $pathDoc = $file->storeAs('document', $fileName, 'public'); // Store the file in the 'public/documents' directory
 
                 // Save file information in the database
                 Document::create([
                     'user_id' => Auth::user()->id,
-                    'doc_name' => 'berkas'.$x->name.'-'.Auth::user()->name,
+                    'doc_name' => 'berkas-'.$group.'/'.$x->name.'-'.Auth::user()->name,
                     'doc_path' => $pathDoc,
                     'doc_type' => $type ,
                     'doc_group' => $group, // Save the doc type based on the Type model

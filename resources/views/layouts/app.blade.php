@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth group" data-sidebar="brand" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>Robotech - Admin & Dashboard Template</title>
+    <title>KEP FKIP UNS</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"

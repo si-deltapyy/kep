@@ -11,7 +11,7 @@
                   var year = new Date();
                   document.write(year.getFullYear());
                 </script>
-                FKIP
+                Komisi Etik Penelitian FKIP UNS
                 <span
                   class="float-right hidden text-slate-600 dark:text-slate-400 md:inline-block"
                   >KEP FKIP</span

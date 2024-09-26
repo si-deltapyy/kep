@@ -27,7 +27,7 @@
                     @elseif($x->doc_status == 'approved')
                     <a href="{{ route('sekretariat.upload.ec', $x->doc_group) }}">Kelola EC</a>
                     @endif
-                    
+
                 </td>
             </tr>
             @endforeach
