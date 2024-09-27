@@ -3,11 +3,12 @@
         <a href="#" class="logo">
           <span>
             <img
-              src="assets/images/logo-sm.png"
+              src="{{ asset('assets/images/logo-fkip-uns-fkip.png') }}"
               alt="logo-small"
-              class="logo-sm h-8 align-middle inline-block"/>
+              style="height: 86px"
+              class="logo-lg logo-light hidden dark:inline-block ms-1 group-data-[sidebar=dark]:inline-block group-data-[sidebar=brand]:inline-block"/>
           </span>
-          <span>
+          {{-- <span>
             <img
               src="assets/images/logo.png"
               alt="logo-large"
@@ -16,7 +17,7 @@
               src="assets/images/logo.png"
               alt="logo-large"
               class="logo-lg h-[28px] logo-dark inline-block dark:hidden ms-1 group-data-[sidebar=dark]:hidden group-data-[sidebar=brand]:hidden"/>
-          </span>
+          </span> --}}
         </a>
       </div>
 
