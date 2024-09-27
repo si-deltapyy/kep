@@ -77,23 +77,22 @@
             document.addEventListener('DOMContentLoaded', function() {
                 const fileInputs = document.querySelectorAll('.file-input');
 
-                // Menyembunyikan semua input file terlebih dahulu
+
                 fileInputs.forEach(input => {
-                    input.style.display = 'none'; // Sembunyikan semua input
+                    input.style.display = 'none';
                 });
 
-                // Tampilkan input file pertama
+
                 if (fileInputs.length > 0) {
-                    fileInputs[0].style.display = 'block'; // Tampilkan input file pertama
+                    fileInputs[0].style.display = 'block';
                 }
 
-                // Menambahkan event listener untuk setiap input file
+
                 fileInputs.forEach((input, index) => {
                     input.addEventListener('change', function() {
-                        if (this.files.length > 0) { // Mengecek apakah file diisi
-                            // Tampilkan input file berikutnya
+                        if (this.files.length > 0) {
                             if (fileInputs[index + 1]) {
-                                fileInputs[index + 1].style.display = 'block'; // Tampilkan input file berikutnya
+                                fileInputs[index + 1].style.display = 'block';
                             }
                         }
                     });
