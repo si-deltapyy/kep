@@ -96,7 +96,7 @@ class DocumentController extends Controller
             'doc_status' => 'new-proposal'
         ]);
 
-        return redirect()->route('ajuan.index');
+        return redirect()->intended(route('ajuan.index'));
     }
 
 

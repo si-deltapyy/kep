@@ -21,6 +21,7 @@
     rel="stylesheet"
     />
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.min.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 
   </head>
 
@@ -62,6 +63,8 @@
     <script src="{{ asset('assets/libs/@frostui/tailwindcss/frostui.js') }}"></script>
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+
     <!-- JAVASCRIPTS -->
   </body>
 </html>
