@@ -34,7 +34,7 @@
         </tbody>
     </table>
 </div> --}}
-<a href="{{route('ajuan.upload')}}" class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
+<a href="{{route('user.ajuan.create')}}" class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
     <i class="ti ti-plus me-1"></i>
     Ajukan
     <span data-lucide="plus" class="w-4 h-4 inline-block me-2"></span>
