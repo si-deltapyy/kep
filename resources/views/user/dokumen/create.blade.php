@@ -7,8 +7,7 @@
 
 @endsection
 @section('content')
-
-{{-- <x-form-input method="POST" action="{{ route('ajuan.save') }}" has-file class="p-4">
+{{-- <x-form-input method="POST" action="{{ route('user.ajuan.store') }}" has-file class="p-4">
 
     <x-input title="Judul Usulan: " id="pengusul" type="text" class="form-control" name="pengusul"/><br>
 

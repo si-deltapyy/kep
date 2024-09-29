@@ -23,18 +23,18 @@ class DocumentController extends Controller
         return view('user.dokumen.index', compact('doc'));
     }
 
-    public function show(){
-        // $doc = Submission::where('user_id', Auth::user()->id)->with([
-        //     'user',
-        //     'logDocument',
-        //     'document'
-        // ])->get();
+    // public function show(){
+    //     // $doc = Submission::where('user_id', Auth::user()->id)->with([
+    //     //     'user',
+    //     //     'logDocument',
+    //     //     'document'
+    //     // ])->get();
 
-        $doc = Dummy::where('user_id', Auth::user()->id)
-        ->get();
+    //     $doc = Dummy::where('user_id', Auth::user()->id)
+    //     ->get();
 
-        return view('user.dokumen.index', compact('doc'));
-    }
+    //     return view('user.dokumen.index', compact('doc'));
+    // }
 
     public function create(){
         $type = TypeDoc::all();
@@ -42,7 +42,7 @@ class DocumentController extends Controller
         return view('user.dokumen.create', compact('type'));
     }
 
-    public function detail($ajuan){
+    public function show($ajuan){
         $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
         ->where('doc_group', $ajuan)->get();
 
@@ -96,7 +96,7 @@ class DocumentController extends Controller
             'doc_status' => 'new-proposal'
         ]);
 
-        return redirect()->intended(route('ajuan.index'));
+        return redirect()->route('user.ajuan.index');
     }
 
 
@@ -109,9 +109,9 @@ class DocumentController extends Controller
             Storage::delete('public/document/'.$doc->doc_name);
             $doc->delete();
 
-            return redirect()->route('ajuan.index')->with('success', 'Document berhasil dihapus');
+            return redirect()->route('user.ajuan.index')->with('success', 'Document berhasil dihapus');
         } else {
-            return redirect()->route('ajuan.index')->with('error', 'Document tidak ditemukan');
+            return redirect()->route('user.ajuan.index')->with('error', 'Document tidak ditemukan');
         }
     }
 }

@@ -38,11 +38,14 @@ Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth',
 // });
 
 Route::middleware(['auth', 'verified', 'role:user'])->group(function(){
-    Route::get('ajuan/upload', [DocumentController::class, 'create'])->name('ajuan.upload');
-    Route::post('ajuan/save', [DocumentController::class, 'store'])->name('ajuan.save');
-    Route::post('ajuan/delete/{ajuan}', [SekretariatController::class, 'destroy'])->name('ajuan.delete');
-    Route::get('ajuan/{ajuan}/detail', [DocumentController::class, 'detail'])->name('ajuan.detail');
-    Route::get('ajuan', [DocumentController::class, 'index'])->name('ajuan.index');
+    // Route::get('ajuan/upload', [DocumentController::class, 'create'])->name('ajuan.upload');
+    // Route::post('ajuan/save', [DocumentController::class, 'store'])->name('ajuan.save');
+    // Route::post('ajuan/delete/{ajuan}', [SekretariatController::class, 'destroy'])->name('ajuan.delete');
+    // Route::get('ajuan/{ajuan}/detail', [DocumentController::class, 'detail'])->name('ajuan.detail');
+    // Route::get('ajuan', [DocumentController::class, 'index'])->name('ajuan.index');
+
+    Route::resource('ajuan', DocumentController::class)->names('user.ajuan');
+
 
     Route::get('/message', [MessageController::class, 'index'])->name('message');
 
