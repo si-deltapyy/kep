@@ -19,3 +19,12 @@ export default {
 
     plugins: [forms],
 };
+
+
+module.exports = {
+
+    plugins: [
+        require('flowbite/plugin')
+    ]
+
+}

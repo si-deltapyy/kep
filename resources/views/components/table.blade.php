@@ -1,22 +1,21 @@
-<table class="w-full">
-    <thead class="bg-gray-50 dark:bg-gray-600/20">
-      <tr>
-
-       @foreach ($head as $head)
-       <th
-       scope="col"
-       class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase"
-     >
-       {{$head}}
-     </th>
-       @endforeach
-      </tr>
+<table class="w-full border-collapse" id="datatable_1">
+    <thead class="bg-slate-100 dark:bg-slate-700/20">
+        <tr>
+            @foreach ($head as $header)
+                <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                    {{ $header }}
+                </th>
+            @endforeach
+            @if($actionHeader)
+                <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                    Actions
+                </th>
+            @endif
+        </tr>
     </thead>
     <tbody>
-        <!-- 1 -->
         @foreach ($data as $row)
-          <tr class="bg-white border-b border-dashed dark:bg-gray-900 dark:border-gray-700/40">
-            <!-- 2 -->
+        <tr class="bg-white border-b border-dashed dark:bg-gray-900 dark:border-gray-700/40">
             @foreach ($row as $cell)
               <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                {{ $cell }}

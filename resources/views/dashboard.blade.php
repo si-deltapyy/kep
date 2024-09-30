@@ -1,76 +1,3 @@
-{{--
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
-    </div> --}}
-                        {{--
-@role('user')
-    @can('update-profile')
-    <a href="{{route('profile.index', Auth::user()->id)}}">Profile</a>
-    @endcan
-
-    @can('done-profile')
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
-                        <table border="1">
-                            <thead>
-                                <tr>
-                                    <td>Nama</td>
-                                    <td>Prodi</td>
-                                    <td>Status</td>
-                                    <td>No Telepon</td>
-                                    <td>Alamat</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($profile as $x)
-                                <tr>
-                                    <td>{{$x->name}}</td>
-                                    <td>{{$x->prodi->name}}</td>
-                                    <td>{{$x->status}}</td>
-                                    <td>{{$x->phone_number}}</td>
-                                    <td>{{$x->address}}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <!-- navigation -->
-                    <a href="{{ route('ajuan.index') }}">Kelola Ajuan Ethical Clearance</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <a href="{{route('profile.index', Auth::user()->id)}}">Profile</a>
-    @endcan
-@endrole
-
-@role('reviewer')
-<h4>reviewer</h4>
-<a href="{{route('reviewer.pengajuan.index')}}">List Ajuan</a>
-@endrole
-
-@role('sekretariat')
-<h4>sekretariat</h4>
-<a href="{{route('sekretariat.pengajuan.index')}}">List Ajuan</a>
-<a href="{{route('sekretariat.review.index')}}">List Reviewer</a>
-<a href="{{route('sekretariat.ec.index')}}">Dokumen EC</a>
-<a href="{{route('sekretariat.ec.index')}}">User Request</a>
-@endrole --}}
-
 
 
 @extends('layouts.app')
@@ -78,7 +5,6 @@
 <x-page-tittle :title="'Dashboard'" :slash1="'Users'" :slash2="'Dashboard'" :slash3="''"></x-page-tittle>
 @endsection
 
-@role('user')
 @section('content')
 @can('update-profile')
 <div class="my-4">
@@ -736,4 +662,3 @@
 </div>
 @endcan
 @endsection
-@endrole

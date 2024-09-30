@@ -21,6 +21,8 @@
     rel="stylesheet"
     />
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.min.css') }}" />
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('assets/libs/simple-datatables/style.css') }}">
 
   </head>
 
@@ -56,12 +58,17 @@
 
     <!-- JAVASCRIPTS -->
     <!-- <div class="menu-overlay"></div> -->
+
+    <script src="{{ asset('assets/libs/simple-datatables/umd/simple-datatables.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/datatable.init.js') }}"></script>
     <script src="{{ asset('assets/libs/lucide/umd/lucide.min.js') }}"></script>
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/libs/flatpickr/flatpickr.min.js') }}"></script>
     <script src="{{ asset('assets/libs/@frostui/tailwindcss/frostui.js') }}"></script>
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+
     <!-- JAVASCRIPTS -->
   </body>
 </html>

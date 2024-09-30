@@ -12,31 +12,31 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // DB::unprepared('
-        // CREATE TRIGGER before_document_insert
-        // AFTER INSERT ON document
-        // FOR EACH ROW
-        // BEGIN
-        //     INSERT INTO log_document (note, doc_id, user_id, doc_status, created_at, updated_at)
-        //     VALUES ( null, NEW.id, NEW.user_id, default, NOW(), NOW());
-        // END;
-        // ');
+        DB::unprepared('
+        CREATE TRIGGER before_document_insert
+        AFTER INSERT ON document
+        FOR EACH ROW
+        BEGIN
+            INSERT INTO log_document (note, doc_id, user_id, doc_status, created_at, updated_at)
+            VALUES ( null, NEW.id, NEW.user_id, default, NOW(), NOW());
+        END;
+        ');
 
-        // DB::unprepared('
-        // CREATE TRIGGER after_document_insert
-        // AFTER INSERT ON log_document
-        // FOR EACH ROW
-        // BEGIN
-        //     DECLARE doc_user_id INT;
+        DB::unprepared('
+        CREATE TRIGGER after_document_insert
+        AFTER INSERT ON log_document
+        FOR EACH ROW
+        BEGIN
+            DECLARE doc_user_id INT;
 
-        //     -- Retrieve user_id from the document table based on the doc_id inserted in log_document
-        //     SELECT doc_group INTO doc_user_id FROM document WHERE id = NEW.doc_id;
+            -- Retrieve user_id from the document table based on the doc_id inserted in log_document
+            SELECT doc_group INTO doc_user_id FROM document WHERE id = NEW.doc_id;
 
-        //     -- Insert into submission table
-        //     INSERT INTO submission (user_id, log_id, doc_group, created_at, updated_at)
-        //     VALUES ( NEW.user_id, NEW.id, doc_user_id, NOW(), NOW());
-        // END;
-        // ');
+            -- Insert into submission table
+            INSERT INTO submission (user_id, log_id, doc_group, created_at, updated_at)
+            VALUES ( NEW.user_id, NEW.id, doc_user_id, NOW(), NOW());
+        END;
+        ');
 
         DB::unprepared('
         CREATE TRIGGER after_user_reg
@@ -70,8 +70,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // DB::unprepared('DROP TRIGGER IF EXISTS before_document_insert');
+        DB::unprepared('DROP TRIGGER IF EXISTS before_document_insert');
         DB::unprepared('DROP TRIGGER IF EXISTS after_document_update');
-        // DB::unprepared('DROP TRIGGER IF EXISTS after_user_reg');
+        DB::unprepared('DROP TRIGGER IF EXISTS after_user_reg');
     }
 };
