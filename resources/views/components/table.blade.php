@@ -21,7 +21,13 @@
               <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                {{ $cell }}
               </td>
+
             @endforeach
+            <td>
+                <x-button>
+                    Hapus
+                </x-button>
+            </td>
           </tr>
         @endforeach
       </tbody>

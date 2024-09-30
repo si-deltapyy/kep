@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     Simplicity is the essence of happiness. - Cedric Bledsoe
 </div>
 <div>
@@ -35,4 +35,31 @@
     </table>
 </div>
 
+ --}}
 
+ @extends('layouts.app')
+ @section('title')
+ <x-page-tittle :title="'List Ajuan Ethical Clereance'" :slash1="'Daftar Ajuan'" :slash2="'List'" :slash3="''"></x-page-tittle>
+ @endsection
+
+ @section('content')
+ <div class="grid grid-cols-1 p-0 md:p-4">
+     <div class="sm:-mx-6 lg:-mx-8">
+         <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
+             {{-- table --}}
+             <!-- resources/views/somepage.blade.php -->
+             <x-table :head="['ID', 'Judul Usulan', 'Status', 'Action']" :data="$doc->map(function($docc) {
+                 return [
+                     $docc->id,
+                     $docc->title,
+                     $docc->doc_status,
+                     'sa',
+                 ];
+             })->toArray()" />
+         </div>
+         <!--end div-->
+     </div>
+     <!--end div-->
+ </div>
+ <!--end grid-->
+ @endsection

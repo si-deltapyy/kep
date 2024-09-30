@@ -240,8 +240,8 @@
                         <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
                             {{-- table --}}
                             <!-- resources/views/somepage.blade.php -->
-                            <x-table :head="['ID', 'Name', 'Email']" :data="$user->map(function($user) {
-                                return [$user->id, $user->name, $user->email];
+                            <x-table :head="['No', 'Name', 'Status']" :data="$user->map(function($user) {
+                                return [$user->id, $user->title, $user->doc_status];
                             })->toArray()" />
                         </div>
                         <!--end div-->

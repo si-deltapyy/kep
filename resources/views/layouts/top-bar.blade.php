@@ -165,9 +165,10 @@
               id="navUserdata"
             >
               <ul class="py-1" aria-labelledby="navUserdata">
+                @role('user')
                 <li>
                   <a
-                    href="{{route('profile.index', Auth::user()->id)}}"
+                    href="{{route('user.profile.index', Auth::user()->id)}}"
                     class="flex items-center py-2 px-3 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-200 dark:hover:bg-gray-900/20 dark:hover:text-white"
                   >
                     <span
@@ -177,6 +178,7 @@
                     Profile</a
                   >
                 </li>
+                @endrole
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
