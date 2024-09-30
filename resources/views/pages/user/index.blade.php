@@ -1,4 +1,4 @@
-<table border="1">
+{{-- <table border="1">
     <thead>
         <tr>
             <td>Name</td>
@@ -22,4 +22,30 @@
         </tr>
         @endforeach
     </tbody>
-</table>
+
+</table> --}}
+
+@extends('layouts.app')
+@section('title')
+<x-page-tittle :title="'List Reviewer'" :slash1="'Pengajuan'" :slash2="'Dokumen'" :slash3="''"></x-page-tittle>
+@endsection
+
+@section('content')
+<div class="grid grid-cols-1 p-0 md:p-4">
+    <div class="sm:-mx-6 lg:-mx-8">
+        <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
+            {{-- table --}}
+            <!-- resources/views/somepage.blade.php -->
+            <x-table :head="['ID', 'Judul Usulan', 'Status', 'Action']" :data="$user->map(function($user) {
+                return [
+                    $user->name,
+                    $user->email
+                ];
+            })->toArray()" />
+        </div>
+        <!--end div-->
+    </div>
+    <!--end div-->
+</div>
+<!--end grid-->
+@endsection

@@ -237,15 +237,23 @@
                 </nav>
               </div>
               <div class="col-auto d-flex gap-3">
+                @if (Auth::check())
                 <div class="header-button">
-                  <a href="{{ route('login') }}" class="th-btn shadow-none"
-                    >Login</a>
-                </div>
-                <div class="header-button">
-                    <a href="{{ route('register') }}" class="th-btn shadow-none"
-                      >Register<i class="fas fa-arrow-right ms-2"></i
-                    ></a>
+                    <a href="{{ route('dashboard') }}" class="th-btn shadow-none"
+                      >Dashboard</a>
                   </div>
+                @else
+                <div class="header-button">
+                    <a href="{{ route('login') }}" class="th-btn shadow-none"
+                      >Login</a>
+                  </div>
+                  <div class="header-button">
+                      <a href="{{ route('register') }}" class="th-btn shadow-none"
+                        >Register<i class="fas fa-arrow-right ms-2"></i
+                      ></a>
+                    </div>
+                @endif
+
               </div>
 
             </div>

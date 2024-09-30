@@ -12,6 +12,8 @@ class Document extends Model
     public $table = 'document';
     protected $guarded = ['id'];
 
+    protected $fillable = ['user_id', 'doc_name', 'doc_path', 'doc_type', 'doc_group'];
+
     public function logDocument()
     {
         return $this->hasMany(LogDocument::class, 'doc_id');

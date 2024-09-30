@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Document;
+use App\Models\Dummy;
 use App\Models\ProfileUser;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -24,7 +26,7 @@ class HomeController extends Controller
             'prodi'
         ])->first();
 
-        $user = User::all();
+        $user = Dummy::where('user_id', Auth::user()->id)->get();
 
         // return $profile;
 

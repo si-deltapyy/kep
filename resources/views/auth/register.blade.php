@@ -1,50 +1,67 @@
+@extends('layouts.auth')
+@section('content')
+<div class="text-center p-6 bg-slate-900 rounded-t">
+    <a href="index.html"><img src="assets/images/logo-sm.png" alt="" class="w-14 h-14 mx-auto mb-2"></a>
+    <h3 class="font-semibold text-white text-xl mb-1">Let's Get Started Tailwind</h3>
+    <p class="text-xs text-slate-400">Sign in to continue to Tailwind.</p>
+</div>
 
-<form method="POST" action="{{ route('register') }}">
-        @csrf
+<form class="p-6" method="POST" action="{{ route('register') }}">
+    @csrf
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+    <x-auth-field
+        label="Name"
+        name="name"
+        type="text"
+        placeholder="Enter your name"
+        :value="old('name')"
+        required
+        autofocus
+        autocomplete="name"
+        title="Name"
+    />
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+    <x-auth-field
+        label="Email"
+        name="email"
+        type="email"
+        placeholder="Enter your email"
+        :value="old('email')"
+        required
+        autocomplete="username"
+        title="Email"
+    />
+    <x-auth-field
+        label="Your password"
+        name="password"
+        type="password"
+        placeholder="Enter your password"
+        required
+        autocomplete="new-password"
+        title="Password"
+    />
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+    <x-auth-field
+        label="Confirm Password"
+        name="password_confirmation"
+        type="password"
+        placeholder="Confirm your password"
+        required
+        autocomplete="new-password"
+        title="Confirm Password"
+    />
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+    <div class="mt-4">
+        <button
+            class="w-full px-2 py-2 tracking-wide text-white transition-colors duration-200 transform bg-brand-500 rounded-md hover:bg-brand-600 focus:outline-none focus:bg-brand-600">
+            Register
+        </button>
+    </div>
+</form>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+<p class="mb-5 text-sm font-medium text-center text-slate-500"> Already have an account ?  <a href="{{ route('login') }}"
+    class="font-medium text-brand-500 hover:underline">Log in</a>
+</p>
+@endsection
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-        
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <button type="submit">Reg</button>
-        </div>
-    </form>

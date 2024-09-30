@@ -81,7 +81,7 @@ class DocumentController extends Controller
                 // Save file information in the database
                 Document::create([
                     'user_id' => Auth::user()->id,
-                    'doc_name' => 'berkas-'.$group.'/'.$x->name.'-'.Auth::user()->name,
+                    'doc_name' => 'berkas-'.$group.'-'.$x->name.'-'.Auth::user()->name,
                     'doc_path' => $pathDoc,
                     'doc_type' => $type ,
                     'doc_group' => $group, // Save the doc type based on the Type model

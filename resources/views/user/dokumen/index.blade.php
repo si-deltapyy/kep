@@ -1,39 +1,32 @@
+@php
+// Data
+$head1 = ['ID', 'Judul Usulan', 'Status'];
+$data1 = $doc->map(function($doc) {
+    return [
+        'id' => $doc->id,
+        'Judul Usulan' => $doc->title,
+        'Status' => $doc->doc_status,
+    ];
+});
+
+
+$actions1 = $doc->mapWithKeys(function ($doc) {
+    return [
+        $doc->id => '<form action="' . route('sekretariat.review.destroy', $doc->id) . '" method="post" style="display:inline;">
+            ' . csrf_field() .
+            method_field('DELETE') . '
+            <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
+        </form>'
+    ];
+})->toArray();
+@endphp
+
 @extends('layouts.app')
 @section('title')
 <x-page-tittle :title="'Pengajuan Ethical Clereance'" :slash1="'Pengajuan'" :slash2="'Dokumen'" :slash3="''"></x-page-tittle>
 @endsection
 
 @section('content')
-{{-- <div>
-    <table border="1" class="table">
-        <thead>
-            <tr>
-                <td>Id</td>
-                <td>Judul Usulan</td>
-                <td>Tanggal Pengajuan</td>
-                <td>Status</td>
-                <td>Detail</td>
-                @can('resubmission')
-                <td>Note</td>
-                @endcan
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($doc as $doc)
-            <tr>
-                <td>{{$doc->id}}</td>
-                <td>{{$doc->title}}</td>
-                <td>{{$doc->created_at}}</td>
-                <td>{{$doc->doc_status}}</td>
-                <td><a href="{{ route('ajuan.detail', $doc->doc_group) }}">cek detail</a></td>
-                @can('resubmission')
-                <td>Revisi Ulang</td>
-                @endcan
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div> --}}
 <a href="{{route('user.ajuan.create')}}" class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
     <i class="ti ti-plus me-1"></i>
     Ajukan
@@ -44,14 +37,12 @@
         <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
             {{-- table --}}
             <!-- resources/views/somepage.blade.php -->
-            <x-table :head="['ID', 'Judul Usulan', 'Status', 'Action']" :data="$doc->map(function($docc) {
-                return [
-                    $docc->id,
-                    $docc->title,
-                    $docc->doc_status,
-                    'sa',
-                ];
-            })->toArray()" />
+            <x-table
+                            :head="$head1"
+                            :data="$data1->toArray()"
+                            :actionHeader="true"
+                            :actionColumn="$actions1"
+                        />
         </div>
         <!--end div-->
     </div>

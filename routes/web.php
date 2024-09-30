@@ -37,14 +37,14 @@ Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth',
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-Route::middleware(['auth', 'verified', 'role:user'])->group(function(){
+Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->group(function(){
     // Route::get('ajuan/upload', [DocumentController::class, 'create'])->name('ajuan.upload');
     // Route::post('ajuan/save', [DocumentController::class, 'store'])->name('ajuan.save');
     // Route::post('ajuan/delete/{ajuan}', [SekretariatController::class, 'destroy'])->name('ajuan.delete');
     // Route::get('ajuan/{ajuan}/detail', [DocumentController::class, 'detail'])->name('ajuan.detail');
     // Route::get('ajuan', [DocumentController::class, 'index'])->name('ajuan.index');
 
-    Route::resource('ajuan', DocumentController::class)->names('user.ajuan');
+    Route::resource('ajuan', DocumentController::class)->names('ajuan');
 
 
     Route::get('/message', [MessageController::class, 'index'])->name('message');
@@ -55,13 +55,16 @@ Route::middleware(['auth', 'verified', 'role:user'])->group(function(){
 });
 
 Route::middleware(['auth', 'verified', 'role:sekretariat'])->name('sekretariat.')->prefix('sekretariat')->group(function(){
-    Route::get('/pengajuan', [SekretariatController::class, 'index'])->name('pengajuan.index');
-    Route::get('/pengajuan/{id}', [SekretariatController::class, 'detail'])->name('pengajuan.show');
-    Route::get('/pengajuan/{id}/expedited', [SekretariatController::class, 'expedited'])->name('pengajuan.expedited');
-    Route::get('/pengajuan/{id}/extempted', [SekretariatController::class, 'extempted'])->name('pengajuan.extempted');
-    Route::get('/pengajuan/{id}/all', [SekretariatController::class, 'all'])->name('pengajuan.all');
-    Route::post('/pengajuan/{id}', [SekretariatController::class, 'post'])->name('pengajuan.post');
-    Route::post('/pengajuan', [SekretariatController::class, 'store'])->name('pengajuan.store');
+
+    Route::resource('ajuan', SekretariatController::class)->names('pengajuan');
+
+    // Route::get('/pengajuan', [SekretariatController::class, 'index'])->name('pengajuan.index');
+    // Route::get('/pengajuan/{id}', [SekretariatController::class, 'detail'])->name('pengajuan.show');
+    // Route::get('/pengajuan/{id}/expedited', [SekretariatController::class, 'expedited'])->name('pengajuan.expedited');
+    // Route::get('/pengajuan/{id}/extempted', [SekretariatController::class, 'extempted'])->name('pengajuan.extempted');
+    // Route::get('/pengajuan/{id}/all', [SekretariatController::class, 'all'])->name('pengajuan.all');
+    // Route::post('/pengajuan/{id}', [SekretariatController::class, 'post'])->name('pengajuan.post');
+    // Route::post('/pengajuan', [SekretariatController::class, 'store'])->name('pengajuan.store');
 
     Route::get('/uploadEC/{id}', [SekretariatController::class, 'upload'])->name('upload.ec');
 
