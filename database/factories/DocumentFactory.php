@@ -14,7 +14,6 @@ class DocumentFactory extends Factory
     public function definition(): array
 {
     return [
-        'user_id' => 1,
         'doc_name' => $this->faker->sentence(),
         'doc_path' => $this->faker->filePath(),
         'doc_type' => TypeDoc::inRandomOrder()->first()->id ?? 1,
