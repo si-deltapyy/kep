@@ -63,7 +63,7 @@
             </li>
           </ul>
     </div>
-    @endrole
+
 
     @role('sekretariat')
     <div class="border-r pb-14 h-[100vh] dark:bg-[#603dc3] dark:border-slate-700/40 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"
