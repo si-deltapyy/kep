@@ -28,11 +28,11 @@ class DatabaseSeeder extends Seeder
         $this->call(TypeSeeder::class);
 
         $this->call([
+            ProfileUserSeeder::class,
             DocumentSeeder::class,
             LogDocumentSeeder::class,
             EcDocumentSeeder::class,
             SubmissionSeeder::class,
-            ProfileUserSeeder::class,
         ]);
     }
 }

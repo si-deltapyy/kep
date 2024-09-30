@@ -7,8 +7,8 @@
 
 @endsection
 @section('content')
-{{-- <x-form-input method="POST" action="{{ route('user.ajuan.store') }}" has-file class="p-4">
-
+<x-form-input method="POST" action="{{ route('user.ajuan.store') }}" has-file class="p-4">
+@csrf
     <x-input title="Judul Usulan: " id="pengusul" type="text" class="form-control" name="pengusul"/><br>
 
     @foreach ($type as $input)
@@ -19,9 +19,9 @@
     Submit
     </x-button>
 
-</x-form-input> --}}
+</x-form-input>
 
-        <div
+        {{-- <div
             class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4 mb-4"
           >
             <div
@@ -44,25 +44,16 @@
                 </div>
                 <!--end header-title-->
                 <div class="flex-auto p-4">
-                  <x-form-input method="POST" action="{{ route('ajuan.save') }}" has-file class="p-4">
+                  <x-form-input method="POST" action="{{ route('user.ajuan.store') }}" has-file class="p-4">
                     <x-input title="Judul Usulan " id="pengusul" type="text" class="form-control" name="pengusul"/>
                     @foreach ($type as $input)
                     <div class="col-span-1">
                         <x-file-upload title="Upload {{$input->name}}: " type="file" id="doc{{$input->id}}" name="doc{{$input->id}}" accept=".docx, .pdf, .doc" class="file-input" style="display: none !important;"></x-file-upload>
                     </div>
                      @endforeach
-                    <button
-                      type="submit"
-                      class="inline-block focus:outline-none text-primary-500 hover:bg-primary-500 hover:text-white bg-transparent border border-gray-200 dark:bg-transparent dark:text-primary-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-primary-500 text-sm font-medium py-1 px-3 rounded mb-1 lg:mb-0"
-                    >
-                      Submit
-                    </button>
-                    <button
-                      type="button"
-                      class="inline-block focus:outline-none text-red-500 hover:bg-red-500 hover:text-white bg-transparent border border-gray-200 dark:bg-transparent dark:text-red-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-red-500 text-sm font-medium py-1 px-3 rounded mb-1 lg:mb-0"
-                    >
-                      Cancel
-                    </button>
+
+                    <x-button>Submit</x-button>
+
                   </x-form-input>
                 </div>
                 <!--end card-body-->
@@ -97,5 +88,5 @@
                     });
                 });
             });
-        </script>
+        </script> --}}
 @endsection

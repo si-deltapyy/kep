@@ -32,77 +32,32 @@
                 </li>
                 <li>
                 <div id="parent-accordion" data-fc-type="accordion">
-                  @role('user')
-                <a href="{{ route('dashboard') }}"
-                  class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                  <span data-lucide="home" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                  <span>Dashboard</span>
-                </a>
+                @role('user')
+                    <x-navigation :route="'dashboard'" :text="'Dashboard'" />
+                    <x-navigation :route="'user.ajuan.index'" :text="'Pengajuan'" />
+                    <x-navigation :route="'dashboard'" :text="'Dokumen EC'" />
 
-                <a href="{{ route('user.ajuan.index') }}"
-                  class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                  <span data-lucide="upload" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                  <span>Pengajuan</span>
-                </a>
+                    <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
+                    <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
+                        <span>Other</span>
+                    </div>
 
-                <a href="{{ route('dashboard') }}"
-                  class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                  <span data-lucide="file" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                  <span>Dokumen EC</span>
-                </a>
-
-                <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
-                <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
-                  <span>Other</span>
-                </div>
-
-                <a href="{{ route('dashboard') }}"
-                  class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                  <span data-lucide="send" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                  <span>Message</span>
-                </a>
-
-                <a href="{{ route('dashboard') }}"
-                  class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                  <span data-lucide="user" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                  <span>Profile</span>
-                </a>
-
+                    <x-navigation :route="'dashboard'" :text="'Message'" />
+                    <x-navigation :route="'dashboard'" :text="'Profile'" />
                 @endrole
+
                 @role('sekretariat')
-                <a href="{{ route('sekretariat.pengajuan.index') }}"
-                  class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                  <span data-lucide="user" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                  <span>Pengajuan</span>
-                </a>
-                <a href="{{ route('sekretariat.ec.index') }}"
-                  class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                  <span data-lucide="user" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                  <span>ECDocument</span>
-                </a>
-                <a href="{{ route('sekretariat.review.index') }}"
-                  class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                  <span data-lucide="user" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                  <span>Reviewer List</span>
-                </a>
-                <a href="{{ route('sekretariat.message.index') }}"
-                  class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                  <span data-lucide="user" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                  <span>Pesan</span>
-                </a>
+                    <x-navigation :route="'sekretariat.pengajuan.index'" :text="'Pengajuan'" />
+                    <x-navigation :route="'sekretariat.ec.index'" :text="'ECDocument'" />
+                    <x-navigation :route="'sekretariat.review.index'" :text="'Reviewer List'" />
+                    <x-navigation :route="'sekretariat.message.index'" :text="'Pesan'" />
                 @endrole
+
                 @role('reviewer')
-                <a href="{{ route('sekretariat.pengajuan.index') }}"
-                  class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                  <span data-lucide="user" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                  <span>Pengajuan</span>
-                </a>
-                <a href="{{ route('ec.index') }}"
-                  class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                  <span data-lucide="user" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                  <span>ECDocument</span>
-                </a>
+                    <x-navigation :route="'reviewer.pengajuan.index'" :text="'Pengajuan'" />
+                    {{-- <x-nav-link :route="'pages.ec.index'" :text="'ECDocument'" /> --}}
                 @endrole
+
                 </div>
               </div>
             </li>
