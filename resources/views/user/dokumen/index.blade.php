@@ -17,6 +17,7 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
             method_field('DELETE') . '
             <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
         </form>'
+
     ];
 })->toArray();
 @endphp

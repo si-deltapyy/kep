@@ -51,8 +51,6 @@ class DocumentController extends Controller
 
 
     public function store(Request $request){
-
-
         $types = TypeDoc::all();  // Fetch the same types as used in the view
 
         $group = Document::orderBy('doc_group', 'desc')

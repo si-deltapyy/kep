@@ -26,7 +26,7 @@ class HomeController extends Controller
             'prodi'
         ])->first();
 
-        $user = Dummy::where('user_id', Auth::user()->id)->get();
+        $user = User::all();
 
         // return $profile;
 

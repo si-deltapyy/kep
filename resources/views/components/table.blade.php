@@ -1,3 +1,10 @@
+@props([
+    'head' => [],
+    'data' => [],
+    'actionHeader' => true,
+    'actionColumn' => []
+])
+
 <table class="w-full border-collapse" id="datatable_1">
     <thead class="bg-slate-100 dark:bg-slate-700/20">
         <tr>
@@ -15,20 +22,18 @@
     </thead>
     <tbody>
         @foreach ($data as $row)
-        <tr class="bg-white border-b border-dashed dark:bg-gray-900 dark:border-gray-700/40">
-            @foreach ($row as $cell)
-              <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-               {{ $cell }}
-              </td>
-
-            @endforeach
-            <td>
-                <x-button>
-                    Hapus
-                </x-button>
-            </td>
-          </tr>
+            <tr class="bg-white border-b border-dashed dark:bg-gray-900 dark:border-gray-700/40">
+                @foreach ($row as $cell)
+                    <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        {{ $cell }}
+                    </td>
+                @endforeach
+                @if($actionHeader)
+                    <td>
+                        {!! $actionColumn[$row['id']] !!}
+                    </td>
+                @endif
+            </tr>
         @endforeach
-      </tbody>
-
-  </table>
+    </tbody>
+</table>

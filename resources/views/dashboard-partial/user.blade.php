@@ -1,6 +1,6 @@
 @php
 // Data
-$head1 = ['ID', 'Name', 'Email'];
+$head1 = ['ID', 'Name', 'Email', 'Created At'];
 $data1 = $user->map(function($user) {
     return [
         'id' => $user->id,
@@ -10,16 +10,6 @@ $data1 = $user->map(function($user) {
           ];
 });
 
-$actions1 = $user->mapWithKeys(function ($user) {
-    return [
-        $user->id => '<form action="' . route('sekretariat.review.destroy', $user->id) . '" method="post" style="display:inline;">
-            ' . csrf_field() .
-            method_field('DELETE') . '
-            <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
-        </form>
-        <a href="' . route('sekretariat.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
-    ];
-})->toArray();
 @endphp
 
 @can('update-profile')
@@ -27,7 +17,7 @@ $actions1 = $user->mapWithKeys(function ($user) {
     <h5 class="text-xxl font-semibold text-slate-700 dark:text-gray-400 mb-4">
     Harap Lengkapi Profil Dahulu !
     </h5>
-    <a href="{{route('profile.index', Auth::user()->id)}}" class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
+    <a href="{{route('user.profile.index', Auth::user()->id)}}" class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
         <i class="ti ti-plus me-1"></i>
         Update Profile
     </a>
@@ -175,8 +165,7 @@ $actions1 = $user->mapWithKeys(function ($user) {
                             <x-table
                             :head="$head1"
                             :data="$data1->toArray()"
-                            :actionHeader="true"
-                            :actionColumn="$actions1"
+                            :actionHeader="false"
                         />
                         </div>
                         <!--end div-->
