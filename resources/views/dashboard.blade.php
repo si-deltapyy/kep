@@ -23,7 +23,7 @@
         <div class="">
             <div class="text-center">
             <img
-                src="assets/images/users/avatar-1.png"
+                src="assets/images/users/male.jpg"
                 alt=""
                 class="rounded-full mx-auto inline-block"
             />
@@ -58,7 +58,7 @@
             </div>
             <!--end col-->
             <div class="col-span-12 sm:col-span-12 md:col-span-7">
-                <span class="dark:text-slate-400">{{ $profile->address }}</span>
+                <span class="dark:text-slate-400">{{ $profile->phone_number }}</span>
             </div>
             <!--end col-->
             <div
@@ -166,9 +166,36 @@
                         <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
                             {{-- table --}}
                             <!-- resources/views/somepage.blade.php -->
-                            <x-table :head="['No', 'Name', 'Status']" :data="$user->map(function($user) {
-                                return [$user->id, $user->title, $user->doc_status];
-                            })->toArray()" />
+                            @php
+                            // Data
+                            $head1 = ['ID', 'Usulan', 'Status', 'Date'];
+                            $data1 = $user->map(function($user) {
+                                return [
+                                    'id' => $user->id,
+                                    'title' => $user->title,
+                                    'doc_status' => $user->doc_status,
+                                    'created_at' => $user->created_at,
+                                    ];
+                            });
+
+                            $actions1 = $user->mapWithKeys(function ($user) {
+                                return [
+                                    $user->id => '<form action="' . route('sekretariat.review.destroy', $user->id) . '" method="post" style="display:inline;">
+                                        ' . csrf_field() .
+                                        method_field('DELETE') . '
+                                        <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
+                                    </form>
+                                    <a href="' . route('sekretariat.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
+                                ];
+                            })->toArray();
+                            @endphp
+                            <x-table
+                                :head="$head1"
+                                :data="$data1->toArray()"
+                                :actionHeader="true"
+                                :actionSelect="true"
+                                :actionColumn="$actions1"
+                            />
                         </div>
                         <!--end div-->
                     </div>

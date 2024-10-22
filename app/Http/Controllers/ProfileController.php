@@ -22,7 +22,7 @@ class ProfileController extends Controller
         $user = User::all();
 
         if($data->updated_at === null){
-            return redirect()->route('profile.edit', Auth::user()->id)->with(['Error' => 'Lengkapi Datamu']);
+            return redirect()->route('user.profile.edit', Auth::user()->id)->with(['Error' => 'Lengkapi Datamu']);
         }else{
             return view('user.profile.index', compact('data', 'user'));
         }
@@ -84,11 +84,11 @@ class ProfileController extends Controller
 
         } else {
 
-            return redirect()->route('profile.edit')->with(['Error' => 'Data Salah']);
+            return redirect()->route('user.profile.edit')->with(['Error' => 'Data Salah']);
         }
 
         //redirect to index
-        return redirect()->route('profile.index')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('user.profile.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**

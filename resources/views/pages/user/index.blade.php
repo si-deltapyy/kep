@@ -36,12 +36,36 @@
         <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
             {{-- table --}}
             <!-- resources/views/somepage.blade.php -->
-            <x-table :head="['ID', 'Judul Usulan', 'Status', 'Action']" :data="$user->map(function($user) {
-                return [
-                    $user->name,
-                    $user->email
-                ];
-            })->toArray()" />
+            @php
+                $head=['ID', 'Judul Usulan', 'Status', 'Action'];
+                $data1 = $user->map(function($user) {
+                    return [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                    ];
+                });
+
+                $actions1 = $user->mapWithKeys(function ($user) {
+                    return [
+                        $user->id => '
+                        <form action="'. route('sekretariat.review.destroy', $user->id) .'" method="post">
+                            ' . csrf_field() . '
+                            ' . method_field("DELETE") . '
+                            <button type="submit">Hapus</button>
+                        </form>
+                        <a href="'. route('sekretariat.review.edit', $user->id) .'">Edit</a>
+                    '
+                    ];
+                })->toArray();
+            @endphp
+            <x-table
+                :head="$head"
+                :actionHeader="false"
+                :actionSelect="true"
+                :actionColumn="$actions1"
+                :data="$data1"
+            />
         </div>
         <!--end div-->
     </div>

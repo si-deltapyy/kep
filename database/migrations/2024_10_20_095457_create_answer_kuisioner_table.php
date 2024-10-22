@@ -11,19 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('document', function (Blueprint $table) {
+        Schema::create('answer_kuisioner', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('doc_name');
-            $table->string('doc_path');
-            $table->unsignedBigInteger('doc_type');
-            $table->unsignedBigInteger('doc_group');
-            $table->unsignedBigInteger('ajuan_type');
+            $table->unsignedBigInteger('kuisioner_id');
+            $table->string('kuisioner');
+            $table->enum('kuisioner_status', ['upload', 'accept'])->default('upload');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('CASCADE');
-            $table->foreign('doc_type')->references('id')->on('document_type')->onDelete('CASCADE');
-            $table->foreign('ajuan_type')->references('id')->on('ajuan_type')->onDelete('CASCADE');
+            $table->foreign('kuisioner_id')->references('id')->on('kuisioner')->onDelete('CASCADE');
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('document');
+        Schema::dropIfExists('answer_kuisioner');
     }
 };

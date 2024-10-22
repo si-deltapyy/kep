@@ -1,6 +1,6 @@
 profil hanya sekali update saja
 <div>
-    <form action="{{route('profile.update', Auth::user()->id)}}" method="post">
+    <form action="{{route('user.profile.update', Auth::user()->id)}}" method="post">
         @csrf
         <label for="name">Name</label>
         <input id="name" type="text" name="name" value="{{$data->name}}" required><br>
