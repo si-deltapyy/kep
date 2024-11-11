@@ -3,6 +3,7 @@
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ECDocumentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KuisionerController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
@@ -45,6 +46,8 @@ Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->group(funct
     // Route::get('ajuan', [DocumentController::class, 'index'])->name('ajuan.index');
 
     Route::resource('ajuan', DocumentController::class)->names('ajuan');
+    Route::resource('kuisioner', KuisionerController::class)->names('kuisioner');
+    Route::get('/template' , [DocumentController::class, 'template'])->name('template');
 
 
     Route::get('/message', [MessageController::class, 'index'])->name('message');
@@ -60,9 +63,9 @@ Route::middleware(['auth', 'verified', 'role:sekretariat'])->name('sekretariat.'
 
     // Route::get('/pengajuan', [SekretariatController::class, 'index'])->name('pengajuan.index');
     // Route::get('/pengajuan/{id}', [SekretariatController::class, 'detail'])->name('pengajuan.show');
-    // Route::get('/pengajuan/{id}/expedited', [SekretariatController::class, 'expedited'])->name('pengajuan.expedited');
-    // Route::get('/pengajuan/{id}/extempted', [SekretariatController::class, 'extempted'])->name('pengajuan.extempted');
-    // Route::get('/pengajuan/{id}/all', [SekretariatController::class, 'all'])->name('pengajuan.all');
+    Route::get('/ajuan/{id}/expedited', [SekretariatController::class, 'expedited'])->name('pengajuan.expedited');
+    Route::get('/ajuan/{id}/extempted', [SekretariatController::class, 'extempted'])->name('pengajuan.extempted');
+    Route::get('/ajuan/{id}/all', [SekretariatController::class, 'all'])->name('pengajuan.all');
     // Route::post('/pengajuan/{id}', [SekretariatController::class, 'post'])->name('pengajuan.post');
     // Route::post('/pengajuan', [SekretariatController::class, 'store'])->name('pengajuan.store');
 

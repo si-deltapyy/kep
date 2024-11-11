@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TypeAjuan;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Database\Seeders\EcDocumentSeeder;
@@ -26,13 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProdiSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(TypeSeeder::class);
-
-        $this->call([
-            ProfileUserSeeder::class,
-            DocumentSeeder::class,
-            LogDocumentSeeder::class,
-            EcDocumentSeeder::class,
-            SubmissionSeeder::class,
-        ]);
+        $this->call(TypeAjuanSeeder::class);
+        $this->call(KuisionerSeeder::class);
     }
 }

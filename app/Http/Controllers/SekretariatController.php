@@ -22,10 +22,10 @@ class SekretariatController extends Controller
     }
 
     /**
-     * @return Params int 
+     * @return Params int
      * Assign Reviewer Untuk Melakukan reviewer Ajuan
      */
-    
+
     public function expedited($id){
         $reviewer = User::role('reviewer')->get();
 
@@ -42,10 +42,10 @@ class SekretariatController extends Controller
 
         $data = Dummy::where('doc_group', $id);
 
-        $data->update([
-            'doc_status' => 'approved',
-            'updated_at' => now()
-        ]);
+        // $data->update([
+        //     'doc_status' => 'approved',
+        //     'updated_at' => now()
+        // ]);
         return redirect()->route('sekretariat.upload.ec')->with(['success' => 'Data Berhasil Diubah!']);
 
     }
@@ -98,7 +98,7 @@ class SekretariatController extends Controller
 
                 if ($doc) {
                     $reviewer = $request->input('review');
-                
+
                     foreach ($doc as $d) {
                         foreach ($reviewer as $singleReviewer) {
                             Submission::create([
@@ -116,7 +116,7 @@ class SekretariatController extends Controller
                         ->first();
                         Mail::to($reviewer_email->email)->send(new SendMail($mailData));
                     }
-                } 
+                }
                 return redirect()->route('sekretariat.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
                 break;
 
@@ -133,7 +133,7 @@ class SekretariatController extends Controller
 
                 if ($doc) {
                     $reviewer = User::role('reviewer')->get();
-                
+
                     foreach ($doc as $d) {
                         foreach ($reviewer as $singleReviewer) {
                             Submission::create([
@@ -151,7 +151,7 @@ class SekretariatController extends Controller
                         ->first();
                         Mail::to($reviewer_email->email)->send(new SendMail($mailData));
                     }
-                } 
+                }
                 return redirect()->route('sekretariat.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
                 break;
 
@@ -162,7 +162,7 @@ class SekretariatController extends Controller
      * @return Params
      * Show Data Ajuan detail
      */
-    public function detail(Int $id){
+    public function show(Int $id){
 
         $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
         ->where('doc_group', $id)->get();

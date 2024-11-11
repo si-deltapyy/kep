@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnswerKuisioner;
 use App\Models\Document;
 use App\Models\Dummy;
+use App\Models\Kuisioner;
 use App\Models\LogDocument;
 use App\Models\Submission;
+use App\Models\Template;
 use App\Models\TypeDoc;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +23,12 @@ class DocumentController extends Controller
         $doc = Dummy::where('user_id', Auth::user()->id)
         ->get();
 
-        return view('user.dokumen.index', compact('doc'));
+        $kuis = AnswerKuisioner::where([
+            ['user_id', '=', Auth::user()->id],
+            ['kuisioner_status', '=', 'upload']
+        ])->count();
+
+        return view('user.dokumen.index', compact('doc', 'kuis'));
     }
 
     // public function show(){
@@ -42,9 +50,10 @@ class DocumentController extends Controller
         return view('user.dokumen.create', compact('type'));
     }
 
-    public function show($ajuan){
+    public function show(Int $id){
         $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
-        ->where('doc_group', $ajuan)->get();
+        ->where('doc_group', $id)->get();
+
 
         return view('user.dokumen.detail', compact('doc'));
     }
@@ -77,7 +86,7 @@ class DocumentController extends Controller
                 $pathDoc = $file->storeAs('document', $fileName, 'public'); // Store the file in the 'public/documents' directory
 
                 // Save file information in the database
-                Document::create([
+                $docu = Document::create([
                     'user_id' => Auth::user()->id,
                     'doc_name' => 'berkas-'.$group.'-'.$x->name.'-'.Auth::user()->name,
                     'doc_path' => $pathDoc,
@@ -111,5 +120,12 @@ class DocumentController extends Controller
         } else {
             return redirect()->route('user.ajuan.index')->with('error', 'Document tidak ditemukan');
         }
+    }
+
+    public function template(){
+
+        $temp = Template::all();
+
+        return view('user.dokumen.template', compact('temp'));
     }
 }

@@ -22,18 +22,28 @@
     </thead>
     <tbody>
         @foreach ($data as $row)
-            <tr class="bg-white border-b border-dashed dark:bg-gray-900 dark:border-gray-700/40">
-                @foreach ($row as $cell)
-                    <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        {{ $cell }}
-                    </td>
-                @endforeach
-                @if($actionHeader)
+        <tr class="bg-white border-b border-dashed dark:bg-gray-900 dark:border-gray-700/40">
+            @foreach ($row as $cell)
+              <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                {{ $cell }}
+              </td>
+            @endforeach
+            @role('user')
+                @if($actionSelect)
                     <td>
                         {!! $actionColumn[$row['id']] !!}
                     </td>
                 @endif
-            </tr>
+            @endrole
+            @role('sekretariat')
+                @if($actionSelect)
+                    <td>
+                        {!! $actionColumn[$row['id']] !!}
+                    </td>
+                @endif
+            @endrole
+          </tr>
         @endforeach
     </tbody>
-</table>
+
+  </table>

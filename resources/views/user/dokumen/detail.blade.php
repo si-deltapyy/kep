@@ -22,4 +22,4 @@
     </table>
 </div>
 <a href="{{ route('dashboard') }}">dashboard</a>
-<a href="{{ route('ajuan.index') }}">List Ajuan</a>
+<a href="{{ route('user.ajuan.index') }}">List Ajuan</a>

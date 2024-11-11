@@ -73,13 +73,39 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
      <div class="sm:-mx-6 lg:-mx-8">
          <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
              {{-- table --}}
-             <x-table
-                :head="$head1"
-                :data="$data1"
-                :actionHeader="true"
-                :actionColumn="$actions1"
-            />
+                <!-- resources/views/somepage.blade.php -->
+                @php
+                // Data
+                $head1 = ['ID', 'Usulan', 'Status'];
+                $data1 = $doc->map(function($docs) {
+                    return [
+                        'id' => $docs->id,
+                        'Judul Usulan' => $docs->title,
+                        'Status' => $docs->doc_status,
+                        ];
+                });
 
+                $actions1 = $doc->mapWithKeys(function ($doc) {
+                    return [
+                        $doc->id => '
+                            <form action="' . route('sekretariat.pengajuan.show', $doc->doc_group) . '" method="POST" style="display:inline;">
+                                ' . csrf_field() . '
+                                ' . method_field("DELETE") . '
+                                <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
+                            </form>
+                            <a href="' . route('sekretariat.pengajuan.show', $doc->doc_group) . '" class="ml-2 text-blue-500 hover:text-blue-700">Cek</a>
+                        '
+                    ];
+                })->toArray();
+                @endphp
+                <x-table
+                    :head="$head1"
+                    :data="$data1->toArray()"
+                    :actionHeader="true"
+                    :actionSelect="true"
+                    :actionColumn="$actions1"
+                />
+            </div>
          </div>
          <!--end div-->
      </div>

@@ -85,6 +85,7 @@ class ProfileController extends Controller
         } else {
 
             return redirect()->route('user.profile.edit')->with(['Error' => 'Data Salah']);
+            return redirect()->route('user.profile.edit')->with(['Error' => 'Data Salah']);
         }
 
         //redirect to index
