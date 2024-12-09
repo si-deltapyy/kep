@@ -35,7 +35,7 @@
                 @role('user')
                     <x-navigation :route="'dashboard'" :text="'Dashboard'" />
                     <x-navigation :route="'user.ajuan.index'" :text="'Pengajuan'" />
-                    <x-navigation :route="'dashboard'" :text="'Dokumen EC'" />
+                    <x-navigation :route="'user.ec.index'" :text="'Dokumen EC'" />
 
                     <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
                     <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
@@ -47,6 +47,7 @@
                 @endrole
 
                 @role('sekretariat')
+                    <x-navigation :route="'dashboard'" :text="'Dashboard'" />
                     <x-navigation :route="'sekretariat.pengajuan.index'" :text="'Pengajuan'" />
                     <x-navigation :route="'sekretariat.ec.index'" :text="'ECDocument'" />
                     <x-navigation :route="'sekretariat.review.index'" :text="'Reviewer List'" />
@@ -65,7 +66,7 @@
     </div>
 
 
-    @role('sekretariat')
+    {{-- @role('sekretariat')
     <div class="border-r pb-14 h-[100vh] dark:bg-[#603dc3] dark:border-slate-700/40 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"
         data-simplebar>
         <div class="p-4 block">
@@ -129,5 +130,5 @@
             </li>
           </ul>
     </div>
-    @endrole
+    @endrole --}}
 </div>

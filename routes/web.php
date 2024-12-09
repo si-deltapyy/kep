@@ -39,18 +39,12 @@ Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth',
 // });
 
 Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->group(function(){
-    // Route::get('ajuan/upload', [DocumentController::class, 'create'])->name('ajuan.upload');
-    // Route::post('ajuan/save', [DocumentController::class, 'store'])->name('ajuan.save');
-    // Route::post('ajuan/delete/{ajuan}', [SekretariatController::class, 'destroy'])->name('ajuan.delete');
-    // Route::get('ajuan/{ajuan}/detail', [DocumentController::class, 'detail'])->name('ajuan.detail');
-    // Route::get('ajuan', [DocumentController::class, 'index'])->name('ajuan.index');
 
     Route::resource('ajuan', DocumentController::class)->names('ajuan');
     Route::resource('kuisioner', KuisionerController::class)->names('kuisioner');
     Route::get('/template' , [DocumentController::class, 'template'])->name('template');
-
-
     Route::get('/message', [MessageController::class, 'index'])->name('message');
+    Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
 
     Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('profile/update/{profil}', [ProfileController::class, 'update'])->name('profile.update');
@@ -60,19 +54,14 @@ Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->group(funct
 Route::middleware(['auth', 'verified', 'role:sekretariat'])->name('sekretariat.')->prefix('sekretariat')->group(function(){
 
     Route::resource('ajuan', SekretariatController::class)->names('pengajuan');
-
-    // Route::get('/pengajuan', [SekretariatController::class, 'index'])->name('pengajuan.index');
-    // Route::get('/pengajuan/{id}', [SekretariatController::class, 'detail'])->name('pengajuan.show');
     Route::post('/ajuan/{id}/expedited', [SekretariatController::class, 'expedited'])->name('pengajuan.expedited');
     Route::get('/ajuan/{id}/extempted', [SekretariatController::class, 'extempted'])->name('pengajuan.extempted');
     Route::get('/ajuan/{id}/all', [SekretariatController::class, 'all'])->name('pengajuan.all');
-    // Route::post('/pengajuan/{id}', [SekretariatController::class, 'post'])->name('pengajuan.post');
-    // Route::post('/pengajuan', [SekretariatController::class, 'store'])->name('pengajuan.store');
 
     Route::get('/uploadEC/{id}', [SekretariatController::class, 'upload'])->name('upload.ec');
 
-    Route::post('/ECDokumen/{id}', [ECDocumentController::class, 'store'])->name('ec.store');
-    Route::get('/ECDokumen', [ECDocumentController::class, 'index'])->name('ec.index');
+    Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
+
 
     Route::get('/reviewerList', [UserController::class, 'index'])->name('review.index');
     Route::get('/reviewerList/{id}/edit', [UserController::class, 'edit'])->name('review.edit');

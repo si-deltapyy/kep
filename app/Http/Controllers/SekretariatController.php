@@ -27,12 +27,7 @@ class SekretariatController extends Controller
      */
 
     public function expedited($id): RedirectResponse{
-        // $reviewer = User::role('reviewer')->get();
 
-        // $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
-        // ->where('doc_group', $id)->get();
-
-        // $dummy = Dummy::where('doc_group', $id)->get();
         $data = Dummy::where('doc_group', $id);
 
         $data->update([
@@ -40,20 +35,28 @@ class SekretariatController extends Controller
             'updated_at' => now()
         ]);
 
-        // return view('pages.pengajuan.assign', compact('doc', 'dummy', 'reviewer'));
-        return redirect()->route('sekretariat.upload.ec')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('sekretariat.upload.ec', $id)->with(['success' => 'Data Berhasil Diubah!']);
 
     }
 
-    public function extempted($id): RedirectResponse{
+    public function extempted($id){
 
-        $data = Dummy::where('doc_group', $id);
+        $reviewer = User::role('reviewer')->get();
 
-        // $data->update([
-        //     'doc_status' => 'approved',
-        //     'updated_at' => now()
-        // ]);
-        return redirect()->route('sekretariat.upload.ec')->with(['success' => 'Data Berhasil Diubah!']);
+        $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
+        ->where('doc_group', $id)->get();
+
+        $dummy = Dummy::where('doc_group', $id)->get();
+
+        return view('pages.pengajuan.assign', compact('doc', 'dummy', 'reviewer'));
+
+        // $data = Dummy::where('doc_group', $id);
+
+        // // $data->update([
+        // //     'doc_status' => 'approved',
+        // //     'updated_at' => now()
+        // // ]);
+        // return redirect()->route('sekretariat.upload.ec')->with(['success' => 'Data Berhasil Diubah!']);
 
     }
 
@@ -62,7 +65,7 @@ class SekretariatController extends Controller
         $doc = Document::where('doc_group', $id)->first();
         $user = User::find($doc->user_id)->first();
 
-        return view('pages.ec.create', compact('data', 'user'));
+        return view('pages.ec.create', compact('data', 'user', 'id'));
     }
 
 

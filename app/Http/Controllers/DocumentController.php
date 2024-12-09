@@ -87,13 +87,13 @@ class DocumentController extends Controller
                 // Handle the file upload
                 $file = $request->file($inputName);
                 $fileName = Auth::user()->name.'_'.$x->name .'.' . $file->getClientOriginalExtension(); // Menggunakan timestamp untuk nama unik
-                $pathDoc = $file->storeAs('document', $fileName, 'public'); // Store the file in the 'public/documents' directory
+                $pathDoc = $file->storeAs('document', 'berkas-'.$group.'-'.$fileName, 'public'); // Store the file in the 'public/documents' directory
 
                 // Save file information in the database
                 $docu = Document::create([
                     'user_id' => Auth::user()->id,
                     'doc_name' => 'berkas-'.$group.'-'.$x->name.'-'.Auth::user()->name,
-                    'doc_path' => $pathDoc,
+                    'doc_path' => 'berkas-'.$group.'-'.$pathDoc,
                     'doc_type' => $type ,
                     'doc_group' => $group,
                     'ajuan_type' => 2, // Save the doc type based on the Type model
