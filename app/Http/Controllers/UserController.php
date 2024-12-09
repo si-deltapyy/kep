@@ -10,10 +10,42 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function index(){
+        $user = User::role('user')
+        ->whereHas('permissions', function ($query) {
+            $query->where('name', 'approved');
+        })
+        ->get();
+
+
+        return view('pages.request.index', compact('user'));
+    }
+
+    public function rev(){
         $user = User::role('reviewer')->get();
 
 
         return view('pages.user.index', compact('user'));
+    }
+
+    public function makeUser($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        // Pastikan hanya pengguna yang ada di database
+        $user->revokePermissionTo('approved');
+        $user->givePermissionTo('update-profile');
+
+        return redirect()->back()->with('success', 'User role has been updated to User.');
+    }
+
+    public function makeReviewer($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        // Menyinkronkan role 'reviewer'
+        $user->syncRoles('reviewer');
+
+        return redirect()->back()->with('success', 'User role has been updated to Reviewer.');
     }
 
     public function show($id){

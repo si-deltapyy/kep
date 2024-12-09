@@ -37,31 +37,32 @@
             {{-- table --}}
             <!-- resources/views/somepage.blade.php -->
             @php
-                $head=['ID', 'Nama', 'Email'];
+                $head=['ID', 'Nama', 'Email', 'Time','Action'];
                 $data1 = $user->map(function($user) {
                     return [
                         'id' => $user->id,
                         'name' => $user->name,
                         'email' => $user->email,
+                        'date' => $user->created_at
                     ];
                 });
 
                 $actions1 = $user->mapWithKeys(function ($user) {
                     return [
                         $user->id => '
-                        <form action="'. route('sekretariat.review.destroy', $user->id) .'" method="post">
-                            ' . csrf_field() . '
-                            ' . method_field("DELETE") . '
-                            <button class="px-2 py-1 bg-red-500/10 border border-transparent collapse:bg-green-100 text-red text-sm rounded hover:bg-red-600 hover:text-white" type="submit">Hapus</button>
-                        </form>
-                        <a href="'. route('sekretariat.review.edit', $user->id) .'" class="px-2 py-1 bg-blue-500/10 border border-transparent collapse:bg-blue-100 text-blue text-sm rounded hover:bg-blue-600 hover:text-white">Edit</a>
+                        <a href="'. route('sekretariat.makeUser', $user->id) .'"
+                            class="px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white"
+                            >User</a>
+                        <a href="'. route('sekretariat.makeReviewer', $user->id) .'"
+                            class="px-2 py-1 bg-blue-500/10 border border-transparent collapse:bg-blue-100 text-blue text-sm rounded hover:bg-blue-600 hover:text-white"
+                            >Reviewer</a>
                     '
                     ];
                 })->toArray();
             @endphp
             <x-table
                 :head="$head"
-                :actionHeader="true"
+                :actionHeader="false"
                 :actionSelect="true"
                 :actionColumn="$actions1"
                 :data="$data1"

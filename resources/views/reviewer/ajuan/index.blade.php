@@ -18,7 +18,7 @@
                 <td>{{$x->created_at}}</td>
                 <td>
                     <a href="{{ route('reviewer.pengajuan.show', $x->doc_group) }}">Detail</a>
-                </td> 
+                </td>
             </tr>
             @endforeach
         </tbody>
@@ -26,3 +26,6 @@
 </div>
 
 <a href="/dashboard">back</a>
+
+
+

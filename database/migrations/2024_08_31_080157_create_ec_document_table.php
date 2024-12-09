@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('ec_document', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('title');
             $table->string('doc_name');
             $table->string('doc_path');
             $table->unsignedBigInteger('doc_group');

@@ -27,11 +27,21 @@ class HomeController extends Controller
         ])->first();
 
         $user = Dummy::where('user_id', Auth::user()->id)->get();
-        $newProposal = Dummy::where('user_id', Auth::user()->id)
-        ->where('doc_status', 'new-proposal')
+        $jumlahAjuan = Dummy::where('doc_status', 'new-proposal')
         ->count();
 
+        $jumlahReq = User::role('user')
+        ->whereHas('permissions', function ($query) {
+            $query->where('name', 'approved');
+        })
+        ->count();
 
-        return view('dashboard', compact('profile', 'user', 'newProposal'));
+        $jumlahUser = User::role('reviewer')->count();
+
+        $jumlahOnReview = Dummy::whereNotIn('doc_status', ['new-proposal', 'approved'])->count();
+
+
+
+        return view('dashboard', compact('profile', 'user', 'jumlahAjuan', 'jumlahUser', 'jumlahReq', 'jumlahOnReview'));
     }
 }
