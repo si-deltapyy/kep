@@ -65,9 +65,9 @@
                             <form action="' . route('sekretariat.pengajuan.show', $doc->doc_group) . '" method="POST" style="display:inline;">
                                 ' . csrf_field() . '
                                 ' . method_field("DELETE") . '
-                                <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
+                                <button type="submit" class="px-2 py-1 bg-red-500/10 border border-transparent collapse:bg-green-100 text-red text-sm rounded hover:bg-red-600 hover:text-white">Hapus</button>
                             </form>
-                            <a href="' . route('sekretariat.pengajuan.show', $doc->doc_group) . '" class="ml-2 text-blue-500 hover:text-blue-700">Cek</a>
+                            <a href="' . route('sekretariat.pengajuan.show', $doc->doc_group) . '" class="px-2 py-1 bg-blue-500/10 border border-transparent collapse:bg-blue-100 text-blue text-sm rounded hover:bg-blue-600 hover:text-white">Cek</a>
                         '
                     ];
                 })->toArray();

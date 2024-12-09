@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+@role('user')
 @can('update-profile')
 <div class="my-4">
     <h5 class="text-xxl font-semibold text-slate-700 dark:text-gray-400 mb-4">
@@ -122,7 +123,7 @@
                     aria-controls="orders"
                     aria-selected="false"
                     >
-                    Pending <span class="text-slate-400">(451)</span>
+                    New Proposal <span class="text-slate-400">({{$newProposal}})</span>
                     </button>
                 </li>
                 <li class="me-2" role="presentation">
@@ -260,185 +261,46 @@
                 >
                 <div class="grid grid-cols-1 p-0 md:p-4">
                     <div class="sm:-mx-6 lg:-mx-8">
-                    <div
-                        class="relative overflow-x-auto block w-full sm:px-6 lg:px-8"
-                    >
-                        <table class="w-full">
-                        <thead class="bg-gray-50 dark:bg-gray-600/20">
-                            <tr>
-                            <th scope="col" class="p-3">
-                                <label class="custom-label">
-                                <div
-                                    class="bg-white dark:bg-slate-600/40 border border-slate-200 dark:border-slate-600 rounded w-5 h-5 inline-block leading-5 text-center -mb-[6px]"
-                                >
-                                    <input type="checkbox" class="hidden" />
-                                    <i
-                                    class="icofont-verification-check hidden text-xs text-brand-500 dark:text-slate-200"
-                                    ></i>
-                                </div>
-                                </label>
-                            </th>
-                            <th
-                                scope="col"
-                                class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase"
-                            >
-                                Product & Title
-                            </th>
-                            <th
-                                scope="col"
-                                class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase"
-                            >
-                                Categories
-                            </th>
-                            <th
-                                scope="col"
-                                class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase"
-                            >
-                                Stock status
-                            </th>
-                            <th
-                                scope="col"
-                                class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase"
-                            >
-                                Attributes
-                            </th>
-                            <th
-                                scope="col"
-                                class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase"
-                            >
-                                Price
-                            </th>
-                            <th
-                                scope="col"
-                                class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase"
-                            >
-                                Date
-                            </th>
-                            <th
-                                scope="col"
-                                class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase"
-                            >
-                                Action
-                            </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- 1 -->
-                            <tr
-                            class="bg-white border-b border-dashed dark:bg-gray-900 dark:border-gray-700/40"
-                            >
-                            <td class="w-4 p-4">
-                                <label class="custom-label">
-                                <div
-                                    class="bg-white dark:bg-slate-600/40 border border-slate-200 dark:border-slate-600 rounded w-5 h-5 inline-block leading-5 text-center -mb-[6px]"
-                                >
-                                    <input type="checkbox" class="hidden" />
-                                    <i
-                                    class="icofont-verification-check hidden text-xs text-brand-500 dark:text-slate-200"
-                                    ></i>
-                                </div>
-                                </label>
-                            </td>
-                            <td
-                                class="p-3 text-sm font-medium whitespace-nowrap dark:text-white"
-                            >
-                                <div class="flex items-center">
-                                <img
-                                    src="assets/images/products/pro-4.png"
-                                    alt=""
-                                    class="me-2 h-8 inline-block"
-                                />
-                                <div class="self-center">
-                                    <h5
-                                    class="text-sm font-semibold text-slate-700 dark:text-gray-400"
-                                    >
-                                    Mannat 530 Bluetooth Wireless
-                                    </h5>
-                                    <span
-                                    class="block font-medium text-slate-500"
-                                    >Size-M (Model 2023)</span
-                                    >
-                                </div>
-                                </div>
-                            </td>
-                            <td
-                                class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
-                            >
-                                <a href="#" class="text-brand-500 underline"
-                                >Footwear</a
-                                >,
-                                <a href="#" class="text-brand-500 underline"
-                                >Lifestayle</a
-                                >
-                            </td>
-                            <td
-                                class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
-                            >
-                                <span
-                                class="bg-green-600/5 text-green-600 text-[11px] font-medium px-2.5 py-0.5 rounded h-5"
-                                >In stock</span
-                                >
-                            </td>
-                            <td
-                                class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
-                            >
-                                <div>
-                                color :
-                                <span class="ms-2">
-                                    <i
-                                    class="icofont-brand-mts text-red-500"
-                                    ></i>
-                                    <i
-                                    class="icofont-brand-mts text-gray-500"
-                                    ></i>
-                                    <i
-                                    class="icofont-brand-mts text-black"
-                                    ></i>
-                                </span>
-                                </div>
-                                <div>
-                                Size :
-                                <span class="mx-1">M</span>
-                                <span class="mx-1">L</span>
-                                </div>
-                            </td>
-                            <td
-                                class="p-3 font-semibold text-lg text-gray-800 whitespace-nowrap dark:text-gray-400"
-                            >
-                                $79
-                                <del class="text-slate-500 font-normal"
-                                >$99</del
-                                >
-                            </td>
-                            <td
-                                class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
-                            >
-                                12 Jan 2023
-                            </td>
-                            <td
-                                class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400"
-                            >
-                                <a href="#"
-                                ><i
-                                    class="icofont-ui-edit text-lg text-gray-500 dark:text-gray-400"
-                                ></i
-                                ></a>
-                                <a href="#"
-                                ><i
-                                    class="icofont-ui-delete text-lg text-red-500 dark:text-red-400"
-                                ></i
-                                ></a>
-                            </td>
-                            </tr>
-                        </tbody>
-                        </table>
-                    </div>
-                    <!--end div-->
+                        <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
+                            {{-- table --}}
+                            <!-- resources/views/somepage.blade.php -->
+                            @php
+                            // Data
+                            $head1 = ['ID', 'Usulan', 'Status', 'Date'];
+                            $data1 = $user->map(function($user) {
+                                return [
+                                    'id' => $user->id,
+                                    'title' => $user->title,
+                                    'doc_status' => $user->doc_status,
+                                    'created_at' => $user->created_at,
+                                    ];
+                            });
+
+                            $actions1 = $user->mapWithKeys(function ($user) {
+                                return [
+                                    $user->id => '<form action="' . route('sekretariat.review.destroy', $user->id) . '" method="post" style="display:inline;">
+                                        ' . csrf_field() .
+                                        method_field('DELETE') . '
+                                        <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
+                                    </form>
+                                    <a href="' . route('sekretariat.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
+                                ];
+                            })->toArray();
+                            @endphp
+                            <x-table
+                                :head="$head1"
+                                :data="$data1->toArray()"
+                                :actionHeader="true"
+                                :actionSelect="true"
+                                :actionColumn="$actions1"
+                            />
+                        </div>
+                        <!--end div-->
                     </div>
                     <!--end div-->
                 </div>
                 <!--end grid-->
-                <div class="flex justify-between">
+                <div class="flex justify-between mt-4">
                     <div class="self-center">
                     <p class="dark:text-slate-400">
                         Showing 1 - 20 of 1,524
@@ -688,4 +550,13 @@
     <!--end col-->
 </div>
 @endcan
+@endrole
+
+@role('sekretariat')
+sekre
+@endrole
+
+@role('reviewer')
+rev
+@endrole
 @endsection

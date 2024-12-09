@@ -1,4 +1,4 @@
-profil hanya sekali update saja
+{{-- profil hanya sekali update saja --}}
 <div>
     <form action="{{route('user.profile.update', Auth::user()->id)}}" method="post">
         @csrf

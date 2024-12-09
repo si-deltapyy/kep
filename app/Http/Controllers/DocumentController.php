@@ -53,9 +53,11 @@ class DocumentController extends Controller
     public function show(Int $id){
         $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
         ->where('doc_group', $id)->get();
+        $dummy = Dummy::where('id', $id)
+        ->get();
 
 
-        return view('user.dokumen.detail', compact('doc'));
+        return view('user.dokumen.detail', compact('doc', 'dummy'));
     }
 
 
@@ -93,7 +95,8 @@ class DocumentController extends Controller
                     'doc_name' => 'berkas-'.$group.'-'.$x->name.'-'.Auth::user()->name,
                     'doc_path' => $pathDoc,
                     'doc_type' => $type ,
-                    'doc_group' => $group, // Save the doc type based on the Type model
+                    'doc_group' => $group,
+                    'ajuan_type' => 2, // Save the doc type based on the Type model
                 ]);
             }
         }

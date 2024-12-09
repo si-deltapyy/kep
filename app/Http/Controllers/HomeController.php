@@ -27,9 +27,11 @@ class HomeController extends Controller
         ])->first();
 
         $user = Dummy::where('user_id', Auth::user()->id)->get();
+        $newProposal = Dummy::where('user_id', Auth::user()->id)
+        ->where('doc_status', 'new-proposal')
+        ->count();
 
-        // return $profile;
 
-        return view('dashboard', compact('profile', 'user'));
+        return view('dashboard', compact('profile', 'user', 'newProposal'));
     }
 }

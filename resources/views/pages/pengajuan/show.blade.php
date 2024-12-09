@@ -51,11 +51,35 @@
  <div class="grid grid-cols-1 p-0 md:p-4">
      <div class="sm:-mx-6 lg:-mx-8">
          <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
+            @if ($dums->doc_status != 'approved')
+            <h2 class="mb-2 font-medium">PROSES AJUAN: </h2>
+            <form action="route('sekretariat.pengajuan.expedited', $doc->doc_group)" method="POST" class="inline">
+                @csrf
+                <button type="submit"
+                    class="px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">
+                    Expedited
+                </button>
+            </form>
+            <form action="route('sekretariat.pengajuan.extempted', $doc->doc_group)" method="POST" class="inline">
+                @csrf
+                <button type="submit"
+                    class="px-2 py-1 bg-red-500/10 border border-transparent collapse:bg-green-100 text-red text-sm rounded hover:bg-red-600 hover:text-white"
+                    >Extempted
+                </button>
+            </form>
+            <form action="route('sekretariat.pengajuan.all', $doc->doc_group)" method="POST" class="inline">
+                @csrf
+                <button type="submit"
+                    class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
+                    All Reviewer
+                </button>
+            </form>
+            @endif
              {{-- table --}}
                 <!-- resources/views/somepage.blade.php -->
                 @php
                 // Data
-                $head1 = ['ID', 'Judul Usulan', 'Status'];
+                $head1 = ['ID', 'File Usulan', 'Status'];
                 $data2 = $doc->map(function($dat){
                     return [
                         'name' => $dat->doc_name,
@@ -63,23 +87,31 @@
                     ];
                 });
 
-                $data1 = $dummy->map(function($docs) {
+                $data1 = $doc->map(function($docs) {
                     return [
                         'id' => $docs->id,
-                        'Judul' => $docs->title,
-                        'Status' => $docs->doc_status,
+                        'File Usulan' => $docs->doc_name,
                         ];
                 });
 
-                $actions1 = $doc->mapWithKeys(function ($doc) {
-                    return [
-                        $doc->id => '
-                            <a href="'. route('sekretariat.pengajuan.expedited', $doc->doc_group) .'">Expedited</a>
-                            <a href="'. route('sekretariat.pengajuan.extempted', $doc->doc_group) .'">Extempted</a>
-                            <a href="'. route('sekretariat.pengajuan.all', $doc->doc_group) .'">All Review</a>
-                    '
-                    ];
-                })->toArray();
+                if($dums->doc_status != 'approved'){
+                    $actions1 = $doc->mapWithKeys(function ($doc) {
+                        return [
+                            $doc->id => '
+                                <a href="'. route('sekretariat.pengajuan.expedited', $doc->doc_group) .'">Expedited</a>
+                        '
+                        ];
+                    })->toArray();
+                }else{
+                    $actions1 = $doc->mapWithKeys(function ($doc) {
+                        return [
+                            $doc->id => '
+                                <p>-</p>
+                        '
+                        ];
+                    })->toArray();
+                }
+
                 @endphp
                 <x-table
                     :head="$head1"

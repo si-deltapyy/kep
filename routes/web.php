@@ -63,7 +63,7 @@ Route::middleware(['auth', 'verified', 'role:sekretariat'])->name('sekretariat.'
 
     // Route::get('/pengajuan', [SekretariatController::class, 'index'])->name('pengajuan.index');
     // Route::get('/pengajuan/{id}', [SekretariatController::class, 'detail'])->name('pengajuan.show');
-    Route::get('/ajuan/{id}/expedited', [SekretariatController::class, 'expedited'])->name('pengajuan.expedited');
+    Route::post('/ajuan/{id}/expedited', [SekretariatController::class, 'expedited'])->name('pengajuan.expedited');
     Route::get('/ajuan/{id}/extempted', [SekretariatController::class, 'extempted'])->name('pengajuan.extempted');
     Route::get('/ajuan/{id}/all', [SekretariatController::class, 'all'])->name('pengajuan.all');
     // Route::post('/pengajuan/{id}', [SekretariatController::class, 'post'])->name('pengajuan.post');

@@ -26,15 +26,22 @@ class SekretariatController extends Controller
      * Assign Reviewer Untuk Melakukan reviewer Ajuan
      */
 
-    public function expedited($id){
-        $reviewer = User::role('reviewer')->get();
+    public function expedited($id): RedirectResponse{
+        // $reviewer = User::role('reviewer')->get();
 
-        $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
-        ->where('doc_group', $id)->get();
+        // $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
+        // ->where('doc_group', $id)->get();
 
-        $dummy = Dummy::where('doc_group', $id)->get();
+        // $dummy = Dummy::where('doc_group', $id)->get();
+        $data = Dummy::where('doc_group', $id);
 
-        return view('pages.pengajuan.assign', compact('doc', 'dummy', 'reviewer'));
+        $data->update([
+            'doc_status' => 'approved',
+            'updated_at' => now()
+        ]);
+
+        // return view('pages.pengajuan.assign', compact('doc', 'dummy', 'reviewer'));
+        return redirect()->route('sekretariat.upload.ec')->with(['success' => 'Data Berhasil Diubah!']);
 
     }
 
@@ -168,7 +175,8 @@ class SekretariatController extends Controller
         ->where('doc_group', $id)->get();
 
         $dummy = Dummy::where('doc_group', $id)->get();
+        $dums = Dummy::where('doc_group', $id)->first();
 
-        return view('pages.pengajuan.show', compact('doc', 'dummy'));
+        return view('pages.pengajuan.show', compact('doc', 'dummy', 'dums'));
     }
 }
