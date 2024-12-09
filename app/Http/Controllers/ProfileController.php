@@ -88,7 +88,7 @@ class ProfileController extends Controller
         }
 
         //redirect to index
-        return redirect()->route('user.profile.index')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('dashboard')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
