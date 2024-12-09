@@ -40,8 +40,8 @@ class HomeController extends Controller
 
         $jumlahOnReview = Dummy::whereNotIn('doc_status', ['new-proposal', 'approved'])->count();
 
+        $newProposal = Dummy::whereIn('doc_status', ['new-proposal'])->count();
 
-
-        return view('dashboard', compact('profile', 'user', 'jumlahAjuan', 'jumlahUser', 'jumlahReq', 'jumlahOnReview'));
+        return view('dashboard', compact('profile', 'user', 'jumlahAjuan', 'jumlahUser', 'jumlahReq', 'jumlahOnReview', 'newProposal'));
     }
 }
