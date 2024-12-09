@@ -60,13 +60,10 @@
                     Expedited
                 </button>
             </form>
-            <form action="{{route('sekretariat.pengajuan.extempted', $dums->doc_group)}}" method="POST" class="inline">
-                @csrf
-                <button type="submit"
+                <a href="{{route('sekretariat.pengajuan.extempted', $dums->doc_group)}}"
                     class="px-2 py-1 bg-red-500/10 border border-transparent collapse:bg-green-100 text-red text-sm rounded hover:bg-red-600 hover:text-white"
                     >Extempted
-                </button>
-            </form>
+                </a>
             <form action="{{route('sekretariat.pengajuan.all', $dums->doc_group)}}" method="POST" class="inline">
                 @csrf
                 <button type="submit"

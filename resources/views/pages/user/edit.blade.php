@@ -6,7 +6,7 @@
 @endsection
 
 @section('content')
-<div
+        <div
             class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4 mb-4"
           >
             <div
@@ -54,7 +54,7 @@
               <!--end card-->
             </div>
             <!--end col-->
-          </div>
+        </div>
 @endsection
 
 

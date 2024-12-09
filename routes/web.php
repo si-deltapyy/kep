@@ -56,7 +56,7 @@ Route::middleware(['auth', 'verified', 'role:sekretariat'])->name('sekretariat.'
     Route::resource('ajuan', SekretariatController::class)->names('pengajuan');
     Route::post('/ajuan/{id}/expedited', [SekretariatController::class, 'expedited'])->name('pengajuan.expedited');
     Route::get('/ajuan/{id}/extempted', [SekretariatController::class, 'extempted'])->name('pengajuan.extempted');
-    Route::get('/ajuan/{id}/all', [SekretariatController::class, 'all'])->name('pengajuan.all');
+    Route::post('/ajuan/{id}/all', [SekretariatController::class, 'all'])->name('pengajuan.all');
 
     Route::get('/uploadEC/{id}', [SekretariatController::class, 'upload'])->name('upload.ec');
 

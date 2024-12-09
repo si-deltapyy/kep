@@ -62,7 +62,7 @@
             <div>
 
                 <div class="active p-4 bg-gray-50 rounded-lg dark:bg-gray-700/20">
-                <h1>{{$x->title}}</h1>
+                <h1 class="font-medium">{{$x->title}}</h1>
                 <div class="mb-3 mt-3">
                 <table>
                     <li>{{$x->doc_name}}</li>
