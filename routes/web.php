@@ -59,11 +59,13 @@ Route::middleware(['auth', 'verified', 'role:sekretariat'])->name('sekretariat.'
     Route::post('/ajuan/{id}/all', [SekretariatController::class, 'all'])->name('pengajuan.all');
 
     Route::get('/uploadEC/{id}', [SekretariatController::class, 'upload'])->name('upload.ec');
-
     Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
 
+    Route::resource('user/request', UserController::class)->names('user.request');
+    Route::get('user/make-user/{user}', [UserController::class, 'makeUser'])->name('makeUser');
+    Route::get('user/make-reviewer/{user}', [UserController::class, 'makeReviewer'])->name('makeReviewer');
 
-    Route::get('/reviewerList', [UserController::class, 'index'])->name('review.index');
+    Route::get('/reviewerList', [UserController::class, 'rev'])->name('review.index');
     Route::get('/reviewerList/{id}/edit', [UserController::class, 'edit'])->name('review.edit');
     Route::put('/reviewerList/{id}', [UserController::class, 'update'])->name('review.update');
     // Route::get('/reviewerList/create', [UserController::class, 'create'])->name('review.create');

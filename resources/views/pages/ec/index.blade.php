@@ -9,13 +9,13 @@
 @role('sekretariat')
     @php
         // Data Reviewer
-        $head1 = ['No', 'Document Name', 'Name', 'Created_at'];
+        $head1 = ['No', 'Judul', 'Name', 'Created_at'];
         $data1 = $doc->map(function($x, $index) {
             return [
                 'id' => $x->id,
-                'no' => $index + 1,
+                'no' => $x->title,
                 'doc_name' => $x->doc_name,
-                'name' => $x->name,
+                'sd' => $x->created_at,
             ];
         });
 
@@ -23,7 +23,7 @@
         $actions1 = $doc->mapWithKeys(function ($x) {
             return [
                 $x->id => '
-                <a href="' . route('sekretariat.review.edit', $x->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
+                -'
             ];
         })->toArray();
     @endphp

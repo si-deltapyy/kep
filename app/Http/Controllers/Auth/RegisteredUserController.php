@@ -45,7 +45,7 @@ class RegisteredUserController extends Controller
         ]);
 
         $user->assignRole('user');
-        $user->givePermissionTo('update-profile');
+        $user->givePermissionTo('approved');
 
         event(new Registered($user));
 
