@@ -29,6 +29,7 @@ class ReviewerController extends Controller
             ->groupBy('dm.title', 'dm.created_at', 'dm.doc_group') // Gunakan alias tabel untuk menghindari ambiguitas
             ->get();
 
+
         //     $reviewer_email = User::role('reviewer')
         //             ->where('id', 3)
         //             ->select('email')
@@ -53,7 +54,7 @@ class ReviewerController extends Controller
      * @param Int Request
      */
     public function assign(Request $request, Int $doc){
-        
+
     }
 
     /**
