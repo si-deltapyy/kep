@@ -133,4 +133,5 @@ class DocumentController extends Controller
 
         return view('user.dokumen.template', compact('temp'));
     }
+
 }

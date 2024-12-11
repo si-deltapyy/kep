@@ -87,4 +87,14 @@ Route::middleware(['auth', 'verified', 'role:super_admin'])->name('super_admin.'
     });
 });
 
+
+// Test Route
+Route::get('/chat', function () {
+    return view('pages.pesan.index');
+});
+
+Route::get('/message-show', function () {
+    return view('pages.pesan.show');
+})->name('message-show');
+
 require __DIR__.'/auth.php';
