@@ -28,7 +28,7 @@
                     </td>
                 @endif
             @endrole
-            @role('sekretariat')
+            @role('admin')
                 @if($actionSelect)
                     <td>
                         {!! $actionColumn[$row['id']] !!}

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
 {
@@ -25,6 +29,30 @@ class UserController extends Controller
 
 
         return view('pages.user.index', compact('user'));
+    }
+
+    public function Sekertaris(){
+        $user = User::role('sekertaris')->get();
+
+        return view('pages.user.admin.sekretaris.index', compact('user'));
+    }
+
+    public function editSekertaris($id){
+        $user = User::find($id);
+
+        return view('pages.user.admin.sekretaris.edit', compact('user'));
+    }
+
+    public function updateSekertaris(Request $request, $id): RedirectResponse{
+
+        $user = User::find($id);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email
+        ]);
+
+        return redirect()->route('admin.sekertarisList')->with(['success' => 'Data Berhasil Di update']);
     }
 
     public function makeUser($userId)

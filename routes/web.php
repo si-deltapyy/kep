@@ -8,7 +8,8 @@ use App\Http\Controllers\LogController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewerController;
-use App\Http\Controllers\SekretariatController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SekertarisController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,17 +27,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('landing');
 });
-Route::get('/tes', [LogController::class, 'indexx']);
-// Route::post('/tes/post', [LogController::class, 'indexx'])->name('posttt');
-
 
 Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
 
 Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->group(function(){
 
@@ -51,14 +43,12 @@ Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->group(funct
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 });
 
-Route::middleware(['auth', 'verified', 'role:sekretariat'])->name('sekretariat.')->prefix('sekretariat')->group(function(){
+Route::middleware(['auth', 'verified', 'role:admin'])->name('admin.')->prefix('admin')->group(function(){
 
-    Route::resource('ajuan', SekretariatController::class)->names('pengajuan');
-    Route::post('/ajuan/{id}/expedited', [SekretariatController::class, 'expedited'])->name('pengajuan.expedited');
-    Route::get('/ajuan/{id}/extempted', [SekretariatController::class, 'extempted'])->name('pengajuan.extempted');
-    Route::post('/ajuan/{id}/all', [SekretariatController::class, 'all'])->name('pengajuan.all');
+    Route::resource('ajuan', AdminController::class)->names('pengajuan');
+    Route::get('/ajuan/{id}/assign', [AdminController::class, 'assign'])->name('pengajuan.assign');
 
-    Route::get('/uploadEC/{id}', [SekretariatController::class, 'upload'])->name('upload.ec');
+    Route::get('/uploadEC/{id}', [AdminController::class, 'upload'])->name('upload.ec');
     Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
 
     Route::resource('user/request', UserController::class)->names('user.request');
@@ -72,6 +62,10 @@ Route::middleware(['auth', 'verified', 'role:sekretariat'])->name('sekretariat.'
     // Route::post('/reviewerList', [UserController::class, 'store'])->name('review.store');
     Route::delete('/reviewerList/{id}', [UserController::class, 'destroy'])->name('review.destroy');
 
+    Route::get('/sekertarisList', [UserController::class , 'Sekertaris'])->name('sekertarisList');
+    Route::get('/sekertarisList/create', [UserController::class, 'createSekertaris'])->name('sekertaris.create');
+    Route::post('/sekertarisList', [UserController::class, 'regSekertaris'])->name('sekertaris.store');
+
     Route::get('/message', [MessageController::class, 'index'])->name('message.index');
 
 });
@@ -81,7 +75,25 @@ Route::middleware(['auth', 'verified', 'role:reviewer'])->name('reviewer.')->pre
     Route::get('/pengajuan/{id}/detail', [ReviewerController::class, 'show'])->name('pengajuan.show');
 });
 
-Route::middleware(['auth', 'verified', 'role:super_admin'])->name('super_admin.')->prefix('super_admin')->group(function(){
+Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')->prefix('Administrator')->group(function(){
+    Route::get('/tes', function () {
+        return 'tes';
+    });
+});
+
+Route::middleware(['auth', 'verified', 'role:sekertaris'])->name('sekertaris.')->prefix('sekertaris')->group(function(){
+    Route::get('/tes', function () {
+        return 'tes';
+    });
+
+    Route::post('/update-password', [SekertarisController::class, 'updatePassword'])->name('update-password');
+
+    Route::post('/ajuan/{id}/expedited', [AdminController::class, 'expedited'])->name('pengajuan.expedited');
+    Route::get('/ajuan/{id}/extempted', [AdminController::class, 'extempted'])->name('pengajuan.extempted');
+    Route::post('/ajuan/{id}/all', [AdminController::class, 'all'])->name('pengajuan.all');
+});
+
+Route::middleware(['auth', 'verified', 'role:kppm'])->name('kppm.')->prefix('kppm')->group(function(){
     Route::get('/tes', function () {
         return 'tes';
     });

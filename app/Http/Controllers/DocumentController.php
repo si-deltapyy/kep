@@ -28,26 +28,13 @@ class DocumentController extends Controller
             ['kuisioner_status', '=', 'upload']
         ])->count();
 
-        return view('user.dokumen.index', compact('doc', 'kuis'));
+        return view('pages.dokumen.index', compact('doc', 'kuis'));
     }
-
-    // public function show(){
-    //     // $doc = Submission::where('user_id', Auth::user()->id)->with([
-    //     //     'user',
-    //     //     'logDocument',
-    //     //     'document'
-    //     // ])->get();
-
-    //     $doc = Dummy::where('user_id', Auth::user()->id)
-    //     ->get();
-
-    //     return view('user.dokumen.index', compact('doc'));
-    // }
 
     public function create(){
         $type = TypeDoc::all();
 
-        return view('user.dokumen.create', compact('type'));
+        return view('pages.dokumen.user.create', compact('type'));
     }
 
     public function show(Int $id){
@@ -57,7 +44,7 @@ class DocumentController extends Controller
         ->get();
 
 
-        return view('user.dokumen.detail', compact('doc', 'dummy'));
+        return view('pages.dokumen.show', compact('doc', 'dummy'));
     }
 
 
@@ -66,10 +53,16 @@ class DocumentController extends Controller
 
         $types = TypeDoc::all();  // Fetch the same types as used in the view
 
-        $group = Document::orderBy('doc_group', 'desc')
-                ->pluck('doc_group')
-                ->first();
-        $group++;
+        Dummy::create([
+            'title' => $request->pengusul,
+            'user_id' => Auth::user()->id,
+            'doc_status' => 'new-proposal',
+            'sekertaris_id' => null,
+        ]);
+
+        $group = Dummy::orderBy('id', 'desc')
+                ->pluck('id')
+                ->first() ?? 0;
 
         foreach ($types as $x) {
             // Dynamically construct the input name (e.g., 'doc1', 'doc2', etc.)
@@ -84,6 +77,8 @@ class DocumentController extends Controller
 
                 $type = $x->id;
 
+                
+
                 // Handle the file upload
                 $file = $request->file($inputName);
                 $fileName = Auth::user()->name.'_'.$x->name .'.' . $file->getClientOriginalExtension(); // Menggunakan timestamp untuk nama unik
@@ -93,7 +88,7 @@ class DocumentController extends Controller
                 $docu = Document::create([
                     'user_id' => Auth::user()->id,
                     'doc_name' => 'berkas-'.$group.'-'.$x->name.'-'.Auth::user()->name,
-                    'doc_path' => 'berkas-'.$group.'-'.$pathDoc,
+                    'doc_path' => $pathDoc,
                     'doc_type' => $type ,
                     'doc_group' => $group,
                     'ajuan_type' => 2, // Save the doc type based on the Type model
@@ -101,14 +96,7 @@ class DocumentController extends Controller
             }
         }
 
-        Dummy::create([
-            'title' => $request->pengusul,
-            'doc_group' => $group,
-            'user_id' => Auth::user()->id,
-            'doc_status' => 'new-proposal'
-        ]);
-
-        return redirect()->route('user.ajuan.index');
+        return redirect()->route('user.ajuan.index')->with('success', 'Dokumen berhasil di');
     }
 
 
@@ -132,6 +120,14 @@ class DocumentController extends Controller
         $temp = Template::all();
 
         return view('user.dokumen.template', compact('temp'));
+    }
+
+
+    public function viewDocument($path)
+    {
+        $file = Storage::disk('public')->get($path);
+        return response($file, 200)
+            ->header('Content-Type', 'application/pdf');
     }
 
 }

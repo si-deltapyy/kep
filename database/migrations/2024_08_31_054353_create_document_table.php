@@ -24,6 +24,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('user')->onDelete('CASCADE');
             $table->foreign('doc_type')->references('id')->on('document_type')->onDelete('CASCADE');
             $table->foreign('ajuan_type')->references('id')->on('ajuan_type')->onDelete('CASCADE');
+            $table->foreign('doc_group')->references('id')->on('dummy')->onDelete('CASCADE');
         });
     }
 

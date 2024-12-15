@@ -34,11 +34,11 @@ class ProfileController extends Controller
         if($data->updated_at === null){
 
             $prodi = Prodi::all();
-            return view('user.profile.edit', compact('data', 'prodi'));
+            return view('pages.profile.edit', compact('data', 'prodi'));
 
         }else{
 
-            return view('user.profile.index', compact('data'));
+            return view('pages.profile.index', compact('data'));
         }
     }
 
@@ -84,7 +84,7 @@ class ProfileController extends Controller
 
         } else {
 
-            return redirect()->route('user.profile.edit')->with(['Error' => 'Data Salah']);
+            return redirect()->route('pages.profile.edit')->with(['Error' => 'Data Salah']);
         }
 
         //redirect to index

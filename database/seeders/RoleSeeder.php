@@ -16,7 +16,9 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         Role::Create([ 'name' => 'super_admin']);
-        Role::Create([ 'name' => 'sekretariat']);
+        Role::Create([ 'name' => 'admin']);
+        Role::Create([ 'name' => 'kppm']);
+        Role::Create([ 'name' => 'sekertaris']);
         Role::Create([ 'name' => 'reviewer']);
         Role::Create([ 'name' => 'user']);
         Role::Create([ 'name' => 'guest']);
@@ -30,5 +32,8 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'update-profile']);
         Permission::create(['name' => 'done-profile']);
+
+        Permission::create(['name' => 'update-password']);
+        Permission::create(['name' => 'done-password']);
     }
 }

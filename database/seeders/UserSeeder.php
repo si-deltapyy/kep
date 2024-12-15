@@ -24,12 +24,28 @@ class UserSeeder extends Seeder
         ])->assignRole('user')->givePermissionTo('update-profile');
 
         User::create([
-            'name' => 'sekre',
-            'email' => 'sekre@gmail.com',
+            'name' => 'Admin KEP',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('123'),
-           
+        ])->assignRole('admin');
 
-        ])->assignRole('sekretariat');
+        User::create([
+            'name' => 'Sekretaris 1',
+            'email' => 'sek1@default',
+            'password' => Hash::make('123'),
+        ])->assignRole('sekertaris')->givePermissionTo('update-password');
+
+        User::create([
+            'name' => 'Sekertaris 1',
+            'email' => 'sek2@default',
+            'password' => Hash::make('123'),
+        ])->assignRole('sekertaris')->givePermissionTo('update-password');
+
+        User::create([
+            'name' => 'Sekertaris 3',
+            'email' => 'sek3@default',
+            'password' => Hash::make('123'),
+        ])->assignRole('sekertaris')->givePermissionTo('update-password');
 
         User::create([
             'name' => 'reviewer 1',

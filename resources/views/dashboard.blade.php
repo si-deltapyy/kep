@@ -5,15 +5,19 @@
 
 @section('content')
 @role('user')
-   @include('dashboard-partial.user')
+   @include('partial.dashboard.user')
 @endrole
 
-@role('sekretariat')
-   @include('dashboard-partial.sekre')
+@role('admin')
+   @include('partial.dashboard.admin')
 @endrole
 
 @role('reviewer')
-@include('dashboard-partial.reviewer')
+@include('partial.dashboard.reviewer')
+@endrole
+
+@role('sekertaris')
+@include('partial.dashboard.sekertaris')
 @endrole
 
 @endsection

@@ -52,18 +52,18 @@
                     @endcan
                 @endrole
 
-                @role('sekretariat')
+                @role('admin')
                     <x-navigation :route="'dashboard'" :text="'Dashboard'" />
-                    <x-navigation :route="'sekretariat.pengajuan.index'" :text="'Pengajuan'" />
-                    <x-navigation :route="'sekretariat.ec.index'" :text="'ECDocument'" />
-                    <x-navigation :route="'sekretariat.review.index'" :text="'Reviewer List'" />
+                    <x-navigation :route="'admin.pengajuan.index'" :text="'Pengajuan'" />
+                    <x-navigation :route="'admin.ec.index'" :text="'ECDocument'" />
+                    <x-navigation :route="'admin.sekertarisList'" :text="'List Sekertaris'" />
 
                     <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
                     <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
                         <span>Other</span>
                     </div>
 
-                    <x-navigation :route="'sekretariat.user.request.index'" :text="'User Request'" />
+                    <x-navigation :route="'admin.user.request.index'" :text="'User Request'" />
                 @endrole
 
                 @role('reviewer')
@@ -96,7 +96,7 @@
                   <span>Dashboard</span>
                 </a>
 
-                <a href="{{ route('sekretariat.pengajuan.index') }}"
+                <a href="{{ route('admin.pengajuan.index') }}"
                   class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
                   <span data-lucide="file-stack" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
                   <span>Daftar Ajuan</span>
@@ -108,7 +108,7 @@
                   <span>Dokumen EC</span>
                 </a>
 
-                <a href="{{ route('sekretariat.review.index') }}"
+                <a href="{{ route('admin.review.index') }}"
                   class="nav-link hover:bg-transparent hover:text-black rounded-md dark:hover:text-slate-200 flex items-center decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
                   <span data-lucide="user-check" class="w-5 h-5 text-center text-slate-800 dark:text-slate-400 me-2 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
                   <span>List Reviewer</span>
