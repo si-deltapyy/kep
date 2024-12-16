@@ -1,3 +1,10 @@
+@can('waiting-acception')
+<div class="my-4">
+    <h5 class="text-xxl font-semibold text-slate-700 dark:text-gray-400 mb-4">
+    Harap Lengkapi Profil Dahulu !
+    </h5>
+</div>
+@endcan
 @can('update-profile')
 <div class="my-4">
     <h5 class="text-xxl font-semibold text-slate-700 dark:text-gray-400 mb-4">

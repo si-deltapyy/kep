@@ -32,6 +32,7 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'update-profile']);
         Permission::create(['name' => 'done-profile']);
+        Permission::create(['name' => 'waiting-acception']);
 
         Permission::create(['name' => 'update-password']);
         Permission::create(['name' => 'done-password']);

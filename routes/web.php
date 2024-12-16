@@ -30,13 +30,21 @@ Route::get('/', function () {
 
 Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->group(function(){
+Route::middleware(['auth', 'verified', 'role:user', 'permission:done-profile'])->name('user.')->group(function(){
 
     Route::resource('ajuan', DocumentController::class)->names('ajuan');
     Route::resource('kuisioner', KuisionerController::class)->names('kuisioner');
     Route::get('/template' , [DocumentController::class, 'template'])->name('template');
     Route::get('/message', [MessageController::class, 'index'])->name('message');
     Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
+
+    Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('profile/update/{profil}', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    
+});
+
+Route::middleware(['auth', 'verified', 'role:user', 'permission:update-profile'])->name('user.')->group(function(){
 
     Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('profile/update/{profil}', [ProfileController::class, 'update'])->name('profile.update');

@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123'),
             
 
-        ])->assignRole('user')->givePermissionTo('update-profile');
+        ])->assignRole('user')->givePermissionTo('waiting-acception');
 
         User::create([
             'name' => 'Admin KEP',

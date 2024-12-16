@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('CASCADE');
+            $table->foreign('doc_group')->references('id')->on('dummy')->onDelete('CASCADE');
         });
     }
 

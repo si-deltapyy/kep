@@ -22,6 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('log_id')->references('id')->on('log_document')->onDelete('CASCADE');
+            $table->foreign('doc_group')->references('id')->on('dummy')->onDelete('CASCADE');
         });
     }
 
