@@ -29,7 +29,7 @@ class SendMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Review Proposal Ethical Clearance',
+            subject: $this->mailData['subject'],
         );
     }
 
@@ -39,7 +39,7 @@ class SendMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.sendReviewer',
+            view: $this->mailData['view'],
         );
     }
 

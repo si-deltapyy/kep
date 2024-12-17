@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index(){
         $user = User::role('user')
         ->whereHas('permissions', function ($query) {
-            $query->where('name', 'approved');
+            $query->where('name', 'waiting-acception');
         })
         ->get();
 
@@ -60,7 +60,7 @@ class UserController extends Controller
         $user = User::findOrFail($userId);
 
         // Pastikan hanya pengguna yang ada di database
-        $user->revokePermissionTo('approved');
+        $user->revokePermissionTo('waiting-acception');
         $user->givePermissionTo('update-profile');
 
         return redirect()->back()->with('success', 'User role has been updated to User.');

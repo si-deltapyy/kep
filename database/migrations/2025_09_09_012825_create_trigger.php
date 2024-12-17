@@ -23,16 +23,17 @@ return new class extends Migration
         ');
 
         DB::unprepared('
-        CREATE TRIGGER after_document_insert
-        AFTER UPDATE ON Dummy
+        CREATE TRIGGER after_dummy_update
+        AFTER UPDATE ON dummy
         FOR EACH ROW
         BEGIN
-            IF OLD.doc_status <> NEW.doc_status THEN
-                UPDATE log_document
-                SET doc_status = NEW.doc_status, updated_at = NOW()
-                WHERE doc_id = NEW.id;
-            END IF;
+            UPDATE log_document lg
+            JOIN document dc ON dc.id = lg.doc_id
+            JOIN dummy du ON du.id = dc.doc_group
+            SET lg.doc_status = NEW.doc_status
+            WHERE du.id = NEW.id;
         END;
+
         ');
 
         DB::unprepared('
@@ -68,7 +69,7 @@ return new class extends Migration
     public function down(): void
     {
         DB::unprepared('DROP TRIGGER IF EXISTS before_document_insert');
-        DB::unprepared('DROP TRIGGER IF EXISTS after_document_update');
+        DB::unprepared('DROP TRIGGER IF EXISTS after_dummy_update');
         DB::unprepared('DROP TRIGGER IF EXISTS after_user_reg');
     }
 };

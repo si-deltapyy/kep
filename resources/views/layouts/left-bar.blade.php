@@ -34,41 +34,59 @@
                 <div id="parent-accordion" data-fc-type="accordion">
                 @role('user')
                     @can('done-profile')
-                        <x-navigation :route="'dashboard'" :text="'Dashboard'" />
-                        <x-navigation :route="'user.ajuan.index'" :text="'Pengajuan'" />
-                        <x-navigation :route="'user.ec.index'" :text="'Dokumen EC'" />
+                        <x-navigation :route="'dashboard'" :text="'Dashboard'" :icon="'home'"/>
+                        <x-navigation :route="'user.ajuan.index'" :text="'Pengajuan'" :icon="'file-input'"/>
+                        <x-navigation :route="'user.ec.index'" :text="'Dokumen EC'" :icon="'files'"/>
 
                         <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
                         <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
                             <span>Other</span>
                         </div>
 
-                        <x-navigation :route="'dashboard'" :text="'Message'" />
-                        <x-navigation :route="'dashboard'" :text="'Profile'" />
+                        <x-navigation :route="'dashboard'" :text="'Message'" :icon="'message-square'"/>
+                        <x-navigation :route="'dashboard'" :text="'Profile'" :icon="'user-cog'"/>
                     @endcan
 
-                    @can('approved')
-                        <x-navigation :route="'dashboard'" :text="'Dashboard'" />
+                    @can('waiting-acception')
+                        <x-navigation :route="'dashboard'" :text="'Dashboard'" :icon="'home'"/>
                     @endcan
                 @endrole
 
                 @role('admin')
-                    <x-navigation :route="'dashboard'" :text="'Dashboard'" />
-                    <x-navigation :route="'admin.pengajuan.index'" :text="'Pengajuan'" />
-                    <x-navigation :route="'admin.ec.index'" :text="'ECDocument'" />
-                    <x-navigation :route="'admin.sekertarisList'" :text="'List Sekertaris'" />
+                    <x-navigation :route="'dashboard'" :text="'Dashboard'" :icon="'files'"/>
+                    <x-navigation :route="'admin.pengajuan.index'" :text="'Pengajuan'" :icon="'file-user'"/>
+                    <x-navigation :route="'admin.ec.index'" :text="'ECDocument'" :icon="'file-user'"/>
+                    <x-navigation :route="'admin.sekertarisList'" :text="'List Sekertaris'" :icon="'file-user'"/>
 
                     <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
                     <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
                         <span>Other</span>
                     </div>
 
-                    <x-navigation :route="'admin.user.request.index'" :text="'User Request'" />
+                    <x-navigation :route="'admin.user.request.index'" :text="'User Request'" :icon="'file-user'"/>
+                    <x-navigation :route="'admin.template.index'" :text="'Kelola Template'" :icon="'file'"/>
                 @endrole
 
                 @role('reviewer')
-                    <x-navigation :route="'reviewer.pengajuan.index'" :text="'Pengajuan'" />
+                    <x-navigation :route="'reviewer.pengajuan.index'" :text="'Pengajuan'" :icon="'file-user'"/>
                     {{-- <x-nav-link :route="'pages.ec.index'" :text="'ECDocument'" /> --}}
+                @endrole
+
+                @role('super_admin')
+                    <x-navigation :route="'dashboard'" :text="'Dashboard'"  :icon="'home'"/>
+                    <x-navigation :route="'dashboard'" :text="'Manage Reviewer'"  :icon="'contact'"/>
+                @endrole
+
+                @role('sekertaris')
+                    <x-navigation :route="'dashboard'" :text="'Dashboard'"  :icon="'home'"/>
+                    <x-navigation :route="'sekertaris.pengajuan.index'" :text="'Pengajuan'" :icon="'file'"/>
+                    <x-navigation :route="'sekertaris.review.index'" :text="'Manage Reviewer'"  :icon="'contact'"/>
+                    <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
+                    <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
+                        <span>Other</span>
+                    </div>
+
+                    <x-navigation :route="'dashboard'" :text="'Message'" :icon="'message-square'"/>
                 @endrole
 
                 </div>

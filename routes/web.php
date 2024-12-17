@@ -9,7 +9,9 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewerController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\SekertarisController;
+use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,26 +30,28 @@ Route::get('/', function () {
     return view('landing');
 });
 
+Route::get('/sendemail', [Controller::class, 'index']);
+
 Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware(['auth', 'verified', 'role:user', 'permission:done-profile'])->name('user.')->group(function(){
+Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->prefix('user')->group(function () {
 
-    Route::resource('ajuan', DocumentController::class)->names('ajuan');
-    Route::resource('kuisioner', KuisionerController::class)->names('kuisioner');
-    Route::get('/template' , [DocumentController::class, 'template'])->name('template');
-    Route::get('/message', [MessageController::class, 'index'])->name('message');
-    Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
+    // Routes with 'permission:done-profile'
+    Route::middleware(['permission:done-profile'])->group(function () {
+        Route::resource('ajuan', DocumentController::class)->names('ajuan');
+        Route::resource('kuisioner', KuisionerController::class)->names('kuisioner');
+        Route::resource('template', TemplateController::class)->names('template');
+        Route::resource('message', MessageController::class)->names('message');
+        Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
+    });
 
-    Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('profile/update/{profil}', [ProfileController::class, 'update'])->name('profile.update');
-    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    // Routes with 'permission:update-profile'
+    Route::middleware(['permission:update-profile'])->group(function () {
+        Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::post('profile/update/{profil}', [ProfileController::class, 'update'])->name('profile.update');
+    });
 
-});
-
-Route::middleware(['auth', 'verified', 'role:user', 'permission:update-profile'])->name('user.')->group(function(){
-
-    Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('profile/update/{profil}', [ProfileController::class, 'update'])->name('profile.update');
+    // Routes that do not require additional permissions
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
 });
 
@@ -56,19 +60,12 @@ Route::middleware(['auth', 'verified', 'role:admin'])->name('admin.')->prefix('a
     Route::resource('ajuan', AdminController::class)->names('pengajuan');
     Route::get('/ajuan/{id}/assign', [AdminController::class, 'assign'])->name('pengajuan.assign');
 
-    Route::get('/uploadEC/{id}', [AdminController::class, 'upload'])->name('upload.ec');
     Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
+    Route::resource('template', TemplateController::class)->names('template');
 
     Route::resource('user/request', UserController::class)->names('user.request');
     Route::get('user/make-user/{user}', [UserController::class, 'makeUser'])->name('makeUser');
     Route::get('user/make-reviewer/{user}', [UserController::class, 'makeReviewer'])->name('makeReviewer');
-
-    Route::get('/reviewerList', [UserController::class, 'rev'])->name('review.index');
-    Route::get('/reviewerList/{id}/edit', [UserController::class, 'edit'])->name('review.edit');
-    Route::put('/reviewerList/{id}', [UserController::class, 'update'])->name('review.update');
-    // Route::get('/reviewerList/create', [UserController::class, 'create'])->name('review.create');
-    // Route::post('/reviewerList', [UserController::class, 'store'])->name('review.store');
-    Route::delete('/reviewerList/{id}', [UserController::class, 'destroy'])->name('review.destroy');
 
     Route::get('/sekertarisList', [UserController::class , 'Sekertaris'])->name('sekertarisList');
     Route::get('/sekertarisList/edit/{id}', [UserController::class, 'editSekertaris'])->name('sekertaris.edit');
@@ -90,15 +87,21 @@ Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')
 });
 
 Route::middleware(['auth', 'verified', 'role:sekertaris'])->name('sekertaris.')->prefix('sekertaris')->group(function(){
-    Route::get('/tes', function () {
-        return 'tes';
-    });
 
     Route::post('/update-password', [SekertarisController::class, 'updatePassword'])->name('update-password');
 
-    Route::post('/ajuan/{id}/expedited', [AdminController::class, 'expedited'])->name('pengajuan.expedited');
-    Route::get('/ajuan/{id}/extempted', [AdminController::class, 'extempted'])->name('pengajuan.extempted');
-    Route::post('/ajuan/{id}/all', [AdminController::class, 'all'])->name('pengajuan.all');
+    Route::resource('ajuan', SekertarisController::class)->names('pengajuan');
+    Route::post('/ajuan/{id}/expedited', [SekertarisController::class, 'expedited'])->name('pengajuan.expedited');
+    Route::get('/ajuan/{id}/extempted', [SekertarisController::class, 'extempted'])->name('pengajuan.extempted');
+    Route::post('/ajuan/{id}/all', [SekertarisController::class, 'all'])->name('pengajuan.all');
+
+    Route::get('/uploadEC/{id}', [SekertarisController::class, 'upload'])->name('upload.ec');
+    Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
+
+    Route::get('/reviewerList', [UserController::class, 'rev'])->name('review.index');
+    Route::get('/reviewerList/{id}/edit', [UserController::class, 'edit'])->name('review.edit');
+    Route::put('/reviewerList/{id}', [UserController::class, 'update'])->name('review.update');
+    Route::delete('/reviewerList/{id}', [UserController::class, 'destroy'])->name('review.destroy');
 });
 
 Route::middleware(['auth', 'verified', 'role:kppm'])->name('kppm.')->prefix('kppm')->group(function(){

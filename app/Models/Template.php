@@ -10,4 +10,9 @@ class Template extends Model
     use HasFactory;
     public $table = 'template';
     protected $guarded = ['id'];
+
+    public function typeAjuan()
+    {
+        return $this->belongsTo(TypeAjuan::class, 'type_ajuan', 'id');
+    }
 }

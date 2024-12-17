@@ -14,10 +14,12 @@ class DocumentFactory extends Factory
     public function definition(): array
 {
     return [
+        'user_id' => User::inRandomOrder()->first()->id ?? 1,
         'doc_name' => $this->faker->sentence(),
-        'doc_path' => $this->faker->filePath(),
+        'doc_path' => 'hj',
         'doc_type' => TypeDoc::inRandomOrder()->first()->id ?? 1,
-        'doc_group' => $this->faker->numberBetween(1, 10),
+        'doc_group' => 1,
+        'ajuan_type' => 1,
     ];
 }
 

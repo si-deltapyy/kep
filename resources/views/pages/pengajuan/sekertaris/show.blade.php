@@ -9,24 +9,25 @@
          <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
             @if ($dums->doc_status != 'approved')
             <h2 class="mb-2 font-medium">PROSES AJUAN: </h2>
-            <form action="{{route('admin.pengajuan.expedited', $dums->id)}}" method="POST" class="inline">
+            <form action="{{route('sekertaris.pengajuan.expedited', $dums->id)}}" method="POST" class="inline">
                 @csrf
                 <button type="submit"
                     class="px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">
                     Expedited
                 </button>
             </form>
-                <a href="{{route('admin.pengajuan.extempted', $dums->id)}}"
-                    class="px-2 py-1 bg-red-500/10 border border-transparent collapse:bg-green-100 text-red text-sm rounded hover:bg-red-600 hover:text-white"
+                <a href="{{route('sekertaris.pengajuan.extempted', $dums->id)}}"
+                    class="ml-3 px-2 py-1 bg-red-500/10 border border-transparent collapse:bg-green-100 text-red text-sm rounded hover:bg-red-600 hover:text-white"
                     >Extempted
                 </a>
-            <form action="{{route('admin.pengajuan.all', $dums->id)}}" method="POST" class="inline">
+            <form action="{{route('sekertaris.pengajuan.all', $dums->id)}}" method="POST" class="inline">
                 @csrf
                 <button type="submit"
-                    class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
+                    class="ml-3 px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
                     All Reviewer
                 </button>
             </form>
+            
             @endif
              {{-- table --}}
                 <!-- resources/views/somepage.blade.php -->
@@ -74,12 +75,17 @@
                     :actionColumn="$actions1"
                     :actionSelect="true"
                 />
+                <a href="/sekertaris/ajuan"
+                    class="ml-3 px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
+                    Kembali
+                </a>
             </div>
          </div>
          <!--end div-->
      </div>
      <!--end div-->
  </div>
+ 
  <!--end grid-->
  
  @endsection

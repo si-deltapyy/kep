@@ -27,7 +27,7 @@
                 </div>
                 <!--end header-title-->
                 <div class="flex-auto p-4">
-                  <x-form-input action="{{route('sekretariat.pengajuan.update', $dummy->doc_group)}}" method="post">
+                  <x-form-input action="{{route('sekertaris.pengajuan.update', $dummy->id)}}" method="post">
                     @csrf
                     @method('PUT')
                     {{-- <x-input title="Nama" id="pengusul" value="" type="text" class="form-control" name="name"/> --}}
@@ -59,7 +59,7 @@
                       Assign Reviwer
                     </button>
                     <a
-                      href="{{route('sekretariat.pengajuan.index')}}"
+                      href="{{route('sekertaris.pengajuan.index')}}"
                       class="inline-block focus:outline-none text-red-500 hover:bg-red-500 hover:text-white bg-transparent border border-gray-200 dark:bg-transparent dark:text-red-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-red-500 text-sm font-medium py-1 px-3 rounded mb-1 lg:mb-0"
                     >
                       Cancel
