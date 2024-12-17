@@ -1,8 +1,9 @@
 @can('waiting-acception')
 <div class="my-4">
     <h5 class="text-xxl font-semibold text-slate-700 dark:text-gray-400 mb-4">
-    Harap Lengkapi Profil Dahulu !
+    Harap menunggu Konfirmasi dari Admin KEP FKIP
     </h5>
+    <p>Tunggu 1x24 Jam atau lebih cepat!</p>
 </div>
 @endcan
 @can('update-profile')
@@ -194,12 +195,12 @@
 
                             $actions1 = $user->mapWithKeys(function ($user) {
                                 return [
-                                    $user->id => '<form action="' . route('sekretariat.review.destroy', $user->id) . '" method="post" style="display:inline;">
+                                    $user->id => '<form action="' . route('sekertaris.review.destroy', $user->id) . '" method="post" style="display:inline;">
                                         ' . csrf_field() .
                                         method_field('DELETE') . '
                                         <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
                                     </form>
-                                    <a href="' . route('sekretariat.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
+                                    <a href="' . route('sekertaris.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
                                 ];
                             })->toArray();
                             @endphp
@@ -293,12 +294,12 @@
 
                             $actions1 = $user->mapWithKeys(function ($user) {
                                 return [
-                                    $user->id => '<form action="' . route('sekretariat.review.destroy', $user->id) . '" method="post" style="display:inline;">
+                                    $user->id => '<form action="' . route('sekertaris.review.destroy', $user->id) . '" method="post" style="display:inline;">
                                         ' . csrf_field() .
                                         method_field('DELETE') . '
                                         <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
                                     </form>
-                                    <a href="' . route('sekretariat.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
+                                    <a href="' . route('sekertaris.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
                                 ];
                             })->toArray();
                             @endphp
@@ -392,12 +393,12 @@
 
                             $actions1 = $user->mapWithKeys(function ($user) {
                                 return [
-                                    $user->id => '<form action="' . route('sekretariat.review.destroy', $user->id) . '" method="post" style="display:inline;">
+                                    $user->id => '<form action="' . route('sekertaris.review.destroy', $user->id) . '" method="post" style="display:inline;">
                                         ' . csrf_field() .
                                         method_field('DELETE') . '
                                         <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
                                     </form>
-                                    <a href="' . route('sekretariat.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
+                                    <a href="' . route('sekertaris.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
                                 ];
                             })->toArray();
                             @endphp
@@ -493,12 +494,12 @@
 
                             $actions1 = $user->mapWithKeys(function ($user) {
                                 return [
-                                    $user->id => '<form action="' . route('sekretariat.review.destroy', $user->id) . '" method="post" style="display:inline;">
+                                    $user->id => '<form action="' . route('sekertaris.review.destroy', $user->id) . '" method="post" style="display:inline;">
                                         ' . csrf_field() .
                                         method_field('DELETE') . '
                                         <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
                                     </form>
-                                    <a href="' . route('sekretariat.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
+                                    <a href="' . route('sekertaris.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
                                 ];
                             })->toArray();
                             @endphp
@@ -577,7 +578,7 @@
 @can('approved')
 <div class="bg-white shadow-lg rounded-lg p-6 flex items-center dark:bg-gray-800">
 <div class="ml-5">
-    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Menunggu Konfirmasi Akun dari Sekretariat KEP FKIP UNS</h3>
+    <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Menunggu Konfirmasi Akun dari Admin KEP FKIP UNS</h3>
     <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Waktu 1x24 Jam atau mungkin bisa lebih cepat</p>
 </div>
 </div>

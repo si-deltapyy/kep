@@ -32,16 +32,18 @@ class HomeController extends Controller
 
         $jumlahReq = User::role('user')
         ->whereHas('permissions', function ($query) {
-            $query->where('name', 'approved');
+            $query->where('name', 'waiting-acception');
         })
         ->count();
 
-        $jumlahUser = User::role('reviewer')->count();
+        $jumlahUser = User::role('sekertaris')->count();
 
         $jumlahOnReview = Dummy::whereNotIn('doc_status', ['new-proposal', 'approved'])->count();
 
         $newProposal = Dummy::whereIn('doc_status', ['new-proposal'])->count();
+        $newProposalSek = Dummy::where('doc_status', 'new-proposal')->
+        where('sekertaris_id', Auth::user()->id)->count();
 
-        return view('dashboard', compact('profile', 'user', 'jumlahAjuan', 'jumlahUser', 'jumlahReq', 'jumlahOnReview', 'newProposal'));
+        return view('dashboard', compact('profile', 'user', 'jumlahAjuan', 'jumlahUser', 'jumlahReq', 'jumlahOnReview', 'newProposal', 'newProposalSek'));
     }
 }

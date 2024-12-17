@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('doc_name');
             $table->string('doc_path');
             $table->unsignedBigInteger('doc_group');
+            $table->enum('ec_status', ['Waiting Sign KPPM', 'Signed'])->default('Waiting Sign KPPM');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('CASCADE');

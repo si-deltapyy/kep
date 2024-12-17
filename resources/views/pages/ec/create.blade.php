@@ -1,7 +1,7 @@
-<form action="{{ route('sekretariat.ec.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('sekertaris.ec.store') }}" method="POST" has-file enctype="multipart/form-data">
     @csrf
 
-    <input id="title" name="id" type="text" value="{{ $data->doc_group }}" hidden>
+    <input id="title" name="id" type="text" value="{{ $data->id}}" hidden>
     <input id="title" name="user" type="text" value="{{ $user->id }}" hidden>
     <label for="title">Judul Ajuan</label>
     <input id="title" name="title" type="text" value="{{ $data->title }}" readonly muted>

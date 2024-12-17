@@ -115,14 +115,6 @@ class DocumentController extends Controller
         }
     }
 
-    public function template(){
-
-        $temp = Template::all();
-
-        return view('user.dokumen.template', compact('temp'));
-    }
-
-
     public function viewDocument($path)
     {
         $file = Storage::disk('public')->get($path);
