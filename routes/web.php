@@ -41,7 +41,7 @@ Route::middleware(['auth', 'verified', 'role:user', 'permission:done-profile'])-
     Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('profile/update/{profil}', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
-    
+
 });
 
 Route::middleware(['auth', 'verified', 'role:user', 'permission:update-profile'])->name('user.')->group(function(){
@@ -71,8 +71,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->name('admin.')->prefix('a
     Route::delete('/reviewerList/{id}', [UserController::class, 'destroy'])->name('review.destroy');
 
     Route::get('/sekertarisList', [UserController::class , 'Sekertaris'])->name('sekertarisList');
-    Route::get('/sekertarisList/create', [UserController::class, 'createSekertaris'])->name('sekertaris.create');
-    Route::post('/sekertarisList', [UserController::class, 'regSekertaris'])->name('sekertaris.store');
+    Route::get('/sekertarisList/edit/{id}', [UserController::class, 'editSekertaris'])->name('sekertaris.edit');
+    Route::post('/sekertarisList/{id}', [UserController::class, 'updateSekertaris'])->name('sekertaris.store');
 
     Route::get('/message', [MessageController::class, 'index'])->name('message.index');
 

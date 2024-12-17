@@ -21,20 +21,11 @@
                 {{ $cell }}
               </td>
             @endforeach
-            @role('user')
                 @if($actionSelect)
                     <td>
                         {!! $actionColumn[$row['id']] !!}
                     </td>
                 @endif
-            @endrole
-            @role('admin')
-                @if($actionSelect)
-                    <td>
-                        {!! $actionColumn[$row['id']] !!}
-                    </td>
-                @endif
-            @endrole
           </tr>
         @endforeach
     </tbody>

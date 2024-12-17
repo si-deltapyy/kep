@@ -10,14 +10,16 @@
     });
 
     $actions1 = $doc->mapWithKeys(function ($doc) {
-        return [
-            $doc->id => '
-                <a href="' . route('admin.pengajuan.assign', $doc->id) . '" class="px-2 py-1 bg-blue-500/10 border border-transparent collapse:bg-blue-100 text-blue text-sm rounded hover:bg-blue-600 hover:text-white">Proses Dokumen</a>
-            '
-        ];
-    })->toArray();
+    return [
+        $doc->id => '
+            <button type="button" data-fc-type="modal" data-fc-target="modal-primary" class="px-2 py-1 lg:px-4 bg-transparent  text-primary text-sm  rounded transition hover:bg-primary-500 hover:text-white border border-primary font-medium">
+        Primary
+    </button>
+        '
+    ];
+})->toArray();
  @endphp
- 
+
  @extends('layouts.app')
  @section('title')
  <x-page-tittle :title="'List Ajuan Ethical Clereance'" :slash1="'Daftar Ajuan'" :slash2="'List'" :slash3="''"></x-page-tittle>
@@ -26,3 +28,6 @@
  @section('content')
     @include('partial.dokumen.admin')
  @endsection
+
+
+

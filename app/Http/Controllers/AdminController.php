@@ -18,7 +18,9 @@ class AdminController extends Controller
     public function index(){
         $doc = Dummy::all();
 
-        return view('pages.pengajuan.admin.index', compact('doc'));
+        $sekertaris = User::role('sekertaris')->get();
+
+        return view('pages.pengajuan.admin.index', compact('doc', 'sekertaris'));
     }
 
     /**
@@ -26,7 +28,7 @@ class AdminController extends Controller
      * Assign Reviewer Untuk Melakukan reviewer Ajuan
      */
 
-    
+
 
     public function upload($id){
         $data = Dummy::where('doc_group', $id)->first();
