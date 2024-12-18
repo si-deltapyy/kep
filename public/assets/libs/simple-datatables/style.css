@@ -122,6 +122,7 @@
 .datatable-table > thead > tr > th {
 	vertical-align: top;
 	padding: 8px 10px;
+    color: #000!important;
 }
 
 .datatable-table > thead > tr > th {
