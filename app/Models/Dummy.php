@@ -10,4 +10,9 @@ class Dummy extends Model
     use HasFactory;
     public $table = 'dummy';
     protected $guarded = ['id'];
+
+    public function Submission()
+    {
+        return $this->hasMany(Submission::class, 'doc_group', 'id');
+    }
 }

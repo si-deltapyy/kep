@@ -1,22 +1,34 @@
 @php
 // Data
-$head1 = ['ID', 'Judul Usulan', 'Status'];
+$head1 = ['ID', 'Judul Usulan', 'Status', 'Review Status'];
 $data1 = $doc->map(function($doc) {
     return [
         'id' => $doc->id,
         'Judul Usulan' => $doc->title,
-        'Status' => $doc->doc_status,
+        'as' => $doc->doc_status,
+        'Status' => $doc->doc_flag,
     ];
 });
 
 
 $actions1 = $doc->mapWithKeys(function ($doc) {
-    return [
-        $doc->id => '
-        <a href="' . route('user.ajuan.show', $doc->doc_group) . '" class="ml-2 text-blue-500 hover:text-blue-700">Cek</a>
-        '
-    ];
-})->toArray();
+        $actions = '';
+
+        if ($doc->doc_flag == "In Review") {
+            $actions .= '
+            <a href="#" class="px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white" onclick="return false;" style="color: gray; cursor: not-allowed;">Waiting for Response</a>
+            <a href="' . route('reviewer.dokRev.index', $doc->id) . '" class="px-2 py-1 bg-blue-500/10 border border-transparent collapse:bg-blue-100 text-blue text-sm rounded hover:bg-blue-600 hover:text-white">
+                    Lanjutkan Review</a>
+            ';
+        }
+        else{
+            $actions .= '<a href="' . route('reviewer.pengajuan.show', $doc->id) . '" class="px-2 py-1 bg-blue-500/10 border border-transparent collapse:bg-blue-100 text-blue text-sm rounded hover:bg-blue-600 hover:text-white">
+                    Review Dokumen</a>';
+        }
+        return [
+            $doc->id => $actions,
+        ];
+    })->toArray();
 @endphp
 
 @extends('layouts.app')

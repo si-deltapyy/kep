@@ -1,6 +1,7 @@
-<div>
-    Simplicity is the essence of happiness. - Cedric Bledsoe
-</div>
+@if ($sub->dummy->doc_flag == 'Progress')
+    Review salah Satu Dokumen
+    <a href="/reviewer/pengajuan">back</a>
+@else
 <div>
     <table border="1">
         <thead>
@@ -20,4 +21,6 @@
     </table>
 </div>
 
-<a href="/reviewer/dokumen/review">back</a>
+<a href="/reviewer/pengajuan/">back</a>
+@endif
+
