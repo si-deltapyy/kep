@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'sangaji',
             'email' => 'sguritno16@gmail.com',
-            'password' => Hash::make('123'),
+            'password' => Hash::make(env('USER_PASSWORD', '123')),
             
 
         ])->assignRole('user')->givePermissionTo('waiting-acception');
@@ -26,43 +26,43 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Admin KEP',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('123'),
+            'password' => Hash::make(env('USER_PASSWORD', '123')),
         ])->assignRole('admin');
 
         User::create([
             'name' => 'Administator',
             'email' => 'super@admin',
-            'password' => Hash::make('123'),
+            'password' => Hash::make(env('USER_PASSWORD', '123')),
         ])->assignRole('super_admin');
 
         User::create([
             'name' => 'Sri Mulyani',
             'email' => 'srimulyani@kppm.com',
-            'password' => Hash::make('123'),
+            'password' => Hash::make(env('USER_PASSWORD', '123')),
         ])->assignRole('kppm');
 
         User::create([
             'name' => 'Sekretaris 1',
             'email' => 'sek1@default',
-            'password' => Hash::make('123'),
+            'password' => Hash::make(env('USER_PASSWORD', '123')),
         ])->assignRole('sekertaris')->givePermissionTo('update-password');
 
         User::create([
-            'name' => 'Sekertaris 1',
+            'name' => 'Sekertaris 2',
             'email' => 'sek2@default',
-            'password' => Hash::make('123'),
+            'password' => Hash::make(env('USER_PASSWORD', '123')),
         ])->assignRole('sekertaris')->givePermissionTo('update-password');
 
         User::create([
             'name' => 'Sekertaris 3',
             'email' => 'sek3@default',
-            'password' => Hash::make('123'),
+            'password' => Hash::make(env('USER_PASSWORD', '123')),
         ])->assignRole('sekertaris')->givePermissionTo('update-password');
 
         User::create([
             'name' => 'reviewer 1',
             'email' => 'rev@a',
-            'password' => Hash::make('123'),
+            'password' => Hash::make(env('USER_PASSWORD', '123')),
             
 
         ])->assignRole('reviewer');
@@ -70,7 +70,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'reviewer 2',
             'email' => 'rev@aa',
-            'password' => Hash::make('123'),
+            'password' => Hash::make(env('USER_PASSWORD', '123')),
             
 
         ])->assignRole('reviewer');
@@ -78,7 +78,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'reviewer 3',
             'email' => 'rev@aaa',
-            'password' => Hash::make('123'),
+            'password' => Hash::make(env('USER_PASSWORD', '123')),
             
 
         ])->assignRole('reviewer');

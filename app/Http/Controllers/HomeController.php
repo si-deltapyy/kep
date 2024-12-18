@@ -37,13 +37,19 @@ class HomeController extends Controller
         ->count();
 
         $jumlahUser = User::role('sekertaris')->count();
-
         $jumlahOnReview = Dummy::whereNotIn('doc_status', ['new-proposal', 'approved'])->count();
+        $jumOnRevSek = Dummy::whereNotIn('doc_status', ['new-proposal', 'approved'])
+        ->where('sekertaris_id', Auth::id())->count();
+        $jumDone = Dummy::where('doc_status', 'approved')->count();
 
         $newProposal = Dummy::whereIn('doc_status', ['new-proposal'])->count();
         $newProposalSek = Dummy::where('doc_status', 'new-proposal')->
         where('sekertaris_id', Auth::user()->id)->count();
 
-        return view('dashboard', compact('profile', 'user', 'jumlahAjuan', 'jumlahUser', 'jumlahReq', 'jumlahOnReview', 'newProposal', 'newProposalSek'));
+        return view('dashboard', 
+            compact(
+                'profile', 'user', 'jumlahAjuan', 'jumlahUser', 
+                'jumlahReq', 'jumlahOnReview', 'newProposal', 
+                'newProposalSek', 'jumDone', 'jumOnRevSek'));
     }
 }

@@ -90,9 +90,41 @@ class TemplateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
-        //
+        $request->validate([
+            'tempName' => 'required',
+            'ajuan' => 'required',
+            'tempFile' => 'mimes:pdf|max:2048',
+        ]);
+
+        $types = TypeAjuan::find($request->ajuan);  // Fetch the same types as used in the view
+
+        $temp = Template::find($id);
+
+        if ($request->hasFile('tempFile')) {
+            $file = $request->file('tempFile');
+            $fileName = 'Template'.'-'. $types->ajuan_name . '.' . $file->getClientOriginalExtension();
+            $pathDoc = $file->storeAs('template', $fileName , 'public'); // Simpan di 'storage/app/public/template'
+
+            if ($pathDoc > 0) {// Simpan di 'storage/app/public/template'
+                $temp->update([
+                    'template_name' => $request->tempName,
+                    'type_ajuan' => $request->ajuan,
+                    'template_path' => $pathDoc,
+                ]);
+                
+                return redirect()->route('admin.template.index');
+            }else{
+                return redirect()->back()->with('error', 'File not found');
+            }
+        }else{
+            $temp->update([
+                'template_name' => $request->tempName,
+                'type_ajuan' => $request->ajuan,
+            ]);
+            return redirect()->route('admin.template.index');
+        }
     }
 
     /**

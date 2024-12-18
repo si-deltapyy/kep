@@ -3,8 +3,13 @@
     <form action="{{ route('sekertaris.update-password') }}" method="POST">
         @csrf
         <div class="form-group">
-            <label for="password_confirmation">Konfirmasi Password Baru</label>
-            <input type="password" class="form-control" name="password" id="password_confirmation" placeholder="Konfirmasi Password Baru">
+            <label for="password">Password Baru</label>
+            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Password Baru">
+            @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
         </div>
         <button type="submit" class="btn btn-primary"><i class="fas fa-key mr-2"></i>Ubah Password</button>
     </form>
@@ -31,7 +36,7 @@
         </div>
         <div class="ml-5">
             <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Proses Review</h3>
-            <p class="mt-2 text-3xl font-bold text-purple-500 dark:text-purple-400">{{ $jumlahOnReview }}</p>
+            <p class="mt-2 text-3xl font-bold text-purple-500 dark:text-purple-400">{{ $jumOnRevSek }}</p>
             <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Dokumen dalam proses</p>
         </div>
     </div>
@@ -42,7 +47,7 @@
         </div>
         <div class="ml-5">
             <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Dokumen Selesai</h3>
-            <p class="mt-2 text-3xl font-bold text-purple-500 dark:text-purple-400">{{ $jumlahOnReview }}</p>
+            <p class="mt-2 text-3xl font-bold text-purple-500 dark:text-purple-400">{{ $jumDone }}</p>
             <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Dokumen dalam proses</p>
         </div>
     </div>

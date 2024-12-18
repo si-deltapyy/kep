@@ -68,8 +68,9 @@
                 @endrole
 
                 @role('reviewer')
+                    <x-navigation :route="'dashboard'" :text="'Dashboard'" :icon="'home'"/>
                     <x-navigation :route="'reviewer.pengajuan.index'" :text="'Pengajuan'" :icon="'file-user'"/>
-                    {{-- <x-nav-link :route="'pages.ec.index'" :text="'ECDocument'" /> --}}
+                    <x-navigation :route="'reviewer.dokRev.index'" :text="'Review Dokumen'" :icon="'file'"/>
                 @endrole
 
                 @role('super_admin')

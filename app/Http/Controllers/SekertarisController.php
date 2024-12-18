@@ -17,7 +17,7 @@ class SekertarisController extends Controller
 {
 
     public function index(){
-        $doc = Dummy::all();
+        $doc = Dummy::where('sekertaris_id', Auth::id())->get();
 
         return view('pages.pengajuan.sekertaris.index', compact('doc'));
     }
@@ -42,6 +42,15 @@ class SekertarisController extends Controller
         $id = Auth::user()->id; // Get the authenticated user id
         $user = User::find($id);
 
+        $request->validate([
+            'password' => 'required|min:8|regex:/[0-9]/|regex:/[a-z]/',
+        ], [
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password harus memiliki minimal 8 karakter.',
+            'password.regex' => 'Password harus mengandung angka dan huruf kecil.',
+        ]);
+        
+
         $user->update([
             'password' => bcrypt($request->password)
         ]);
@@ -65,90 +74,44 @@ class SekertarisController extends Controller
                 ->where('doc_group', $id)
                 ->select( '*' , 'ld.id as id_log')
                 ->get();
+        
+        $data->update([
+            'doc_status' => 'on-review',
+            'doc_flag' => 'Progress',
+        ]);
 
-        // switch($code){
-        //     case 1:
-        //         $data->update([
-        //             'doc_status' => 'approved',
-        //             'updated_at' => now()
-        //         ]);
-        //         return redirect()->route('sekretariat.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
-        //         break;
+        $mailData = [
+            'title' => 'Mail from KEP FKIP',
+            'body' => 'This is for testing email using smtp.',
+            'subject' => 'Review Bos',
+            'view' => 'pages.email.sendReviewer',
+        ];
 
-        //     case 2:
-                $data->update([
-                    'doc_status' => 'on-review',
-                    'updated_at' => now()
-                ]);
+        if ($doc) {
+            $reviewer = $request->input('review');
 
-                $mailData = [
-                    'title' => 'Mail from KEP FKIP',
-                    'body' => 'This is for testing email using smtp.'
-                ];
-
-                if ($doc) {
-                    $reviewer = $request->input('review');
-
-                    foreach ($doc as $d) {
-                        foreach ($reviewer as $singleReviewer) {
-                            Submission::create([
-                                'log_id' => $d->id_log,
-                                'reviewer' => $singleReviewer,
-                                'doc_group' => $id
-                            ]);
-                        }
-                    }
-
-                    foreach ($reviewer as $singleReviewer) {
-                        $reviewer_email = User::role('reviewer')
-                        ->where('id', $singleReviewer)
-                        ->select('email')
-                        ->first();
-                        Mail::to($reviewer_email->email)->send(new SendMail($mailData));
-                    }
+            foreach ($doc as $d) {
+                foreach ($reviewer as $singleReviewer) {
+                    Submission::create([
+                        'log_id' => $d->id_log,
+                        'reviewer' => $singleReviewer,
+                        'doc_group' => $id
+                    ]);
                 }
-                return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
-            //     break;
+            }
 
-            // case 3:
-            //     $data->update([
-            //         'doc_status' => 'on-review',
-            //         'updated_at' => now()
-            //     ]);
-
-            //     $mailData = [
-            //         'title' => 'Mail from KEP FKIP',
-            //         'body' => 'This is for testing email using smtp.'
-            //     ];
-
-            //     if ($doc) {
-            //         $reviewer = User::role('reviewer')->get();
-
-            //         foreach ($doc as $d) {
-            //             foreach ($reviewer as $singleReviewer) {
-            //                 Submission::create([
-            //                     'log_id' => $d->id_log,
-            //                     'reviewer' => $singleReviewer->id,
-            //                     'doc_group' => $id
-            //                 ]);
-            //             }
-            //         }
-
-            //         foreach ($reviewer as $singleReviewer) {
-            //             $reviewer_email = User::role('reviewer')
-            //             ->where('id', $singleReviewer->id)
-            //             ->select('email')
-            //             ->first();
-            //             Mail::to($reviewer_email->email)->send(new SendMail($mailData));
-            //         }
-            //     }
-            //     return redirect()->route('sekretariat.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
-            //     break;
-
-        // }
+            foreach ($reviewer as $singleReviewer) {
+                $reviewer_email = User::role('reviewer')
+                ->where('id', $singleReviewer)
+                ->select('email')
+                ->first();
+                Mail::to($reviewer_email->email)->send(new SendMail($mailData));
+            }
+        }
+        return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
-    public function expedited($id): RedirectResponse{
+    public function extempted($id): RedirectResponse{
 
         $data = Dummy::find($id);
 
@@ -161,7 +124,7 @@ class SekertarisController extends Controller
 
     }
 
-    public function extempted($id){
+    public function expedited($id){
 
         $reviewer = User::role('reviewer')->get();
 

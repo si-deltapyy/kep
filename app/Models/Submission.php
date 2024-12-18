@@ -14,7 +14,12 @@ class Submission extends Model
 
     public function logDocument()
     {
-        return $this->belongsTo(LogDocument::class, 'log_id');
+        return $this->belongsTo(LogDocument::class, 'log_id', 'id');
+    }
+
+    public function Dummy()
+    {
+        return $this->belongsTo(Dummy::class, 'doc_group', 'id');
     }
 
 }

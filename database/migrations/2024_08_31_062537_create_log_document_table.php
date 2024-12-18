@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('note')->nullable();
             $table->unsignedBigInteger('doc_id');
             $table->unsignedBigInteger('user_id');
-            $table->enum('doc_status', ['new-proposal', 'on-review', 'approved','approved-with','resubmission', 'disapproved', 'revised'])->default('new-proposal');
+            $table->enum('doc_status', ['new-proposal', 'process','on-review', 'approved','approved-with','resubmission', 'disapproved', 'revised'])->default('new-proposal');
             $table->timestamps();
 
             $table->foreign('doc_id')->references('id')->on('document')->onDelete('CASCADE');

@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewerController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DocRevController;
 use App\Http\Controllers\SekertarisController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UserController;
@@ -30,7 +31,7 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/sendemail', [Controller::class, 'index']);
+Route::get('/a', [Controller::class, 'tes']);
 
 Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -76,8 +77,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])->name('admin.')->prefix('a
 });
 
 Route::middleware(['auth', 'verified', 'role:reviewer'])->name('reviewer.')->prefix('reviewer')->group(function(){
-    Route::get('/pengajuan', [ReviewerController::class, 'index'])->name('pengajuan.index');
-    Route::get('/pengajuan/{id}/detail', [ReviewerController::class, 'show'])->name('pengajuan.show');
+    Route::resource('pengajuan', ReviewerController::class)->names('pengajuan');
+    Route::resource('dokumen/review' , DocRevController::class)->names('dokRev');
+    Route::resource('message', MessageController::class)->names('message');
 });
 
 Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')->prefix('Administrator')->group(function(){

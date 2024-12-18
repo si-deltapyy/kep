@@ -15,39 +15,28 @@ use Illuminate\Support\Facades\DB;
 class ReviewerController extends Controller
 {
     public function index(){
-        // Ambil semua data reviewer dari submission
-        // $data = Submission::join('log_document as ld', 'ld.id' , '=', 'submission.log_id')
-        //     ->join('document as dc', 'dc.id', '=', 'ld.doc_id')
-        //     ->join('dummy as dm', 'dm.doc_group', '=', 'dc.doc_group')
-        //     ->where('reviewer', Auth::user()->id)->get();
 
-        $doc = Submission::join('log_document as ld', 'ld.id', '=', 'submission.log_id')
-            ->join('document as dc', 'dc.id', '=', 'ld.doc_id')
-            ->join('dummy as dm', 'dm.doc_group', '=', 'dc.doc_group')
-            ->where('reviewer', Auth::user()->id) // Pastikan 'reviewer' berasal dari tabel yang benar
-            ->select('dm.title', 'dm.created_at', 'dm.doc_group') // Misalnya, jika ingin menghitung total per grup
-            ->groupBy('dm.title', 'dm.created_at', 'dm.doc_group') // Gunakan alias tabel untuk menghindari ambiguitas
-            ->get();
-
-
-        //     $reviewer_email = User::role('reviewer')
-        //             ->where('id', 3)
-        //             ->select('email')
-        //             ->first();
-
-        // return response()->json([
-        //     'data' => $reviewer_email->email,
-        //     'user' => Auth::user()->id,
-        //     'message' => 'Bukan id kamu'
-        // ]);
-
-        return view('reviewer.ajuan.index', compact('doc'));
+        $id = Submission::select('doc_group')->where('reviewer', Auth::id())->first();
+        $doc = Dummy::find($id);
+        
+        
+        return view('pages.pengajuan.reviewer.index', compact('doc'));
     }
 
     public function show(Int $id){
         $doc = Document::where('doc_group', $id)->get();
+        // $sub = Submission::where('reviewer', Auth::id())->with(
+        //         'logDocument',
+        //         'Dummy',
+        //     )->get();
 
-        return view('reviewer.ajuan.show', compact('doc'));
+        $sub = Dummy::find($id);
+
+        $sub->update([
+            'doc_flag' => 'In Review',
+        ]);
+        
+        return view('pages.pengajuan.reviewer.show', compact('doc'));
     }
 
     /**
