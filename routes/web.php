@@ -69,8 +69,8 @@ Route::middleware(['auth', 'verified', 'role:admin'])->name('admin.')->prefix('a
     Route::get('user/make-reviewer/{user}', [UserController::class, 'makeReviewer'])->name('makeReviewer');
 
     Route::get('/sekertarisList', [UserController::class , 'Sekertaris'])->name('sekertarisList');
-    Route::get('/sekertarisList/create', [UserController::class, 'createSekertaris'])->name('sekertaris.create');
-    Route::post('/sekertarisList', [UserController::class, 'regSekertaris'])->name('sekertaris.store');
+    Route::get('/sekertarisList/edit/{id}', [UserController::class, 'editSekertaris'])->name('sekertaris.edit');
+    Route::post('/sekertarisList/{id}', [UserController::class, 'updateSekertaris'])->name('sekertaris.store');
 
     Route::get('/message', [MessageController::class, 'index'])->name('message.index');
 
@@ -89,7 +89,7 @@ Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')
 });
 
 Route::middleware(['auth', 'verified', 'role:sekertaris'])->name('sekertaris.')->prefix('sekertaris')->group(function(){
-    
+
     Route::post('/update-password', [SekertarisController::class, 'updatePassword'])->name('update-password');
 
     Route::resource('ajuan', SekertarisController::class)->names('pengajuan');

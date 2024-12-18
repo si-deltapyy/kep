@@ -18,8 +18,12 @@ class AdminController extends Controller
     public function index(){
         $doc = Dummy::all();
 
-        return view('pages.pengajuan.admin.index', compact('doc'));
+        $sekertaris = User::role('sekertaris')->get();
+
+        return view('pages.pengajuan.admin.index', compact('doc', 'sekertaris'));
     }
+
+
 
     /**
      * @return Params
