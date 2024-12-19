@@ -9,7 +9,7 @@ try{
   var options = {
 
 
-    
+
     chart: {
         height:80,
         animations: {
@@ -32,8 +32,8 @@ try{
     },
     plotOptions: {
         bar: {
-            horizontal: false, 
-            endingShape: "rounded", 
+            horizontal: false,
+            endingShape: "rounded",
             columnWidth: "40%"
         }
     },
@@ -41,13 +41,13 @@ try{
         enabled: false
     },
     stroke: {
-        show: true, 
-        width: 2, 
+        show: true,
+        width: 2,
         colors: ["transparent"]
     },
     colors: ["#5C3DC3"],
     series:[ {
-        name: "Orders", 
+        name: "Orders",
         data: [50, 60, 70, 80, 90, 100, 95, 85, 75, 65, 55, 65, 75, 85, 95, 105, 80, 70, 60, 50, 40, 30, 45, 55, 65, 75, 85, 95, 100, 80, 60]
     }
     ],
@@ -60,7 +60,7 @@ try{
     fill: {
         opacity: 0.9
     },
-    
+
     tooltip: {
         y: {
             formatter:function(val) {
@@ -81,7 +81,7 @@ var chart = new ApexCharts(
 
 try{
   var dash_spark_1 = {
-    
+
     chart: {
         type: 'area',
         height: 80,
@@ -161,7 +161,7 @@ var options = {
     offsetX: 0,
     offsetY: 0,
   },
-  labels: ["Mobile", "Tablet", "Desktop"],
+  labels: ["Diajukan", "Diterima", "Ditolak"],
   colors: ["#fd3d97", "#5d78ff", "#35bfa3"],
 
   responsive: [
@@ -248,16 +248,16 @@ try{
         name: 'This Year',
         data: [0,45,10,75,35,94,40,115,30,105,65,110]
     }],
-  
+
     xaxis: {
         type: 'month',
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         axisBorder: {
           show: true,
-        },  
+        },
         axisTicks: {
           show: true,
-        },                  
+        },
     },
     fill: {
       type: "gradient",
@@ -268,7 +268,7 @@ try{
         stops: [0, 90, 100]
       }
     },
-    
+
     tooltip: {
         x: {
             format: 'dd/MM/yy HH:mm'
@@ -279,14 +279,14 @@ try{
       horizontalAlign: 'right'
     },
   }
-  
+
   var chart = new ApexCharts(
     document.querySelector("#crm-dash"),
     options
   );
-  
+
   chart.render();
-  
+
   }catch (err) {}
 
 
@@ -295,7 +295,7 @@ try{
       chart: {
           height: 205,
           type: 'donut',
-      }, 
+      },
       plotOptions: {
         pie: {
           donut: {
@@ -311,7 +311,7 @@ try{
           width: 2,
           colors: ['transparent']
       },
-     
+
       series: [10, 65, 25,],
       legend: {
           show: false,
@@ -325,7 +325,7 @@ try{
       },
       labels: [ "Mobile", "Tablet", "Desktop"],
       colors: ["#13939c", "#603dc3", "#fac639"],
-     
+
       responsive: [{
           breakpoint: 600,
           options: {
@@ -333,7 +333,7 @@ try{
                 donut: {
                   customScale: 0.2
                 }
-              },        
+              },
               chart: {
                   height: 200
               },
@@ -342,21 +342,21 @@ try{
               },
           }
       }],
-    
+
       tooltip: {
         y: {
             formatter: function (val) {
                 return   val + " %"
             }
         }
-      }  
+      }
     }
-    
+
     var chart = new ApexCharts(
       document.querySelector("#email_report"),
       options
     );
-    
+
     chart.render();
   }catch(err){}
 
@@ -480,7 +480,7 @@ try{
 // }
 
 // try{
-  
+
 // var colors = ['#98e7df', '#b8c4d0', '#bec7fa', '#ffe2a3', '#92e6f0'];
 // var options = {
 //   series: [{
@@ -497,7 +497,7 @@ try{
 // plotOptions: {
 //   bar: {
 //       dataLabels: {
-//           position: 'top', // top, center, bottom              
+//           position: 'top', // top, center, bottom
 //       },
 //       columnWidth: '20',
 //       distributed: true,
