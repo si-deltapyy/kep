@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.min.css') }}" />
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/libs/simple-datatables/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
 
   </head>
 

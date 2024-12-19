@@ -75,7 +75,34 @@
 
                 @role('super_admin')
                     <x-navigation :route="'dashboard'" :text="'Dashboard'"  :icon="'home'"/>
+                    <x-navigation :route="'dashboard'" :text="'Manage User'" :icon="'contact'"/>
                     <x-navigation :route="'dashboard'" :text="'Manage Reviewer'"  :icon="'contact'"/>
+                    <x-navigation :route="'dashboard'" :text="'Manage Sekertaris'" :icon="'contact'"/>
+
+                    <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
+                    <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
+                        <span>Security</span>
+                    </div>
+
+                    <x-navigation :route="'dashboard'" :text="'Permission Management'" :icon="'message-square'"/>
+                    <x-navigation :route="'dashboard'" :text="'Role Management'" :icon="'message-square'"/>
+                    <x-navigation :route="'dashboard'" :text="'Password Management'" :icon="'message-square'"/>
+
+                    <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
+                    <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
+                        <span>Other</span>
+                    </div>
+
+                    <x-navigation :route="'dashboard'" :text="'Setting'" :icon="'message-square'"/>
+                    <x-nav-dropdown 
+                        route="parent.route" 
+                        text="Menu Utama" 
+                        icon="home" 
+                        :items="[
+                            ['route' => 'dashboard', 'text' => 'Submenu 1'],
+                            ['route' => 'dashboard', 'text' => 'Submenu 2'],
+                        ]"
+                    />
                 @endrole
 
                 @role('sekertaris')

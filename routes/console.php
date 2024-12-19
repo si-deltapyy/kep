@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DocumentController;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 
-Artisan::command('inspire', function () {
+Artisan::command('arak:bali', function () {
     $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+})->purpose('Dinggo kata kata ben ra mletre boss');
+
+// Artisan::command('del', function () {
+//     $this->comment('Delete directory public/Document Success!');
+// })->purpose('Delete directory command');
