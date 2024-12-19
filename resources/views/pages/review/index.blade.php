@@ -1,4 +1,4 @@
-@if ($sub->dummy->doc_flag == 'Progress')
+@if ($sub == 'Progress')
     Review salah Satu Dokumen
     <a href="/reviewer/pengajuan">back</a>
 @else
@@ -15,6 +15,7 @@
             <tr>
                 <td>-</td>
                 <td>{{$x->doc_name}} - <a href="/storage/{{$x->doc_path}}">Unduh</a></td>
+                <td><a href="{{ route('reviewer.dokRev.show', $x->id) }}">lihat</a></td>
             </tr>
             @endforeach
         </tbody>

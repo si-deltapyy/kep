@@ -15,11 +15,13 @@ class DocRevController extends Controller
      */
     public function index()
     {
-        $sub = Submission::where('reviewer', Auth::id())->with(
+        $subs = Submission::where('reviewer', Auth::id())->with(
                 'logDocument',
                 'Dummy',
-            )->first();
-        $doc = Document::where('doc_group', $sub->doc_group)->get();
+            )->get();
+
+        $doc = Document::where('doc_group', $subs[0]['doc_group'])->get();
+        dd($doc[1]['doc_path']);
 
         return view('pages.review.index', compact('doc', 'sub'));
     }
@@ -31,6 +33,19 @@ class DocRevController extends Controller
     {
         //
     }
+
+    public function pils($id)
+    {
+        $doc = Document::where('doc_group', $id)->get();
+        $sub = Submission::where('reviewer', Auth::id())->with(
+                    'logDocument',
+                    'Dummy',
+                )->where('reviewer_status', 'in review')
+                ->get();
+
+        return view('pages.review.index', compact('doc', 'sub'));
+    }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -45,7 +60,9 @@ class DocRevController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $doc = Document::find($id);
+        // dd($doc['doc_path']);
+        return view('pages.pengajuan.reviewer.detail', compact('doc'));
     }
 
     /**

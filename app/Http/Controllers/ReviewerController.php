@@ -16,8 +16,8 @@ class ReviewerController extends Controller
 {
     public function index(){
 
-        $id = Submission::select('doc_group')->where('reviewer', Auth::id())->first();
-        $doc = Dummy::find($id);
+        $id = Submission::select('doc_group')->where('reviewer', Auth::id());
+        $doc = Dummy::whereIn('id', $id)->get();
         
         
         return view('pages.pengajuan.reviewer.index', compact('doc'));

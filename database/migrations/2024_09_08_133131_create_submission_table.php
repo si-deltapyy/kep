@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('log_id');
             $table->string('reviewer');
             $table->unsignedBigInteger('doc_group');
+            $table->enum('reviewer_status', ['done', 'process', 'in review'])->default('process')->nullable();
             $table->timestamps();
 
             $table->foreign('log_id')->references('id')->on('log_document')->onDelete('CASCADE');

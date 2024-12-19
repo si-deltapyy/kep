@@ -80,6 +80,8 @@ Route::middleware(['auth', 'verified', 'role:reviewer'])->name('reviewer.')->pre
     Route::resource('pengajuan', ReviewerController::class)->names('pengajuan');
     Route::resource('dokumen/review' , DocRevController::class)->names('dokRev');
     Route::resource('message', MessageController::class)->names('message');
+
+    Route::get('/dokumen/review/{id}/show', [DocRevController::class, 'pils'])->name('dokRev.pils');
 });
 
 Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')->prefix('Administrator')->group(function(){
