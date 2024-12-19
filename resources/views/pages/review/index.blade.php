@@ -55,22 +55,31 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
     Review salah Satu Dokumen
     <a href="/reviewer/pengajuan">back</a>
 @else
-<div class="grid grid-cols-1 p-0 md:p-4">
-    <div class="sm:-mx-6 lg:-mx-8">
-        <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
-            {{-- table --}}
-            <!-- resources/views/somepage.blade.php -->
-            <x-table
-                            :head="$head1"
-                            :data="$data1->toArray()"
-                            :actionHeader="true"
-                            :actionSelect="true"
-                            :actionColumn="$actions1"
-                        />
+
+<div
+                class="active p-4 bg-gray-50 rounded-lg dark:bg-gray-700/20"
+                id="orders"
+                role="tabpanel"
+                aria-labelledby="orders-tab"
+                >
+    <button type=c"button" class="px-2 py-1 lg:px-4 bg-transparent  text-primary text-xl  rounded transition hover:bg-primary-500 hover:text-white border border-primary font-medium">Kirim Pesan</button>
+    <div class="grid grid-cols-1 p-0 md:p-4">
+        <div class="sm:-mx-6 lg:-mx-8">
+            <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
+                {{-- table --}}
+                <!-- resources/views/somepage.blade.php -->
+                <x-table
+                                :head="$head1"
+                                :data="$data1->toArray()"
+                                :actionHeader="true"
+                                :actionSelect="true"
+                                :actionColumn="$actions1"
+                            />
+            </div>
+            <!--end div-->
         </div>
         <!--end div-->
     </div>
-    <!--end div-->
 </div>
 @endif
 <!--end grid-->

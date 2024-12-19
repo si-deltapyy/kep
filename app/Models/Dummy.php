@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Pesan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Dummy extends Model
 {
@@ -11,8 +12,18 @@ class Dummy extends Model
     public $table = 'dummy';
     protected $guarded = ['id'];
 
-    public function Submission()
+    public function submissions()
     {
-        return $this->hasMany(Submission::class, 'doc_group', 'id');
+        return $this->hasMany(Submission::class, 'doc_group', 'doc_group');
     }
+
+    public function Sekertaris()
+    {
+        return $this->belongsTo(User::class, 'sekertaris_id', 'id');
+    }
+
+    public function pesans()
+{
+    return $this->hasMany(Pesan::class);
+}
 }

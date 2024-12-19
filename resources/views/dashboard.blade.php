@@ -20,4 +20,8 @@
 @include('partial.dashboard.sekertaris')
 @endrole
 
+@role('super_admin')
+@include('partial.dashboard.superAdmin')
+@endrole
+
 @endsection

@@ -56,7 +56,7 @@
                     <x-navigation :route="'dashboard'" :text="'Dashboard'" :icon="'files'"/>
                     <x-navigation :route="'admin.pengajuan.index'" :text="'Pengajuan'" :icon="'file-user'"/>
                     <x-navigation :route="'admin.ec.index'" :text="'ECDocument'" :icon="'file-user'"/>
-                    <x-navigation :route="'admin.sekertarisList'" :text="'List Sekertaris'" :icon="'file-user'"/>
+                    {{-- <x-navigation :route="'admin.sekertarisList'" :text="'List Sekertaris'" :icon="'file-user'"/> --}}
 
                     <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
                     <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
@@ -94,15 +94,46 @@
                     </div>
 
                     <x-navigation :route="'dashboard'" :text="'Setting'" :icon="'message-square'"/>
-                    <x-nav-dropdown 
-                        route="parent.route" 
-                        text="Menu Utama" 
-                        icon="home" 
-                        :items="[
-                            ['route' => 'dashboard', 'text' => 'Submenu 1'],
-                            ['route' => 'dashboard', 'text' => 'Submenu 2'],
-                        ]"
-                    />
+
+
+                    <div data-fc-type="collapse" data-fc-parent="parent-accordion">
+                        <a href="#"
+                           class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
+                            <span data-lucide="grid"
+                                  class="w-5 h-5 text-center text-slate-800 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
+                            <span>Apps</span>
+                            <i class="icofont-thin-down fc-collapse-open:rotate-180 ms-auto inline-block text-[14px] transform transition-transform duration-300 text-slate-800 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></i>
+                        </a>
+                    </div>
+                    <div class="hidden  overflow-hidden">
+                        <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2" id="apps-accordion"
+                            data-fc-type="accordion">
+                            <li class="nav-item relative block">
+                                <a href=""
+                                   class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200  flex items-center decoration-0 px-3 py-3">
+                                    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                    Sub Menu 1
+                                </a>
+                            </li>
+                            <li class="nav-item relative block">
+                                <a href=""
+                                   class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
+                                    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                    Sub Menu 1
+                                </a>
+                            </li>
+                            <li class="nav-item relative block">
+                                <a href=""
+                                   class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
+                                    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                    Sub Menu 1
+                                </a>
+                            </li>
+
+
+
+                        </ul>
+                    </div>
                 @endrole
 
                 @role('sekertaris')
@@ -114,7 +145,7 @@
                         <span>Other</span>
                     </div>
 
-                    <x-navigation :route="'dashboard'" :text="'Message'" :icon="'message-square'"/>
+                    <x-navigation :route="'sekertaris.pesan.index'" :text="'Message'" :icon="'message-square'"/>
                 @endrole
 
                 </div>

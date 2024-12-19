@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ asset('assets/libs/simple-datatables/style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
+    @stack('pages-style')
+
 
   </head>
 
@@ -75,6 +77,8 @@
 
     <script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
     <script src="{{asset('assets/js/pages/analytics-index.init.js')}}"></script>
+
+    @stack('pages-script')
 
     <!-- JAVASCRIPTS -->
   </body>
