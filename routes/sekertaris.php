@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PesanController;
 use App\Http\Controllers\ECDocumentController;
 use App\Http\Controllers\SekertarisController;
 
@@ -21,4 +22,11 @@ Route::middleware(['auth', 'verified', 'role:sekertaris'])->name('sekertaris.')-
     Route::get('/reviewerList/{id}/edit', [UserController::class, 'edit'])->name('review.edit');
     Route::put('/reviewerList/{id}', [UserController::class, 'update'])->name('review.update');
     Route::delete('/reviewerList/{id}', [UserController::class, 'destroy'])->name('review.destroy');
+
+
+    // Pesan
+    Route::get('/pesan', [PesanController::class, 'index'])->name('pesan.index');
+    Route::get('/pesan/{id}/edit', [PesanController::class, 'edit'])->name('pesan.show');
+
 });
+

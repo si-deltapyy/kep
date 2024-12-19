@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Pesan;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Submission extends Model
 {
@@ -17,9 +18,14 @@ class Submission extends Model
         return $this->belongsTo(LogDocument::class, 'log_id', 'id');
     }
 
-    public function Dummy()
+    public function dummy()
     {
-        return $this->belongsTo(Dummy::class, 'doc_group', 'id');
+        return $this->hasOne(Dummy::class, 'id', 'doc_group');
     }
+
+    public function pesan()
+{
+    return $this->hasMany(Pesan::class);
+}
 
 }

@@ -10,7 +10,7 @@ Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->prefix('use
     Route::middleware(['permission:done-profile'])->group(function () {
         Route::resource('ajuan', DocumentController::class)->names('ajuan');
         Route::resource('kuisioner', KuisionerController::class)->names('kuisioner');
-        Route::resource('template', TemplateController::class)->names('template');
+        // Route::resource('template', TemplateController::class)->names('template');
         Route::resource('message', MessageController::class)->names('message');
         Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
     });
