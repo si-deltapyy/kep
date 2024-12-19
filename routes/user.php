@@ -4,6 +4,7 @@ use App\Http\Controllers\ECDocumentController;
 use App\Http\Controllers\KuisionerController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->prefix('user')->group(function () {
