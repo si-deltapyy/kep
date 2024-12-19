@@ -40,6 +40,38 @@
                                             <p class="focus:outline-none text-gray-800 dark:text-gray-400 text-xs font-medium flex-wrap truncate w-40">Subjek Revisi</p>
                                         </div>
                                     </div>
+                                    <div class="flex items-center">
+                                        <div class="w-9 h-9 rounded relative">
+                                            <span class="absolute text-green-500 -left-1 -top-1">
+                                                <svg width="12" height="12">
+                                                <circle cx="4" cy="4" r="4" fill="currentColor"></circle>
+                                                </svg>
+                                            </span>
+                                            <img class="w-full h-full overflow-hidden object-cover rounded object-center" src="assets/images/users/avatar-1.png" alt="logo" />
+                                        </div>
+                                        <div class="ms-2">
+                                            <div class="cursor-pointer hover:text-gray-900 focus:text-gray-500 text-gray-800 dark:text-gray-100 focus:outline-none">
+                                                <h5 class=" font-medium text-sm">Judul Ajuan</h5>
+                                            </div>
+                                            <p class="focus:outline-none text-gray-800 dark:text-gray-400 text-xs font-medium flex-wrap truncate w-40">Subjek Revisi</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-9 h-9 rounded relative">
+                                            <span class="absolute text-green-500 -left-1 -top-1">
+                                                <svg width="12" height="12">
+                                                <circle cx="4" cy="4" r="4" fill="currentColor"></circle>
+                                                </svg>
+                                            </span>
+                                            <img class="w-full h-full overflow-hidden object-cover rounded object-center" src="assets/images/users/avatar-1.png" alt="logo" />
+                                        </div>
+                                        <div class="ms-2">
+                                            <div class="cursor-pointer hover:text-gray-900 focus:text-gray-500 text-gray-800 dark:text-gray-100 focus:outline-none">
+                                                <h5 class=" font-medium text-sm">Judul Ajuan</h5>
+                                            </div>
+                                            <p class="focus:outline-none text-gray-800 dark:text-gray-400 text-xs font-medium flex-wrap truncate w-40">Subjek Revisi</p>
+                                        </div>
+                                    </div>
                                 </a>
                                 <div class="ms-auto self-center text-center">
                                     <span class="w-4 h-4 rounded-full bg-green-500 text-white text-xs font-medium text-center inline-block">3</span>
@@ -67,7 +99,7 @@
                         </div>
                         <div class="flex flex-col ">
                             <div class="text-lg mt-1 flex items-center font-medium">
-                                <span class="text-gray-700 me-3 dark:text-slate-200">Reviwer</span>
+                                <span class="text-gray-700 me-3 dark:text-slate-200">Ajuan 1</span>
                             </div>
                             <span class="text-sm text-gray-500 -mt-1">online</span>
                         </div>
@@ -102,7 +134,23 @@
                     <div class="chat-message">
                         <div class="flex items-end">
                             <div class="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-2 items-start font-medium">
-                                <div><span class="px-4 py-2 rounded-lg inline-block rounded-bl-none border border-gray-100 bg-gray-50 text-gray-600 dark:border-slate-800 dark:bg-slate-700 dark:text-slate-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam reprehenderit quaerat officia, voluptatum et, alias expedita asperiores facere, eius consequuntur amet iure in necessitatibus? Doloribus eaque quasi unde maxime. Hic.</span></div>
+                                <div><span class="px-4 py-2 rounded-lg inline-block rounded-bl-none border border-gray-100 bg-gray-50 text-gray-600 dark:border-slate-800 dark:bg-slate-700 dark:text-slate-400">Review 1</span> <button>To Respond</button></div>
+                            </div>
+                            <img src="assets/images/users/avatar-3.png" alt="My profile" class="w-8 h-8 rounded-full order-1">
+                        </div>
+                    </div>
+                    <div class="chat-message">
+                        <div class="flex items-end">
+                            <div class="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-2 items-start font-medium">
+                                <div><span class="px-4 py-2 rounded-lg inline-block rounded-bl-none border border-gray-100 bg-gray-50 text-gray-600 dark:border-slate-800 dark:bg-slate-700 dark:text-slate-400">Review 2</span></div>
+                            </div>
+                            <img src="assets/images/users/avatar-3.png" alt="My profile" class="w-8 h-8 rounded-full order-1">
+                        </div>
+                    </div>
+                    <div class="chat-message">
+                        <div class="flex items-end">
+                            <div class="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-2 items-start font-medium">
+                                <div><span class="px-4 py-2 rounded-lg inline-block rounded-bl-none border border-gray-100 bg-gray-50 text-gray-600 dark:border-slate-800 dark:bg-slate-700 dark:text-slate-400">Review 3</span></div>
                             </div>
                             <img src="assets/images/users/avatar-3.png" alt="My profile" class="w-8 h-8 rounded-full order-1">
                         </div>

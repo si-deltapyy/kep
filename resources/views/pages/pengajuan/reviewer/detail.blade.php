@@ -1,20 +1,28 @@
-<html lang="en">
+
+<!DOCTYPE html>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
-        .pdf {
-            width: 100%;
-         
-        }
-    </style>
 </head>
+<style>
+    .pdf {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+    }
+
+    .pdf,
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
 <body>
-    <h1>sadiajsdjias</h1>
-    
-    <embed class="pdf" src="{{ asset('storage/'.$doc['doc_path']) }}"  width="100%" height="600px">
+        <iframe class="pdf" src="{{ asset('storage/' . $doc['doc_path']) }}" frameborder="0" width="100%" height="600px"></iframe>
 </body>
+
 </html>
 
