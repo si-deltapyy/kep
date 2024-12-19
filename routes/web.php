@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,6 +16,8 @@ Route::get('/chat', function () {
 Route::get('/message-show', function () {
     return view('pages.pesan.show');
 })->name('message-show');
+
+Route::resource('message', MessageController::class)->names('message');
 
 require __DIR__.'/auth.php';
 require __DIR__ . '/user.php';

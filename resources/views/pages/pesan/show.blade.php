@@ -99,7 +99,7 @@
                         </div>
                         <div class="flex flex-col ">
                             <div class="text-lg mt-1 flex items-center font-medium">
-                                <span class="text-gray-700 me-3 dark:text-slate-200">Ajuan 1</span>
+                                <span class="text-gray-700 me-3 dark:text-slate-200">{{ $message[0]['docGroup']->title }}</span>
                             </div>
                             <span class="text-sm text-gray-500 -mt-1">online</span>
                         </div>
@@ -134,35 +134,22 @@
                     <div class="chat-message">
                         <div class="flex items-end">
                             <div class="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-2 items-start font-medium">
-                                <div><span class="px-4 py-2 rounded-lg inline-block rounded-bl-none border border-gray-100 bg-gray-50 text-gray-600 dark:border-slate-800 dark:bg-slate-700 dark:text-slate-400">Review 1</span> <button>To Respond</button></div>
+                                <div><span class="px-4 py-2 rounded-lg inline-block rounded-bl-none border border-gray-100 bg-gray-50 text-gray-600 dark:border-slate-800 dark:bg-slate-700 dark:text-slate-400">
+                                    {{ $message[0]->note }}<br>
+                                    <button><a href="">Ini Tombol</a></button></span>
+                                </div>
                             </div>
                             <img src="assets/images/users/avatar-3.png" alt="My profile" class="w-8 h-8 rounded-full order-1">
                         </div>
                     </div>
-                    <div class="chat-message">
-                        <div class="flex items-end">
-                            <div class="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-2 items-start font-medium">
-                                <div><span class="px-4 py-2 rounded-lg inline-block rounded-bl-none border border-gray-100 bg-gray-50 text-gray-600 dark:border-slate-800 dark:bg-slate-700 dark:text-slate-400">Review 2</span></div>
-                            </div>
-                            <img src="assets/images/users/avatar-3.png" alt="My profile" class="w-8 h-8 rounded-full order-1">
-                        </div>
-                    </div>
-                    <div class="chat-message">
-                        <div class="flex items-end">
-                            <div class="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-2 items-start font-medium">
-                                <div><span class="px-4 py-2 rounded-lg inline-block rounded-bl-none border border-gray-100 bg-gray-50 text-gray-600 dark:border-slate-800 dark:bg-slate-700 dark:text-slate-400">Review 3</span></div>
-                            </div>
-                            <img src="assets/images/users/avatar-3.png" alt="My profile" class="w-8 h-8 rounded-full order-1">
-                        </div>
-                    </div>
-                    <div class="chat-message">
+                    {{-- <div class="chat-message">
                         <div class="flex items-end justify-end">
                             <div class="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-1 items-end font-medium">
                                 <div><span class="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-500 text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, tempora. Earum non aspernatur quas odio distinctio a debitis possimus! Ducimus aliquid laboriosam possimus veniam placeat ut, aliquam voluptatem sit ex!.</span></div>
                             </div>
                             <img src="assets/images/users/avatar-5.png" alt="My profile" class="w-8 h-8 rounded-full order-2">
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="border-t border-dashed border-gray-200 pt-4 mb-2 sm:mb-0 dark:border-slate-700">
                     <div class="relative flex">

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -12,7 +14,16 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return view('pages.pesan.index');
+        $message = Message::where('receiver_id', Auth::id())
+        ->with([
+            'sender',
+            'receiver',
+            'submission',
+            'docGroup'
+        ])
+        ->get();
+        // dd($message[0]['docGroup']->title);
+        return view('pages.pesan.show', compact('message'));
     }
 
     /**
