@@ -123,21 +123,21 @@
                     <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2" id="apps-accordion"
                         data-fc-type="accordion">
                         <li class="nav-item relative block">
-                            <a href="{{ route('superadmin.manage.prodi') }}"
+                            <a href="{{ route('superadmin.prodi.index') }}"
                                class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200  flex items-center decoration-0 px-3 py-3">
                                 <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
                                 Prodi
                             </a>
                         </li>
                         <li class="nav-item relative block">
-                            <a href="{{ route('superadmin.manage.type-ajuan')}}"
+                            <a href="{{ route('superadmin.typeajuan.index')}}"
                                class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
                                 <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
                                 Type Ajuan
                             </a>
                         </li>
                         <li class="nav-item relative block">
-                            <a href="{{ route('superadmin.manage.document-type') }}"
+                            <a href="{{ route('superadmin.typedokumen.index') }}"
                                class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
                                 <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
                                 Dokumen Type

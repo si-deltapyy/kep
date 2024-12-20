@@ -29,7 +29,7 @@
     return [$doc->id => '
     <button class="px-2 py-1 lg:px-4 bg-slate-100  text-gray-600 text-sm  rounded hover:bg-slate-200 border border-slate-100" disabled>Terproses</button>
     '];
-})->toArray();
+    })->toArray();
 @endphp
 
 
