@@ -24,4 +24,8 @@
 @include('partial.dashboard.superAdmin')
 @endrole
 
+@role('kppm')
+@include('partial.dashboard.kppm')
+@endrole
+
 @endsection

@@ -29,15 +29,14 @@ class ECDocumentController extends Controller
         // Simpan file ke penyimpanan
         $file = $request->file('file');
         $fileName = 'Dokumen EC'.'-'. $request->name .'-'. now() . '.' . $file->getClientOriginalExtension();
-        // $pathDoc = $file->storeAs('ecDocument', $fileName, 'public');
-        $pathDoc = $file->store('public/ecDocument'); // Simpan di 'storage/app/public/ec_documents'
+        $pathDoc = $file->storeAs('ecDocument', $fileName); // Simpan di 'storage/app/public/ec_documents'
 
         // Simpan data ke database
         ECDocument::create([
             'user_id' => $request->user,
             'title' => $request->title,
             'doc_name' => $fileName,
-            'doc_path' => $pathDoc,
+            'doc_path' => 'ecDocument/'.$fileName,
             'doc_group' => $request->id
         ]);
 
