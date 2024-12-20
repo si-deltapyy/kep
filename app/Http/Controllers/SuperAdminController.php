@@ -17,7 +17,7 @@ class SuperAdminController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -242,7 +242,7 @@ class SuperAdminController extends Controller
 
     public function manageView()
     {
-        return view('superAdmin.manageView.dashboard'); 
+        return view('superAdmin.manageView.dashboard');
     }
 
 

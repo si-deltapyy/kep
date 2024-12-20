@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\SuperAdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\SuperAdmin\ProdiController;
+use App\Http\Controllers\SuperAdmin\TypeAjuanController;
+use App\Http\Controllers\SuperAdmin\TypeDokumenController;
 
 Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')->prefix('administrator')->group(function(){
     // Common
@@ -28,6 +31,14 @@ Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')
     Route::get('/manage/sekertaris/create', [SuperAdminController::class, 'sekertarisCreate'])->name('manage.sekertaris.create');
 
     Route::post('/manage/store', [SuperAdminController::class, 'manageStore'])->name('manage.store');
+
+
+    //Manage Prodi
+    Route::resource('prodi', ProdiController::class);
+    //Manage Ajuan Type
+    Route::resource('typeajuan', TypeAjuanController::class);
+    //Manage Document Type
+    Route::resource('typedokumen', TypeDokumenController::class);
 
 
 
