@@ -25,17 +25,17 @@
                     <span data-lucide="arrow-right" class="w-4 h-4 inline-block me-2"></span>
                     Request Sign KPPM
                 </a>
-                @elseif($x->ec_status == 'Singed')
-                <a href="{{route('user.ajuan.index')}}" class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
-                    <i class="ti ti-plus me-1"></i>
-                    <span data-lucide="arrow-left" class="w-4 h-4 inline-block me-2"></span>
-                    Kembali
-
-                </a>
-                <a href="{{route('user.ajuan.index')}}" class="ml-2 px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">
+                @elseif($x->ec_status == 'Process')
+                <a href="/storage/{{$x->doc_path}}" class="ml-2 px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">
                     <i class="ti ti-plus me-1"></i>
                     <span data-lucide="download" class="w-4 h-4 inline-block me-2"></span>
                     Download
+
+                </a>
+                <a href="{{route('kppm.pengajuan.show', $x->doc_group)}}" class="ml-2 px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-primary-100 text-primary text-sm rounded hover:bg-primary-600 hover:text-white">
+                    <i class="ti ti-plus me-1"></i>
+                    <span data-lucide="file-up" class="w-4 h-4 inline-block me-2"></span>
+                    Upload Signed EC
 
                 </a>
                 @endif

@@ -85,7 +85,7 @@ class SuperAdminController extends Controller
 
     public function manageUser()
     {
-        $user = User::role(['user', 'admin'])->get();
+        $user = User::role(['user', 'admin', 'kppm'])->get();
         return view('superAdmin.manageUser.user', compact('user'));
     }
 
