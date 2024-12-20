@@ -59,6 +59,7 @@
                     ];
                 })->toArray();
             @endphp
+
             <x-table
                 :head="$head"
                 :actionHeader="true"
