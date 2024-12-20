@@ -9,6 +9,10 @@
 
                 <!-- Body Modal -->
                 <div class="relative flex-auto p-4 text-slate-600 dark:text-gray-300 leading-relaxed">
+                    <p>Harap Mengganti <strong>Password</strong> dahulu dengan syarat:</p>
+                    <li class=" text-gray-400"><i>Minimal 8 Karakter</i></li>
+                    <li class=" text-gray-400"><i>Harus ada huruf kecil dan angka</i></li>
+                    <br>
                     <form action="{{ route('sekertaris.update-password') }}" method="POST">
                         @csrf
                         <div class="form-group mb-4">

@@ -59,4 +59,6 @@ class ReviewerController extends Controller
     public function destroy(Int $doc){
 
     }
+
+    
 }

@@ -11,5 +11,6 @@ Route::middleware(['auth', 'verified', 'role:reviewer'])->name('reviewer.')->pre
     Route::resource('dokumen/review' , DocRevController::class)->names('dokRev');
     Route::resource('message', MessageController::class)->names('message');
 
-    Route::get('/dokumen/review/{id}/show', [DocRevController::class, 'pils'])->name('dokRev.pils');
+    Route::get('/dokumen/feedback/{id}', [DocRevController::class, 'feedback'])->name('dokRev.feedback');
+    Route::get('/dokumen/review/{id}/doc/show', [DocRevController::class, 'pils'])->name('dokRev.pils');
 });

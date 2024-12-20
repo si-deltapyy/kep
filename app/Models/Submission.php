@@ -13,14 +13,14 @@ class Submission extends Model
     public $table = 'submission';
     protected $guarded = ['id'];
 
-    public function logDocument()
+    public function log_id()
     {
-        return $this->belongsTo(LogDocument::class, 'log_id', 'id');
+        return $this->hasOne(LogDocument::class, 'id');
     }
 
-    public function dummy()
+    public function doc_group()
     {
-        return $this->hasOne(Dummy::class, 'id', 'doc_group');
+        return $this->belongsTo(Dummy::class, 'doc_group');
     }
 
     public function pesan()

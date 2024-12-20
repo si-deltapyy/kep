@@ -62,7 +62,8 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
                 role="tabpanel"
                 aria-labelledby="orders-tab"
                 >
-    <button type=c"button" class="px-2 py-1 lg:px-4 bg-transparent  text-primary text-xl  rounded transition hover:bg-primary-500 hover:text-white border border-primary font-medium">Kirim Pesan</button>
+    {{-- <button type=c"button" class="px-2 py-1 lg:px-4 bg-transparent  text-primary text-xl  rounded transition hover:bg-primary-500 hover:text-white border border-primary font-medium">Kirim Pesan</button> --}}
+    <a href="{{ route('reviewer.dokRev.feedback', Auth::id()) }}">Beri Feedback Review</a>
     <div class="grid grid-cols-1 p-0 md:p-4">
         <div class="sm:-mx-6 lg:-mx-8">
             <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">

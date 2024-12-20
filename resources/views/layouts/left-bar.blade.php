@@ -70,70 +70,132 @@
                 @role('reviewer')
                     <x-navigation :route="'dashboard'" :text="'Dashboard'" :icon="'home'"/>
                     <x-navigation :route="'reviewer.pengajuan.index'" :text="'Pengajuan'" :icon="'file-user'"/>
-                    <x-navigation :route="'reviewer.dokRev.index'" :text="'Review Dokumen'" :icon="'file'"/>
+                    {{-- <x-navigation :route="'reviewer.dokRev.index'" :text="'Review Dokumen'" :icon="'file'"/> --}}
                 @endrole
 
                 @role('super_admin')
                     <x-navigation :route="'dashboard'" :text="'Dashboard'"  :icon="'home'"/>
-                    <x-navigation :route="'dashboard'" :text="'Manage User'" :icon="'contact'"/>
-                    <x-navigation :route="'dashboard'" :text="'Manage Reviewer'"  :icon="'contact'"/>
-                    <x-navigation :route="'dashboard'" :text="'Manage Sekertaris'" :icon="'contact'"/>
+                    <div data-fc-type="collapse" data-fc-parent="parent-accordion">
+                      <a href="#"
+                         class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
+                          <span data-lucide="contact"
+                                class="w-5 h-5 text-center text-slate-800 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
+                          <span>Manage Users</span>
+                          <i class="icofont-thin-down fc-collapse-open:rotate-180 ms-auto inline-block text-[14px] transform transition-transform duration-300 text-white  group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></i>
+                      </a>
+                  </div>
+                  <div class="hidden  overflow-hidden">
+                      <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2" id="apps-accordion"
+                          data-fc-type="accordion">
+                          <li class="nav-item relative block">
+                              <a href="{{ route('superadmin.manage.user') }}"
+                                 class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200  flex items-center decoration-0 px-3 py-3">
+                                  <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                  User
+                              </a>
+                          </li>
+                          <li class="nav-item relative block">
+                              <a href="{{ route('superadmin.manage.reviewer') }}"
+                                 class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
+                                  <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                  Reviewer
+                              </a>
+                          </li>
+                          <li class="nav-item relative block">
+                              <a href="{{ route('superadmin.manage.sekertaris') }}"
+                                 class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
+                                  <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                  Sekertaris
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+                  <div data-fc-type="collapse" data-fc-parent="parent-accordion">
+                    <a href="#"
+                       class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
+                        <span data-lucide="database"
+                              class="w-5 h-5 text-center text-slate-800 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
+                        <span>Change Data</span>
+                        <i class="icofont-thin-down fc-collapse-open:rotate-180 ms-auto inline-block text-[14px] transform transition-transform duration-300 text-slate-800 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></i>
+                    </a>
+                  </div>
+                  <div class="hidden  overflow-hidden">
+                    <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2" id="apps-accordion"
+                        data-fc-type="accordion">
+                        <li class="nav-item relative block">
+                            <a href="{{ route('superadmin.manage.prodi') }}"
+                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200  flex items-center decoration-0 px-3 py-3">
+                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                Prodi
+                            </a>
+                        </li>
+                        <li class="nav-item relative block">
+                            <a href="{{ route('superadmin.manage.type-ajuan')}}"
+                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
+                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                Type Ajuan
+                            </a>
+                        </li>
+                        <li class="nav-item relative block">
+                            <a href="{{ route('superadmin.manage.document-type') }}"
+                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
+                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                Dokumen Type
+                            </a>
+                        </li>
+                    </ul>
+                  </div>
+
+                  <x-navigation :route="'superadmin.manage.view'" :text="'Change Dashboard'" :icon="'image-plus'"/>
 
                     <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
                     <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
                         <span>Security</span>
                     </div>
 
-                    <x-navigation :route="'dashboard'" :text="'Permission Management'" :icon="'message-square'"/>
-                    <x-navigation :route="'dashboard'" :text="'Role Management'" :icon="'message-square'"/>
-                    <x-navigation :route="'dashboard'" :text="'Password Management'" :icon="'message-square'"/>
+                    <x-navigation :route="'superadmin.change.password'" :text="'Change Password'" :icon="'key-round'"/>
+                    <div data-fc-type="collapse" data-fc-parent="parent-accordion">
+                      <a href="#"
+                         class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
+                          <span data-lucide="shield-alert"
+                                class="w-5 h-5 text-center text-slate-800 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
+                          <span>Security Management</span>
+                          <i class="icofont-thin-down fc-collapse-open:rotate-180 ms-auto inline-block text-[14px] transform transition-transform duration-300 text-slate-800 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></i>
+                      </a>
+                    </div>
+                    <div class="hidden  overflow-hidden">
+                      <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2" id="apps-accordion"
+                          data-fc-type="accordion">
+                          <li class="nav-item relative block">
+                              <a href="{{ route('superadmin.manage.permission') }}"
+                                 class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200  flex items-center decoration-0 px-3 py-3">
+                                  <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                  Permission
+                              </a>
+                          </li>
+                          <li class="nav-item relative block">
+                              <a href="{{ route('superadmin.manage.role') }}"
+                                 class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
+                                  <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                  Role
+                              </a>
+                          </li>
+                          <li class="nav-item relative block">
+                              <a href="{{ route('superadmin.manage.password') }}"
+                                 class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
+                                  <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                                  Password
+                              </a>
+                          </li>
+                      </ul>
+                    </div>
 
                     <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
                     <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
                         <span>Other</span>
                     </div>
 
-                    <x-navigation :route="'dashboard'" :text="'Setting'" :icon="'message-square'"/>
-
-
-                    <div data-fc-type="collapse" data-fc-parent="parent-accordion">
-                        <a href="#"
-                           class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                            <span data-lucide="grid"
-                                  class="w-5 h-5 text-center text-slate-800 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                            <span>Apps</span>
-                            <i class="icofont-thin-down fc-collapse-open:rotate-180 ms-auto inline-block text-[14px] transform transition-transform duration-300 text-slate-800 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></i>
-                        </a>
-                    </div>
-                    <div class="hidden  overflow-hidden">
-                        <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2" id="apps-accordion"
-                            data-fc-type="accordion">
-                            <li class="nav-item relative block">
-                                <a href=""
-                                   class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200  flex items-center decoration-0 px-3 py-3">
-                                    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                    Sub Menu 1
-                                </a>
-                            </li>
-                            <li class="nav-item relative block">
-                                <a href=""
-                                   class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
-                                    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                    Sub Menu 1
-                                </a>
-                            </li>
-                            <li class="nav-item relative block">
-                                <a href=""
-                                   class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
-                                    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                    Sub Menu 1
-                                </a>
-                            </li>
-
-
-
-                        </ul>
-                    </div>
+                    <x-navigation :route="'dashboard'" :text="'Setting'" :icon="'settings'"/>
                 @endrole
 
                 @role('sekertaris')
@@ -218,6 +280,46 @@
               </div>
             </li>
           </ul>
+    </div>
+
+    //navbarr setting
+    <div data-fc-type="collapse" data-fc-parent="parent-accordion">
+        <a href="#"
+            class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
+            <span data-lucide="grid"
+                    class="w-5 h-5 text-center text-slate-800 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
+            <span>Apps</span>
+            <i class="icofont-thin-down fc-collapse-open:rotate-180 ms-auto inline-block text-[14px] transform transition-transform duration-300 text-slate-800 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></i>
+        </a>
+    </div>
+    <div class="hidden  overflow-hidden">
+        <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2" id="apps-accordion"
+            data-fc-type="accordion">
+            <li class="nav-item relative block">
+                <a href=""
+                    class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200  flex items-center decoration-0 px-3 py-3">
+                    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                    Sub Menu 1
+                </a>
+            </li>
+            <li class="nav-item relative block">
+                <a href=""
+                    class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
+                    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                    Sub Menu 1
+                </a>
+            </li>
+            <li class="nav-item relative block">
+                <a href=""
+                    class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
+                    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+                    Sub Menu 1
+                </a>
+            </li>
+
+
+
+        </ul>
     </div>
     @endrole --}}
 </div>

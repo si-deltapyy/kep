@@ -12,9 +12,9 @@ class LogDocument extends Model
     public $table = 'log_document';
     protected $guarded = ['id'];
 
-    public function document()
+    public function doc_id()
     {
-        return $this->hasMany(Document::class, 'doc_id');
+        return $this->hasMany(Document::class, 'id');
     }
 
     public function submission()

@@ -3,7 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>FKIP</title>
+    <title>KPPM FKIP UNS</title>
+    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
     <meta name="author" content="Themeholy" />
     <meta
       name="description"
@@ -196,13 +197,13 @@
             <div class="row align-items-center justify-content-between">
               <div class="col-auto">
                 <div class="header-logo">
-                  <a class="icon-masking" href="index.html"
-                    ><span
-                      data-mask-src="assets1/img/logo.svg"
-                      class="mask-icon"
-                    ></span
-                    ><img src="assets1/img/logo.svg" alt="Webteck"
-                  /></a>
+                  <span>
+                    <img
+                      src="{{ asset('assets/images/logo-fkip-uns-fkip.png') }}"
+                      alt="logo-small"
+                      style="height: 86px;"
+                      class="logo-lg hidden dark:inline-block ms-1 group-data-[sidebar=dark]:inline-block group-data-[sidebar=brand]:inline-block"/>
+                  </span>
                 </div>
               </div>
               <div class="col-auto">
@@ -251,16 +252,15 @@ Hero Area
       </div>
       <div class="container">
         <div class="hero-style1">
-          <span class="hero-subtitle">Solusi untuk Akademisi</span>
-          <h1 class="hero-title">Evaluasi Jurnal</h1>
+          <span class="hero-subtitle">Solusi untuk Penelitian anda</span>
+          <h1 class="hero-title">Komisi Kode Etik</h1>
           <h1 class="hero-title">
             Yang <span class="text-theme fw-medium">Mudah & Efisien</span>
           </h1>
           <p class="hero-text">
-            Dengan mudah menyederhanakan proses evaluasi jurnal melalui jaringan
-            yang aman dan transparan. Kami membantu integrasi dokumen akademis
-            dengan solusi berbasis teknologi untuk memaksimalkan proses evaluasi
-            yang cepat dan akurat.
+            Komisi Etik Penelitian FKIP UNS hadir untuk memastikan bahwa 
+            setiap penelitian yang dilakukan di FKIP UNS menjunjung tinggi 
+            nilai-nilai etika dan menghasilkan temuan yang kredibel dan bermanfaat.
           </p>
         </div>
       </div>

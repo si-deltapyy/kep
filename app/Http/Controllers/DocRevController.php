@@ -34,6 +34,20 @@ class DocRevController extends Controller
         //
     }
 
+    public function feedback(Int $id){
+
+        $sub = Submission::where('reviewer', $id)->with(
+            'log_id',
+            'doc_group',
+            'log_id.doc_id',
+        )->where('reviewer_status', 'in review')
+        ->first();
+
+        return [$sub];
+        return view('pages.review.message', compact('sub'));
+    }
+    
+
     public function pils($id)
     {
         $doc = Document::where('doc_group', $id)->get();
