@@ -67,6 +67,7 @@
                                     :namaReviewer="$reviewers[$review->reviewer_id] ?? 'Nama Tidak Ditemukan'"
                                     :tanggal="$review->created_at"
                                     :reviewerID="$review->reviewer_id"
+                                    :action="route('messages.detail', ['id' => $review->id])"
                                 />
                             @endforeach
                         </div>
@@ -75,6 +76,7 @@
             @endforeach
         </div>
     </div>
+
 </div><!--end inner-grid-->
 
 <style>

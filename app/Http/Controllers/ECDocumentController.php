@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dummy;
+use App\Models\Document;
 use App\Models\ECDocument;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class ECDocumentController extends Controller
 {
@@ -75,7 +77,16 @@ class ECDocumentController extends Controller
 
     public function show($id)
     {
+        $doc = Document::find($id);
 
+        $data = [
+            'nama' => $doc->User->name ?? 'Tidak ada nama pengguna',
+            'judul' => $doc->doc_name ?? 'Tidak ada judul dokumen',
+            'tanggal' => now()->format('d-m-Y')
+        ];
+
+        $pdf = Pdf::loadView('pages.ec.preview', ['data' => $data]);
+        return $pdf->stream('dokumen-ec.pdf');
     }
 
 }

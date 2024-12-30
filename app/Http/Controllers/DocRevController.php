@@ -50,7 +50,7 @@ class DocRevController extends Controller
 
     public function pils($id)
     {
-        $doc = Document::where('doc_group', $id)->get();
+        $doc = Document::where('doc_group', $id)->with('Dummy')->get();
         $sub = Submission::where('reviewer', Auth::id())->with(
                     'logDocument',
                     'Dummy',
