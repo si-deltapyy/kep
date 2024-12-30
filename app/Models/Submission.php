@@ -23,9 +23,11 @@ class Submission extends Model
         return $this->belongsTo(Dummy::class, 'doc_group');
     }
 
-    public function pesan()
-{
-    return $this->hasMany(Pesan::class);
-}
+    public function pesans()
+    {
+        return $this->hasMany(Pesan::class, 'submission_id');
+    }
+
+
 
 }

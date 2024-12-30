@@ -112,7 +112,7 @@
         <button class="th-menu-toggle"><i class="fal fa-times"></i></button>
         <div class="mobile-logo">
           <a href="index.html"
-            ><img src="assets1/img/logo.svg" alt="Webteck"
+            ><img src="{{asset('assets1/img/logo.svg')}}" alt="Webteck"
           /></a>
         </div>
         <div class="th-mobile-menu">
@@ -248,7 +248,7 @@ Hero Area
 ==============================-->
     <div class="th-hero-wrapper hero-1" id="hero">
       <div class="hero-img tilt-active">
-        <img src="assets1/img/hero/hero_img_1_1.png" alt="Hero Image" />
+        <img src="{{asset('assets1/img/fkip3.png')}}" alt="Hero Image" />
       </div>
       <div class="container">
         <div class="hero-style1">
@@ -258,20 +258,20 @@ Hero Area
             Yang <span class="text-theme fw-medium">Mudah & Efisien</span>
           </h1>
           <p class="hero-text">
-            Komisi Etik Penelitian FKIP UNS hadir untuk memastikan bahwa 
-            setiap penelitian yang dilakukan di FKIP UNS menjunjung tinggi 
+            Komisi Etik Penelitian FKIP UNS hadir untuk memastikan bahwa
+            setiap penelitian yang dilakukan di FKIP UNS menjunjung tinggi
             nilai-nilai etika dan menghasilkan temuan yang kredibel dan bermanfaat.
           </p>
         </div>
       </div>
       <div class="hero-shape1">
-        <img src="assets1/img/hero/hero_shape_1_1.svg" alt="shape" />
+        <img src="{{asset('assets1/img/hero/hero_shape_1_1.svg')}}" alt="shape" />
       </div>
       <div class="hero-shape2">
-        <img src="assets1/img/hero/hero_shape_1_2.svg" alt="shape" />
+        <img src="{{asset('assets1/img/hero/hero_shape_1_2.svg')}}" alt="shape" />
       </div>
       <div class="hero-shape3">
-        <img src="assets1/img/hero/hero_shape_1_3.svg" alt="shape" />
+        <img src="{{asset('assets1/img/hero/hero_shape_1_3.svg')}}" alt="shape" />
       </div>
     </div>
     <!--======== / Hero Section ========--><!--==============================
@@ -283,7 +283,7 @@ Feature Area
           <div class="col-xl-4 col-md-6">
             <div class="feature-card">
               <div class="shape-icon">
-                <img src="assets1/img/icon/feature_card_1.png" alt="icon" />
+                <img src="{{asset('assets1/img/icon/feature_card_1.png')}}" alt="icon" />
               </div>
               <h3 class="box-title">Layanan Pengelolaan Data</h3>
               <p class="feature-card_text">
@@ -296,7 +296,7 @@ Feature Area
           <div class="col-xl-4 col-md-6">
             <div class="feature-card">
               <div class="shape-icon">
-                <img src="assets1/img/icon/feature_card_2.png" alt="icon" />
+                <img src="{{asset('assets1/img/icon/feature_card_2.png')}}" alt="icon" />
               </div>
               <h3 class="box-title">Strategi & Konsultasi Evaluasi</h3>
               <p class="feature-card_text">
@@ -309,7 +309,7 @@ Feature Area
           <div class="col-xl-4 col-md-6">
             <div class="feature-card">
               <div class="shape-icon">
-                <img src="assets1/img/icon/feature_card_3.png" alt="icon" />
+                <img src="{{asset('assets1/img/icon/feature_card_3.png')}}" alt="icon" />
               </div>
               <h3 class="box-title">Dukungan Kelas Dunia</h3>
               <p class="feature-card_text">
@@ -326,13 +326,10 @@ Feature Area
           <div class="col-lg-5 mb-30 mb-lg-0">
             <div class="img-box6">
               <div class="img1">
-                <img src="assets1/img/normal/about_4_1.png" alt="About" />
+                <img src="{{asset('assets1/img/fkip1.jpg')}}" alt="About" />
               </div>
               <div class="shape1">
-                <img src="assets1/img/normal/about_4_2.png" alt="About" />
-              </div>
-              <div class="shape2">
-                <img src="assets1/img/normal/about_4_3.png" alt="About" />
+                <img src="{{asset('assets1/img/fkip2.jpg')}}" alt="About" />
               </div>
               <div class="color-animate"></div>
             </div>
@@ -354,17 +351,17 @@ Feature Area
               <div class="checklist style4 mb-40 list-center">
                 <ul>
                   <li>
-                    <img src="assets1/img/icon/check_1.png" alt="icon" />
+                    <img src="{{asset('assets1/img/icon/check_1.png')}}" alt="icon" />
                     Mempermudah pengajuan jurnal melalui sistem digital
                     terintegrasi
                   </li>
                   <li>
-                    <img src="assets1/img/icon/check_1.png" alt="icon" />
+                    <img src="{{asset('assets1/img/icon/check_1.png')}}" alt="icon" />
                     Desain dan pengembangan aplikasi web untuk evaluasi yang
                     lebih efisien
                   </li>
                   <li>
-                    <img src="assets1/img/icon/check_1.png" alt="icon" />
+                    <img src="{{asset('assets1/img/icon/check_1.png')}}" alt="icon" />
                     Pengalaman pengguna profesional untuk meningkatkan interaksi
                     akademik
                   </li>
@@ -388,7 +385,7 @@ Infographic Area
             <div class="col-6 col-lg-auto">
               <div class="counter-card">
                 <div class="icon">
-                  <img src="assets1/img/icon/counter_2_1.png" alt="Icon" />
+                  <img src="{{asset('assets1/img/icon/counter_2_1.png')}}" alt="Icon" />
                 </div>
                 <div class="media-body">
                   <h2 class="counter-card_number text-title">
@@ -402,7 +399,7 @@ Infographic Area
             <div class="col-6 col-lg-auto">
               <div class="counter-card">
                 <div class="icon">
-                  <img src="assets1/img/icon/counter_2_3.png" alt="Icon" />
+                  <img src="{{asset('assets1/img/icon/counter_2_3.png')}}" alt="Icon" />
                 </div>
                 <div class="media-body">
                   <h2 class="counter-card_number text-title">
@@ -415,7 +412,7 @@ Infographic Area
             <div class="col-6 col-lg-auto">
               <div class="counter-card">
                 <div class="icon">
-                  <img src="assets1/img/icon/counter_2_4.png" alt="Icon" />
+                  <img src="{{asset('assets1/img/icon/counter_2_4.png')}}" alt="Icon" />
                 </div>
                 <div class="media-body">
                   <h2 class="counter-card_number text-title">
@@ -433,199 +430,152 @@ Infographic Area
     <!--==============================
 Process Area
 ==============================-->
-    <section class="space" id="process-sec">
-      <div class="container">
-        <div class="title-area text-center">
-          <span class="sub-title">WORK PROCESS</span>
-          <h2 class="sec-title">
-            How to work <span class="text-theme">it!</span>
-          </h2>
+<section class="space" id="process-sec">
+    <div class="container">
+      <div class="title-area text-center">
+        <span class="sub-title">ALUR PENGAJUAN</span>
+        <h2 class="sec-title">
+          Proses Pengajuan Ethical Clearance di <span class="text-theme">KPPM FKIP UNS</span>
+        </h2>
+      </div>
+      <div class="process-card-area">
+        <div class="process-line position-top">
+          <img src="{{ asset('assets1/img/bg/process_line_2.svg') }}" alt="line" />
         </div>
-        <div class="process-card-area">
-          <div class="process-line position-top">
-            <img src="assets/img/bg/process_line_2.svg" alt="line" />
-          </div>
-          <div class="row gy-40 justify-content-between">
-            <div class="col-sm-6 col-xl-auto process-card-wrap">
-              <div class="process-card">
-                <div class="pulse"></div>
-                <div class="process-card_icon">
-                  <img src="assets1/img/icon/process_box_1.png" alt="icon" />
-                </div>
-                <h2 class="box-title">Select a project</h2>
-                <p class="process-card_text">
-                  Continua scale empowered metrics with cost effective
-                  innovation.
-                </p>
+        <div class="row gy-40 justify-content-between">
+
+          <!-- Step 1: Pendaftaran dan Pengajuan Protokol Ethical Clearance -->
+          <div class="col-sm-6 col-xl-auto process-card-wrap">
+            <div class="process-card">
+              <div class="pulse"></div>
+              <div class="process-card_icon">
+                <img src="{{ asset('assets1/img/icon/process_box_1.png') }}" alt="icon" />
               </div>
-            </div>
-            <div class="col-sm-6 col-xl-auto process-card-wrap">
-              <div class="process-card">
-                <div class="pulse"></div>
-                <div class="process-card_icon">
-                  <img src="assets1/img/icon/process_box_2.png" alt="icon" />
-                </div>
-                <h2 class="box-title">Project analysis</h2>
-                <p class="process-card_text">
-                  Continua scale empowered metrics with cost effective
-                  innovation.
-                </p>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-auto process-card-wrap">
-              <div class="process-card">
-                <div class="pulse"></div>
-                <div class="process-card_icon">
-                  <img src="assets1/img/icon/process_box_3.png" alt="icon" />
-                </div>
-                <h2 class="box-title">Plan Execute</h2>
-                <p class="process-card_text">
-                  Continua scale empowered metrics with cost effective
-                  innovation.
-                </p>
-              </div>
-            </div>
-            <div class="col-sm-6 col-xl-auto process-card-wrap">
-              <div class="process-card">
-                <div class="pulse"></div>
-                <div class="process-card_icon">
-                  <img src="assets1/img/icon/process_box_4.png" alt="icon" />
-                </div>
-                <h2 class="box-title">Deliver result</h2>
-                <p class="process-card_text">
-                  Continua scale empowered metrics with cost effective
-                  innovation.
-                </p>
-              </div>
+              <h2 class="box-title">Pendaftaran dan Pengajuan Protokol Ethical Clearance</h2>
+              <p class="process-card_text">
+                Melakukan pendaftaran dan melengkapi informasi serta dokumen di aplikasi <strong>KPPM FKIP UNS</strong>.
+              </p>
             </div>
           </div>
+
+          <!-- Step 2: Reviu Data dan Kelengkapan Berkas -->
+          <div class="col-sm-6 col-xl-auto process-card-wrap">
+            <div class="process-card">
+              <div class="pulse"></div>
+              <div class="process-card_icon">
+                <img src="{{ asset('assets1/img/icon/process_box_2.png') }}" alt="icon" />
+              </div>
+              <h2 class="box-title">Reviu Data dan Kelengkapan Berkas</h2>
+              <p class="process-card_text">
+                Pemohon dapat mengakses perkembangan proses reviu pada sistem.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3: Pengumuman Hasil Reviu -->
+          <div class="col-sm-6 col-xl-auto process-card-wrap">
+            <div class="process-card">
+              <div class="pulse"></div>
+              <div class="process-card_icon">
+                <img src="{{ asset('assets1/img/icon/process_box_3.png') }}" alt="icon" />
+              </div>
+              <h2 class="box-title">Pengumuman Hasil Reviu</h2>
+              <p class="process-card_text">
+                Hasil reviu diumumkan melalui sistem <strong>KPPM FKIP UNS</strong>.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 4: Dokumen Ethical Clearance dikirim -->
+          <div class="col-sm-6 col-xl-auto process-card-wrap">
+            <div class="process-card">
+              <div class="pulse"></div>
+              <div class="process-card_icon">
+                <img src="{{ asset('assets1/img/icon/process_box_4.png') }}" alt="icon" />
+              </div>
+              <h2 class="box-title">Dokumen Ethical Clearance Dikirim</h2>
+              <p class="process-card_text">
+                Dokumen Ethical Clearance akan dikirim kepada pemohon setelah semua tahapan selesai.
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+
 
     <!--==============================
-Faq Area
+Price Area
 ==============================-->
-    <div class="overflow-hidden space-top" id="faq-sec">
-      <div class="container">
-        <div class="row align-items-center justify-content-center">
-          <div class="col-xl-6 col-lg-9">
-            <div class="title-area text-center text-xl-start">
-              <span class="sub-title">FAQ'S</span>
-              <h2 class="sec-title">Know More About Our It Solution</h2>
-            </div>
-            <div class="accordion-area accordion" id="faqAccordion">
-              <div class="accordion-card style3">
-                <div class="accordion-header" id="collapse-item-1">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapse-1"
-                    aria-expanded="false"
-                    aria-controls="collapse-1"
-                  >
-                    Where can I get analytics help?
-                  </button>
-                </div>
-                <div
-                  id="collapse-1"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="collapse-item-1"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    <p class="faq-text">
-                      Dramatically disseminate real-time portals rather than
-                      top-line action items. Uniquely provide access to low-risk
-                      high-yield products without dynamic products.
-                      Progressively re-engineer low-risk high-yield ideas rather
-                      than emerging alignments.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-card style3 active">
-                <div class="accordion-header" id="collapse-item-2">
-                  <button
-                    class="accordion-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapse-2"
-                    aria-expanded="true"
-                    aria-controls="collapse-2"
-                  >
-                    How long should a business plan be?
-                  </button>
-                </div>
-                <div
-                  id="collapse-2"
-                  class="accordion-collapse collapse show"
-                  aria-labelledby="collapse-item-2"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    <p class="faq-text">
-                      Dramatically disseminate real-time portals rather than
-                      top-line action items. Uniquely provide access to low-risk
-                      high-yield products without dynamic products.
-                      Progressively re-engineer low-risk high-yield ideas rather
-                      than emerging alignments.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="accordion-card style3">
-                <div class="accordion-header" id="collapse-item-3">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapse-3"
-                    aria-expanded="false"
-                    aria-controls="collapse-3"
-                  >
-                    Do I need a business plan?
-                  </button>
-                </div>
-                <div
-                  id="collapse-3"
-                  class="accordion-collapse collapse"
-                  aria-labelledby="collapse-item-3"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    <p class="faq-text">
-                      Dramatically disseminate real-time portals rather than
-                      top-line action items. Uniquely provide access to low-risk
-                      high-yield products without dynamic products.
-                      Progressively re-engineer low-risk high-yield ideas rather
-                      than emerging alignments.
-                    </p>
-                  </div>
-                </div>
+<section class="pricing-section">
+    <div class="container">
+      <h2 class="text-center fw-bold">Biaya Pengajuan</h2>
+      <p class="text-center">
+        Biaya Administrasi dapat dilakukan melalui setoran tunai teller atau transfer internet banking / ATM ke No rekening Universitas Negeri Sebelas Maret (KEP Universitas Negeri Sebelas Maret) 9888855513810001.
+      </p>
+      <div class="row gy-4 justify-content-center">
+        <!-- Universitas Negeri Sebelas Maret (UNS) - Mahasiswa -->
+        <div class="col-xl-3 col-md-6">
+          <div class="price-box style2 th-ani">
+            <div class="price-title-wrap">
+              <div class="media-body">
+                <p class="subtitle">Universitas Negeri Sebelas Maret (UNS)</p>
+                <h3 class="box-title">Mahasiswa</h3>
               </div>
             </div>
+            <h4 class="price-box_price">IDR 100.000</h4>
+            <p class="price-box_text">Biaya pengajuan untuk mahasiswa internal UNS.</p>
           </div>
-          <div class="col-xl-6 mt-35 mt-xl-0">
-            <div class="img-box8">
-              <div class="img1">
-                <img src="assets1/img/normal/faq_2_1.png" alt="Faq" />
+        </div>
+
+        <!-- Universitas Negeri Sebelas Maret (UNS) - Dosen -->
+        <div class="col-xl-3 col-md-6">
+          <div class="price-box style2 th-ani">
+            <div class="price-title-wrap">
+              <div class="media-body">
+                <p class="subtitle">Universitas Negeri Sebelas Maret (UNS)</p>
+                <h3 class="box-title">Dosen</h3>
               </div>
-              <div class="shape1">
-                <img src="assets1/img/normal/faq_2_2.png" alt="About" />
-              </div>
-              <div class="shape2">
-                <img src="assets1/img/normal/faq_2_3.png" alt="About" />
-              </div>
-              <div class="color-animate"></div>
             </div>
+            <h4 class="price-box_price">IDR 200.000</h4>
+            <p class="price-box_text">Biaya pengajuan untuk dosen internal UNS.</p>
+          </div>
+        </div>
+
+        <!-- External (Luar UNS) - Mahasiswa -->
+        <div class="col-xl-3 col-md-6">
+          <div class="price-box style2 th-ani">
+            <div class="price-title-wrap">
+              <div class="media-body">
+                <p class="subtitle">External (Luar UNS)</p>
+                <h3 class="box-title">Mahasiswa</h3>
+              </div>
+            </div>
+            <h4 class="price-box_price">IDR 150.000</h4>
+            <p class="price-box_text">Biaya pengajuan untuk mahasiswa eksternal.</p>
+          </div>
+        </div>
+
+        <!-- External (Luar UNS) - Dosen/Peneliti -->
+        <div class="col-xl-3 col-md-6">
+          <div class="price-box style2 th-ani">
+            <div class="price-title-wrap">
+              <div class="media-body">
+                <p class="subtitle">External (Luar UNS)</p>
+                <h3 class="box-title">Dosen/Peneliti</h3>
+              </div>
+            </div>
+            <h4 class="price-box_price">IDR 300.000</h4>
+            <p class="price-box_text">Biaya pengajuan untuk dosen/peneliti eksternal.</p>
           </div>
         </div>
       </div>
     </div>
+  </section>
+
+
 
     <!--==============================
 	Footer Area
@@ -639,7 +589,7 @@ Faq Area
                 <div class="th-widget-about">
                   <div class="about-logo">
                     <a href="index.html"
-                      ><img src="assets/img/logo-small.svg" alt="Webteck"
+                      ><img src="{{asset('assets/images/logo-fkip-uns-fkip.png')}}" alt="Webteck"
                     /></a>
                   </div>
                   <p class="about-text">
@@ -749,16 +699,16 @@ Faq Area
         </div>
       </div>
       <div class="shape-mockup" data-top="0%" data-left="0%">
-        <img src="assets/img/shape/footer_shape_3.png" alt="shape" />
+        <img src="{{asset('assets1/img/shape/footer_shape_3.png')}}" alt="shape" />
       </div>
       <div class="shape-mockup" data-top="0%" data-right="0%">
-        <img src="assets/img/shape/footer_shape_4.png" alt="shape" />
+        <img src="{{asset('assets1/img/shape/footer_shape_4.png')}}" alt="shape" />
       </div>
       <div class="shape-mockup" data-bottom="0%" data-left="0%">
-        <img src="assets/img/shape/footer_shape_5.png" alt="shape" />
+        <img src="{{asset('assets1/img/shape/footer_shape_5.png')}}" alt="shape" />
       </div>
       <div class="shape-mockup" data-bottom="0%" data-right="0%">
-        <img src="assets/img/shape/footer_shape_6.png" alt="shape" />
+        <img src="{{asset('assets1/img/shape/footer_shape_6.png')}}" alt="shape" />
       </div>
     </footer>
 

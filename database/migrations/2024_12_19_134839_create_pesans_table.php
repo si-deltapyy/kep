@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->text('review')->nullable();
+            $table->text('reviewer_id')->nullable();
 
             $table->unsignedBigInteger('dummy_id')->nullable();
-            $table->unsignedBigInteger('submission_id')->nullable();
+            $table->unsignedBigInteger('document_id')->nullable();
 
             $table->foreign('dummy_id')->references('id')->on('dummy')->onDelete('cascade');
-            $table->foreign('submission_id')->references('id')->on('submission')->onDelete('cascade');
-
+            $table->foreign('document_id')->references('id')->on('document')->onDelete('cascade');
         });
     }
 

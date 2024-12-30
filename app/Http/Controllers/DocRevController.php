@@ -46,7 +46,7 @@ class DocRevController extends Controller
         return [$sub];
         return view('pages.review.message', compact('sub'));
     }
-    
+
 
     public function pils($id)
     {
@@ -59,7 +59,7 @@ class DocRevController extends Controller
 
         return view('pages.review.index', compact('doc', 'sub'));
     }
-    
+
 
     /**
      * Store a newly created resource in storage.

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Pesan;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Document extends Model
 {
@@ -23,5 +24,10 @@ class Document extends Model
     public function logDocument()
     {
         return $this->hasMany(LogDocument::class, 'doc_id');
+    }
+
+    public function Pesan()
+    {
+        return $this->hasMany(Pesan::class, 'document_id');
     }
 }
