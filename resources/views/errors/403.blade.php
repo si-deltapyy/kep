@@ -39,7 +39,7 @@
 <body>
     <div class="container">
         <h1>403</h1>
-        <p>Oops! You don't have permission to access this page.</p>
+        <p>Yahh kamu gak boleh mengakses halaman ini yaa, Terlarang !!!</p>
         <a href="{{ url('/dashboard') }}">Back to Home</a>
     </div>
 </body>
