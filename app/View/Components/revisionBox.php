@@ -11,10 +11,12 @@ class revisionBox extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    // public function __construct($namaDokumen, $revisi, $tanggal)
+    // {
+    //     $this->namaDokumen = $namaDokumen;
+    //     $this->revisi = $revisi;
+    //     $this->tanggal = $tanggal;
+    // }
 
     /**
      * Get the view / contents that represent the component.

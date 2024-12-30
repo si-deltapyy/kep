@@ -24,6 +24,7 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/libs/simple-datatables/style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <link rel="stylesheet" href="{{asset('assets/libs/mobius1-selectr/selectr.min.css')}}">
 
     @stack('pages-style')
 
@@ -77,6 +78,8 @@
 
     <script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
     <script src="{{asset('assets/js/pages/analytics-index.init.js')}}"></script>
+    <script src="{{asset('assets/libs/mobius1-selectr/selectr.min.js')}}"></script>
+    <script src="{{asset('assets/js/pages/form-advanced.init.js')}}"></script>
 
     @stack('pages-script')
 

@@ -23,7 +23,7 @@ class Dummy extends Model
     }
 
     public function pesans()
-{
-    return $this->hasMany(Pesan::class);
-}
+    {
+        return $this->hasMany(Pesan::class, 'dummy_id');
+    }
 }

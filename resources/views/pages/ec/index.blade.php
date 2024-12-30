@@ -30,6 +30,7 @@
 @section('content')
 
 @role('sekertaris')
+
     @include('partial.ec.sekertaris');
 @endrole
 
