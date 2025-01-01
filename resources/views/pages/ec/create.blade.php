@@ -6,8 +6,6 @@
 <x-page-tittle :title="'EC Document'" :slash1="'EC Document'" :slash2="'Dokumen'" :slash3="'Create'"></x-page-tittle>
 @endsection
 
-
-
 @section('content')
         <div
             class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4 mb-4"
@@ -38,10 +36,6 @@
 
                     <x-input title="Nama Pengusul " value="{{ $user->name }}" id="name" name="name" type="text" class="form-control" readonly muted/>
                     <x-input title="Judul Usulan " id="title" name="title" type="text" value="{{ $data->title }}" class="form-control" readonly muted/>
-
-                    <div class="col-span-1">
-                        <x-file-upload title="Upload File" id="file" name="file" type="file" accept=".pdf" class="file-input"/><br>
-                    </div>
 
                     <a href="{{ route('sekertaris.ec.show', ['ECDokuman' => $data->id]) }}" target="blank"
                         class='px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white'>Preview</a>

@@ -15,14 +15,15 @@ Route::middleware(['auth', 'verified', 'role:sekertaris'])->name('sekertaris.')-
     Route::get('/ajuan/{id}/extempted', [SekertarisController::class, 'extempted'])->name('pengajuan.extempted');
     Route::post('/ajuan/{id}/all', [SekertarisController::class, 'all'])->name('pengajuan.all');
 
-    Route::get('/uploadEC/{id}', [SekertarisController::class, 'upload'])->name('upload.ec');
+    //Update tanggal proses EC sekaligus Preview Dokumen EC
+    Route::match(['get', 'post'], '/uploadEC/{id}', [SekertarisController::class, 'upload'])->name('upload.ec');
+
     Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
 
     Route::get('/reviewerList', [UserController::class, 'rev'])->name('review.index');
     Route::get('/reviewerList/{id}/edit', [UserController::class, 'edit'])->name('review.edit');
     Route::put('/reviewerList/{id}', [UserController::class, 'update'])->name('review.update');
     Route::delete('/reviewerList/{id}', [UserController::class, 'destroy'])->name('review.destroy');
-
 
     // Pesan
     Route::get('/pesan', [PesanController::class, 'index'])->name('pesan.index');

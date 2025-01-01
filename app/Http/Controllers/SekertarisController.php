@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\Dummy;
 use App\Mail\SendMail;
 use App\Models\Document;
-use App\Models\Dummy;
+use App\Models\ECDocument;
 use App\Models\Submission;
-use App\Models\User;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\RedirectResponse;
 
 class SekertarisController extends Controller
 {
 
     public function index(){
         $doc = Dummy::where('sekertaris_id', Auth::id())->get();
-
         return view('pages.pengajuan.sekertaris.index', compact('doc'));
     }
 
@@ -49,7 +50,7 @@ class SekertarisController extends Controller
             'password.min' => 'Password harus memiliki minimal 8 karakter.',
             'password.regex' => 'Password harus mengandung angka dan huruf kecil.',
         ]);
-        
+
 
         $user->update([
             'password' => bcrypt($request->password)
@@ -74,7 +75,7 @@ class SekertarisController extends Controller
                 ->where('doc_group', $id)
                 ->select( '*' , 'ld.id as id_log')
                 ->get();
-        
+
         $data->update([
             'doc_status' => 'on-review',
             'doc_flag' => 'Progress',
@@ -181,11 +182,30 @@ class SekertarisController extends Controller
      * @return Params int
      * Assign Reviewer Untuk Melakukan reviewer Ajuan
      */
-     public function upload($id){
-        $data = Dummy::where('id', $id)->first();
+
+    public function upload(Request $request, $id)
+    {
+        // Ambil data
+        $data = Dummy::find($id);
         $doc = Document::where('doc_group', $id)->first();
-        $user = User::find($doc->user_id)->first();
+
+        if (!$doc) {
+            return redirect()->back()->with('error', 'Dokumen tidak ditemukan.');
+        }
+
+        $user = User::find($doc->user_id);
+
+        // update ec_proceed_at di tabel Dummy biar bisa mencantumkan tanggal di surat
+        if ($request->isMethod('post')) {
+            $document = Dummy::find($id);
+
+            $document->ec_proceed_at = Carbon::now();
+            $document->save();
+
+            return redirect()->route('sekertaris.upload.ec', $id)->with('success', 'Tanggal proceed_at berhasil diperbarui.');
+        }
 
         return view('pages.ec.create', compact('data', 'user', 'id'));
     }
+
 }

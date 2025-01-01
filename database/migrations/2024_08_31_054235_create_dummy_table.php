@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sekertaris_id')->nullable();
             $table->enum('doc_status', ['new-proposal','process', 'on-review', 'approved','approved-with','resubmission', 'disapproved', 'revised', 'done'])->default('new-proposal');
             $table->enum('doc_flag', ['Waiting','Progress','In Review','Feedback Review','Done','EC Process'])->default('Waiting');
+            $table->timestamp('ec_proceed_at')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('CASCADE');

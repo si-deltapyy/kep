@@ -14,6 +14,15 @@ class Dummy extends Model
     public $table = 'dummy';
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        'title',
+        'user_id',
+        'sekertaris_id',
+        'doc_status',
+        'doc_flag',
+        'ec_proceed_at',
+    ];
+
     public function submissions()
     {
         return $this->hasMany(Submission::class, 'doc_group', 'doc_group');
