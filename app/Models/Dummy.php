@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Pesan;
+use App\Models\Document;
+use App\Models\Feedback;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -11,6 +13,15 @@ class Dummy extends Model
     use HasFactory;
     public $table = 'dummy';
     protected $guarded = ['id'];
+
+    protected $fillable = [
+        'title',
+        'user_id',
+        'sekertaris_id',
+        'doc_status',
+        'doc_flag',
+        'ec_proceed_at',
+    ];
 
     public function submissions()
     {
@@ -26,4 +37,15 @@ class Dummy extends Model
     {
         return $this->hasMany(Pesan::class, 'dummy_id');
     }
+
+    public function Document()
+    {
+        return $this->hasMany(Document::class, 'doc_group');
+    }
+
+    public function Feedback()
+    {
+        return $this->hasMany(Feedback::class, 'dummy_id');
+    }
+
 }

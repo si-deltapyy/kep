@@ -16,5 +16,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->name('admin.')->prefix('a
     Route::get('user/make-user/{user}', [UserController::class, 'makeUser'])->name('makeUser');
     Route::get('user/make-reviewer/{user}', [UserController::class, 'makeReviewer'])->name('makeReviewer');
     Route::get('ec/publish/{id}', [ECDocumentController::class, 'publish'])->name('ec.publish');
-    Route::get('ec/reqSign/{id}', [ECDocumentController::class, 'signKPPM'])->name('ec.reqSign');
+    Route::match(['get', 'post'], 'ec/reqSign/{id}', [ECDocumentController::class, 'signKPPM'])->name('ec.reqSign');
+
 });

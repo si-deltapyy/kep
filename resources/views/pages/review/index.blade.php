@@ -1,10 +1,11 @@
 @php
 // Data
-$head1 = ['ID', 'Judul Usulan'];
+$head1 = ['ID', 'Judul Usulan', 'Id Dummy'];
 $data1 = $doc->map(function($doc) {
     return [
         'id' => $doc->id,
         'Judul Usulan' => $doc->doc_name,
+        'ID Dummy' => $doc->Dummy->sekertaris_id,
     ];
 });
 
@@ -20,6 +21,7 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
                 data-doc-id="' . ($doc->id ?? '') . '"
                 data-reviewer-id="' . (auth()->id() ?? '') . '"
                 data-dummy-id="' . ($doc->doc_group ?? '') . '"
+                data-receiver-id="' . ($doc->Dummy->sekertaris_id ?? '') . '"
                 class="px-2 py-1 lg:px-4 bg-transparent text-primary text-sm rounded transition hover:bg-primary-500 hover:text-white border border-primary font-medium"
             >
                 Message
@@ -49,7 +51,7 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
                 aria-labelledby="orders-tab"
                 >
     {{-- <button type=c"button" class="px-2 py-1 lg:px-4 bg-transparent  text-primary text-xl  rounded transition hover:bg-primary-500 hover:text-white border border-primary font-medium">Kirim Pesan</button> --}}
-    <a href="{{ route('reviewer.dokRev.feedback', Auth::id()) }}">Beri Feedback Review</a>
+    <a href="{{ route('reviewer.dokRev.feedback', Auth::id()) }}">Beri Feedback Review   </a>
     <div class="grid grid-cols-1 p-0 md:p-4">
         <div class="sm:-mx-6 lg:-mx-8">
             <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
@@ -63,7 +65,7 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
                                 :actionColumn="$actions1"
                             />
             </div>
-            <a href="{{ route('message.index') }}">TESTTT</a>
+            <a href="{{ route('messages.index') }}">TESTTT</a>
 
             <!--end div-->
         </div>
@@ -80,15 +82,18 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
                 <button type="button" class="box-content w-4 h-4 p-1 bg-slate-700/60 rounded-full text-slate-300 leading-4 text-xl close" aria-label="Close" data-fc-dismiss>&times;</button>
             </div>
             <div class="relative flex-auto p-4 text-slate-600 dark:text-gray-300 leading-relaxed">
-                <form action="{{ route('reviewer.message.store') }}" method="POST">
+                <form action="{{ route('messages.store') }}" method="POST">
                     @csrf
                     <!-- Hidden Inputs -->
+
                     <input type="hidden" id="doc-id-input" name="doc_id" value="">
+
                     <input type="hidden" id="doc-dummy-id" name="dummy_id" value="">
                     <input type="hidden" id="doc-reviewer-id" name="reviewer_id" value="">
+                    <input type="hidden" id="doc-receiver-id" name="receiver_id" value="">
 
                     <label for="message" class="font-medium text-sm text-slate-600 dark:text-slate-400">Your message</label>
-                    <textarea id="message" name="review" rows="4" class="form-input w-full rounded-md mt-1 border"></textarea>
+                    <textarea id="message" name="message" rows="4" class="form-input w-full rounded-md mt-1 border"></textarea>
 
                     <div class="flex flex-wrap shrink-0 justify-end p-3 rounded-b border-t border-dashed">
                         <button type="button" class="inline-block text-red-500 hover:bg-red-500 hover:text-white border border-gray-200 text-sm font-medium py-1 px-3 rounded mr-1 close" data-fc-dismiss>Close</button>
@@ -115,11 +120,13 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
                 const dummyId = button.getAttribute('data-dummy-id');
                 const docId = button.getAttribute('data-doc-id');
                 const reviewerId = button.getAttribute('data-reviewer-id');
+                const receiverId = button.getAttribute('data-receiver-id');
 
                 // Isi input di modal dengan data dari tombol
                 document.getElementById('doc-id-input').value = docId || '';
                 document.getElementById('doc-dummy-id').value = dummyId || '';
                 document.getElementById('doc-reviewer-id').value = reviewerId || '';
+                document.getElementById('doc-receiver-id').value = receiverId || '';
             });
         });
     });

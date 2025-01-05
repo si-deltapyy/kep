@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Dummy;
 use App\Models\Pesan;
+use App\Models\Feedback;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,5 +31,20 @@ class Document extends Model
     public function Pesan()
     {
         return $this->hasMany(Pesan::class, 'document_id');
+    }
+
+    public function Feedback()
+    {
+        return $this->hasMany(Feedback::class, 'document_id');
+    }
+
+    public function Dummy()
+    {
+        return $this->belongsTo(Dummy::class, 'doc_group', 'id');
+    }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'doc_group', 'id');
     }
 }

@@ -204,11 +204,7 @@
                     <x-navigation :route="'sekertaris.ec.index'" :text="'ECDocument'" :icon="'files'"/>
                     {{-- <x-navigation :route="'sekertaris.review.index'" :text="'Manage Reviewer'"  :icon="'contact'"/> --}}
                     <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
-                    <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
-                        <span>Other</span>
-                    </div>
 
-                    <x-navigation :route="'sekertaris.pesan.index'" :text="'Message'" :icon="'message-square'"/>
                 @endrole
 
                 @role('kppm')
@@ -216,6 +212,14 @@
                     <x-navigation :route="'kppm.pengajuan.index'" :text="'Request EC'" :icon="'files'"/>
                     {{-- <x-navigation :route="'reviewer.dokRev.index'" :text="'Review Dokumen'" :icon="'file'"/> --}}
                 @endrole
+
+                @auth
+                <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
+                    <span>Other</span>
+                </div>
+
+                <x-navigation :route="'messages.index'" :text="'Message'" :icon="'message-square'"/>
+                @endauth
 
                 </div>
               </div>

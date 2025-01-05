@@ -15,10 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('title');
-            $table->string('doc_name');
-            $table->string('doc_path');
+            $table->string('doc_name')->nullable();
+            $table->string('doc_path')->nullable();
             $table->unsignedBigInteger('doc_group');
             $table->enum('ec_status', ['Waiting Sign KPPM', 'Signed', 'Process', 'Distribute'])->default('Waiting Sign KPPM');
+            $table->string('ethical_number')->nullable();
+            $table->timestamp('signed_at')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('CASCADE');

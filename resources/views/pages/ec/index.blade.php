@@ -14,12 +14,17 @@
         $actions1 = $docs->mapWithKeys(function ($x) {
             return [
                 $x->id => '
-                <a href="' . route('sekertaris.upload.ec', $x->id) . '" class="px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">Upload EC</a>
+                <form action="' . route('sekertaris.upload.ec', $x->id) . '" method="POST">
+                    ' . csrf_field() . '
+                    <button type="submit" class="px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">Upload EC</button>
+                </form>
                 '
             ];
         })->toArray();
     @endphp
 @endrole
+
+
 
 @extends('layouts.app')
 
@@ -30,7 +35,6 @@
 @section('content')
 
 @role('sekertaris')
-
     @include('partial.ec.sekertaris');
 @endrole
 
@@ -45,7 +49,4 @@
 @role('kppm')
     @include('partial.ec.kppm');
 @endrole
-
 @endsection
-
-
