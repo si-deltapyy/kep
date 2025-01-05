@@ -1,7 +1,7 @@
 
 ## KEP FKIP
 
-Website Pengajuan Dokumen Ethichal Cleareance FKIP UNS.
+Website Pengajuan Dokumen Ethichal Cleareance KEP FKIP UNS.
 
 ## Installation
 Some basic Git commands are:
