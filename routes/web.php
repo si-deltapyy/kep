@@ -2,12 +2,16 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\FeedbackController;
-use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\SuperAdmin\ManageWebsiteController;
 
 Route::get('/', [Controller::class, 'index'])->name('home');
+Route::get('/maintenance/check', [ManageWebsiteController::class, 'checkMaintenance'])->name('maintenance.check');
+
+
 Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
