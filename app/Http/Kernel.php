@@ -14,7 +14,8 @@ class Kernel extends HttpKernel
      * @var array<int, class-string|string>
      */
     protected $middleware = [
-        // \App\Http\Middleware\TrustHosts::class,
+        
+        \App\Http\Middleware\CheckAppStatus::class,
         \App\Http\Middleware\TrustProxies::class,
         \Illuminate\Http\Middleware\HandleCors::class,
         \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
@@ -25,6 +26,7 @@ class Kernel extends HttpKernel
 
     protected $routeMiddleware = [
         'permission' => \App\Http\Middleware\CheckPermission::class,
+        'restrict.cornjob' => \App\Http\Middleware\RestrictToCornjob::class,
     ];
 
     /**
@@ -47,6 +49,13 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        
+        'saml' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+        ],
+
     ];
 
     /**

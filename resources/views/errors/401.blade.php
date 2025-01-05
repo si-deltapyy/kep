@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>403 - KEP FKIP</title>
+	<title>401 Unauthorized</title>
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
 
 	<!-- Google font -->
@@ -128,7 +128,6 @@ body {
     font-size: 16px;
   }
 }
-
 a {
     background-color: #262626;
     padding: 10px 20px;
@@ -156,13 +155,12 @@ a:hover {
 	<div id="notfound">
 		<div class="notfound">
 			<div class="notfound-404">
-				<h3>Oops! Restricted Area</h3>
-				<h1><span class="center">4</span><span >0</span><span class="center">3</span></h1>
+				<h3>Unauthorized</h3>
+				<h1><span class="center">4</span><span >0</span><span class="center">1</span></h1>
 			</div>
-			<h2>we are sorry, You don't have permission to acces this page</h2>
+			<h2>we are sorry, the server has failed to identify the user.</h2>
             <h5><a href="{{ url('/') }}">Back to Home</a></h5>
 		</div>
-        
 	</div>
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->

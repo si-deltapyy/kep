@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 @section('content')
 <div class="text-center p-6 bg-slate-900 rounded-t">
-    <a href="index.html"><img src="assets/images/logo-sm.png" alt="" class="w-14 h-14 mx-auto mb-2"></a>
+    <a href="index.html"><img src="assets/images/logos/UNS-LOGO.png" alt="" class="w-14 h-14 mx-auto mb-2"></a>
     <h3 class="font-semibold text-white text-xl mb-1">KPPM FKIP UNS</h3>
     <p class="text-xs text-slate-400">Email Verification</p>
 </div>

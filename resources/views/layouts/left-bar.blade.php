@@ -195,7 +195,7 @@
                         <span>Other</span>
                     </div>
 
-                    <x-navigation :route="'dashboard'" :text="'Setting'" :icon="'settings'"/>
+                    <x-navigation :route="'superadmin.setting'" :text="'Setting'" :icon="'settings'"/>
                 @endrole
 
                 @role('sekertaris')

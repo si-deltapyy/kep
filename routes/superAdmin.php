@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SuperAdmin\ProdiController;
@@ -9,7 +11,6 @@ use App\Http\Controllers\SuperAdmin\TypeDokumenController;
 Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')->prefix('administrator')->group(function(){
     // Common
     Route::resource('data', SuperAdminController::class)->names('data');
-
 
     // Manage User
     Route::get('/manage/user', [SuperAdminController::class, 'manageUser'])->name('manage.user');
@@ -53,4 +54,7 @@ Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')
     Route::get('/manage/type-ajuan', [SuperAdminController::class, 'manageTypeAjuan'])->name('manage.type-ajuan');
     Route::get('/manage/document-type', [SuperAdminController::class, 'manageDocumentType'])->name('manage.document-type');
     Route::get('/manage/view', [SuperAdminController::class, 'manageView'])->name('manage.view');
+
+    Route::get('/setting', [Controller::class, 'setting'])->name('setting');
+    Route::patch('/setting/{status}', [Controller::class, 'setDownMode'])->name('setting.update');
 });

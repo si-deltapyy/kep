@@ -767,4 +767,5 @@ Price Area
 <script src="{{ asset('assets1/js/main.js') }}"></script>
 
   </body>
-</html>
+</html> 
+

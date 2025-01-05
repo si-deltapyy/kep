@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\FeedbackController;
+use Illuminate\Support\Facades\Artisan;
 
-
-Route::get('/', function () { return view('landing');});
+Route::get('/', [Controller::class, 'index'])->name('home');
 Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -25,9 +26,24 @@ Route::get('/chat', function () {
     return view('pages.pesan.index');
 });
 
+
+
 Route::get('/message-show', function () {
     return view('pages.pesan.show');
 })->name('message-show');
+
+
+// Corn Job Routes
+
+Route::middleware('restrict.cornjob')->group(function () {
+    Route::get('/artisan/down', [Controller::class, 'down'])->name('app.down');
+    Route::get('/artisan/up', [Controller::class, 'up'])->name('app.live');
+    Route::get('/artisan/run', function () { Artisan::call('schedule:run'); return 'Optimize and Cache Clear Success';});
+});
+
+
+
+
 
 
 
@@ -38,3 +54,4 @@ require __DIR__ . '/reviewer.php';
 require __DIR__ . '/sekertaris.php';
 require __DIR__ . '/superAdmin.php';
 require __DIR__ . '/kppm.php';
+require __DIR__ . '/sso.php';
