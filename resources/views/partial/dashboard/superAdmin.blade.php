@@ -2,11 +2,15 @@
     <!-- Css -->
 <link rel="stylesheet" href="{{asset('assets/libs/sweetalert2/sweetalert2.min.css')}}">
 <link rel="stylesheet" href="{{asset('assets/libs/animate.css/animate.min.css')}}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endpush
 
 @push('pages-script')
 <script src="{{asset('assets/libs/sweetalert2/sweetalert2.all.min.js')}}"></script>
 <script src="{{asset('assets/js/pages/sweetalert.init.js')}}"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
     function showConfirmation() {
@@ -24,6 +28,23 @@
         }
     });
 }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    flatpickr("#start_maintenance", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true,
+    });
+
+    flatpickr("#end_maintenance", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true,
+    });
+});
+
 </script>
 @endpush
 

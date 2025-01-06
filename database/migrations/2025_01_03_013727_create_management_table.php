@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->boolean('is_down')->default(false);
             $table->text('title')->nullable();
-            $table->timestamp('maintenance_start')->nullable();
-            $table->timestamp('maintenance_finish')->nullable();
-
+            $table->dateTime('maintenance_start')->nullable();
+            $table->dateTime('maintenance_finish')->nullable();
         });
     }
 

@@ -14,6 +14,7 @@ class ManagementModel extends Model
         'maintenance_start',
         'maintenance_end',
         'title',
+        'is_down',
     ];
 
 }

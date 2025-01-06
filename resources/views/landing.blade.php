@@ -743,7 +743,7 @@ Price Area
       </svg>
     </div>
 
-    <div class="popup-search-box d-none d-lg-block">
+    <div class="popup-search-box d-none d-lg-block" style="display: none;">
         <button class="searchClose"><i class="fal fa-times"></i></button>
         <form action="#">
             <div class="swiper-slide swiper-slide-active" role="group" aria-label="3 / 5" style="width: 500px; margin-right: 24px;" data-swiper-slide-index="2">
@@ -812,54 +812,90 @@ Price Area
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    fetch('{{ route('maintenance.check') }}', {
-        method: 'GET',
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-        },
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); // Debugging respons di konsol
-        if (data.show_modal) {
+document.addEventListener('DOMContentLoaded', function () {
+    // Fungsi untuk memeriksa status maintenance
+    function checkMaintenanceStatus() {
+        fetch('{{ route('maintenance.check') }}', {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('API Response:', data); // Debugging respons di konsol
+
             const maintenanceModal = document.querySelector('.popup-search-box');
-            maintenanceModal.querySelector('#maintenance-start').innerText = `Start: ${data.maintenance_start}`;
-            maintenanceModal.querySelector('#maintenance-finish').innerText = `Finish: ${data.maintenance_finish}`;
-            maintenanceModal.classList.remove('d-none');
-            maintenanceModal.classList.add('show');
-
-            //Countdown
             const countdownElement = maintenanceModal.querySelector('#countdown');
+
+            // Default: Sembunyikan modal
+            maintenanceModal.style.display = 'none';
+            maintenanceModal.classList.remove('show');
+
+            const now = new Date().getTime();
             const maintenanceStart = new Date(data.maintenance_start).getTime();
+            const maintenanceFinish = new Date(data.maintenance_finish).getTime();
 
-            const timer = setInterval(() => {
-                const now = new Date().getTime();
-                const distance = maintenanceStart - now;
+            console.log('🕒 Current Time:', now);
+            console.log('📅 Start Time:', maintenanceStart);
+            console.log('📅 Finish Time:', maintenanceFinish);
 
-                if (distance <= 0) {
-                    clearInterval(timer);
+            // Validasi apakah saat ini dalam periode maintenance
+            if (data.show_modal && now < maintenanceFinish) {
+                if (now >= maintenanceStart) {
+                    console.log('🔒 Maintenance is active. Modal shown.');
                     countdownElement.innerText = "Maintenance has started!";
-                    return;
+                } else {
+                    console.log('⏳ Maintenance countdown active. Modal shown.');
+                    let timer = setInterval(() => {
+                        const now = new Date().getTime();
+                        const distance = maintenanceStart - now;
+
+                        if (distance <= 0) {
+                            clearInterval(timer);
+                            countdownElement.innerText = "Maintenance has started!";
+                            return;
+                        }
+
+                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                        countdownElement.innerText = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                    }, 1000);
                 }
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                // Tampilkan modal
+                maintenanceModal.style.display = 'block';
+                maintenanceModal.classList.add('show');
+            } else if (now >= maintenanceFinish) {
+                console.log('🛑 Maintenance period has ended. Modal remains hidden.');
+                maintenanceModal.style.display = 'none';
+                maintenanceModal.classList.remove('show');
+            } else {
+                console.log('❌ No active maintenance. Modal remains hidden.');
+                maintenanceModal.style.display = 'none';
+                maintenanceModal.classList.remove('show');
+            }
+        })
+        .catch(error => {
+            console.error('❌ Error fetching maintenance status:', error);
+        });
+    }
 
-                countdownElement.innerText = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-            }, 1000);
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching maintenance status:', error);
-    });
+    // Panggil fungsi pertama kali
+    checkMaintenanceStatus();
 
-    // Event untuk menutup modal
+    // Periksa status maintenance setiap 1 menit (60000 ms)
+    setInterval(checkMaintenanceStatus, 60000);
+
+    // Event untuk menutup modal manual
     document.querySelector('.searchClose').addEventListener('click', function () {
         const maintenanceModal = document.querySelector('.popup-search-box');
+        maintenanceModal.style.display = 'none';
         maintenanceModal.classList.remove('show');
+        console.log('❎ Modal manually closed.');
     });
 });
 </script>

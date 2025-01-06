@@ -31,6 +31,7 @@ class ManageWebsiteController extends Controller
                 // Update kolom maintenance
                 $maintenance->maintenance_start = $request->start_maintenance;
                 $maintenance->maintenance_finish = $request->end_maintenance;
+                $maintenance->is_down = false;
 
                 $maintenance->save();
 
