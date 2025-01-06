@@ -14,10 +14,6 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('cache:clear')->everyMinute();
-        $schedule->command('config:cache')->everyMinute();
-        $schedule->command('route:cache')->everyMinute();
-        $schedule->command('view:clear')->everyMinute();
-        $schedule->command('optimize:clear')->everyMinute();
         $schedule->command('optimize')->everyMinute();
     }
 
