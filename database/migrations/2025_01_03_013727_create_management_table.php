@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('management', function (Blueprint $table) {
-            // $table->id();
+            $table->id();
             $table->boolean('is_down')->default(false);
-            // $table->timestamps();
+            $table->text('title')->nullable();
+            $table->dateTime('maintenance_start')->nullable();
+            $table->dateTime('maintenance_finish')->nullable();
         });
     }
 

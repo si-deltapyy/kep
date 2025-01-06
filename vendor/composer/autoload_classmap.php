@@ -6,6 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Actions\\ElaborateSummary' => $vendorDir . '/laravel/pint/app/Actions/ElaborateSummary.php',
+    'App\\Actions\\FixCode' => $vendorDir . '/laravel/pint/app/Actions/FixCode.php',
+    'App\\Commands\\DefaultCommand' => $vendorDir . '/laravel/pint/app/Commands/DefaultCommand.php',
+    'App\\Console\\Commands\\MaintenanceScheduler' => $baseDir . '/app/Console/Commands/MaintenanceScheduler.php',
     'App\\Console\\Commands\\SummaryData' => $baseDir . '/app/Console/Commands/SummaryData.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -42,6 +46,7 @@ return array(
     'App\\Http\\Controllers\\SekertarisController' => $baseDir . '/app/Http/Controllers/SekertarisController.php',
     'App\\Http\\Controllers\\SsoController' => $baseDir . '/app/Http/Controllers/SsoController.php',
     'App\\Http\\Controllers\\SuperAdminController' => $baseDir . '/app/Http/Controllers/SuperAdminController.php',
+    'App\\Http\\Controllers\\SuperAdmin\\ManageWebsiteController' => $baseDir . '/app/Http/Controllers/SuperAdmin/ManageWebsiteController.php',
     'App\\Http\\Controllers\\SuperAdmin\\ProdiController' => $baseDir . '/app/Http/Controllers/SuperAdmin/ProdiController.php',
     'App\\Http\\Controllers\\SuperAdmin\\TypeAjuanController' => $baseDir . '/app/Http/Controllers/SuperAdmin/TypeAjuanController.php',
     'App\\Http\\Controllers\\SuperAdmin\\TypeDokumenController' => $baseDir . '/app/Http/Controllers/SuperAdmin/TypeDokumenController.php',
@@ -71,6 +76,7 @@ return array(
     'App\\Models\\Kppm' => $baseDir . '/app/Models/Kppm.php',
     'App\\Models\\Kuisioner' => $baseDir . '/app/Models/Kuisioner.php',
     'App\\Models\\LogDocument' => $baseDir . '/app/Models/LogDocument.php',
+    'App\\Models\\ManagementModel' => $baseDir . '/app/Models/ManagementModel.php',
     'App\\Models\\Message' => $baseDir . '/app/Models/Message.php',
     'App\\Models\\Pengajuan' => $baseDir . '/app/Models/Pengajuan.php',
     'App\\Models\\Pesan' => $baseDir . '/app/Models/Pesan.php',
@@ -89,6 +95,7 @@ return array(
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\View\\Components\\AppLayout' => $baseDir . '/app/View/Components/AppLayout.php',
     'App\\View\\Components\\GuestLayout' => $baseDir . '/app/View/Components/GuestLayout.php',
+    'App\\View\\Components\\badge' => $baseDir . '/app/View/Components/badge.php',
     'App\\View\\Components\\file-upload' => $baseDir . '/app/View/Components/file-upload.php',
     'App\\View\\Components\\form-input' => $baseDir . '/app/View/Components/form-input.php',
     'App\\View\\Components\\input' => $baseDir . '/app/View/Components/input.php',
@@ -220,6 +227,7 @@ return array(
     'Database\\Seeders\\EcDocumentSeeder' => $baseDir . '/database/seeders/EcDocumentSeeder.php',
     'Database\\Seeders\\KuisionerSeeder' => $baseDir . '/database/seeders/KuisionerSeeder.php',
     'Database\\Seeders\\LogDocumentSeeder' => $baseDir . '/database/seeders/LogDocumentSeeder.php',
+    'Database\\Seeders\\ManagementSeeder' => $baseDir . '/database/seeders/ManagementSeeder.php',
     'Database\\Seeders\\ProdiSeeder' => $baseDir . '/database/seeders/ProdiSeeder.php',
     'Database\\Seeders\\ProfileUserSeeder' => $baseDir . '/database/seeders/ProfileUserSeeder.php',
     'Database\\Seeders\\RoleSeeder' => $baseDir . '/database/seeders/RoleSeeder.php',

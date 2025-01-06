@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\SuperAdmin\ProdiController;
 use App\Http\Controllers\SuperAdmin\TypeAjuanController;
 use App\Http\Controllers\SuperAdmin\TypeDokumenController;
+use App\Http\Controllers\SuperAdmin\ManageWebsiteController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')->prefix('administrator')->group(function(){
     // Common
@@ -57,4 +58,10 @@ Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')
 
     Route::get('/setting', [Controller::class, 'setting'])->name('setting');
     Route::patch('/setting/{status}', [Controller::class, 'setDownMode'])->name('setting.update');
+
+
+    //Maintenance Setting
+    Route::post('/maintenance/update', [ManageWebsiteController::class, 'update'])->name('maintenance.update');
+
+
 });

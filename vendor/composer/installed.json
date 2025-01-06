@@ -3462,7 +3462,7 @@
             },
             "time": "2024-05-30T15:10:40+00:00",
             "type": "library",
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "OneLogin\\": "src/"
@@ -3539,7 +3539,7 @@
                     ]
                 }
             },
-            "installation-source": "source",
+            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Overtrue\\LaravelSaml\\": "src"

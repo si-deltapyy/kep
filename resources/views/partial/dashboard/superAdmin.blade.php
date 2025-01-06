@@ -1,3 +1,53 @@
+@push('pages-style')
+    <!-- Css -->
+<link rel="stylesheet" href="{{asset('assets/libs/sweetalert2/sweetalert2.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/libs/animate.css/animate.min.css')}}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endpush
+
+@push('pages-script')
+<script src="{{asset('assets/libs/sweetalert2/sweetalert2.all.min.js')}}"></script>
+<script src="{{asset('assets/js/pages/sweetalert.init.js')}}"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    function showConfirmation() {
+    Swal.fire({
+        title: 'Apakah Anda Yakin Untuk Mengatur Jadwal Maintenance?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, Submit',
+        cancelButtonText: 'Batalkan',
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Submit Form
+            document.getElementById('maintenance-form').submit();
+        }
+    });
+}
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    flatpickr("#start_maintenance", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true,
+    });
+
+    flatpickr("#end_maintenance", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true,
+    });
+});
+
+</script>
+@endpush
+
 <div class="grid grid-cols-12 sm:grid-cols-12 md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4">
     <div class="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3">
         <div class="bg-white shadow-sm dark:shadow-slate-700/10 dark:bg-gray-900  rounded-md w-full relative mb-4">
@@ -77,6 +127,55 @@
             </div><!--end card-body-->
         </div> <!--end inner-grid-->
     </div>
+
+    {{-- Form --}}
+    <div class="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3">
+        <div class="bg-white shadow-sm dark:shadow-slate-700/10 dark:bg-gray-900  rounded-md w-full relative mb-4">
+
+                <div class="flex-auto p-4">
+                    <a href="#" class="block mb-3 text-[16px] font-medium tracking-tight text-gray-800 dark:text-white">Atur Jadwal Maintenance</a>
+                    <form id="maintenance-form" action="{{ route('superadmin.maintenance.update') }}" method="POST">
+                        @csrf
+                        <div class="col-span-12 sm:col-span-12 md:col-span-6 lg:col-span-3 xl:col-span-3">
+                            <div class="bg-white shadow-sm dark:shadow-slate-700/10 dark:bg-gray-900 rounded-md w-full relative mb-4">
+                                <div class="flex-auto p-4">
+                                    <a href="#" class="block mb-3 text-[16px] font-medium tracking-tight text-gray-800 dark:text-white">
+                                        Atur Jadwal Maintenance
+                                    </a>
+                                    <x-input title="Tanggal Mulai" id="start_maintenance" type="date" class="form-control" name="start_maintenance" required />
+                                    <x-input title="Tanggal Selesai" id="end_maintenance" type="date" class="form-control" name="end_maintenance" required />
+                                    <button type="button" onclick="showConfirmation()" class="inline-block focus:outline-none text-slate-500 hover:bg-slate-500 hover:text-white bg-transparent border border-gray-200 dark:bg-transparent dark:text-slate-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-slate-500 text-sm font-medium py-1 px-3 rounded mb-1">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div><!--end card-body-->
+        </div> <!--end inner-grid-->
+    </div>
+
+{{-- Sweeet Alert --}}
+<template id="my-template">
+    <swal-title>
+    Apakah Anda Yakin Untuk Mengatur Jadwal Maintenance?
+    </swal-title>
+    <swal-icon type="warning" color="red"></swal-icon>
+    <swal-button type="confirm">
+    Ya
+    </swal-button>
+    <swal-button type="cancel">
+    Batalkan
+    </swal-button>
+    <swal-param name="allowEscapeKey" value="false" />
+    <swal-param
+    name="customClass"
+    value='{ "popup": "my-popup" }' />
+</template>
+
+
+
+
 
 </div> <!--end grid-->
 

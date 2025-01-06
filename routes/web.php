@@ -2,12 +2,16 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\FeedbackController;
-use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\SuperAdmin\ManageWebsiteController;
 
 Route::get('/', [Controller::class, 'index'])->name('home');
+Route::get('/maintenance/check', [ManageWebsiteController::class, 'checkMaintenance'])->name('maintenance.check');
+
+
 Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -40,8 +44,6 @@ Route::middleware('restrict.cornjob')->group(function () {
     Route::get('/artisan/up', [Controller::class, 'up'])->name('app.live');
     Route::get('/artisan/run', function () { Artisan::call('schedule:run'); return 'Optimize and Cache Clear Success';});
 });
-
-
 
 
 

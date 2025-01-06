@@ -135,7 +135,7 @@
                     aria-controls="wishlist"
                     aria-selected="false"
                     >
-                    Approved <span class="text-slate-400">(155)</span>
+                    Approved <span class="text-slate-400">({{$jumDone}})</span>
                     </button>
                 </li>
                 <li class="me-2" role="presentation">
@@ -148,7 +148,7 @@
                     aria-controls="ratings"
                     aria-selected="false"
                     >
-                    Progress <span class="text-slate-400">(25)</span>
+                    Progress <span class="text-slate-400">({{$jumlahOnReview}})</span>
                     </button>
                 </li>
                 <li class="me-2" role="presentation">
@@ -161,7 +161,7 @@
                     aria-controls="cek"
                     aria-selected="false"
                     >
-                    Perbaikan <span class="text-slate-400">(25)</span>
+                    Perbaikan <span class="text-slate-400">({{$perbaikan}})</span>
                     </button>
                 </li>
                 </ul>
@@ -179,37 +179,72 @@
                         <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
                             {{-- table --}}
                             <!-- resources/views/somepage.blade.php -->
-                            @php
-                            // Data
-                            $head1 = ['ID', 'Usulan', 'Status', 'Date'];
-                            $data1 = $user->filter(function ($user) {
-                                return $user->doc_status === 'new-proposal'; // Filter hanya doc_status 'approved'
-                            })->map(function ($user) {
-                                return [
-                                    'id' => $user->id,
-                                    'title' => $user->title,
-                                    'doc_status' => $user->doc_status,
-                                    'created_at' => $user->created_at,
-                                ];
-                            });
 
-                            $actions1 = $user->mapWithKeys(function ($user) {
-                                return [
-                                    $user->id => '<form action="' . route('sekertaris.review.destroy', $user->id) . '" method="post" style="display:inline;">
-                                        ' . csrf_field() .
-                                        method_field('DELETE') . '
-                                        <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
-                                    </form>
-                                    <a href="' . route('sekertaris.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
+                            @php
+                                $head1 = ['ID', 'Usulan', 'Status', 'Date'];
+                                $data1 = $user->filter(function ($user) {
+                                    return $user->doc_status === 'new-proposal';
+                                })->map(function ($user) {
+                                    return [
+                                        'id' => $user->id,
+                                        'title' => $user->title,
+                                        'doc_status' => $user->doc_status,
+                                        'created_at' => $user->created_at,
+                                    ];
+                                });
+
+                                $actions1 = $user->mapWithKeys(function ($user) {
+                                    return [
+                                        $user->id => '<form action="' . route('sekertaris.review.destroy', $user->id) . '" method="post" style="display:inline;">
+                                            ' . csrf_field() .
+                                            method_field('DELETE') . '
+                                            <button type="submit" class="text-red-500 hover:text-red-700">Hapus</button>
+                                        </form>
+                                        <a href="' . route('sekertaris.review.edit', $user->id) . '" class="ml-2 text-blue-500 hover:text-blue-700">Edit</a>'
+                                    ];
+                                })->toArray();
+
+                                $customColumns = [
+                                    'doc_status' => function ($cell, $row) {
+                                        switch ($cell) {
+                                            //dark
+                                            case 'new-proposal':
+                                                return '<span class="bg-gray-500/10 text-gray-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded ">New Proposal</span>';
+                                            //yellow
+                                            case 'process':
+                                                return '<span class="bg-yellow-500/10 text-yellow-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded ">Process</span>';
+                                            case 'on-review':
+                                                return '<span class="bg-yellow-500/10 text-yellow-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded ">On Review</span>';
+                                            //Green
+                                            case 'approved':
+                                                return '<span class="bg-green-500/10 text-green-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded ">Approved</span>';
+                                            case 'approved-with':
+                                                return '<span class="bg-green-500/10 text-green-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded  ">Approved With</span>';
+                                            case 'done':
+                                                return '<span class="bg-green-500/10 text-green-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded ">Done</span>';
+                                            //Pink
+                                            case 'resubmission':
+                                                return '<span class="bg-pink-500/10 text-pink-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded ">Resubmission</span>';
+                                            case 'revised':
+                                                return '<span class="bg-pink-500/10 text-pink-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded ">Revised</span>';
+                                            //Red
+                                            case 'disapproved':
+                                                return '<span class="bg-yellow-500/10 text-yellow-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded ">Rejected</span>';
+
+                                            default:
+                                                return $cell;
+                                        }
+                                    }
                                 ];
-                            })->toArray();
                             @endphp
+
                             <x-table
                                 :head="$head1"
                                 :data="$data1->toArray()"
                                 :actionHeader="true"
                                 :actionSelect="true"
                                 :actionColumn="$actions1"
+                                :customColumns="$customColumns"
                             />
                         </div>
                         <!--end div-->
@@ -217,55 +252,6 @@
                     <!--end div-->
                 </div>
                 <!--end grid-->
-                <div class="flex justify-between mt-4">
-                    <div class="self-center">
-                    <p class="dark:text-slate-400">
-                        Showing 1 - 20 of 1,524
-                    </p>
-                    </div>
-                    <div class="self-center">
-                    <ul class="inline-flex items-center -space-x-px">
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 ms-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                        >
-                            <i class="icofont-simple-left"></i>
-                        </a>
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >1</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            aria-current="page"
-                            class="z-10 py-2 px-3 leading-tight text-brand-600 bg-brand-50 border border-brand-300 hover:bg-brand-100 hover:text-brand-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                            >2</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >3</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                        >
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                        </li>
-                    </ul>
-                    </div>
-                </div>
                 </div>
                 <div
                 class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800"
@@ -309,6 +295,7 @@
                                 :actionHeader="true"
                                 :actionSelect="true"
                                 :actionColumn="$actions1"
+                                :customColumns="$customColumns"
                             />
                         </div>
                         <!--end div-->
@@ -316,55 +303,6 @@
                     <!--end div-->
                 </div>
                 <!--end grid-->
-                <div class="flex justify-between mt-4">
-                    <div class="self-center">
-                    <p class="dark:text-slate-400">
-                        Showing 1 - 20 of 1,524
-                    </p>
-                    </div>
-                    <div class="self-center">
-                    <ul class="inline-flex items-center -space-x-px">
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 ms-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                        >
-                            <i class="icofont-simple-left"></i>
-                        </a>
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >1</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            aria-current="page"
-                            class="z-10 py-2 px-3 leading-tight text-brand-600 bg-brand-50 border border-brand-300 hover:bg-brand-100 hover:text-brand-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                            >2</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >3</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                        >
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                        </li>
-                    </ul>
-                    </div>
-                </div>
                 </div>
                 <div
                 class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800"
@@ -408,6 +346,7 @@
                                 :actionHeader="true"
                                 :actionSelect="true"
                                 :actionColumn="$actions1"
+                                :customColumns="$customColumns"
                             />
                         </div>
                         <!--end div-->
@@ -415,55 +354,6 @@
                     <!--end div-->
                 </div>
                 <!--end grid-->
-                <div class="flex justify-between">
-                    <div class="self-center">
-                    <p class="dark:text-slate-400">
-                        Showing 1 - 20 of 1,524
-                    </p>
-                    </div>
-                    <div class="self-center">
-                    <ul class="inline-flex items-center -space-x-px">
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 ms-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                        >
-                            <i class="icofont-simple-left"></i>
-                        </a>
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >1</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            aria-current="page"
-                            class="z-10 py-2 px-3 leading-tight text-brand-600 bg-brand-50 border border-brand-300 hover:bg-brand-100 hover:text-brand-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                            >2</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >3</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                        >
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                        </li>
-                    </ul>
-                    </div>
-                </div>
                 </div>
                 <div
                 class="hidden p-4 bg-gray-50 rounded-lg dark:bg-gray-800"
@@ -508,6 +398,7 @@
                                 :actionHeader="true"
                                 :actionSelect="true"
                                 :actionColumn="$actions1"
+                                :customColumns="$customColumns"
                             />
                         </div>
                         <!--end div-->
@@ -515,55 +406,6 @@
                     <!--end div-->
                 </div>
                 <!--end grid-->
-                <div class="flex justify-between">
-                    <div class="self-center">
-                    <p class="dark:text-slate-400">
-                        Showing 1 - 20 of 1,524
-                    </p>
-                    </div>
-                    <div class="self-center">
-                    <ul class="inline-flex items-center -space-x-px">
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 ms-0 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                        >
-                            <i class="icofont-simple-left"></i>
-                        </a>
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >1</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            aria-current="page"
-                            class="z-10 py-2 px-3 leading-tight text-brand-600 bg-brand-50 border border-brand-300 hover:bg-brand-100 hover:text-brand-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                            >2</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                            >3</a
-                        >
-                        </li>
-                        <li>
-                        <a
-                            href="#"
-                            class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-900 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                        >
-                            <i class="icofont-simple-right"></i>
-                        </a>
-                        </li>
-                    </ul>
-                    </div>
-                </div>
                 </div>
             </div>
             </div>

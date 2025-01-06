@@ -38,6 +38,7 @@
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="msapplication-TileImage" content="{{ asset('assets/img/favicons/ms-icon-144x144.png') }}" />
 
+
     <meta name="theme-color" content="#ffffff" />
 
     <!--==============================
@@ -64,6 +65,9 @@
     <link rel="stylesheet" href="{{ asset('assets1/css/swiper-bundle.min.css') }}" />
     <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets1/css/style.css') }}" />
+
+
+
   </head>
 
   <body class="gradient-body">
@@ -104,6 +108,7 @@
     </div>
 
 
+
     <!--==============================
     Mobile Menu
   ============================== -->
@@ -135,7 +140,9 @@
             </li>
             <li>
               <a href="contact.html">Contact</a>
+              <button type="button" class="icon-btn searchBoxToggler"><i class="fal fa-search"></i></button>
             </li>
+
           </ul>
         </div>
       </div>
@@ -274,6 +281,7 @@ Hero Area
         <img src="{{asset('assets1/img/hero/hero_shape_1_3.svg')}}" alt="shape" />
       </div>
     </div>
+
     <!--======== / Hero Section ========--><!--==============================
 Feature Area
 ==============================-->
@@ -735,6 +743,41 @@ Price Area
       </svg>
     </div>
 
+    <div class="popup-search-box d-none d-lg-block" style="display: none;">
+        <button class="searchClose"><i class="fal fa-times"></i></button>
+        <form action="#">
+            <div class="swiper-slide swiper-slide-active" role="group" aria-label="3 / 5" style="width: 500px; margin-right: 24px;" data-swiper-slide-index="2">
+                <div class="service-grid">
+                    <div class="service-grid_icon">
+                        <img src="{{asset('assets1/img/icon/service_card_3.svg')}}" alt="Maintenance Icon">
+                    </div>
+                    <div class="service-grid_content">
+                        <h3 class="box-title">
+                            <a href="">🚧 Scheduled Maintenance Alert 🚧</a>
+                        </h3>
+                        <p class="service-grid_text">
+                            Our website is scheduled for maintenance to improve your experience.
+                            Maintenance will begin soon, and we apologize for any inconvenience this may cause.
+                            Thank you for your understanding and patience.
+                            <br>
+                            <span id="maintenance-start">Start: --</span>
+                            <br>
+                            <span id="maintenance-finish">Finish: --</span>
+                            <br>
+                            <span id="countdown">
+                                Countdown: --
+                            </span>
+                        </p>
+
+                        <div class="bg-shape">
+                            <img src="{{asset('assets1/img/bg/service_grid_bg.png')}}" alt="Maintenance Background">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
 
 <!-- jQuery -->
 <script src="{{ asset('assets1/js/vendor/jquery-3.7.1.min.js') }}"></script>
@@ -766,6 +809,101 @@ Price Area
 <!-- Main JS File -->
 <script src="{{ asset('assets1/js/main.js') }}"></script>
 
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Fungsi untuk memeriksa status maintenance
+    function checkMaintenanceStatus() {
+        fetch('{{ route('maintenance.check') }}', {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('API Response:', data); // Debugging respons di konsol
+
+            const maintenanceModal = document.querySelector('.popup-search-box');
+            const countdownElement = maintenanceModal.querySelector('#countdown');
+
+            // Default: Sembunyikan modal
+            maintenanceModal.style.display = 'none';
+            maintenanceModal.classList.remove('show');
+
+            const now = new Date().getTime();
+            const maintenanceStart = new Date(data.maintenance_start).getTime();
+            const maintenanceFinish = new Date(data.maintenance_finish).getTime();
+
+            console.log('🕒 Current Time:', now);
+            console.log('📅 Start Time:', maintenanceStart);
+            console.log('📅 Finish Time:', maintenanceFinish);
+
+            // Validasi apakah saat ini dalam periode maintenance
+            if (data.show_modal && now < maintenanceFinish) {
+                if (now >= maintenanceStart) {
+                    console.log('🔒 Maintenance is active. Modal shown.');
+                    countdownElement.innerText = "Maintenance has started!";
+                } else {
+                    console.log('⏳ Maintenance countdown active. Modal shown.');
+                    let timer = setInterval(() => {
+                        const now = new Date().getTime();
+                        const distance = maintenanceStart - now;
+
+                        if (distance <= 0) {
+                            clearInterval(timer);
+                            countdownElement.innerText = "Maintenance has started!";
+                            return;
+                        }
+
+                        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                        countdownElement.innerText = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+                    }, 1000);
+                }
+
+                // Tampilkan modal
+                maintenanceModal.style.display = 'block';
+                maintenanceModal.classList.add('show');
+            } else if (now >= maintenanceFinish) {
+                console.log('🛑 Maintenance period has ended. Modal remains hidden.');
+                maintenanceModal.style.display = 'none';
+                maintenanceModal.classList.remove('show');
+            } else {
+                console.log('❌ No active maintenance. Modal remains hidden.');
+                maintenanceModal.style.display = 'none';
+                maintenanceModal.classList.remove('show');
+            }
+        })
+        .catch(error => {
+            console.error('❌ Error fetching maintenance status:', error);
+        });
+    }
+
+    // Panggil fungsi pertama kali
+    checkMaintenanceStatus();
+
+    // Periksa status maintenance setiap 1 menit (60000 ms)
+    setInterval(checkMaintenanceStatus, 60000);
+
+    // Event untuk menutup modal manual
+    document.querySelector('.searchClose').addEventListener('click', function () {
+        const maintenanceModal = document.querySelector('.popup-search-box');
+        maintenanceModal.style.display = 'none';
+        maintenanceModal.classList.remove('show');
+        console.log('❎ Modal manually closed.');
+    });
+});
+</script>
+
+
   </body>
-</html> 
+
+
+
+</html>
 

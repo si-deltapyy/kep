@@ -42,6 +42,7 @@ class HomeController extends Controller
         $jumOnRevSek = Dummy::whereNotIn('doc_status', ['new-proposal', 'approved'])
         ->where('sekertaris_id', Auth::id())->count();
         $jumDone = Dummy::where('doc_status', 'approved')->count();
+        $perbaikan = Dummy::where('doc_status', ['revised', 'resubmission'])->count();
 
         $newProposal = Dummy::whereIn('doc_status', ['new-proposal'])->count();
         $newProposalSek = Dummy::where('doc_status', 'new-proposal')->
@@ -85,6 +86,6 @@ class HomeController extends Controller
             compact(
                 'profile', 'user', 'jumlahAjuan', 'jumlahUser',
                 'jumlahReq', 'jumlahOnReview', 'newProposal',
-                'newProposalSek', 'jumDone', 'jumOnRevSek', 'userReq', 'ajuan', 'series'));
+                'newProposalSek', 'jumDone', 'jumOnRevSek', 'userReq', 'ajuan', 'series', 'perbaikan'));
     }
 }
