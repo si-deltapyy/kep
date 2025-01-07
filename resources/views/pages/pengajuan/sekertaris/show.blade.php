@@ -17,7 +17,7 @@
                 </button>
             </form>
                 <a href="{{route('sekertaris.pengajuan.extempted', $dums->id)}}"
-                    class="ml-3 px-2 py-1 bg-red-500/10 border border-transparent collapse:bg-green-100 text-red text-sm rounded hover:bg-red-600 hover:text-white"
+                    class="ml-3 px-2 py-1 bg-yellow-500/10 border border-transparent collapse:bg-yellow-100 text-yellow text-sm rounded hover:bg-yellow-600 hover:text-white"
                     >Extempted
                 </a>
             <form action="{{route('sekertaris.pengajuan.all', $dums->id)}}" method="POST" class="inline">
@@ -27,6 +27,10 @@
                     All Reviewer
                 </button>
             </form>
+            <a href="{{route('sekertaris.pengajuan.rejected', $dums->id)}}"
+                class="ml-3 px-2 py-1 bg-red-500/10 border border-transparent collapse:bg-green-100 text-red text-sm rounded hover:bg-red-600 hover:text-white"
+                >Tolak
+            </a>
             
             @endif
              {{-- table --}}

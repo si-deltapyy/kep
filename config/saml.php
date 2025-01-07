@@ -19,7 +19,7 @@ return [
     // Service Provider Data that we are deploying.
     'sp' => [
         // Identifier of the SP entity  (must be a URI)
-        'entityId' => env('SAML_IDP_ENTITYID', 'https://sso.uns.ac.id/saml2/idp/metadata.php'),
+        'entityId' => env('SAML_SP_ENTITYID', 'https://sso.uns.ac.id/saml2/idp/metadata.php'),
         // Specifies info about where and how the <AuthnResponse> message MUST be
         // returned to the requester, in this case our SP.
         'assertionConsumerService' => [

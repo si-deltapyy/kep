@@ -21,7 +21,7 @@
 </style>
 
 <body>
-        <iframe class="pdf" src="{{ asset('storage/' . $doc['doc_path']) }}" frameborder="0" width="100%" height="600px"></iframe>
+        <iframe class="pdf" src="{{ asset('app/' . $doc['doc_path']) }}" frameborder="0" width="100%" height="600px"></iframe>
 </body>
 
 </html>

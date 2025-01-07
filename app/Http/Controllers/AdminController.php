@@ -6,8 +6,10 @@ use App\Mail\SendMail;
 use App\Models\Document;
 use App\Models\Dummy;
 use App\Models\LogDocument;
+use App\Models\Logs;
 use App\Models\Submission;
 use App\Models\User;
+use FontLib\Table\Type\name;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -16,11 +18,19 @@ class AdminController extends Controller
 {
     //
     public function index(){
-        $doc = Dummy::all();
+        $doc = Dummy::orderBy('created_at', 'desc')->get();
 
         $sekertaris = User::role('sekertaris')->get();
 
-        return view('pages.pengajuan.admin.index', compact('doc', 'sekertaris'));
+        $num = [
+            'sek1' => Dummy::where('sekertaris_id', 5)->count(),
+            'sek2' => Dummy::where('sekertaris_id', 6)->count(),
+            'sek3' => Dummy::where('sekertaris_id', 7)->count(),
+        ];
+
+        $nama = User::role('sekertaris')->get();
+
+        return view('pages.pengajuan.admin.index', compact('doc', 'sekertaris', 'num', 'nama'));
     }
 
 
@@ -54,6 +64,14 @@ class AdminController extends Controller
             'sekertaris_id' => $request->sekertaris,
             'doc_status' => 'process',
             'doc_flag' => 'Waiting'
+        ]);
+
+        Logs::create([
+            'title' => 'Konfirmasi Dokumen',
+            'description' => 'Sedang dalam pengecekan kelengkapan dokumen',
+            'action_label' => 'Pengecakan Dokumen',
+            'action_link' => '',
+            'doc_group' => $request->id,
         ]);
 
         return redirect()->route('admin.pengajuan.index');

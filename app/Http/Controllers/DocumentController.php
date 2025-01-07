@@ -7,6 +7,7 @@ use App\Models\Document;
 use App\Models\Dummy;
 use App\Models\Kuisioner;
 use App\Models\LogDocument;
+use App\Models\Logs;
 use App\Models\Submission;
 use App\Models\Template;
 use App\Models\TypeDoc;
@@ -43,8 +44,10 @@ class DocumentController extends Controller
         $dummy = Dummy::where('id', $id)
         ->get();
 
+        $logs = Logs::where('doc_group', $id)->orderBy('created_at', 'desc')->get();
 
-        return view('pages.dokumen.show', compact('doc', 'dummy'));
+
+        return view('pages.dokumen.show', compact('doc', 'dummy', 'logs'));
     }
 
 
@@ -60,6 +63,16 @@ class DocumentController extends Controller
             'sekertaris_id' => null,
         ]);
 
+        Logs::create([
+            'title' => 'Pengajuan Dokumen Baru',
+            'description' => 'Dokumen Berhasil Diunggah, Menunggu Konfirmasi Admin',
+            'action_label' => 'Upload Success',
+            'action_link' => route('user.ajuan.index'),
+            'doc_group' => Dummy::orderBy('id', 'desc')
+                ->pluck('id')
+                ->first() ?? 0,
+        ]);
+
         $group = Dummy::orderBy('id', 'desc')
                 ->pluck('id')
                 ->first() ?? 0;
@@ -72,7 +85,7 @@ class DocumentController extends Controller
             if ($request->hasFile($inputName)) {
                 // Validate the uploaded file
                 $request->validate([
-                    $inputName => 'required|mimes:doc,docx,pdf|max:2048',
+                    $inputName => 'required|mimes:pdf|max:2048',
                 ]);
 
                 $type = $x->id;

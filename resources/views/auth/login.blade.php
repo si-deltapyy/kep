@@ -25,6 +25,7 @@
 
 <form class="p-6" method="POST" action="{{ route('login') }}">
     @csrf
+    <!-- Email Field -->
     <x-auth-field
         label="Email"
         name="email"
@@ -36,6 +37,7 @@
         autocomplete="username"
         title="Email"
     />
+    <!-- Password Field -->
     <x-auth-field
         label="Your password"
         name="password"
@@ -45,16 +47,27 @@
         autocomplete="current-password"
         title="Password"
     />
+    <!-- Forgot Password Link -->
     @if (Route::has('password.request'))
         <a href="{{ route('password.request') }}" class="text-xs font-medium text-brand-500 underline">Forget Password?</a>
     @endif
+    <!-- Submit Button -->
     <div class="mt-4">
         <button
-            class="w-full px-2 py-2 tracking-wide text-white transition-colors duration-200 transform bg-brand-500 rounded hover:bg-brand-600 focus:outline-none focus:bg-brand-600">
+            class="w-full  py-2 tracking-wide text-white transition-colors duration-200 transform bg-brand-500 rounded hover:bg-brand-600 focus:outline-none focus:bg-brand-600">
             Login
         </button>
     </div>
 </form>
+
+<!-- SSO Login Button -->
+<div class="flex items-center  p-6" style="margin-top: -2rem;">
+    <a href="{{ route('sso.login') }}"
+        class="w-full py-2 text-center text-brand-500 border border-brand-500 rounded transition-colors duration-200 transform  hover:text-brand-500 focus:outline-none focus:bg-brand-500">
+        Login SSO UNS
+    </a>
+</div>
+
 
 <p class="mb-5 text-sm font-medium text-center text-slate-500"> Don't have an account? <a href="{{ route('register') }}"
     class="font-medium text-brand-500 hover:underline">Sign up</a>

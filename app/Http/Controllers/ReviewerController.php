@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use App\Models\Dummy;
 use App\Models\LogDocument;
+use App\Models\Logs;
 use App\Models\Submission;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -34,6 +35,14 @@ class ReviewerController extends Controller
 
         $sub->update([
             'doc_flag' => 'In Review',
+        ]);
+
+        Logs::create([
+            'title' => 'Review Dokumen',
+            'description' => 'Dokumen anda sedang direview oleh pihak reviewer KEP FKIP UNS',
+            'action_label' => 'Proses Review',
+            'action_link' => '',
+            'doc_group' => $id,
         ]);
         
         return view('pages.pengajuan.reviewer.show', compact('doc'));
