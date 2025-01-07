@@ -18,8 +18,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('route:cache')->everyMinute();
         // $schedule->command('view:clear')->everyMinute();
         // $schedule->command('optimize:clear')->everyMinute();
-        // $schedule->command('optimize')->everyMinute();
-        $schedule->command('maintenance:schedule')->everyMinute();
+        $schedule->command('optimize')->everyMinute();
+        // $schedule->command('maintenance:schedule')->everyMinute();
     }
 
     /**
