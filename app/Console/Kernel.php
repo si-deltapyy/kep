@@ -14,11 +14,12 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         // $schedule->command('cache:clear')->everyMinute();
-        // $schedule->command('config:cache')->everyMinute();
-        // $schedule->command('route:cache')->everyMinute();
         // $schedule->command('view:clear')->everyMinute();
         // $schedule->command('optimize:clear')->everyMinute();
         $schedule->command('optimize')->everyMinute();
+        $schedule->command('config:clear')->everyMinute();
+        $schedule->command('route:cache')->everyMinute();
+        $schedule->command('route:clear')->everyMinute();
         // $schedule->command('maintenance:schedule')->everyMinute();
     }
 
