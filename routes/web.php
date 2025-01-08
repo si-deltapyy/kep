@@ -7,6 +7,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SuperAdmin\ManageWebsiteController;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendMail;
 
 Route::get('/', [Controller::class, 'index'])->name('home');
 Route::get('/maintenance/check', [ManageWebsiteController::class, 'checkMaintenance'])->name('maintenance.check');
@@ -44,6 +47,9 @@ Route::middleware('restrict.cornjob')->group(function () {
     Route::get('/artisan/up', [Controller::class, 'up'])->name('app.live');
     Route::get('/artisan/run', function () { Artisan::call('schedule:run'); return 'Optimize and Cache Clear Success';});
 });
+
+Route::get('/artisan/db', function () { Artisan::call('migrate:fresh --seed'); return 'Optimize and Cache Clear Success';});
+
 
 
 

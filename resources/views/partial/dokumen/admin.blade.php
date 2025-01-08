@@ -65,6 +65,61 @@
                     ];
 @endphp
 
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4">
+    <!-- Card 1 -->
+    <div class="col-span-1">
+        <div class="bg-white shadow-sm dark:shadow-slate-700/10 dark:bg-gray-900 rounded-md w-full relative mb-4">
+            <div class="flex-auto p-4">
+                <div class="flex justify-between xl:gap-x-2 items-center">
+                    <div class="self-center">
+                        <p class="text-gray-800 font-semibold dark:text-slate-400 text-lg uppercase">{{ $nama[0]->name }}</p>
+                        <h3 class="my-4 font-semibold text-[30px] dark:text-slate-200">{{ $num['sek1'] }}</h3>
+                    </div>
+                    <div class="self-center">
+                        <i data-lucide="book-open-check" class="h-16 w-16 stroke-primary-500/30"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="col-span-1">
+        <div class="bg-white shadow-sm dark:shadow-slate-700/10 dark:bg-gray-900 rounded-md w-full relative mb-4">
+            <div class="flex-auto p-4">
+                <div class="flex justify-between xl:gap-x-2 items-center">
+                    <div class="self-center">
+                        <p class="text-gray-800 font-semibold dark:text-slate-400 text-lg uppercase">{{ $nama[1]->name }}</p>
+                        <h3 class="my-4 font-semibold text-[30px] dark:text-slate-200">{{ $num['sek2'] }}</h3>
+                    </div>
+                    <div class="self-center">
+                        <i data-lucide="book-open-check" class="h-16 w-16 stroke-primary-500/30"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="col-span-1">
+        <div class="bg-white shadow-sm dark:shadow-slate-700/10 dark:bg-gray-900 rounded-md w-full relative mb-4">
+            <div class="flex-auto p-4">
+                <div class="flex justify-between xl:gap-x-2 items-center">
+                    <div class="self-center">
+                        <p class="text-gray-800 font-semibold dark:text-slate-400 text-lg uppercase">{{ $nama[2]->name }}</p>
+                        <h3 class="my-4 font-semibold text-[30px] dark:text-slate-200">{{ $num['sek3'] }}</h3>
+                    </div>
+                    <div class="self-center">
+                        <i data-lucide="book-open-check" class="h-16 w-16 stroke-primary-500/30"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <div
                 class="active p-4 bg-gray-50 rounded-lg dark:bg-gray-700/20"

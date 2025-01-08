@@ -17,6 +17,7 @@ use Overtrue\LaravelSaml\Saml;
 
      public function login() {
          if (Auth::check()) {
+             dd(Auth::user());
              return redirect()->route($this->afterLoginRoute);
          }
 
@@ -43,6 +44,10 @@ use Overtrue\LaravelSaml\Saml;
                  'phone_verified_at' => now(),
              ]
          );
+
+        $user->assignRole('user');
+        $user->givePermissionTo('waiting-acception'); 
+
 
          // Jika user ditemukan, maka loginkan user
          if ($user != null) {

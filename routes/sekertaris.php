@@ -14,6 +14,7 @@ Route::middleware(['auth', 'verified', 'role:sekertaris'])->name('sekertaris.')-
     Route::post('/ajuan/{id}/expedited', [SekertarisController::class, 'expedited'])->name('pengajuan.expedited');
     Route::get('/ajuan/{id}/extempted', [SekertarisController::class, 'extempted'])->name('pengajuan.extempted');
     Route::post('/ajuan/{id}/all', [SekertarisController::class, 'all'])->name('pengajuan.all');
+    Route::get('/ajuan/{id}/rejected', [SekertarisController::class, 'rejected'])->name('pengajuan.rejected');
 
     //Update tanggal proses EC sekaligus Preview Dokumen EC
     Route::match(['get', 'post'], '/uploadEC/{id}', [SekertarisController::class, 'upload'])->name('upload.ec');

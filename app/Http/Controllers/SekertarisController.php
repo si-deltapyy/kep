@@ -11,6 +11,7 @@ use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\Logs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
@@ -149,6 +150,14 @@ class SekertarisController extends Controller
             'updated_at' => now()
         ]);
 
+        Logs::create([
+            'title' => 'Accepted',
+            'description' => 'Dokumen anda sesuai, dokumen akan segera diproses reviewer',
+            'action_label' => 'Dokumen Valid',
+            'action_link' => '',
+            'doc_group' => $id,
+        ]);
+
         $mailData = [
             'title' => 'Mail from KEP FKIP',
             'body' => 'This is for testing email using smtp.'
@@ -183,6 +192,35 @@ class SekertarisController extends Controller
      * Assign Reviewer Untuk Melakukan reviewer Ajuan
      */
 
+    public function rejected($id): RedirectResponse{
+
+        $data = Dummy::find($id);
+
+        $data->update([
+            'doc_status' => 'disapproved',
+            'doc_flag' => 'Done',
+            'updated_at' => now(),
+        ]);
+
+        Logs::create([
+            'title' => 'Dokumen Tidak Sesuai',
+            'description' => 'Dokumen yang diajukan belum sesuai dengan ketentuan yang berlaku',
+            'action_label' => 'Ajuan Ditolak',
+            'action_link' => '',
+            'doc_group' => $id,
+        ]);
+
+        Logs::create([
+            'title' => 'Proses selesai',
+            'description' => 'Dokumen yang diajukan telah selesai diproses',
+            'action_label' => 'Ajuan Selesai',
+            'action_link' => '',
+            'doc_group' => $id,
+        ]);
+
+        return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
+    }
+    
     public function upload(Request $request, $id)
     {
         // Ambil data
