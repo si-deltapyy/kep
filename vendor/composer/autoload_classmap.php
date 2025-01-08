@@ -6,10 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Actions\\ElaborateSummary' => $vendorDir . '/laravel/pint/app/Actions/ElaborateSummary.php',
-    'App\\Actions\\FixCode' => $vendorDir . '/laravel/pint/app/Actions/FixCode.php',
-    'App\\Commands\\DefaultCommand' => $vendorDir . '/laravel/pint/app/Commands/DefaultCommand.php',
+    'App\\Console\\Commands\\EndMaintenanceCommand' => $baseDir . '/app/Console/Commands/EndMaintenanceCommand.php',
     'App\\Console\\Commands\\MaintenanceScheduler' => $baseDir . '/app/Console/Commands/MaintenanceScheduler.php',
+    'App\\Console\\Commands\\ResetMaintenanceCommand' => $baseDir . '/app/Console/Commands/ResetMaintenanceCommand.php',
+    'App\\Console\\Commands\\StartMaintenanceCommand' => $baseDir . '/app/Console/Commands/StartMaintenanceCommand.php',
     'App\\Console\\Commands\\SummaryData' => $baseDir . '/app/Console/Commands/SummaryData.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
@@ -39,6 +39,7 @@ return array(
     'App\\Http\\Controllers\\KppmController' => $baseDir . '/app/Http/Controllers/KppmController.php',
     'App\\Http\\Controllers\\KuisionerController' => $baseDir . '/app/Http/Controllers/KuisionerController.php',
     'App\\Http\\Controllers\\LogController' => $baseDir . '/app/Http/Controllers/LogController.php',
+    'App\\Http\\Controllers\\Logs' => $baseDir . '/app/Http/Controllers/Logs.php',
     'App\\Http\\Controllers\\MessageController' => $baseDir . '/app/Http/Controllers/MessageController.php',
     'App\\Http\\Controllers\\PesanController' => $baseDir . '/app/Http/Controllers/PesanController.php',
     'App\\Http\\Controllers\\ProfileController' => $baseDir . '/app/Http/Controllers/ProfileController.php',
@@ -76,6 +77,7 @@ return array(
     'App\\Models\\Kppm' => $baseDir . '/app/Models/Kppm.php',
     'App\\Models\\Kuisioner' => $baseDir . '/app/Models/Kuisioner.php',
     'App\\Models\\LogDocument' => $baseDir . '/app/Models/LogDocument.php',
+    'App\\Models\\Logs' => $baseDir . '/app/Models/Logs.php',
     'App\\Models\\ManagementModel' => $baseDir . '/app/Models/ManagementModel.php',
     'App\\Models\\Message' => $baseDir . '/app/Models/Message.php',
     'App\\Models\\Pengajuan' => $baseDir . '/app/Models/Pengajuan.php',
