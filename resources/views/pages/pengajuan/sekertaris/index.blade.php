@@ -1,17 +1,18 @@
  @php
  // Data
-    $head1 = ['ID', 'Usulan', 'Status'];
-    $data1 = $doc->filter(function ($docs) {
+    $head1 = ['ID', 'Usulan', 'Type Ajuan', 'Status'];
+    $data1 = $ajuan->filter(function ($docs) {
         return $docs->doc_flag !== 'EC Procces';
     })->map(function ($docs) {
         return [
             'id' => $docs->id,
             'Judul Usulan' => $docs->title,
+            'Type Ajuan' => $docs->ajuan_name,
             'Status' => $docs->doc_status,
         ];
     });
 
-    $actions1 = $doc->mapWithKeys(function ($doc) {
+    $actions1 = $ajuan->mapWithKeys(function ($doc) {
     $actions = '';
 
         // Add conditional action for "approved" status

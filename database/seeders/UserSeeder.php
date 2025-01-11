@@ -19,9 +19,8 @@ class UserSeeder extends Seeder
             'name' => 'sangaji',
             'email' => 'sguritno16@gmail.com',
             'password' => Hash::make(env('USER_PASSWORD', '123')),
-            
-
-        ])->assignRole('user')->givePermissionTo('waiting-acception');
+        
+        ])->assignRole('user')->givePermissionTo('waiting-acception')->givePermissionTo('user');
 
         User::create([
             'name' => 'Admin KEP',

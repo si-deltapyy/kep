@@ -5,6 +5,6 @@
 @else
     @foreach ($temp as $data)
         <h1>{{ $data->typeAjuan->ajuan_name }}</h1>
-        <a href="/storage/{{ $data->template_path }}">Download - {{ $data->template_name }}</a>
+        <a href="/{{ $x->doc_path }}">Download - {{ $data->template_name }}</a>
     @endforeach
 @endif

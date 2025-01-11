@@ -11,6 +11,7 @@ use App\Models\Submission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\Ajuan;
 use App\Models\Logs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -21,7 +22,12 @@ class SekertarisController extends Controller
 
     public function index(){
         $doc = Dummy::where('sekertaris_id', Auth::id())->get();
-        return view('pages.pengajuan.sekertaris.index', compact('doc'));
+        $ajuan = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
+        ->join('ajuan_type as at', 'at.id', '=', 'document.ajuan_type')
+        ->join('dummy as d', 'd.id', '=', 'document.doc_group')
+        ->where('doc_group', $doc[0]->id)->get();
+
+        return view('pages.pengajuan.sekertaris.index', compact('ajuan'));
     }
 
     /**
@@ -122,7 +128,15 @@ class SekertarisController extends Controller
             'updated_at' => now(),
         ]);
 
-        return redirect()->route('sekretariat.upload.ec', $id)->with(['success' => 'Data Berhasil Diubah!']);
+        Logs::create([
+            'title' => 'Accepted',
+            'description' => 'Dokumen anda sesuai, dokumen akan segera diproses Secara Langsung (Khusus)',
+            'action_label' => 'Dokumen Valid',
+            'action_link' => '',
+            'doc_group' => $id,
+        ]);
+
+        return redirect()->route('sekertaris.upload.ec', $id)->with(['success' => 'Data Berhasil Diubah!']);
 
     }
 
@@ -138,7 +152,7 @@ class SekertarisController extends Controller
         return view('pages.pengajuan.sekertaris.assign', compact('doc', 'dummy', 'reviewer'));
     }
 
-    public function all(Request $request, int $id): RedirectResponse{
+    public function all($id): RedirectResponse{
         $data = Dummy::where('doc_group', $id);
                 $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
                 ->where('doc_group', $id)
@@ -160,7 +174,10 @@ class SekertarisController extends Controller
 
         $mailData = [
             'title' => 'Mail from KEP FKIP',
-            'body' => 'This is for testing email using smtp.'
+            'body' => 'This is for testing email using smtp.',
+            'subject' => 'a',
+            'view' => 'pages.email.sendReviewer',
+            'link' => 'reviewer/pengajuan',
         ];
 
         if ($doc) {
@@ -195,6 +212,7 @@ class SekertarisController extends Controller
     public function rejected($id): RedirectResponse{
 
         $data = Dummy::find($id);
+        $user = User::find($data->user_id);
 
         $data->update([
             'doc_status' => 'disapproved',
@@ -217,6 +235,15 @@ class SekertarisController extends Controller
             'action_link' => '',
             'doc_group' => $id,
         ]);
+
+        $mailData = [
+            'title' => 'Dokumen Tidak Sesuai',
+            'body' => 'Rejected Request Ethical Clearance Document',
+            'subject' => 'datamu ditolak ayo ajukan lagi',
+            'view' => 'pages.email.sendReviewer',
+            'link' => 'user/Ajuan',
+        ];
+        Mail::to($user->email)->send(new SendMail($mailData));
 
         return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
     }

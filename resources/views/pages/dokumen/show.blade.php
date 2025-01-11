@@ -14,7 +14,10 @@
                     @foreach ($dummy as $d)
                         <h2 class="font-medium text-2xl font-extrabold dark:text-slate-100">
                             {{ $d->title }}
+                            
                         </h2>
+                        <span class="bg-yellow-500/10 text-yellow-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded flex items-center">
+                                {{ $doc->ajuan_name }}</span>
                         <p class=" position-center"><i>Tanggal Pengajuan: </i> <b>{{ \Carbon\Carbon::parse($d->created_at)->translatedFormat('l, j F Y, H:i')}}</b></p><br><br>
                         
                     @endforeach

@@ -30,6 +30,12 @@
                 <div class="flex-auto p-4">
                   <x-form-input method="POST" action="{{ route('user.ajuan.store') }}" has-file class="p-4">
                     <x-input title="Judul Usulan " id="pengusul" type="text" class="form-control" name="pengusul"/>
+                    <select name="typeajuan" id="at">
+                      <option value="0">-- Pilih Type Ajuan -- </option>
+                      @foreach ($ajuan as $s)
+                        <option value="{{$s->id}}">{{$s->ajuan_name}}</option>
+                      @endforeach
+                    </select>
                     @foreach ($type as $input)
                     <div class="col-span-1">
                         <x-file-upload title="Upload {{$input->name}}: " type="file" id="doc{{$input->id}}" name="doc{{$input->id}}" class="file-input" accept=".docx, .pdf, .doc"/><br>

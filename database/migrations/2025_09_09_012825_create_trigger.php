@@ -41,8 +41,8 @@ return new class extends Migration
         AFTER INSERT ON user
         FOR EACH ROW
         BEGIN
-            INSERT INTO profile_user (user_id, name, phone_number, gender, status, prodi_id, nik, address, created_at, updated_at)
-            VALUES (NEW.id, NEW.name, default, default, default, default, default, default, NOW(), null);
+            INSERT INTO profile_user (user_id, name, phone_number, gender, status, prodi_id, prodi_luar, univ, nik, address, created_at, updated_at)
+            VALUES (NEW.id, NEW.name, default, default, default, default, null, null, default, default, NOW(), null);
         END;
         ');
 

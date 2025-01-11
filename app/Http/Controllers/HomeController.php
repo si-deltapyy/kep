@@ -28,6 +28,7 @@ class HomeController extends Controller
         ])->first();
 
         $user = Dummy::where('user_id', Auth::user()->id)->get();
+
         $jumlahAjuan = Dummy::where('doc_status', 'new-proposal')
         ->count();
 
@@ -80,12 +81,22 @@ class HomeController extends Controller
             ]
         ];
 
-
-
+        $sekcount = [
+            'masuk' => Dummy::where('doc_status', 'new-proposal')
+                ->where('sekertaris_id', Auth::id())
+                ->count(),
+            'review' => Dummy::whereIn('doc_status', ['on-review','process'])
+                ->where('sekertaris_id', Auth::id())
+                ->count(),
+            'done' => Dummy::whereIn('doc_status', ['approved', 'done'])
+                ->where('sekertaris_id', Auth::id())
+                ->count(),
+        ];
+        
         return view('dashboard',
             compact(
                 'profile', 'user', 'jumlahAjuan', 'jumlahUser',
                 'jumlahReq', 'jumlahOnReview', 'newProposal',
-                'newProposalSek', 'jumDone', 'jumOnRevSek', 'userReq', 'ajuan', 'series', 'perbaikan'));
+                'newProposalSek', 'jumDone', 'jumOnRevSek', 'userReq', 'ajuan', 'series', 'perbaikan' , 'sekcount'));
     }
 }

@@ -6,7 +6,7 @@
     <span data-lucide="plus" class="w-4 h-4 inline-block me-2"></span>
 </a>
 
-<a href=""
+<a href="{{ route('user.template.index') }}"
    class="ml-3 px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">
     <i data-lucide="download" class="w-4 h-4 inline-block me-2"></i>
     Download Template

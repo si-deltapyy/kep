@@ -18,7 +18,9 @@ return new class extends Migration
             $table->char('phone_number', length: 15)->default('00');
             $table->enum('gender', ['laki-laki', 'perempuan'])->default('laki-laki');
             $table->enum('status', ['Dosen', 'Mahasiswa'])->default('Mahasiswa');
-            $table->unsignedBigInteger('prodi_id')->default('1');
+            $table->unsignedBigInteger('prodi_id')->nullable();
+            $table->string('prodi_luar')->nullable();
+            $table->string('univ')->nullable();
             $table->char('nik', length: 16)->default('000');
             $table->text('address')->default('none');
             $table->timestamps();

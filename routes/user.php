@@ -16,7 +16,12 @@ Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->prefix('use
         Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
     });
 
-    Route::middleware(['permission:update-profile'])->group(function () {
+    Route::middleware(['permission:update-profile' , 'permission:sso'])->group(function () {
+        Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::post('profile/update/{profil}', [ProfileController::class, 'update'])->name('profile.update');
+    });
+
+    Route::middleware(['permission:update-profile', 'permission:user'])->group(function () {
         Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::post('profile/update/{profil}', [ProfileController::class, 'update'])->name('profile.update');
     });

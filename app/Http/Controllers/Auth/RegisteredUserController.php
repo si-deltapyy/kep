@@ -47,6 +47,7 @@ class RegisteredUserController extends Controller
 
         $user->assignRole('user');
         $user->givePermissionTo('waiting-acception');
+        $user->givePermissionTo('user');
 
         event(new Registered($user));
 

@@ -20,13 +20,12 @@
                 </table>
                 </div>
                 @if ($x->ec_status == 'Waiting Sign KPPM')
-                -
-                @elseif($x->ec_status == 'Process')
                 <form action="{{ route('kppm.ec.download', $x->id) }}" method="POST">
                     @csrf
                     <button type="submit"lass="ml-2 px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">
                         <i class="ti ti-plus me-1"></i>Download Untuk Menandatangani Dokumen</button>
-                </form>
+                </form>v
+                @elseif($x->ec_status == 'Process')
                 <a href="" class="ml-2 px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">
                     <i class="ti ti-plus me-1"></i>
                     <span data-lucide="download" class="w-4 h-4 inline-block me-2"></span>

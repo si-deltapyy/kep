@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 
 class UserController extends Controller
@@ -62,6 +64,18 @@ class UserController extends Controller
         // Pastikan hanya pengguna yang ada di database
         $user->revokePermissionTo('waiting-acception');
         $user->givePermissionTo('update-profile');
+
+        $mailData = [
+            'title' => 'Akun anda telah diaktifasi',
+            'body' => 'Silahkan login untuk melengkapi data diri anda. Nikmati layanan kami untuk mengajukan proposal penelitian.',
+            'subject' => 'Activaiton Account Success ✅',
+            'view' => 'pages.email.sendUser',
+            'link' => 'login',
+        ];
+
+        Mail::to($user->email)->send(new SendMail($mailData));
+
+
 
         return redirect()->back()->with('success', 'User role has been updated to User.');
     }

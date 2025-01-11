@@ -51,6 +51,7 @@ use Overtrue\LaravelSaml\Saml;
         }else{
             $user->assignRole('user');
             $user->givePermissionTo('waiting-acception');
+            $user->givePermissionTo('sso');
         }
         
 

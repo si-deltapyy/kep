@@ -48,7 +48,7 @@
         </div>
         <div class="ml-5">
             <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Dokumen Masuk</h3>
-            <p class="mt-2 text-3xl font-bold text-primary-500 dark:text-primary-400">{{ $newProposalSek }}</p>
+            <p class="mt-2 text-3xl font-bold text-primary-500 dark:text-primary-400">{{ $sekcount['masuk'] }}</p>
             <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Ajuan yang telah diajukan.</p>
         </div>
     </div>
@@ -59,7 +59,7 @@
         </div>
         <div class="ml-5">
             <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Proses Review</h3>
-            <p class="mt-2 text-3xl font-bold text-purple-500 dark:text-purple-400">{{ $jumOnRevSek }}</p>
+            <p class="mt-2 text-3xl font-bold text-purple-500 dark:text-purple-400">{{ $sekcount['review'] }}</p>
             <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Dokumen dalam proses</p>
         </div>
     </div>
@@ -70,7 +70,7 @@
         </div>
         <div class="ml-5">
             <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Dokumen Selesai</h3>
-            <p class="mt-2 text-3xl font-bold text-purple-500 dark:text-purple-400">{{ $jumDone }}</p>
+            <p class="mt-2 text-3xl font-bold text-purple-500 dark:text-purple-400">{{ $sekcount['done'] }}</p>
             <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Dokumen dalam proses</p>
         </div>
     </div>
