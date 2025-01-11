@@ -17,6 +17,9 @@ class MaintenanceScheduler extends Command
     {
         Log::info('⚙️ Maintenance Scheduler Running...');
 
+        // Muat ulang data dari database di setiap iterasi
+        \Illuminate\Support\Facades\DB::reconnect();
+
         $maintenance = DB::table('management')->find(1);
 
         if (!$maintenance) {
@@ -71,6 +74,7 @@ class MaintenanceScheduler extends Command
             Log::info('ℹ️ No action taken. Current time does not match any maintenance window.');
         }
     }
+
 
     private function isApplicationDown()
     {
