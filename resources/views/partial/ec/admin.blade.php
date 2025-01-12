@@ -73,12 +73,66 @@
 
                 </a>
                 @endif
-
+                <a href="{{ route('admin.ec.previewPDF', ['id' => $x->id]) }}" target="blank"
+                    class='px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white'>Preview</a>
+                    <a href="{{ route('admin.ec.log', ['id' => $x->id]) }}" target="blank"
+                        class='px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white'>Log</a>
                 </div>
             </div>
         </div>
 
         @endforeach
+
+
+
+
+        <div class="modal animate-ModalSlide hidden" id="modal-primary">
+            <div class="relative w-auto pointer-events-none sm:max-w-lg sm:my-0 sm:mx-auto z-[99] flex items-center h-[calc(100%-3.5rem)]">
+                <div class="relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-800 bg-clip-padding rounded">
+                    <div class="flex shrink-0 items-center justify-between py-2 px-4 rounded-t border-b border-solid dark:border-gray-700 bg-slate-800">
+                        <h6 class="mb-0 leading-4 text-base font-semibold text-slate-300 mt-0" id="staticBackdropLabel1">Input Ethical Number</h6>
+                        <button type="button" class="box-content w-4 h-4 p-1 bg-slate-700/60 rounded-full text-slate-300 leading-4 text-xl close" aria-label="Close" data-fc-dismiss>&times;</button>
+                    </div>
+                    <div class="relative flex-auto p-4 text-slate-600 dark:text-gray-300 leading-relaxed">
+                        <form action="{{route('admin.ec.reqSign', $x->id)}}" method="POST">
+                            @csrf
+                            <!-- Hidden Inputs -->
+                            <input type="text" id="data-id" hidden>
+                            <x-input title="Masukan Ethical Number" id="ethical_number" placeholder="…../UN27.02.11/PP/EC/202…" name="ethical_number" type="text" class="form-control"/>
+
+                            <div class="flex flex-wrap shrink-0 justify-end p-3 rounded-b border-t border-dashed">
+                                <button type="button" class="inline-block text-red-500 hover:bg-red-500 hover:text-white border border-gray-200 text-sm font-medium py-1 px-3 rounded mr-1 close" data-fc-dismiss>Close</button>
+                                <button type="submit" class="inline-block text-primary-500 hover:bg-primary-500 hover:text-white border border-gray-200 text-sm font-medium py-1 px-3 rounded">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal animate-ModalSlide hidden" id="modal-edit">
+            <div class="relative w-auto pointer-events-none sm:max-w-lg sm:my-0 sm:mx-auto z-[99] flex items-center h-[calc(100%-3.5rem)]">
+                <div class="relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-800 bg-clip-padding rounded">
+                    <div class="flex shrink-0 items-center justify-between py-2 px-4 rounded-t border-b border-solid dark:border-gray-700 bg-slate-800">
+                        <h6 class="mb-0 leading-4 text-base font-semibold text-slate-300 mt-0" id="staticBackdropLabel1">Input Ethical Number</h6>
+                        <button type="button" class="box-content w-4 h-4 p-1 bg-slate-700/60 rounded-full text-slate-300 leading-4 text-xl close" aria-label="Close" data-fc-dismiss>&times;</button>
+                    </div>
+                    <div class="relative flex-auto p-4 text-slate-600 dark:text-gray-300 leading-relaxed">
+                        <form action="{{route('admin.ec.reqSign', $x->id)}}" method="POST">
+                            @csrf
+                            <!-- Hidden Inputs -->
+                            <input type="text" id="data-id" hidden>
+                            <x-input title="Masukan Ethical Number (…../UN27.02.11/PP/EC/202…)" value="…../UN27.02.11/PP/EC/202…" id="ethical_number" name="ethical_number" type="text" class="form-control"/>
+
+                            <div class="flex flex-wrap shrink-0 justify-end p-3 rounded-b border-t border-dashed">
+                                <button type="button" class="inline-block text-red-500 hover:bg-red-500 hover:text-white border border-gray-200 text-sm font-medium py-1 px-3 rounded mr-1 close" data-fc-dismiss>Close</button>
+                                <button type="submit" class="inline-block text-primary-500 hover:bg-primary-500 hover:text-white border border-gray-200 text-sm font-medium py-1 px-3 rounded">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     @endif
 
 </div>
@@ -86,53 +140,7 @@
 
 {{-- Modal --}}
 
-<div class="modal animate-ModalSlide hidden" id="modal-primary">
-    <div class="relative w-auto pointer-events-none sm:max-w-lg sm:my-0 sm:mx-auto z-[99] flex items-center h-[calc(100%-3.5rem)]">
-        <div class="relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-800 bg-clip-padding rounded">
-            <div class="flex shrink-0 items-center justify-between py-2 px-4 rounded-t border-b border-solid dark:border-gray-700 bg-slate-800">
-                <h6 class="mb-0 leading-4 text-base font-semibold text-slate-300 mt-0" id="staticBackdropLabel1">Input Ethical Number</h6>
-                <button type="button" class="box-content w-4 h-4 p-1 bg-slate-700/60 rounded-full text-slate-300 leading-4 text-xl close" aria-label="Close" data-fc-dismiss>&times;</button>
-            </div>
-            <div class="relative flex-auto p-4 text-slate-600 dark:text-gray-300 leading-relaxed">
-                <form action="{{route('admin.ec.reqSign', $x->id)}}" method="POST">
-                    @csrf
-                    <!-- Hidden Inputs -->
-                    <input type="text" id="data-id" hidden>
-                    <x-input title="Masukan Ethical Number" id="ethical_number" name="ethical_number" type="text" class="form-control"/>
 
-                    <div class="flex flex-wrap shrink-0 justify-end p-3 rounded-b border-t border-dashed">
-                        <button type="button" class="inline-block text-red-500 hover:bg-red-500 hover:text-white border border-gray-200 text-sm font-medium py-1 px-3 rounded mr-1 close" data-fc-dismiss>Close</button>
-                        <button type="submit" class="inline-block text-primary-500 hover:bg-primary-500 hover:text-white border border-gray-200 text-sm font-medium py-1 px-3 rounded">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal animate-ModalSlide hidden" id="modal-edit">
-    <div class="relative w-auto pointer-events-none sm:max-w-lg sm:my-0 sm:mx-auto z-[99] flex items-center h-[calc(100%-3.5rem)]">
-        <div class="relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-800 bg-clip-padding rounded">
-            <div class="flex shrink-0 items-center justify-between py-2 px-4 rounded-t border-b border-solid dark:border-gray-700 bg-slate-800">
-                <h6 class="mb-0 leading-4 text-base font-semibold text-slate-300 mt-0" id="staticBackdropLabel1">Input Ethical Number</h6>
-                <button type="button" class="box-content w-4 h-4 p-1 bg-slate-700/60 rounded-full text-slate-300 leading-4 text-xl close" aria-label="Close" data-fc-dismiss>&times;</button>
-            </div>
-            <div class="relative flex-auto p-4 text-slate-600 dark:text-gray-300 leading-relaxed">
-                <form action="{{route('admin.ec.reqSign', $x->id)}}" method="POST">
-                    @csrf
-                    <!-- Hidden Inputs -->
-                    <input type="text" id="data-id" hidden>
-                    <x-input title="Masukan Ethical Number" id="ethical_number" name="ethical_number" type="text" class="form-control"/>
-
-                    <div class="flex flex-wrap shrink-0 justify-end p-3 rounded-b border-t border-dashed">
-                        <button type="button" class="inline-block text-red-500 hover:bg-red-500 hover:text-white border border-gray-200 text-sm font-medium py-1 px-3 rounded mr-1 close" data-fc-dismiss>Close</button>
-                        <button type="submit" class="inline-block text-primary-500 hover:bg-primary-500 hover:text-white border border-gray-200 text-sm font-medium py-1 px-3 rounded">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 @push('pages-script')

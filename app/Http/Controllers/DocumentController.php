@@ -90,7 +90,7 @@ class DocumentController extends Controller
 
                 $type = $x->id;
 
-                
+
 
                 // Handle the file upload
                 $file = $request->file($inputName);
@@ -117,12 +117,9 @@ class DocumentController extends Controller
     public function destroy($id)
     {
         $doc = Document::find($id);
-
         if($doc){
-
             Storage::delete('public/document/'.$doc->doc_name);
             $doc->delete();
-
             return redirect()->route('user.ajuan.index')->with('success', 'Document berhasil dihapus');
         } else {
             return redirect()->route('user.ajuan.index')->with('error', 'Document tidak ditemukan');

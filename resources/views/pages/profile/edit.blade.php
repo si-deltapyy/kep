@@ -18,7 +18,7 @@
                                         <h4 class="font-medium">Personal Information</h4>
                                     </div><!--end card-header-->
                                     <div class="flex-auto p-4">
-                                        <form action="{{route('user.profile.update', Auth::user()->id)}}" method="post">
+                                        <form action="{{route('user.profile.update', $data->id)}}" method="post">
                                             @csrf
                                             <div class="grid md:grid-cols-12 lg:grid-cols-12">
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-3 self-center text-right mr-2">

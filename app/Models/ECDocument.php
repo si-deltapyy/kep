@@ -10,4 +10,21 @@ class ECDocument extends Model
     use HasFactory;
     public $table = 'ec_document';
     protected $guarded = ['id'];
+
+
+    public function Dummy()
+    {
+        return $this->belongsTo(Dummy::class, 'doc_group', 'id');
+    }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function logs()
+    {
+        return $this->hasMany(ECLog::class);
+    }
+
 }

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Pesan;
 use App\Models\Feedback;
+use App\Models\Submission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +18,14 @@ class FeedbackController extends Controller
      */
     public function index()
     {
+
         $pesan = Feedback::where('receiver_id', Auth::id())
+        ->when(Auth::user()->hasRole('sekertaris'), function ($query) {
+            // Tambahkan kondisi `is_review` untuk role `sekretaris`
+            return $query->whereHas('dummy', function ($subQuery) {
+                $subQuery->where('review_status', 1);
+            });
+        })
         ->get()
         ->groupBy('dummy_id')
         ->map(function ($group) {
@@ -43,6 +52,7 @@ class FeedbackController extends Controller
     public function store(Request $request)
     {
 
+
         $validated = $request->validate([
             'doc_id' => 'required|exists:document,id',
             'dummy_id' => 'required|string',
@@ -50,6 +60,7 @@ class FeedbackController extends Controller
             'message' => 'required|string',
             'receiver_id' => 'required|exists:user,id',
         ]);
+
 
         try {
 
@@ -67,6 +78,10 @@ class FeedbackController extends Controller
                 'receiver_role' => User::find($request->receiver_id)->getRoleNames()->first(),
                 'message' => $request->message,
             ]);
+
+            $updated = Submission::where('log_id', $validated['doc_id'])
+                     ->where('reviewer', Auth::id())
+                     ->update(['reviewer_status' => 'done']);
 
             return redirect()->back()->with('success', 'Message successfully assigned.');
         } catch (\Exception $e) {

@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\Validator;
 
 class ManageWebsiteController extends Controller
 {
+
+    public function index()
+    {
+
+        return view('superAdmin.setting.dashboard');
+    }
+
+
         public function update(Request $request)
         {
             // Validasi input

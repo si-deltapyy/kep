@@ -56,7 +56,7 @@ Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')
     Route::get('/manage/document-type', [SuperAdminController::class, 'manageDocumentType'])->name('manage.document-type');
     Route::get('/manage/view', [SuperAdminController::class, 'manageView'])->name('manage.view');
 
-    Route::get('/setting', [Controller::class, 'setting'])->name('setting');
+    Route::get('/setting', [ManageWebsiteController::class, 'index'])->name('setting.index');
     Route::patch('/setting/{status}', [Controller::class, 'setDownMode'])->name('setting.update');
 
 

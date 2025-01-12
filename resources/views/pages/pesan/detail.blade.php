@@ -356,7 +356,7 @@
                         data-receiver-id="{{ $pesan->Dummy->user_id ?? '' }}"
                         >
                         Forward <i class="icofont-bubble-right"></i></button>
-                    @elseif (Auth::user()->hasRole('sekre'))
+                    @elseif (Auth::user()->hasRole('sekertaris'))
                         <button
                         class="inline-block focus:outline-none text-brand-500 hover:bg-brand-500 hover:text-white bg-transparent border border-brand-200 dark:bg-transparent dark:text-brand-500
                         dark:hover:text-white dark:border-gray-700 dark:hover:bg-brand-500  text-sm font-medium py-2 px-3"

@@ -24,7 +24,7 @@ class ProfileController extends Controller
         if($data->updated_at === null){
             return redirect()->route('user.profile.edit', Auth::user()->id)->with(['Error' => 'Lengkapi Datamu']);
         }else{
-            return view('user.profile.index', compact('data', 'user'));
+            return view('pages.profile.index', compact('data', 'user'));
         }
     }
 
@@ -47,23 +47,57 @@ class ProfileController extends Controller
      * @param  mixed $id
      * @return RedirectRespons
      */
+
+
+
     public function update(Request $request, $profil): RedirectResponse
     {
-        $this->validate($request, [
-            'name'     => 'required',
-            'nik'     => 'required',
-            'no'   => 'required'
-        ]);
-
-        //get post by ID
-        $data = ProfileUser::where('user_id', $profil);
+        // Ambil data profile dan user
+        $data = ProfileUser::where('user_id', $profil)->first();
         $user = User::find($profil);
 
+        if (!$data || !$user) {
+            return redirect()->route('pages.profile.edit')->with(['Error' => 'Data Salah']);
+        }
 
-        //check if image is uploaded
-        if ($data) {
+        // Periksa permission
+        if ($user->hasPermissionTo('done-profile')) {
+            // Validasi untuk user dengan 'done-profile' permission
+            $this->validate($request, [
+                'name'         => 'required',
+                'nik'          => 'required',
+                'phone_number' => 'required',
+                'gender'       => 'required',
+                'status'       => 'required',
+                'address'      => 'required',
+                'prodi_id'     => 'required',
+            ]);
 
-            //update post with new image
+            // Update data profile
+            $data->update([
+                'name'         => $request->input('name'),
+                'nik'          => $request->input('nik'),
+                'phone_number' => $request->input('phone_number'),
+                'gender'       => $request->input('gender'),
+                'status'       => $request->input('status'),
+                'address'      => $request->input('address'),
+                'prodi_id'     => $request->input('prodi_id'),
+                'updated_at'   => now(),
+            ]);
+
+            // Update data user
+            $user->update([
+                'name' => $request->input('name'),
+            ]);
+        } else {
+            // Validasi untuk user tanpa 'done-profile' permission
+            $this->validate($request, [
+                'name' => 'required',
+                'nik'  => 'required',
+                'no'   => 'required',
+            ]);
+
+            // Update dengan logika izin
             $data->update([
                 'name'         => $request->name,
                 'nik'          => $request->nik,
@@ -72,24 +106,23 @@ class ProfileController extends Controller
                 'gender'       => $request->jl,
                 'status'       => $request->sts,
                 'address'      => $request->addr,
-                'updated_at'   => now()
+                'updated_at'   => now(),
             ]);
 
             $user->update([
-                'name' => $request->name
+                'name' => $request->name,
             ]);
 
+            // Ubah izin
             $user->revokePermissionTo('update-profile');
             $user->givePermissionTo('done-profile');
-
-        } else {
-
-            return redirect()->route('pages.profile.edit')->with(['Error' => 'Data Salah']);
         }
 
-        //redirect to index
+        // Redirect dengan pesan sukses
         return redirect()->route('dashboard')->with(['success' => 'Data Berhasil Diubah!']);
     }
+
+
 
     /**
      * Update the user's profile information.
