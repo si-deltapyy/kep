@@ -28,14 +28,14 @@
                 </div>
                 <!--end header-title-->
                 <div class="flex-auto p-4">
-                  <x-form-input action="{{ route('kppm.pengajuan.store') }}" method="POST" has-file enctype="multipart/form-data">
+                  <x-form-input action="{{ route('kppm.ec.upload', $user->id) }}" method="POST" has-file enctype="multipart/form-data">
                     <input id="title" name="id" type="text" value="{{ $data->id}}" hidden>
                     <input id="title" name="user" type="text" value="{{ $user->id }}" hidden>
                     <x-input title="Nama Pengusul " value="{{ $user->name }}" id="name" name="name" type="text" class="form-control" readonly muted/>
                     <x-input title="Judul Usulan " id="title" name="title" type="text" value="{{ $data->title }}" class="form-control" readonly muted/>
 
                     <div class="col-span-1">
-                        <x-file-upload title="Upload File" id="file" name="file" type="file" accept=".pdf" class="file-input"/><br>
+                        <x-file-upload title="Upload File" id="file" name="fileEc" type="file" accept=".pdf" class="file-input"/><br>
                     </div>
 
                     <x-button>Submit</x-button>
