@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title'); // Judul aktivitas
             $table->text('description')->nullable(); // Deskripsi aktivitas (nullable jika tidak wajib)
-            $table->enum('action_label', ['Upload Success', 'Reupload', 'Ajuan Ditolak', 'Proses Review', 'Dokumen Valid', 'Penerbitan EC', 'Ajuan Selesai', 'Pengecakan Dokumen'])->default('Upload Success'); // Label untuk aksi
+            $table->enum('action_label', ['Upload Success', 'Reupload', 'Ajuan Ditolak', 'Proses Review', 'Dokumen Valid', 'Penerbitan EC', 'Ajuan Selesai', 'Pengecakan Dokumen', 'Payment Pending', 'Payment Success'])->default('Upload Success'); // Label untuk aksi
             $table->string('action_link')->nullable(); // Link untuk aksi
             $table->timestamp('time')->useCurrent(); // Waktu aktivitas
             $table->unsignedBigInteger('doc_group'); // ID grup dokumen

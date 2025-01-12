@@ -8,6 +8,7 @@ use App\Models\Dummy;
 use App\Models\Kuisioner;
 use App\Models\LogDocument;
 use App\Models\Logs;
+use App\Models\Payment;
 use App\Models\Submission;
 use App\Models\Template;
 use App\Models\TypeAjuan;
@@ -109,10 +110,20 @@ class DocumentController extends Controller
                     'doc_group' => $group,
                     'ajuan_type' => $request->typeajuan, // Save the doc type based on the Type model
                 ]);
+
+                
             }
         }
 
-        return redirect()->route('user.ajuan.index')->with('success', 'Dokumen berhasil di');
+        Payment::create([
+            'user_id' => Auth::user()->id,
+            'group_id' => $group,
+            'payment_method' => null,
+            'payment_date' => null,
+            'path_proof' => null,
+        ]);
+
+        return redirect()->route('user.ajuan.index')->with('success', 'Berhasil Mengajukan Dokumen. Harap segera membayar biaya pengajuan.');
     }
 
 

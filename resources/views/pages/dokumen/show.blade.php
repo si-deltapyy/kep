@@ -101,6 +101,16 @@
                                                 <i data-lucide="clipboard-check" class="w-4 h-4 mr-1"></i>
                                                 {{ $log->action_label }}</span>
                                             @break
+                                        @case($log->action_label == 'Payment Success' )
+                                        <span class="bg-green-500/10 text-green-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded flex items-center">
+                                            <i data-lucide="badge-check" class="w-4 h-4 mr-1"></i>
+                                            {{ $log->action_label }}</span>
+                                            @break
+                                        @case($log->action_label == 'Payment Pending')
+                                        <span class="bg-yellow-500/10 text-yellow-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded flex items-center">
+                                            <i data-lucide="clock" class="w-4 h-4 mr-1"></i>
+                                            {{ $log->action_label }}</span>
+                                            @break
 
                                         @default
                                             

@@ -2,6 +2,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ECDocumentController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,10 @@ Route::middleware(['auth', 'verified', 'role:admin'])->name('admin.')->prefix('a
     Route::get('/ajuan/{id}/assign', [AdminController::class, 'assign'])->name('pengajuan.assign');
     Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
     Route::resource('template', TemplateController::class)->names('template');
+
+     //Payment Method
+     Route::resource('payment', PaymentController::class)->names('payment');
+     Route::post('payment/{id}/validate', [PaymentController::class, 'validatePayment'])->name('payment.validate');
 
     Route::resource('user/request', UserController::class)->names('user.request');
     Route::get('user/make-user/{user}', [UserController::class, 'makeUser'])->name('makeUser');

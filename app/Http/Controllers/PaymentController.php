@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
     public function index()
     {
-        return view('pages.payment.index');
+        $payment = Payment::all();
+        return view('pages.payment.index', compact('payment'));
     }
 
     public function create()
@@ -37,7 +39,7 @@ class PaymentController extends Controller
 
     public function edit($id)
     {
-        $payment = Payment::find($id);
+        $payment = Payment::find($id)->first();
 
         return view('pages.payment.edit', compact('payment'));
     }
@@ -45,18 +47,27 @@ class PaymentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'description' => 'required',
+            'metode' => 'required',
+            'proof' => 'required|mimes:png,jpg|max:2048',
         ]);
 
-        $payment = Payment::find($id);
-        $payment->name = $request->name;
-        $payment->price = $request->price;
-        $payment->description = $request->description;
-        $payment->save();
+        if($request->hasFile('proof')){
+            $file = $request->file('proof');
+            $fileName = Auth::user()->name.'_'. 'proof' .'.' . $file->getClientOriginalExtension();
+            $pathProof = $file->storeAs('/proof-img', $fileName,['disks' => 'save_upload']);
 
-        return redirect()->route('payment.index')->with('success', 'Payment updated successfully.');
+            $payment = Payment::find($id);
+            $payment->payment_method = $request->metode;
+            $payment->payment_status = 'waiting';
+            $payment->payment_date = now();
+            $payment->path_proof = $pathProof;
+            $payment->save();
+        } else {
+            return redirect()->back()->with(['error' => 'File Error']);
+        }
+        
+
+        return redirect()->route('user.payment.index')->with('success', 'Payment updated successfully. Waiting from Validate');
     }
 
     public function destroy($id)
@@ -65,5 +76,14 @@ class PaymentController extends Controller
         $payment->delete();
 
         return redirect()->route('payment.index')->with('success', 'Payment deleted successfully.');
-    }   
+    } 
+
+    public function validatePayment($id)
+    {
+        $payment = Payment::find($id);
+        $payment->payment_status = 'success';
+        $payment->save();
+
+        return redirect()->route('admin.payment.index')->with('success', 'Payment validated successfully.');
+    }
 }

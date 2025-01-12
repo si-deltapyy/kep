@@ -14,13 +14,15 @@ return new class extends Migration
         Schema::create('payment', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('payment_method');
-            $table->string('payment_code');
-            $table->enum('payment_status', ['pending', 'success']);
-            $table->string('payment_amount');
-            $table->string('payment_date');
-            $table->string('path_proof');
+            $table->unsignedBigInteger('group_id');
+            $table->enum('payment_method', ['transfer', 'e-wallet', 'VA'])->nullable();
+            $table->enum('payment_status', ['pending', 'success', 'waiting'])->default('pending');
+            $table->timestamp('payment_date')->nullable();
+            $table->string('path_proof')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('user')->onDelete('CASCADE');
+            $table->foreign('group_id')->references('id')->on('dummy')->onDelete('CASCADE');
         });
     }
 

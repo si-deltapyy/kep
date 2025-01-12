@@ -64,7 +64,8 @@
                         <span>Other</span>
                     </div>
 
-                    <x-navigation :route="'admin.user.request.index'" :text="'User Request'" :icon="'file-user'"/>
+                    <x-navigation :route="'admin.user.request.index'" :text="'User Request'" :icon="'user'"/>
+                    <x-navigation :route="'admin.payment.index'" :text="'Payment'" :icon="'banknote'"/>
                     <x-navigation :route="'admin.template.index'" :text="'Kelola Template'" :icon="'file'"/>
                 @endrole
 
