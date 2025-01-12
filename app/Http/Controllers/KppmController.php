@@ -40,19 +40,19 @@ class KppmController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => 'required|mimes:pdf|max:2048',
+            'fileEc' => 'required|mimes:pdf|max:2048',
         ]);
 
         $ec = ECDocument::where('doc_group',$request->id);
         // Storage::delete($ec->doc_path);
 
-        $file = $request->file('file');
+        $file = $request->file('fileEc');
         $filename = 'EC (KPPM-Signed)' . now() . '.' . $file->getClientOriginalExtension();
-        $file->storeAs('public/ecDocument', $filename);
+        $pathDoc = $file->store('ecDocument');
 
         $ec->update([
             'ec_status' => 'Signed',
-            'doc_path' => 'ecDocument/' . $filename,
+            'doc_path' => $pathDoc,
             'doc_name' => $filename,
         ]);
 

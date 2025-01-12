@@ -57,20 +57,24 @@ class ECDocumentController extends Controller
         if (Auth::user()->hasRole('kppm')) {
             // Validasi khusus untuk pengguna dengan role 'kppm'
             $request->validate([
-                'file' => 'required|mimes:pdf|max:2048'
+                'fileEc' => 'required|mimes:pdf|max:2048'
             ]);
 
-            if ($request->hasFile('file')) {
+            if ($request->hasFile('fileEc')) {
                 // Simpan file ke penyimpanan
-                $file = $request->file('file');
+                $file = $request->file('fileEc');
                 $fileName = 'Dokumen EC-' . $request->name . '-' . now()->format('Y-m-d-H-i-s') . '.pdf';
                 $pathDoc = $file->storeAs('/ecDocument', $fileName,['disks' => 'save_upload']);
 
                 // Update kolom `doc_path` jika role adalah 'kppm'
                 $doc->doc_path = $pathDoc;
+                $doc->ec_status = 'Signed';
                 $doc->save();
+            } else {
+                // Jika tidak ada file yang diunggah, kembalikan pesan error
+                return 'File tidak ditemukan';
             }
-        }
+
 
         return redirect()->route('sekertaris.ec.index');
     }
