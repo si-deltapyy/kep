@@ -65,58 +65,81 @@ class ProfileController extends Controller
         $data = ProfileUser::where('user_id', $profil);
         $user = User::find($profil);
 
-
-        //check if image is uploaded
-        if ($data) {
-
-            if ($user->hasPermissionTo('sso')){
-
-            //update post with new image
-            $data->update([
-                'name'         => $request->name,
-                'nik'          => $request->nik,
-                'phone_number' => $request->no,
-                'prodi_id'     => $request->prodi,
-                'gender'       => $request->jl,
-                'status'       => $request->sts,
-                'address'      => $request->addr,
-                'updated_at'   => now()
-            ]);
-
-            $user->update([
-                'name' => $request->name
-            ]);
-
-            $user->revokePermissionTo('update-profile');
-            $user->revokePermissionTo('sso');
-            $user->givePermissionTo('done-profile');
-            } elseif ($user->hasPermissionTo('user')){
-                $data->update([
-                    'name'         => $request->name,
-                    'nik'          => $request->nik,
-                    'phone_number' => $request->no,
-                    'univ'         => $request->univ,
-                    'prodi_luar'   => $request->prodi,
-                    'gender'       => $request->jl,
-                    'status'       => $request->sts,
-                    'address'      => $request->addr,
-                    'updated_at'   => now()
-                ]);
-    
-                $user->update([
-                    'name' => $request->name
-                ]);
-    
-                $user->revokePermissionTo('update-profile');
-                $user->revokePermissionTo('user');
-                $user->givePermissionTo('done-profile');
-            }
-
-        } else {
-
+        if (!$data || !$user) {
             return redirect()->route('pages.profile.edit')->with(['Error' => 'Data Salah']);
-        }
+        } else {
+            if ($user->hasPermissionTo('done-profile')) {
+                // Validasi untuk user dengan 'done-profile' permission
+                $this->validate($request, [
+                    'name'         => 'required',
+                    'nik'          => 'required',
+                    'phone_number' => 'required',
+                    'gender'       => 'required',
+                    'status'       => 'required',
+                    'address'      => 'required',
+                ]);
+    
+                // Update data profile
+                $data->update([
+                    'name'         => $request->input('name'),
+                    'nik'          => $request->input('nik'),
+                    'phone_number' => $request->input('phone_number'),
+                    'address'      => $request->input('address'),
+                    'updated_at'   => now(),
+                ]);
+    
+                // Update data user
+                $user->update([
+                    'name' => $request->input('name'),
+                ]);
+            } else {
+                if ($user->hasPermissionTo('sso')){
 
+                    //update post with new image
+                    $data->update([
+                        'name'         => $request->name,
+                        'nik'          => $request->nik,
+                        'phone_number' => $request->no,
+                        'prodi_id'     => $request->prodi,
+                        'gender'       => $request->jl,
+                        'status'       => $request->sts,
+                        'address'      => $request->addr,
+                        'updated_at'   => now()
+                    ]);
+        
+                    $user->update([
+                        'name' => $request->name
+                    ]);
+        
+                    $user->revokePermissionTo('update-profile');
+                    $user->revokePermissionTo('sso');
+                    $user->givePermissionTo('done-profile');
+                } elseif ($user->hasPermissionTo('user')){
+                        $data->update([
+                            'name'         => $request->name,
+                            'nik'          => $request->nik,
+                            'phone_number' => $request->no,
+                            'univ'         => $request->univ,
+                            'prodi_luar'   => $request->prodi,
+                            'gender'       => $request->jl,
+                            'status'       => $request->sts,
+                            'address'      => $request->addr,
+                            'updated_at'   => now()
+                        ]);
+            
+                        $user->update([
+                            'name' => $request->name
+                        ]);
+            
+                        $user->revokePermissionTo('update-profile');
+                        $user->revokePermissionTo('user');
+                        $user->givePermissionTo('done-profile');
+                } else{
+                    return redirect()->route('pages.profile.edit')->with(['Error' => 'Data Salah']);
+                }
+            }
+        }
+        
         //redirect to index
         return redirect()->route('dashboard')->with(['success' => 'Data Berhasil Diubah!']);
     }
