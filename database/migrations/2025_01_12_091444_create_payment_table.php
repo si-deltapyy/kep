@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reviewer', function (Blueprint $table) {
+        Schema::create('payment', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('type');
+            $table->string('payment_method');
+            $table->string('payment_code');
+            $table->enum('payment_status', ['pending', 'success']);
+            $table->string('payment_amount');
+            $table->string('payment_date');
+            $table->string('path_proof');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('CASCADE');
-            $table->foreign('type')->references('id')->on('ajuan_type')->onDelete('CASCADE');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reviewer');
+        Schema::dropIfExists('payment');
     }
 };

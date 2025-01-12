@@ -207,6 +207,7 @@ class SuperAdminController extends Controller
     // Security Function
     public function manageRole()
     {
+        
         return view('superAdmin.manageSecurity.role');
     }
 

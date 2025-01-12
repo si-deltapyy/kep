@@ -3,6 +3,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ECDocumentController;
 use App\Http\Controllers\KuisionerController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,9 @@ Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->prefix('use
         Route::resource('template', TemplateController::class)->names('template');
         Route::resource('message', MessageController::class)->names('message');
         Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
+
+        //Payment Method
+        Route::resource('payment', PaymentController::class)->names('payment');
     });
 
     Route::middleware(['permission:update-profile' , 'permission:sso'])->group(function () {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use App\Models\Dummy;
 use App\Models\ProfileUser;
+use App\Models\Submission;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -92,11 +93,23 @@ class HomeController extends Controller
                 ->where('sekertaris_id', Auth::id())
                 ->count(),
         ];
+
+        $revcount = [
+            'masuk' => Submission::where('reviewer', Auth::id())
+                ->where('reviewer_status', 'process')
+                ->count(),
+            'review' => Submission::where('reviewer', Auth::id())
+                ->where('reviewer_status', 'in review')
+                ->count(),
+            'done' => Submission::where('reviewer', Auth::id())
+                ->where('reviewer_status', 'done')
+                ->count(),
+        ];
         
         return view('dashboard',
             compact(
                 'profile', 'user', 'jumlahAjuan', 'jumlahUser',
                 'jumlahReq', 'jumlahOnReview', 'newProposal',
-                'newProposalSek', 'jumDone', 'jumOnRevSek', 'userReq', 'ajuan', 'series', 'perbaikan' , 'sekcount'));
+                'newProposalSek', 'jumDone', 'jumOnRevSek', 'userReq', 'ajuan', 'series', 'perbaikan' , 'sekcount', 'revcount'));
     }
 }

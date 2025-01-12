@@ -17,8 +17,14 @@
 
         // Add conditional action for "approved" status
         if ($doc->doc_status == "approved") {
-            $actions .= '<a href="' . route('sekertaris.ec.index', $doc->id) . '" class="px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">Proses EC</a>';
-        }else{
+            $actions .= '<button class="px-2 py-1 lg:px-4 bg-slate-100  text-gray-600 text-sm  rounded hover:bg-slate-200 border border-slate-100" disabled>Cek di menu EC Document</button>';
+        } elseif ($doc->doc_status == "on-review") {
+            $actions .= '<button class="px-2 py-1 lg:px-4 bg-slate-100  text-gray-600 text-sm  rounded hover:bg-slate-200 border border-slate-100" disabled>Sedang di Review</button>';
+        } elseif ($doc->doc_status == "disapproved") {
+            $actions .= '<button class="px-2 py-1 lg:px-4 bg-slate-100  text-gray-600 text-sm  rounded hover:bg-slate-200 border border-slate-100" disabled>Ajuan sudah ditolak</button>';
+        } elseif ($doc->doc_status == "done") {
+            $actions .= '<button class="px-2 py-1 lg:px-4 bg-slate-100  text-gray-600 text-sm  rounded hover:bg-slate-200 border border-slate-100" disabled>Ajuan selesai</button>';
+        } else{
             $actions .= '<a href="' . route('sekertaris.pengajuan.show', $doc->id) . '" class="px-2 py-1 bg-blue-500/10 border border-transparent collapse:bg-blue-100 text-blue text-sm rounded hover:bg-blue-600 hover:text-white">Cek Dokumen</a>';
         }
         return [

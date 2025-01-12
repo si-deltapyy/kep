@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Reviewer;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -64,7 +65,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make(env('USER_PASSWORD', '123')),
             
 
-        ])->assignRole('reviewer');
+        ])->assignRole('reviewer')->givePermissionTo('update-password');
 
         User::create([
             'name' => 'reviewer 2',
@@ -72,7 +73,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make(env('USER_PASSWORD', '123')),
             
 
-        ])->assignRole('reviewer');
+        ])->assignRole('reviewer')->givePermissionTo('update-password');
 
         User::create([
             'name' => 'reviewer 3',
@@ -80,7 +81,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make(env('USER_PASSWORD', '123')),
             
 
-        ])->assignRole('reviewer');
+        ])->assignRole('reviewer')->givePermissionTo('update-password');
     }
 }
 

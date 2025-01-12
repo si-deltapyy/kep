@@ -1,3 +1,44 @@
+@can('update-password')
+    <div class="modal animate-ModalSlide" id="modal-primary">
+        <div class="relative w-auto pointer-events-none sm:max-w-lg sm:my-0 sm:mx-auto z-[99] flex items-center h-[calc(100%-3.5rem)]">
+            <div class="relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-800 bg-clip-padding rounded">
+                <!-- Header Modal -->
+                <div class="flex shrink-0 items-center justify-between py-2 px-4 rounded-t border-b border-solid dark:border-gray-700 bg-slate-800">
+                    <h6 class="mb-0 leading-4 text-base font-semibold text-slate-300 mt-0" id="modalLabel">Ubah Password</h6>
+                </div>
+
+                <!-- Body Modal -->
+                <div class="relative flex-auto p-4 text-slate-600 dark:text-gray-300 leading-relaxed">
+                    <p>Harap Mengganti <strong>Password</strong> dahulu dengan syarat:</p>
+                    <li class=" text-gray-400"><i>Minimal 8 Karakter</i></li>
+                    <li class=" text-gray-400"><i>Harus ada huruf kecil dan angka</i></li>
+                    <br>
+                    <form action="{{ route('reviewer.update-password') }}" method="POST">
+                        @csrf
+                        <div class="form-group mb-4">
+                            <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password Baru</label>
+                            <input type="password"
+                                class="form-control w-full px-3 py-2 border rounded-lg dark:bg-slate-700 dark:border-gray-600 dark:text-gray-300 @error('password') is-invalid @enderror"
+                                name="password" id="password" placeholder="Masukkan Password Baru">
+                            @error('password')
+                                <span class="text-sm text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="flex justify-end p-3 rounded-b border-t border-dashed dark:border-gray-700">
+                            <button type="submit"
+                                    class="inline-block focus:outline-none text-primary-500 hover:bg-primary-500 hover:text-white bg-transparent border border-gray-200 dark:text-primary-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-primary-500 text-sm font-medium py-1 px-3 rounded">
+                                <i class="fas fa-key mr-1"></i> Ubah Password
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endcan
+
+@can('done-password')
 <div class="grid grid-cols-12 sm:grid-cols-12 md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4">
     <div class="col-span-12 sm:col-span-6 md:col-span-6 lg:col-span-3 xl:col-span-3">
         <div class="bg-white shadow-sm dark:shadow-slate-700/10 dark:bg-gray-900  rounded-md w-full relative mb-4">
@@ -117,3 +158,4 @@
         </div> <!--end inner-grid-->
     </div><!--end col-->
 </div> <!--end grid-->
+@endcan

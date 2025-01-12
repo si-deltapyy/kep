@@ -13,6 +13,7 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\Ajuan;
 use App\Models\Logs;
+use App\Models\Reviewer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
@@ -22,10 +23,28 @@ class SekertarisController extends Controller
 
     public function index(){
         $doc = Dummy::where('sekertaris_id', Auth::id())->get();
+
+        if ($doc->isEmpty()) {
+            // Jika $doc kosong, ambil tindakan (misalnya, kembalikan pesan error)
+            return redirect()->back()->with('error', 'Belum ada dokumen yang diajukan Masuk.');
+        }
+        
+        // Ambil ID dari $doc jika tidak kosong
+        $docGroup = $doc->map(function ($item) {
+            return $item->id;
+        });
+        
+        // Query hanya akan dijalankan jika $docGroup tidak kosong
         $ajuan = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
-        ->join('ajuan_type as at', 'at.id', '=', 'document.ajuan_type')
-        ->join('dummy as d', 'd.id', '=', 'document.doc_group')
-        ->where('doc_group', $doc[0]->id)->get();
+            ->join('ajuan_type as at', 'at.id', '=', 'document.ajuan_type')
+            ->join('dummy as d', 'd.id', '=', 'document.doc_group')
+            ->whereIn('doc_group', $docGroup) // Gunakan whereIn untuk array
+            ->get();
+
+
+            
+
+            // return $reviewer;
 
         return view('pages.pengajuan.sekertaris.index', compact('ajuan'));
     }
@@ -153,8 +172,8 @@ class SekertarisController extends Controller
     }
 
     public function all($id): RedirectResponse{
-        $data = Dummy::where('doc_group', $id);
-                $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
+        $data = Dummy::where('id', $id);
+        $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
                 ->where('doc_group', $id)
                 ->select( '*' , 'ld.id as id_log')
                 ->get();
@@ -164,13 +183,10 @@ class SekertarisController extends Controller
             'updated_at' => now()
         ]);
 
-        Logs::create([
-            'title' => 'Accepted',
-            'description' => 'Dokumen anda sesuai, dokumen akan segera diproses reviewer',
-            'action_label' => 'Dokumen Valid',
-            'action_link' => '',
-            'doc_group' => $id,
-        ]);
+        $idtype = $doc->map(function ($item) {
+            return $item->ajuan_type;
+        });
+
 
         $mailData = [
             'title' => 'Mail from KEP FKIP',
@@ -181,7 +197,11 @@ class SekertarisController extends Controller
         ];
 
         if ($doc) {
-            $reviewer = User::role('reviewer')->get();
+            $typeRev = Reviewer::where('type', 1)->get();
+            $idRev = $typeRev->map(function ($item) {
+                return $item->user_id;
+            });
+            $reviewer = User::whereIn('id', $idRev)->get();
 
             foreach ($doc as $d) {
                 foreach ($reviewer as $singleReviewer) {
@@ -193,6 +213,14 @@ class SekertarisController extends Controller
                 }
             }
 
+            Logs::create([
+                'title' => 'Accepted',
+                'description' => 'Dokumen anda sesuai, dokumen akan segera diproses reviewer',
+                'action_label' => 'Dokumen Valid',
+                'action_link' => '',
+                'doc_group' => $id,
+            ]);
+
             foreach ($reviewer as $singleReviewer) {
                 $reviewer_email = User::role('reviewer')
                 ->where('id', $singleReviewer->id)
@@ -201,7 +229,7 @@ class SekertarisController extends Controller
                 Mail::to($reviewer_email->email)->send(new SendMail($mailData));
             }
         }
-        return redirect()->route('admin.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Dokumen berhasil diberikan ke reviewer bidang terkait!']);
     }
 
     /**
@@ -245,7 +273,7 @@ class SekertarisController extends Controller
         ];
         Mail::to($user->email)->send(new SendMail($mailData));
 
-        return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Dokumen telah berhasil ditolak!']);
     }
     
     public function upload(Request $request, $id)

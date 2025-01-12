@@ -37,6 +37,7 @@
                         <x-navigation :route="'dashboard'" :text="'Dashboard'" :icon="'home'"/>
                         <x-navigation :route="'user.ajuan.index'" :text="'Pengajuan'" :icon="'file-input'"/>
                         <x-navigation :route="'user.ec.index'" :text="'Dokumen EC'" :icon="'files'"/>
+                        <x-navigation :route="'user.payment.index'" :text="'Payment'" :icon="'banknote'"/>
 
                         <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
                         <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
@@ -69,7 +70,7 @@
 
                 @role('reviewer')
                     <x-navigation :route="'dashboard'" :text="'Dashboard'" :icon="'home'"/>
-                    <x-navigation :route="'reviewer.pengajuan.index'" :text="'Pengajuan'" :icon="'file-user'"/>
+                    <x-navigation :route="'reviewer.pengajuan.index'" :text="'Ajuan Review'" :icon="'pen-line'"/>
                     {{-- <x-navigation :route="'reviewer.dokRev.index'" :text="'Review Dokumen'" :icon="'file'"/> --}}
                 @endrole
 
@@ -180,13 +181,13 @@
                                   Role
                               </a>
                           </li>
-                          <li class="nav-item relative block">
+                          {{-- <li class="nav-item relative block">
                               <a href="{{ route('superadmin.manage.password') }}"
                                  class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
                                   <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
                                   Password
                               </a>
-                          </li>
+                          </li> --}}
                       </ul>
                     </div>
 
