@@ -86,7 +86,7 @@
                     $actions1 = $doc->mapWithKeys(function ($doc) {
                         return [
                             $doc->id => '
-                                <a href="/storage/' . $doc->doc_path . '" target="_blank" rel="noopener noreferrer">Lihat</a>
+                                <a href="/app/' . $doc->doc_path . '" target="_blank" rel="noopener noreferrer">Lihat</a>
                         '
                         ];
                     })->toArray();
