@@ -62,13 +62,6 @@ class ProfileController extends Controller
         $data = ProfileUser::where('user_id', $profil)->first();
         $user = User::find($profil);
 
-
-        //check if image is uploaded
-        if ($data) {
-
-            if ($user->hasPermissionTo('sso')){
-
-            //update post with new image
         if (!$data || !$user) {
             return redirect()->route('pages.profile.edit')->with(['Error' => 'Data Salah']);
         }
@@ -130,31 +123,6 @@ class ProfileController extends Controller
             $user->revokePermissionTo('update-profile');
             $user->revokePermissionTo('sso');
             $user->givePermissionTo('done-profile');
-            } elseif ($user->hasPermissionTo('user')){
-                $data->update([
-                    'name'         => $request->name,
-                    'nik'          => $request->nik,
-                    'phone_number' => $request->no,
-                    'univ'         => $request->univ,
-                    'prodi_luar'   => $request->prodi,
-                    'gender'       => $request->jl,
-                    'status'       => $request->sts,
-                    'address'      => $request->addr,
-                    'updated_at'   => now()
-                ]);
-
-                $user->update([
-                    'name' => $request->name
-                ]);
-
-                $user->revokePermissionTo('update-profile');
-                $user->revokePermissionTo('user');
-                $user->givePermissionTo('done-profile');
-            }
-
-        } else {
-
-            return redirect()->route('pages.profile.edit')->with(['Error' => 'Data Salah']);
         }
 
         // Redirect dengan pesan sukses

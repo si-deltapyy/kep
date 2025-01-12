@@ -29,7 +29,8 @@ Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->prefix('use
     });
 
     Route::middleware(['permission:update-profile', 'permission:user'])->group(function () {
-        Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');});
+
     Route::middleware(['permission:update-profile'])->group(function () {
         Route::get('profile/make/{profil}', [ProfileController::class, 'edit'])->name('profile.make');
         Route::post('profile/update/{profil}', [ProfileController::class, 'update'])->name('profile.update');
