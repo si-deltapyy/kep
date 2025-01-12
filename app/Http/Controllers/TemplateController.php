@@ -39,7 +39,7 @@ class TemplateController extends Controller
         $request->validate([
             'tempName' => 'required',
             'ajuan' => 'required',
-            'tempFile' => 'required|mimes:pdf|max:2048',
+            'tempFile' => 'required|mimes:docx,doc|max:2048',
         ]);
 
         $types = TypeAjuan::find($request->ajuan);  // Fetch the same types as used in the view
@@ -58,10 +58,10 @@ class TemplateController extends Controller
                 
                 return redirect()->route('admin.template.index');
             }else{
-                return redirect()->back()->with('error', 'File not found');
+                return redirect()->back()->with(['error' => 'File not found']);
             }
         }else{
-            return redirect()->back()->with('error', 'File not found');
+            return redirect()->back()->with(['error' => 'File tidak sesuai']);
         }
         // Simpan data ke database
         
