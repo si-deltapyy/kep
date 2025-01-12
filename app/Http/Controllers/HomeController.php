@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use App\Models\Dummy;
 use App\Models\ProfileUser;
+use App\Models\Submission;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,7 @@ class HomeController extends Controller
         ])->first();
 
         $user = Dummy::where('user_id', Auth::user()->id)->get();
+
         $jumlahAjuan = Dummy::where('doc_status', 'new-proposal')
         ->count();
 
@@ -80,12 +82,34 @@ class HomeController extends Controller
             ]
         ];
 
+        $sekcount = [
+            'masuk' => Dummy::where('doc_status', 'new-proposal')
+                ->where('sekertaris_id', Auth::id())
+                ->count(),
+            'review' => Dummy::whereIn('doc_status', ['on-review','process'])
+                ->where('sekertaris_id', Auth::id())
+                ->count(),
+            'done' => Dummy::whereIn('doc_status', ['approved', 'done'])
+                ->where('sekertaris_id', Auth::id())
+                ->count(),
+        ];
 
-
+        $revcount = [
+            'masuk' => Submission::where('reviewer', Auth::id())
+                ->where('reviewer_status', 'process')
+                ->count(),
+            'review' => Submission::where('reviewer', Auth::id())
+                ->where('reviewer_status', 'in review')
+                ->count(),
+            'done' => Submission::where('reviewer', Auth::id())
+                ->where('reviewer_status', 'done')
+                ->count(),
+        ];
+        
         return view('dashboard',
             compact(
                 'profile', 'user', 'jumlahAjuan', 'jumlahUser',
                 'jumlahReq', 'jumlahOnReview', 'newProposal',
-                'newProposalSek', 'jumDone', 'jumOnRevSek', 'userReq', 'ajuan', 'series', 'perbaikan'));
+                'newProposalSek', 'jumDone', 'jumOnRevSek', 'userReq', 'ajuan', 'series', 'perbaikan' , 'sekcount', 'revcount'));
     }
 }

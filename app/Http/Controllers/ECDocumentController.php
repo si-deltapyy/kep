@@ -10,8 +10,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
+use App\Mail\SendMail;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class ECDocumentController extends Controller
@@ -34,7 +37,7 @@ class ECDocumentController extends Controller
         $fileName = 'Dokumen EC-' . $request->name . '-' . now()->format('Y-m-d-H-i-s') . '.pdf';
         // Simpan data ke database
 
-        ECDocument::updateOrCreate([
+        $doc = ECDocument::updateOrCreate([
             //Cek apakah dokumen sudah diproses
             'doc_group' => $request->id
         ],
@@ -51,7 +54,7 @@ class ECDocumentController extends Controller
             'doc_flag' => 'EC Process'
         ]);
 
-        if ($user->hasRole('kppm')) {
+        if (Auth::role('sekertaris')) {
             // Validasi khusus untuk pengguna dengan role 'kppm'
             $request->validate([
                 'file' => 'required|mimes:pdf|max:2048'
@@ -64,8 +67,8 @@ class ECDocumentController extends Controller
                 $pathDoc = $file->storeAs('ecDocument', $fileName, 'public');
 
                 // Update kolom `doc_path` jika role adalah 'kppm'
-                $document->doc_path = $pathDoc;
-                $document->save();
+                $doc->doc_path = $pathDoc;
+                $doc->save();
             }
         }
 
@@ -78,6 +81,18 @@ class ECDocumentController extends Controller
         $doc->update([
             'ec_status' => 'Distribute'
         ]);
+
+        $user = User::find($doc->user_id);
+
+        $mailData = [
+            'title' => 'Dokumen EC anda telah terbit',
+            'body' => 'Silahkan unduh dokumen EC anda di link berikut.',
+            'subject' => 'Ethical Clerance Document Published',
+            'view' => 'pages.email.sendUser',
+            'link' => 'user/ECDokumen',
+        ];
+
+        Mail::to($user->email)->send(new SendMail($mailData));
 
         return redirect()->route('admin.ec.index');
     }

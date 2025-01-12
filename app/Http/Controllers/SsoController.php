@@ -45,8 +45,17 @@ use Overtrue\LaravelSaml\Saml;
              ]
          );
 
-        $user->assignRole('user');
-        $user->givePermissionTo('waiting-acception'); 
+        
+        if ($user->hasPermissionTo('done-profile') || $user->hasPermissionTo('update-profile')) {
+            $user->revokePermissionTo('waiting-acception');
+        }else{
+            $user->assignRole('user');
+            $user->givePermissionTo('waiting-acception');
+            $user->givePermissionTo('sso');
+        }
+        
+
+        
 
 
          // Jika user ditemukan, maka loginkan user

@@ -7,6 +7,9 @@ use App\Http\Controllers\ReviewerController;
 
 
 Route::middleware(['auth', 'verified', 'role:reviewer'])->name('reviewer.')->prefix('reviewer')->group(function(){
+
+    Route::post('/update-password', [ReviewerController::class, 'updatePassword'])->name('update-password');
+
     Route::resource('pengajuan', ReviewerController::class)->names('pengajuan');
     Route::resource('dokumen/review' , DocRevController::class)->names('dokRev');
 

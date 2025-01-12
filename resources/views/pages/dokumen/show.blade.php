@@ -14,10 +14,40 @@
                     @foreach ($dummy as $d)
                         <h2 class="font-medium text-2xl font-extrabold dark:text-slate-100">
                             {{ $d->title }}
+
                         </h2>
+                        <span class="bg-yellow-500/10 text-yellow-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded flex items-center">
+                                {{ $doc->ajuan_name }}</span>
                         <p class=" position-center"><i>Tanggal Pengajuan: </i> <b>{{ \Carbon\Carbon::parse($d->created_at)->translatedFormat('l, j F Y, H:i')}}</b></p><br><br>
 
                     @endforeach
+                    {{-- buatkan foreach log disini dan auto generate ketika ada database baru --}}
+
+                    <!-- Loop Through Logs -->
+                    {{-- <div class="relative">
+                        @foreach ($logs as $index => $log)
+                            <div class="relative flex items-start mb-6">
+                                <!-- Icon Wrapper -->
+                                <div class="z-10 flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full dark:bg-blue-700 relative">
+                                    @if (!$loop->first)
+                                        <!-- Garis atas -->
+                                        <span class="absolute top-0 left-1/2 w-[2px] h-1/2 bg-gray-300 dark:bg-gray-600 transform -translate-x-1/2"></span>
+                                    @endif
+                                    @if (!$loop->last)
+                                        <!-- Garis bawah -->
+                                        <span class="absolute bottom-0 left-1/2 w-[2px] h-1/2 bg-gray-300 dark:bg-gray-600 transform -translate-x-1/2"></span>
+                                    @endif
+                                </div>
+
+                                <!-- Log Content -->
+                                <div class="ml-6">
+                                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100">{{ $log->title }}</h3>
+                                    <p class="text-sm text-gray-600 dark:text-gray-300">{{ $log->description }}</p>
+                                    <span class="bg-gray-500/10 text-gray-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded ">{{ \Carbon\Carbon::parse($log->time)->translatedFormat('l, j F Y, H:i') }}</span>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div> --}}
                 {{-- buatkan foreach log disini dan auto generate ketika ada database baru --}}
 
                 <!-- Loop Through Logs -->
@@ -100,6 +130,16 @@
                                             <span class="bg-gray-500/10 text-gray-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded flex items-center">
                                                 <i data-lucide="clipboard-check" class="w-4 h-4 mr-1"></i>
                                                 {{ $log->action_label }}</span>
+                                            @break
+                                        @case($log->action_label == 'Payment Success' )
+                                        <span class="bg-green-500/10 text-green-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded flex items-center">
+                                            <i data-lucide="badge-check" class="w-4 h-4 mr-1"></i>
+                                            {{ $log->action_label }}</span>
+                                            @break
+                                        @case($log->action_label == 'Payment Pending')
+                                        <span class="bg-yellow-500/10 text-yellow-500 text-[11px] font-medium mr-1 px-2.5 py-0.5 rounded flex items-center">
+                                            <i data-lucide="clock" class="w-4 h-4 mr-1"></i>
+                                            {{ $log->action_label }}</span>
                                             @break
                                         @default
                                     @endswitch

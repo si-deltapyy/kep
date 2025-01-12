@@ -47,10 +47,12 @@ Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')
     // Change Password
     Route::get('/change/password', [SuperAdminController::class, 'changePassword'])->name('change.password');
 
-    // Manage Role
+    // Manage Security
     Route::get('/manage/role', [SuperAdminController::class, 'manageRole'])->name('manage.role');
     Route::get('/manage/permission', [SuperAdminController::class, 'managePermission'])->name('manage.permission');
     Route::get('/manage/password', [SuperAdminController::class, 'managePassword'])->name('manage.password');
+
+    //Manage data
     Route::get('/manage/prodi', [SuperAdminController::class, 'manageProdi'])->name('manage.prodi');
     Route::get('/manage/type-ajuan', [SuperAdminController::class, 'manageTypeAjuan'])->name('manage.type-ajuan');
     Route::get('/manage/document-type', [SuperAdminController::class, 'manageDocumentType'])->name('manage.document-type');

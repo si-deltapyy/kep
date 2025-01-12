@@ -24,16 +24,17 @@ class ReviewerController extends Controller
         return view('pages.pengajuan.reviewer.index', compact('doc'));
     }
 
-    public function show(Int $id){
+    public function show(Int $id): RedirectResponse{
         $doc = Document::where('doc_group', $id)->get();
         // $sub = Submission::where('reviewer', Auth::id())->with(
         //         'logDocument',
         //         'Dummy',
         //     )->get();
 
-        $sub = Dummy::find($id);
+        $dum = Dummy::find($id);
+        $sub = Submission::where('doc_group', $id)->get();
 
-        $sub->update([
+        $dum->update([
             'doc_flag' => 'In Review',
         ]);
 
@@ -90,6 +91,32 @@ class ReviewerController extends Controller
 
     public function destroy(Int $doc){
 
+    }
+
+    public function updatePassword(Request $request): RedirectResponse{
+
+        $id = Auth::user()->id; // Get the authenticated user id
+        $user = User::find($id);
+
+        $request->validate([
+            'password' => 'required|min:8|regex:/[0-9]/|regex:/[a-z]/',
+        ], [
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password harus memiliki minimal 8 karakter.',
+            'password.regex' => 'Password harus mengandung angka dan huruf kecil.',
+        ]);
+
+
+        $user->update([
+            'password' => bcrypt($request->password)
+        ]);
+
+        $user->save();
+
+        $user->revokePermissionTo('update-password');
+        $user->givePermissionTo('done-password');
+
+        return redirect()->route('dashboard');
     }
 
 

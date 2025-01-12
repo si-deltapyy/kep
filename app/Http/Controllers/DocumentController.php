@@ -8,8 +8,10 @@ use App\Models\Dummy;
 use App\Models\Kuisioner;
 use App\Models\LogDocument;
 use App\Models\Logs;
+use App\Models\Payment;
 use App\Models\Submission;
 use App\Models\Template;
+use App\Models\TypeAjuan;
 use App\Models\TypeDoc;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,13 +36,15 @@ class DocumentController extends Controller
 
     public function create(){
         $type = TypeDoc::all();
+        $ajuan = TypeAjuan::all();
 
-        return view('pages.dokumen.user.create', compact('type'));
+        return view('pages.dokumen.user.create', compact('type', 'ajuan'));
     }
 
     public function show(Int $id){
         $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
-        ->where('doc_group', $id)->get();
+        ->join('ajuan_type as at', 'at.id', '=', 'document.ajuan_type')
+        ->where('doc_group', $id)->first();
         $dummy = Dummy::where('id', $id)
         ->get();
 
@@ -96,7 +100,6 @@ class DocumentController extends Controller
                 $file = $request->file($inputName);
                 $fileName = Auth::user()->name.'_'.$x->name .'_'. $group .'.' . $file->getClientOriginalExtension();
                 $pathDoc = $file->storeAs('/document', $fileName,['disks' => 'save_upload']); // Menggunakan timestamp untuk nama unik
-                // $pathDoc = $file->storeAs('document', 'berkas-'.$group.'-'.$fileName, 'public'); // Store the file in the 'public/documents' directory
 
                 // Save file information in the database
                 $docu = Document::create([
@@ -105,12 +108,22 @@ class DocumentController extends Controller
                     'doc_path' => $pathDoc,
                     'doc_type' => $type ,
                     'doc_group' => $group,
-                    'ajuan_type' => 2, // Save the doc type based on the Type model
+                    'ajuan_type' => $request->typeajuan, // Save the doc type based on the Type model
                 ]);
+
+                
             }
         }
 
-        return redirect()->route('user.ajuan.index')->with('success', 'Dokumen berhasil di');
+        Payment::create([
+            'user_id' => Auth::user()->id,
+            'group_id' => $group,
+            'payment_method' => null,
+            'payment_date' => null,
+            'path_proof' => null,
+        ]);
+
+        return redirect()->route('user.ajuan.index')->with('success', 'Berhasil Mengajukan Dokumen. Harap segera membayar biaya pengajuan.');
     }
 
 

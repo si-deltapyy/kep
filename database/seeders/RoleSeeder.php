@@ -23,8 +23,8 @@ class RoleSeeder extends Seeder
         Role::Create([ 'name' => 'user']);
         Role::Create([ 'name' => 'guest']);
 
-        Permission::create(['name' => 'submission']);
-        Permission::create(['name' => 'resubmission']);
+        Permission::create(['name' => 'sso']);
+        Permission::create(['name' => 'user']);
         Permission::create(['name' => 'approved']);
         Permission::create(['name' => 'approved-with']);
         Permission::create(['name' => 'edit-data']);

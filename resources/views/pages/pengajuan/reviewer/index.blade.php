@@ -16,9 +16,9 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
 
         if ($doc->doc_flag == "In Review" && $doc->review_status == "0") {
             $actions .= '
-            <a href="#" class="px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white" onclick="return false;" style="color: gray; cursor: not-allowed;">Waiting for Response</a>
+            <a href="#" class="px-2 py-1 bg-gray-500/10 border border-transparent collapse:bg-gray-100 text-gray text-sm rounded onclick="return false;" style="color: gray; cursor: not-allowed;">Waiting for Response</a>
             <a href="' . route('reviewer.dokRev.pils', $doc->id) . '" class="px-2 py-1 bg-blue-500/10 border border-transparent collapse:bg-blue-100 text-blue text-sm rounded hover:bg-blue-600 hover:text-white">
-                    Lanjutkan Review</a>
+                    Lanjutkan Review </a>
             ';
         }
         elseif ($doc->review_status == "1") {
@@ -75,6 +75,31 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
 @endsection
 
 @section('content')
+@if (session('success'))
+    <div id="errorAlert" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md shadow-lg mb-4 relative" role="alert">
+        <div class="flex items-center">
+            <div class="mr-3">
+                <span data-lucide="badge-check" class="w-6 h-6 text-green-500"></span>
+            </div>
+            <div>
+                <p class="font-bold">Success</p>
+                <p>{{ session('success') }}</p>
+            </div>
+        </div>
+        <button type="button" onclick="closeAlert('errorAlert')" class="absolute top-2 right-2 text-green-500 hover:text-green-700 focus:outline-none">
+            <span data-lucide="x" class="w-5 h-5"></span>
+        </button>
+    </div>
+
+    <script>
+        function closeAlert(id) {
+            const alert = document.getElementById(id);
+            if (alert) {
+                alert.style.display = 'none';
+            }
+        }
+    </script>
+@endif
 
 <div class="grid grid-cols-1 p-0 md:p-4">
     <div class="sm:-mx-6 lg:-mx-8">

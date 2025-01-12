@@ -1,23 +1,30 @@
  @php
  // Data
-    $head1 = ['ID', 'Usulan', 'Status'];
-    $data1 = $doc->filter(function ($docs) {
+    $head1 = ['ID', 'Usulan', 'Type Ajuan', 'Status'];
+    $data1 = $ajuan->filter(function ($docs) {
         return $docs->doc_flag !== 'EC Procces';
     })->map(function ($docs) {
         return [
             'id' => $docs->id,
             'Judul Usulan' => $docs->title,
+            'Type Ajuan' => $docs->ajuan_name,
             'Status' => $docs->doc_status,
         ];
     });
 
-    $actions1 = $doc->mapWithKeys(function ($doc) {
+    $actions1 = $ajuan->mapWithKeys(function ($doc) {
     $actions = '';
 
         // Add conditional action for "approved" status
         if ($doc->doc_status == "approved") {
-            $actions .= '<a href="' . route('sekertaris.ec.index', $doc->id) . '" class="px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">Proses EC</a>';
-        }else{
+            $actions .= '<button class="px-2 py-1 lg:px-4 bg-slate-100  text-gray-600 text-sm  rounded hover:bg-slate-200 border border-slate-100" disabled>Cek di menu EC Document</button>';
+        } elseif ($doc->doc_status == "on-review") {
+            $actions .= '<button class="px-2 py-1 lg:px-4 bg-slate-100  text-gray-600 text-sm  rounded hover:bg-slate-200 border border-slate-100" disabled>Sedang di Review</button>';
+        } elseif ($doc->doc_status == "disapproved") {
+            $actions .= '<button class="px-2 py-1 lg:px-4 bg-slate-100  text-gray-600 text-sm  rounded hover:bg-slate-200 border border-slate-100" disabled>Ajuan sudah ditolak</button>';
+        } elseif ($doc->doc_status == "done") {
+            $actions .= '<button class="px-2 py-1 lg:px-4 bg-slate-100  text-gray-600 text-sm  rounded hover:bg-slate-200 border border-slate-100" disabled>Ajuan selesai</button>';
+        } else{
             $actions .= '<a href="' . route('sekertaris.pengajuan.show', $doc->id) . '" class="px-2 py-1 bg-blue-500/10 border border-transparent collapse:bg-blue-100 text-blue text-sm rounded hover:bg-blue-600 hover:text-white">Cek Dokumen</a>';
         }
         return [

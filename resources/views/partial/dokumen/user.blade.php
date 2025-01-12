@@ -1,3 +1,29 @@
+@if (session('success'))
+    <div id="errorAlert" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-md shadow-lg mb-4 relative" role="alert">
+        <div class="flex items-center">
+            <div class="mr-3">
+                <span data-lucide="badge-check" class="w-6 h-6 text-green-500"></span>
+            </div>
+            <div>
+                <p class="font-bold">Success</p>
+                <p>{{ session('success') }}</p>
+            </div>
+        </div>
+        <button type="button" onclick="closeAlert('errorAlert')" class="absolute top-2 right-2 text-green-500 hover:text-green-700 focus:outline-none">
+            <span data-lucide="x" class="w-5 h-5"></span>
+        </button>
+    </div>
+
+    <script>
+        function closeAlert(id) {
+            const alert = document.getElementById(id);
+            if (alert) {
+                alert.style.display = 'none';
+            }
+        }
+    </script>
+@endif
+
 <a href="javascript:void(0);"
    onclick="showModal()"
    class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">

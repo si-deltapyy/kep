@@ -62,8 +62,8 @@
                                 <a href="{{route('messages.show', $p->dummy_id)}}">
                                     <div class="text-center">
                                         <i class="icofont-file-alt text-slate-500 text-4xl"></i>
-                                        <h6 class="truncate font-medium dark:text-slate-300 text-sm">{{$p->Document->doc_name}}</h6>
-                                        <small class="text-slate-400">Tanggal  : {{$p->created_at}}</small>
+                                        <h6 class="truncate font-medium dark:text-slate-300 text-sm">{{$p->Dummy->title}}</h6>
+                                        <small class="text-slate-400">Tanggal  : {{$p->Dummy->created_at}}</small>
                                     </div>
                                 </a>
                             </div>

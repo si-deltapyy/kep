@@ -7,6 +7,7 @@ use App\Models\Template;
 use App\Models\TypeAjuan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TemplateController extends Controller
 {
@@ -38,15 +39,15 @@ class TemplateController extends Controller
         $request->validate([
             'tempName' => 'required',
             'ajuan' => 'required',
-            'tempFile' => 'required|mimes:pdf|max:2048',
+            'tempFile' => 'required|mimes:docx,doc|max:2048',
         ]);
 
         $types = TypeAjuan::find($request->ajuan);  // Fetch the same types as used in the view
 
         if ($request->hasFile('tempFile')) {
             $file = $request->file('tempFile');
-            $fileName = 'Template'.'-'. $types->ajuan_name . '.' . $file->getClientOriginalExtension();
-            $pathDoc = $file->storeAs('template', $fileName , 'public'); // Simpan di 'storage/app/public/template'
+            $fileName = 'Template'.'-'. $types->ajuan_name . '-' . $request->tempName . '.' . $file->getClientOriginalExtension();
+            $pathDoc = $file->storeAs('/template', $fileName ,['disks' => 'save_upload']); // Simpan di 'storage/app/public/template'
 
             if ($pathDoc > 0) {// Simpan di 'storage/app/public/template'
                 Template::create([
@@ -57,10 +58,10 @@ class TemplateController extends Controller
                 
                 return redirect()->route('admin.template.index');
             }else{
-                return redirect()->back()->with('error', 'File not found');
+                return redirect()->back()->with(['error' => 'File not found']);
             }
         }else{
-            return redirect()->back()->with('error', 'File not found');
+            return redirect()->back()->with(['error' => 'File tidak sesuai']);
         }
         // Simpan data ke database
         
@@ -103,9 +104,14 @@ class TemplateController extends Controller
         $temp = Template::find($id);
 
         if ($request->hasFile('tempFile')) {
+
+            if ($temp->template_path && Storage::disk('save_upload')->exists($temp->template_path)) {
+                Storage::disk('save_upload')->delete($temp->template_path);
+            }
+
             $file = $request->file('tempFile');
             $fileName = 'Template'.'-'. $types->ajuan_name . '.' . $file->getClientOriginalExtension();
-            $pathDoc = $file->storeAs('template', $fileName , 'public'); // Simpan di 'storage/app/public/template'
+            $pathDoc = $file->storeAs('/template', $fileName,['disks' => 'save_upload']); // Simpan di 'storage/app/public/template'
 
             if ($pathDoc > 0) {// Simpan di 'storage/app/public/template'
                 $temp->update([
