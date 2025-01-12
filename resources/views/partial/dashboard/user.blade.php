@@ -6,12 +6,37 @@
     <p>Tunggu 1x24 Jam atau lebih cepat!</p>
 </div>
 @endcan
+
+{{-- Alert Untuk Update profile --}}
+@if(session('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative alert" role="alert">
+        <span class="block sm:inline">{{ session('success') }}</span>
+        <button type="button" role="button" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <title>Close</title>
+                <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 00-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 101.414 1.414L10 11.414l2.934 2.934a1 1 0 101.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" />
+            </svg>
+        </button>
+    </div>
+@endif
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.alert [role="button"]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            this.closest('.alert').remove();
+        });
+        });
+    });
+</script>
+
+
 @can('update-profile')
 <div class="my-4">
     <h5 class="text-xxl font-semibold text-slate-700 dark:text-gray-400 mb-4">
     Harap Lengkapi Profil Dahulu !
     </h5>
-    <a href="{{route('user.profile.index', Auth::user()->id)}}" class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
+    <a href="{{route('user.profile.make', Auth::user()->id)}}" class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
         <i class="ti ti-plus me-1"></i>
         Update Profile
     </a>
@@ -22,11 +47,21 @@
     <div class="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-4 xl:col-span-3">
         <div class="">
             <div class="text-center">
-            <img
-                src="assets/images/users/male.jpg"
-                alt=""
-                class="rounded-full mx-auto inline-block"
-            />
+                @if ($profile->gender == 'laki-laki')
+                <img
+                    src="{{asset('assets/images/users/male.jpg')}}"
+                    alt=""
+                    class="rounded-full mx-auto inline-block"
+                />
+                @else
+                    <img
+                    src="{{asset('assets/images/users/female.jpg')}}"
+                    alt=""
+                    class="rounded-full mx-auto inline-block"
+                />
+                @endif
+
+
             <div class="my-4">
                 <h5
                 class="text-xxl font-semibold text-slate-700 dark:text-gray-400"

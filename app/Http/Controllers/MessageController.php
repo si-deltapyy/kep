@@ -49,7 +49,7 @@ class MessageController extends Controller
     }
 
     /**
-     * Store a newly created message in storage.
+     * Menyimpan Pesan untuk setiap dokumen yang telah direview
      */
 
     public function store(Request $request)
@@ -74,6 +74,7 @@ class MessageController extends Controller
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+
 
             return redirect()->back()->with('success', 'Message successfully assigned.');
         } catch (\Exception $e) {

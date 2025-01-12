@@ -107,6 +107,7 @@ class SekertarisController extends Controller
             'doc_flag' => 'Progress',
         ]);
 
+
         $mailData = [
             'title' => 'Mail from KEP FKIP',
             'body' => 'This is for testing email using smtp.',
@@ -275,7 +276,7 @@ class SekertarisController extends Controller
 
         return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Dokumen telah berhasil ditolak!']);
     }
-    
+
     public function upload(Request $request, $id)
     {
         // Ambil data

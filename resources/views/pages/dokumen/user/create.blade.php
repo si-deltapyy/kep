@@ -38,7 +38,7 @@
                     </select>
                     @foreach ($type as $input)
                     <div class="col-span-1">
-                        <x-file-upload title="Upload {{$input->name}}: " type="file" id="doc{{$input->id}}" name="doc{{$input->id}}" class="file-input" accept=".docx, .pdf, .doc"/><br>
+                        <x-file-upload title="Upload {{$input->name}}: " type="file" id="doc{{$input->id}}" name="doc{{$input->id}}" class="file-input" accept=".pdf"/><br>
                     </div>
                      @endforeach
                     <x-button>Submit</x-button>
@@ -51,22 +51,33 @@
             <!--end col-->
           </div>
           <script>
-           document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const fileInputs = document.querySelectorAll('.file-input');
+                const maxSize = 2 * 1048576; // Batas ukuran file dalam bytes (2MB)
 
+                // Sembunyikan semua input file kecuali yang pertama
                 fileInputs.forEach(input => {
                     input.style.display = 'none';
                 });
 
-                // Display the first file input by default
                 if (fileInputs.length > 0) {
                     fileInputs[0].style.display = 'block';
                 }
 
-                // Show the next file input when a file is selected
+                // Tambahkan event listener untuk setiap input file
                 fileInputs.forEach((input, index) => {
-                    input.addEventListener('change', function() {
+                    input.addEventListener('change', function () {
                         if (this.files.length > 0) {
+                            const file = this.files[0];
+
+                            // Validasi ukuran file
+                            if (file.size > maxSize) {
+                                alert(`File terlalu besar. Ukuran maksimal adalah ${maxSize / 1048576}MB.`);
+                                this.value = ''; // Reset input file
+                                return; // Hentikan eksekusi
+                            }
+
+                            // Tampilkan input file berikutnya jika ada
                             if (fileInputs[index + 1]) {
                                 fileInputs[index + 1].style.display = 'block';
                             }
@@ -75,4 +86,5 @@
                 });
             });
         </script>
+
 @endsection

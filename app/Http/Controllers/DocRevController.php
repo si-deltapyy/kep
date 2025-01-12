@@ -51,13 +51,28 @@ class DocRevController extends Controller
     public function pils($id)
     {
         $doc = Document::where('doc_group', $id)->with('Dummy')->get();
-        $sub = Submission::where('reviewer', Auth::id())->with(
-                    'logDocument',
-                    'Dummy',
-                )->where('reviewer_status', 'in review')
-                ->get();
+        // $sub = Submission::where('reviewer', Auth::id())->with(
+        //             'logDocument',
+        //             'Dummy',
+        //         )->where('reviewer_status', 'in review')
+        //         ->get();
 
-        return view('pages.review.index', compact('doc', 'sub'));
+
+        //Cek apakah semua dokumen telah direview
+        $docGroupId = $doc->first()->doc_group;
+        $allDone = Submission::where('doc_group', $docGroupId)
+        ->where('reviewer', auth()->id())
+        ->get()
+        ->every(function ($submission) {
+            return $submission->reviewer_status === 'done';
+        });
+        //Variabel untuk cek reviewer_status di view
+        $submissionStatuses = Submission::whereIn('log_id', $doc->pluck('id'))
+        ->where('reviewer', auth()->id())
+        ->get()
+        ->pluck('reviewer_status', 'log_id');
+
+        return view('pages.review.index', compact('doc', 'submissionStatuses', 'id', 'allDone'));
     }
 
 

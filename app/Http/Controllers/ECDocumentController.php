@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dummy;
+use App\Models\ECLog;
 use App\Models\Document;
 use App\Models\ECDocument;
 use Illuminate\Http\Request;
@@ -117,43 +118,72 @@ class ECDocumentController extends Controller
 
     }
 
+    //Preview Role Sekertaris
     public function show($id)
-{
-    $doc = Document::find($id);
+    {
+        $doc = Document::find($id);
 
-    $data = [
-        'nama' => $doc->User->name ?? 'Tidak ada nama pengguna',
-        'judul' => $doc->Dummy->title ?? 'Tidak ada judul dokumen',
-        'tanggal' => Carbon::now()->translatedFormat('j F, Y'),
-    ];
+        $data = [
+            'nama' => $doc->User->name ?? 'Tidak ada nama pengguna',
+            'judul' => $doc->Dummy->title ?? 'Tidak ada judul dokumen',
+            'tanggal' => Carbon::now()->translatedFormat('j F, Y'),
+        ];
 
 
-    $pdf = Pdf::loadView('pages.ec.preview', ['data' => $data])
-        ->setOption('isRemoteEnabled', true)
-        ->setOption('enable_remote', true);
+        $pdf = Pdf::loadView('pages.ec.preview', ['data' => $data])
+            ->setOption('isRemoteEnabled', true)
+            ->setOption('enable_remote', true);
 
-    return $pdf->stream('dokumen-ec.pdf');
-}
+        return $pdf->stream('dokumen-ec.pdf');
+    }
 
-public function downloadPDF($id)
-{
-    $doc = ECDocument::find($id);
-    $doc->signed_at = Carbon::now();
-    $doc->save();
-    $data = [
-        'nama' => $doc->User->name ?? 'Tidak ada nama pengguna',
-        'judul' => $doc->Dummy->title ?? 'Tidak ada judul dokumen',
-        'ethical_number' => $doc->ethical_number ?? 'Ethical Number Belum Terbit',
-        'signed_date' => $doc->signed_at ?? '......',
-        'tanggal' => $doc->Dummy->proceed_at ?? '......',
-    ];
 
-    $pdf = Pdf::loadView('pages.ec.preview', ['data' => $data])
-        ->setOption('isRemoteEnabled', true)
-        ->setOption('enable_remote', true);
+    //Preview Khusus Role Admin dan KPPM
+    public function previewPDF($id)
+    {
+        $doc = ECDocument::find($id);
+        $data = [
+            'nama' => $doc->User->name ?? 'Tidak ada nama pengguna',
+            'judul' => $doc->Dummy->title ?? 'Tidak ada judul dokumen',
+            'ethical_number' => $doc->ethical_number ?? 'Ethical Number Belum Terbit',
+            'signed_date' => $doc->signed_at ?? '......',
+            'tanggal' => $doc->Dummy->ec_proceed_at ?? '......',
+        ];
 
-    return $pdf->download('dokumen-ec.pdf');
-}
+        $pdf = Pdf::loadView('pages.ec.preview', ['data' => $data])
+            ->setOption('isRemoteEnabled', true)
+            ->setOption('enable_remote', true);
+
+            return $pdf->stream('dokumen-ec.pdf');
+    }
+
+    public function downloadPDF($id)
+    {
+        $doc = ECDocument::find($id);
+        $doc->signed_at = Carbon::now();
+        $doc->save();
+        $data = [
+            'nama' => $doc->User->name ?? 'Tidak ada nama pengguna',
+            'judul' => $doc->Dummy->title ?? 'Tidak ada judul dokumen',
+            'ethical_number' => $doc->ethical_number ?? 'Ethical Number Belum Terbit',
+            'signed_date' => $doc->signed_at ?? '......',
+            'tanggal' => $doc->Dummy->ec_proceed_at ?? '......',
+        ];
+
+        $pdf = Pdf::loadView('pages.ec.preview', ['data' => $data])
+            ->setOption('isRemoteEnabled', true)
+            ->setOption('enable_remote', true);
+
+        return $pdf->download('dokumen-ec.pdf');
+    }
+
+
+    public function log($id)
+    {
+        $dummy = Dummy::where('id', $id)->get();
+        $logs = ECLog::where('ec_id', $id)->get();
+        return view('pages.ec.logs-show', compact('dummy', 'logs'));
+    }
 
 
 }

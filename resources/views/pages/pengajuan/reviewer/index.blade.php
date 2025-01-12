@@ -14,11 +14,16 @@ $data1 = $doc->map(function($doc) {
 $actions1 = $doc->mapWithKeys(function ($doc) {
         $actions = '';
 
-        if ($doc->doc_flag == "In Review") {
+        if ($doc->doc_flag == "In Review" && $doc->review_status == "0") {
             $actions .= '
             <a href="#" class="px-2 py-1 bg-gray-500/10 border border-transparent collapse:bg-gray-100 text-gray text-sm rounded onclick="return false;" style="color: gray; cursor: not-allowed;">Waiting for Response</a>
             <a href="' . route('reviewer.dokRev.pils', $doc->id) . '" class="px-2 py-1 bg-blue-500/10 border border-transparent collapse:bg-blue-100 text-blue text-sm rounded hover:bg-blue-600 hover:text-white">
                     Lanjutkan Review </a>
+            ';
+        }
+        elseif ($doc->review_status == "1") {
+            $actions .= '
+            done bang
             ';
         }
         else{

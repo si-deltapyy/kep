@@ -13,6 +13,10 @@ class Submission extends Model
     public $table = 'submission';
     protected $guarded = ['id'];
 
+    protected $fillable = [
+        'log_id', 'reviewer', 'reviewer_status', 'doc_group'
+    ];
+
     public function log_id()
     {
         return $this->hasOne(LogDocument::class, 'id');

@@ -19,8 +19,8 @@ class ReviewerController extends Controller
 
         $id = Submission::select('doc_group')->where('reviewer', Auth::id());
         $doc = Dummy::whereIn('id', $id)->get();
-        
-        
+
+
         return view('pages.pengajuan.reviewer.index', compact('doc'));
     }
 
@@ -38,9 +38,11 @@ class ReviewerController extends Controller
             'doc_flag' => 'In Review',
         ]);
 
-        $sub->update([
-            'reviewer_status' => 'In Review',
-        ]);
+        Submission::where('doc_group', $sub->id)
+          ->where('reviewer', Auth::id())
+          ->where('reviewer_status', 'process')
+          ->update(['reviewer_status' => 'in review']);
+
 
         Logs::create([
             'title' => 'Review Dokumen',
@@ -49,8 +51,25 @@ class ReviewerController extends Controller
             'action_link' => '',
             'doc_group' => $id,
         ]);
-        
-        return redirect()->route('reviewer.pengajuan.index')->with(['success' => 'Dokumen siap untuk direview. Silahkan berikan feedback']);
+
+        //Cek apakah semua dokumen telah direview
+        $docGroupId = $doc->first()->doc_group;
+        $allDone = Submission::where('doc_group', $docGroupId)
+        ->where('reviewer', auth()->id())
+        ->get()
+        ->every(function ($submission) {
+            return $submission->reviewer_status === 'done';
+        });
+
+        //Variabel untuk cek reviewer_status di view
+
+        $submissionStatuses = Submission::whereIn('log_id', $doc->pluck('id'))
+        ->where('reviewer', auth()->id())
+        ->get()
+        ->pluck('reviewer_status', 'log_id');
+
+
+        return view('pages.review.index', compact('doc', 'submissionStatuses', 'id', 'allDone'));
     }
 
     /**
@@ -100,5 +119,27 @@ class ReviewerController extends Controller
         return redirect()->route('dashboard');
     }
 
-    
+
+    public function finishReview($dummyId)
+{
+    // Temukan dummy berdasarkan ID
+    $dummy = Dummy::find($dummyId);
+
+    // Pastikan data dummy ditemukan
+    if (!$dummy) {
+        return redirect()->back()->with('error', 'Data not found.');
+    }
+
+    // Langsung perbarui review_status menjadi selesai (1)
+    $dummy->doc_flag = 'Feedback Review';
+    $dummy->review_status = 1;
+    $dummy->save();
+
+    // Redirect ke halaman reviewer index dengan pesan sukses
+    return redirect()->route('reviewer.pengajuan.index')->with('success', 'Review finished successfully.');
+}
+
+
+
+
 }

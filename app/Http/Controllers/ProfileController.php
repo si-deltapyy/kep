@@ -24,7 +24,7 @@ class ProfileController extends Controller
         if($data->updated_at === null){
             return redirect()->route('user.profile.edit', Auth::user()->id)->with(['Error' => 'Lengkapi Datamu']);
         }else{
-            return view('user.profile.index', compact('data', 'user'));
+            return view('pages.profile.index', compact('data', 'user'));
         }
     }
 
@@ -40,7 +40,7 @@ class ProfileController extends Controller
             }else{
                 return view('pages.profile.edit', compact('data', 'prodi'));
             }
-            
+
 
         }else{
 
@@ -53,16 +53,13 @@ class ProfileController extends Controller
      * @param  mixed $id
      * @return RedirectRespons
      */
+
+
+
     public function update(Request $request, $profil): RedirectResponse
     {
-        $this->validate($request, [
-            'name'     => 'required',
-            'nik'     => 'required',
-            'no'   => 'required'
-        ]);
-
-        //get post by ID
-        $data = ProfileUser::where('user_id', $profil);
+        // Ambil data profile dan user
+        $data = ProfileUser::where('user_id', $profil)->first();
         $user = User::find($profil);
 
         if (!$data || !$user) {
@@ -143,6 +140,8 @@ class ProfileController extends Controller
         //redirect to index
         return redirect()->route('dashboard')->with(['success' => 'Data Berhasil Diubah!']);
     }
+
+
 
     /**
      * Update the user's profile information.

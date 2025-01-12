@@ -5,6 +5,19 @@
 
 @section('content')
 
+@push('pages-style')
+<link rel="stylesheet" href="{{asset('assets/libs/mobius1-selectr/selectr.min.css')}}">
+
+@endpush
+
+@push('pages-script')
+<script src="{{asset('assets/libs/mobius1-selectr/selectr.min.js')}}"></script>
+<script>
+     new Selectr('#multiSelect',{
+     multiple: true
+ });
+</script>
+@endpush
 <div
             class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4 mb-4"
           >
@@ -28,6 +41,7 @@
                 </div>
                 <!--end header-title-->
                 <div class="flex-auto p-4">
+
                   <x-form-input action="{{route('sekertaris.pengajuan.update', $dummy->id)}}" method="post">
                     @csrf
                     @method('PUT')
@@ -35,19 +49,15 @@
                         <label for="review" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Pilih Reviewer
                         </label>
-                        <select name="review[]" id="review" multiple
-                            class="block w-full py-2 px-3 text-sm border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option value="" disabled>-- Pilih Reviewer --</option>
+                        <select name="review[]"  multiple id="multiSelect" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-1 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700">
                             @if ($reviewer && count($reviewer) > 0)
-                                @foreach ($reviewer as $x)
-                                    <option value="{{ $x->id }}">{{ $x->name }}</option>
-                                @endforeach
-                            @else
-                                <option value="" disabled>Reviewer tidak tersedia</option>
-                            @endif
+                                    @foreach ($reviewer as $x)
+                                        <option value="{{ $x->id }}">{{ $x->name }}</option>
+                                    @endforeach
+                                @else
+                                    <option value="" disabled>Reviewer tidak tersedia</option>
+                                @endif
                         </select>
-
-
                     </div>
                     <button
                       type="submit"

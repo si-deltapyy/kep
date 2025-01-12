@@ -45,7 +45,7 @@
                         </div>
 
                         <x-navigation :route="'dashboard'" :text="'Message'" :icon="'message-square'"/>
-                        <x-navigation :route="'dashboard'" :text="'Profile'" :icon="'user-cog'"/>
+                        <x-navigation :route="'user.profile.index'" :text="'Profile'" :icon="'user-cog'"/>
                     @endcan
 
                     @can('waiting-acception')
@@ -55,8 +55,8 @@
 
                 @role('admin')
                     <x-navigation :route="'dashboard'" :text="'Dashboard'" :icon="'files'"/>
-                    <x-navigation :route="'admin.pengajuan.index'" :text="'Pengajuan'" :icon="'file-user'"/>
-                    <x-navigation :route="'admin.ec.index'" :text="'ECDocument'" :icon="'file-user'"/>
+                    <x-navigation :route="'admin.pengajuan.index'" :text="'Pengajuan'" :icon="'book-open-check'"/>
+                    <x-navigation :route="'admin.ec.index'" :text="'ECDocument'" :icon="'scroll-text'"/>
                     {{-- <x-navigation :route="'admin.sekertarisList'" :text="'List Sekertaris'" :icon="'file-user'"/> --}}
 
                     <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
@@ -197,7 +197,7 @@
                         <span>Other</span>
                     </div>
 
-                    <x-navigation :route="'superadmin.setting'" :text="'Setting'" :icon="'settings'"/>
+                    <x-navigation :route="'superadmin.setting.index'" :text="'Setting'" :icon="'settings'"/>
                 @endrole
 
                 @role('sekertaris')

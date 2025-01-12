@@ -112,7 +112,7 @@
             },
             buttonsStyling: false
           })
-          
+
           swalWithBootstrapButtons.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -140,7 +140,7 @@
             }
           })
         return;
-        
+
         case 'customImage':
           Swal.fire({
             title: 'Robotech!',
@@ -151,7 +151,7 @@
             imageAlt: 'Custom image',
           })
         return;
-        
+
         case 'customWidth':
           Swal.fire({
             title: 'Custom width, padding, background.',
@@ -160,7 +160,7 @@
             background: 'rgba(254,254,254,1) url(assets/images/pattern.png)',
           })
         return;
-        
+
         case 'timer':
           let timerInterval
             Swal.fire({
@@ -189,7 +189,7 @@
               }
             })
         return;
-        
+
         case 'rtl':
           Swal.fire({
             title: 'هل تريد الاستمرار؟',
@@ -201,9 +201,9 @@
             showCloseButton: true
           })
         return;
-        
-        
-        
+
+
+
         case 'mixin':
           const Toast = Swal.mixin({
             toast: true,
@@ -216,20 +216,20 @@
               toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
           })
-          
+
           Toast.fire({
             icon: 'success',
             title: 'Signed in successfully'
           })
         return;
-        
+
         case 'declarativeTemplate':
-          
+
             Swal.fire({
                 template: '#my-template'
-            })         
+            })
         return;
-        
+
         case 'TriggerModalToast':
           Swal.bindClickHandler()
           Swal.mixin({
@@ -244,7 +244,7 @@
             timer: 1500
             })
         return;
-        
+
         case 'error':
           Swal.fire({
               icon: 'error',
@@ -255,8 +255,8 @@
         case 'warning':
           Swal.fire({
               icon: 'warning',
-              title: 'Oops...',
-              text: 'Icon warning!',
+              title: 'Selesaikan Review',
+              text: 'Selesaikan Review untuk Semua Dokumen Terlebih dahulu!',
             })
         return;
         case 'info':

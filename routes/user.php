@@ -16,6 +16,9 @@ Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->prefix('use
         Route::resource('message', MessageController::class)->names('message');
         Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
 
+        Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+        Route::post('profile/edit/{id}', [ProfileController::class, 'update'])->name('profile.edit');
+
         //Payment Method
         Route::resource('payment', PaymentController::class)->names('payment');
     });
@@ -26,9 +29,12 @@ Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->prefix('use
     });
 
     Route::middleware(['permission:update-profile', 'permission:user'])->group(function () {
-        Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::get('profile/edit/{profil}', [ProfileController::class, 'edit'])->name('profile.edit');});
+
+    Route::middleware(['permission:update-profile'])->group(function () {
+        Route::get('profile/make/{profil}', [ProfileController::class, 'edit'])->name('profile.make');
         Route::post('profile/update/{profil}', [ProfileController::class, 'update'])->name('profile.update');
     });
 
-    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+
 });

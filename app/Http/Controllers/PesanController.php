@@ -15,7 +15,13 @@ class PesanController extends Controller
     public function index(){
 
         $currentUserId = Auth::id();
-        $data = Dummy::where('sekertaris_id', $currentUserId)->get();
+
+        // Ambil role pengguna
+        $currentUserRole = Auth::user()->getRoleNames()->first();
+        $data = Dummy::when($currentUserRole === 'sekretaris', function ($query) use ($currentUserId) {
+            // Jika pengguna adalah sekretaris, tambahkan kondisi `is_review`
+            return $query->where('sekertaris_id', $currentUserId)->where('is_review', 1);
+        })->get();
 
         return view('pages.pesan.index', compact('data'));
     }

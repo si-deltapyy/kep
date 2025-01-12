@@ -38,6 +38,9 @@
 
                 </a>
                 @endif
+                <a href="{{ route('kppm.ec.download', ['id' => $x->id]) }}" target="blank"
+                    class='px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white'>Preview</a>
+
 
                 </div>
             </div>

@@ -21,6 +21,7 @@ class Dummy extends Model
         'doc_status',
         'doc_flag',
         'ec_proceed_at',
+        'review_status',
     ];
 
     public function submissions()

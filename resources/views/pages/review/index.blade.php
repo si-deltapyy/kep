@@ -9,7 +9,26 @@ $data1 = $doc->map(function($doc) {
     ];
 });
 
-$actions1 = $doc->mapWithKeys(function ($doc) {
+$actions1 = $doc->mapWithKeys(function ($doc) use ($submissionStatuses) {
+    // Ambil status dari submissionStatuses berdasarkan log_id
+    $status = $submissionStatuses->get($doc->id);
+
+    // Jika status adalah 'done', jangan tampilkan tombol
+    if ($status === 'done') {
+        return [
+            $doc->id => '
+            <button
+                type="button"
+                disable
+                class="px-2 py-1 lg:px-4 bg-transparent text-green text-sm rounded transition hover:bg-green-500 hover:text-white border border-green font-medium"
+            >
+                Dokumen telah direview
+            </button>
+            '
+        ];
+    }
+
+    // Jika status tidak 'done', tampilkan tombol
     return [
         $doc->id => '
             <a href="' . asset('storage/' . $doc->doc_path) . '" class="ml-2 text-blue-500 hover:text-blue-700" download>Unduh</a>
@@ -30,7 +49,24 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
     ];
 })->toArray();
 
+
+
+
 @endphp
+@push('pages-style')
+        <!-- Css -->
+<link rel="stylesheet" href="{{asset('assets/libs/sweetalert2/sweetalert2.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/libs/animate.css/animate.min.css')}}">
+
+@endpush
+
+@push('pages-script')
+
+<!-- JS -->
+<script src="{{asset('assets/libs/sweetalert2/sweetalert2.all.min.js')}}"></script>
+<script src="{{asset('assets/js/pages/sweetalert.init.js')}}"></script>
+
+@endpush
 
 @extends('layouts.app')
 @section('title')
@@ -39,12 +75,8 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
 
 @section('content')
 
-@if ($sub == 'Progress')
-    Review salah Satu Dokumen
-    <a href="/reviewer/pengajuan">back</a>
-@else
 
-<div
+    <div
                 class="active p-4 bg-gray-50 rounded-lg dark:bg-gray-700/20"
                 id="orders"
                 role="tabpanel"
@@ -65,7 +97,21 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
                                 :actionColumn="$actions1"
                             />
             </div>
-            <a href="{{ route('messages.index') }}">TESTTT</a>
+
+            @if ($allDone)
+            <form action="{{ route('reviewer.finishReview', $id) }}" method="POST">
+                @csrf
+                <button
+                    type="submit"
+                    class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+                >
+                    Finish Review
+                </button>
+            </form>
+            @else
+            <button type="button" onclick="executeExample('warning')" class=" inline-block focus:outline-none text-slate-500 hover:bg-slate-500 hover:text-white bg-transparent border border-gray-200 dark:bg-transparent dark:text-slate-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-slate-500  text-sm font-medium py-1 px-3 rounded mb-1">Finish Review</button>
+            @endif
+
 
             <!--end div-->
         </div>
@@ -104,32 +150,70 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
         </div>
     </div>
 </div>
-@endif
+
 <!--end grid-->
 @endsection
 
 @push('pages-script')
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Pilih modal
-        const modal = document.getElementById('modal-primary');
+ document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('modal-primary');
 
-        // Event listener untuk menampilkan modal
-        document.querySelectorAll('[data-fc-target="modal-primary"]').forEach(button => {
-            button.addEventListener('click', function () {
-                const dummyId = button.getAttribute('data-dummy-id');
-                const docId = button.getAttribute('data-doc-id');
-                const reviewerId = button.getAttribute('data-reviewer-id');
-                const receiverId = button.getAttribute('data-receiver-id');
+    // Fungsi untuk membuka modal dengan data yang sesuai
+    const openModal = (button) => {
+        const dummyId = button.getAttribute('data-dummy-id');
+        const docId = button.getAttribute('data-doc-id');
+        const reviewerId = button.getAttribute('data-reviewer-id');
+        const receiverId = button.getAttribute('data-receiver-id');
 
-                // Isi input di modal dengan data dari tombol
-                document.getElementById('doc-id-input').value = docId || '';
-                document.getElementById('doc-dummy-id').value = dummyId || '';
-                document.getElementById('doc-reviewer-id').value = reviewerId || '';
-                document.getElementById('doc-receiver-id').value = receiverId || '';
-            });
-        });
+        // Isi modal dengan data dari tombol
+        document.getElementById('doc-id-input').value = docId || '';
+        document.getElementById('doc-dummy-id').value = dummyId || '';
+        document.getElementById('doc-reviewer-id').value = reviewerId || '';
+        document.getElementById('doc-receiver-id').value = receiverId || '';
+
+        // Tampilkan modal
+        modal.classList.remove('hidden');
+    };
+
+    // Delegasi event click untuk membuka modal
+    document.addEventListener('click', function (event) {
+        const button = event.target.closest('[data-fc-target="modal-primary"]');
+        if (button) {
+            openModal(button);
+        }
     });
+
+    // Delegasi event click untuk menutup modal
+    modal.addEventListener('click', function (event) {
+        if (event.target.hasAttribute('data-fc-dismiss')) {
+            modal.classList.add('hidden');
+        }
+    });
+
+    // Inisialisasi DataTable jika tabel ditemukan
+    const tableElement = document.querySelector('#datatable_1');
+    if (tableElement) {
+        const dataTable = new simpleDatatables.DataTable("#datatable_1", {
+            searchable: true,
+            fixedHeight: false,
+        });
+
+        // Tangani perubahan halaman atau update DataTable
+        const rebindModalButtons = () => {
+            document.dispatchEvent(new Event('DOMContentLoaded'));
+        };
+
+        dataTable.on('datatable.page', rebindModalButtons);
+        dataTable.on('datatable.update', rebindModalButtons);
+    }
+});
+
+
+
+
+
+
 </script>
 @endpush
 
