@@ -24,7 +24,7 @@ class ReviewerController extends Controller
         return view('pages.pengajuan.reviewer.index', compact('doc'));
     }
 
-    public function show(Int $id): RedirectResponse{
+    public function show(Int $id){
         $doc = Document::where('doc_group', $id)->get();
         // $sub = Submission::where('reviewer', Auth::id())->with(
         //         'logDocument',
@@ -38,7 +38,7 @@ class ReviewerController extends Controller
             'doc_flag' => 'In Review',
         ]);
 
-        Submission::where('doc_group', $sub->id)
+        Submission::where('doc_group', $id)
           ->where('reviewer', Auth::id())
           ->where('reviewer_status', 'process')
           ->update(['reviewer_status' => 'in review']);

@@ -24,7 +24,7 @@
                     @csrf
                     <button type="submit"lass="ml-2 px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">
                         <i class="ti ti-plus me-1"></i>Download Untuk Menandatangani Dokumen</button>
-                </form>v
+                </form>
                 @elseif($x->ec_status == 'Process')
                 <a href="" class="ml-2 px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">
                     <i class="ti ti-plus me-1"></i>

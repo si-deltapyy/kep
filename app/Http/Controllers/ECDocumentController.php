@@ -54,7 +54,7 @@ class ECDocumentController extends Controller
             'doc_flag' => 'EC Process'
         ]);
 
-        if (Auth::role('sekertaris')) {
+        if (Auth::user()->hasRole('kppm')) {
             // Validasi khusus untuk pengguna dengan role 'kppm'
             $request->validate([
                 'file' => 'required|mimes:pdf|max:2048'
@@ -64,7 +64,7 @@ class ECDocumentController extends Controller
                 // Simpan file ke penyimpanan
                 $file = $request->file('file');
                 $fileName = 'Dokumen EC-' . $request->name . '-' . now()->format('Y-m-d-H-i-s') . '.pdf';
-                $pathDoc = $file->storeAs('ecDocument', $fileName, 'public');
+                $pathDoc = $file->storeAs('/ecDocument', $fileName,['disks' => 'save_upload']);
 
                 // Update kolom `doc_path` jika role adalah 'kppm'
                 $doc->doc_path = $pathDoc;

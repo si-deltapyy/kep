@@ -49,7 +49,7 @@
                                                         <label for="gender" class="font-medium text-sm text-slate-600 dark:text-slate-400">Jenis Kelamin</label>
                                                     </div>
                                                     <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
-                                                        <input type="text" id="gender" name="gender" class="form-input w-full rounded-md" value="{{ $data->gender }}" placeholder="Jenis Kelamin" required>
+                                                        <input type="text" id="gender" name="gender" class="form-input w-full rounded-md" value="{{ $data->gender }}" placeholder="Jenis Kelamin" readonly>
                                                     </div>
 
                                                     <!-- Alamat -->
@@ -73,7 +73,7 @@
                                                         <label for="status" class="font-medium text-sm text-slate-600 dark:text-slate-400">Status</label>
                                                     </div>
                                                     <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
-                                                        <input type="text" id="status" name="status" class="form-input w-full rounded-md" value="{{ $data->status }}" placeholder="Status" required>
+                                                        <input type="text" id="status" name="status" class="form-input w-full rounded-md" value="{{ $data->status }}" placeholder="Status" readonly>
                                                     </div>
 
                                                     <!-- NIK -->
@@ -81,15 +81,7 @@
                                                         <label for="nik" class="font-medium text-sm text-slate-600 dark:text-slate-400">NIK</label>
                                                     </div>
                                                     <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
-                                                        <input type="text" id="nik" name="nik" class="form-input w-full rounded-md" value="{{ $data->nik }}" placeholder="NIK" required>
-                                                    </div>
-
-                                                    <!-- Prodi -->
-                                                    <div class="col-span-12 md:col-span-12 lg:col-span-3 self-center text-right mr-2">
-                                                        <label for="prodi_id" class="font-medium text-sm text-slate-600 dark:text-slate-400">Prodi</label>
-                                                    </div>
-                                                    <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
-                                                        <input type="text" id="prodi_id" name="prodi_id" class="form-input w-full rounded-md" value="{{ $data->prodi_id }}" placeholder="Prodi" required>
+                                                        <input type="text" id="nik" name="nik" class="form-input w-full rounded-md" value="{{ $data->nik }}" placeholder="NIK" readonly>
                                                     </div>
 
                                                     <!-- Buttons -->

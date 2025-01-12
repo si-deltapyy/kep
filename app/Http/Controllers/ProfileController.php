@@ -69,22 +69,18 @@ class ProfileController extends Controller
                 // Validasi untuk user dengan 'done-profile' permission
                 $this->validate($request, [
                     'name'         => 'required',
-                    'nik'          => 'required',
                     'phone_number' => 'required',
-                    'gender'       => 'required',
-                    'status'       => 'required',
                     'address'      => 'required',
                 ]);
-    
+
                 // Update data profile
                 $data->update([
                     'name'         => $request->input('name'),
-                    'nik'          => $request->input('nik'),
                     'phone_number' => $request->input('phone_number'),
                     'address'      => $request->input('address'),
                     'updated_at'   => now(),
                 ]);
-    
+
                 // Update data user
                 $user->update([
                     'name' => $request->input('name'),
@@ -103,11 +99,11 @@ class ProfileController extends Controller
                         'address'      => $request->addr,
                         'updated_at'   => now()
                     ]);
-        
+
                     $user->update([
                         'name' => $request->name
                     ]);
-        
+
                     $user->revokePermissionTo('update-profile');
                     $user->revokePermissionTo('sso');
                     $user->givePermissionTo('done-profile');
@@ -123,11 +119,11 @@ class ProfileController extends Controller
                             'address'      => $request->addr,
                             'updated_at'   => now()
                         ]);
-            
+
                         $user->update([
                             'name' => $request->name
                         ]);
-            
+
                         $user->revokePermissionTo('update-profile');
                         $user->revokePermissionTo('user');
                         $user->givePermissionTo('done-profile');
@@ -136,7 +132,7 @@ class ProfileController extends Controller
                 }
             }
         }
-        
+
         //redirect to index
         return redirect()->route('dashboard')->with(['success' => 'Data Berhasil Diubah!']);
     }

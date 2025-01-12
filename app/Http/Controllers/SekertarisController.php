@@ -28,12 +28,12 @@ class SekertarisController extends Controller
             // Jika $doc kosong, ambil tindakan (misalnya, kembalikan pesan error)
             return redirect()->back()->with('error', 'Belum ada dokumen yang diajukan Masuk.');
         }
-        
+
         // Ambil ID dari $doc jika tidak kosong
         $docGroup = $doc->map(function ($item) {
             return $item->id;
         });
-        
+
         // Query hanya akan dijalankan jika $docGroup tidak kosong
         $ajuan = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
             ->join('ajuan_type as at', 'at.id', '=', 'document.ajuan_type')
@@ -42,7 +42,7 @@ class SekertarisController extends Controller
             ->get();
 
 
-            
+
 
             // return $reviewer;
 
@@ -113,6 +113,7 @@ class SekertarisController extends Controller
             'body' => 'This is for testing email using smtp.',
             'subject' => 'Review Bos',
             'view' => 'pages.email.sendReviewer',
+            'link' => 'reviewer/pengajuan',
         ];
 
         if ($doc) {
