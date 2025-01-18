@@ -35,14 +35,13 @@ class SekertarisController extends Controller
         });
 
         // Query hanya akan dijalankan jika $docGroup tidak kosong
-        $ajuan = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
-            ->join('ajuan_type as at', 'at.id', '=', 'document.ajuan_type')
-            ->join('dummy as d', 'd.id', '=', 'document.doc_group')
-            ->whereIn('doc_group', $docGroup) // Gunakan whereIn untuk array
-            ->get();
+        $ajuan = Dummy::with(['document.ajuanType']) // Load relasi 'documents' dan 'ajuanType'
+        ->where('sekertaris_id', Auth::id())
+        ->get();
 
-
-
+        // $ajuan2 = Dummy::with('firstDocument.ajuanType') // Load firstDocument dan relasi ajuanType
+        // ->where('sekertaris_id', Auth::id()) // Filter berdasarkan sekertaris_id
+        // ->get();
 
             // return $reviewer;
 

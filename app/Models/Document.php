@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Dummy;
 use App\Models\Pesan;
 use App\Models\Feedback;
+use App\Models\AjuanType;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,4 +48,10 @@ class Document extends Model
     {
         return $this->belongsTo(User::class, 'doc_group', 'id');
     }
+
+    public function AjuanType()
+    {
+        return $this->belongsTo(AjuanType::class, 'ajuan_type', 'id');
+    }
+
 }

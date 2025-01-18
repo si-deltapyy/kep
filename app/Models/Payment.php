@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Dummy;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Payment extends Model
 {
@@ -11,4 +12,9 @@ class Payment extends Model
 
     public $table = 'payment';
     protected $guarded = ['id'];
+
+    public function Dummy()
+    {
+        return $this->belongsTo(Dummy::class, 'group_id');
+    }
 }

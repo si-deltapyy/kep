@@ -21,6 +21,13 @@
             </div>
             <div class="flex-auto p-4">
                 <div id="EmailBox">
+                    <div class="">
+                        <form action="{{ route('messages.selesaiReview', $dummy_id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button data-fc-type="modal" data-fc-target="compose_msg"  class="px-3 py-2 lg:px-4 block text-center w-full mb-4 bg-primary-500 text-white text-sm font-semibold rounded hover:bg-primary-600">Compose</button>
+                        </form>
+                    </div>
                     <div id="UserChat" role="tabpanel" aria-labelledby="UserChat-tab">
                         <div id="accordion-collapse" data-fc-type="accordion">
                             <div id="accordion-collapse-body-1" class="" aria-labelledby="accordion-collapse-heading-1">

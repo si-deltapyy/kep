@@ -26,28 +26,28 @@
                                                     <label for="name" class="font-medium text-sm text-slate-600 dark:text-slate-400">Name</label>
                                                 </div>
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
-                                                    <input type="text" id="name" name="name" value="{{$data->name}}" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-1 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700" required>
+                                                    <input required type="text" id="name" name="name" value="{{$data->name}}" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-1 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700" required>
                                                 </div>
 
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-3 self-center text-right mr-2">
                                                     <label for="nik" class="font-medium text-sm text-slate-600 dark:text-slate-400">NIK</label>
                                                 </div>
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
-                                                    <input type="text" id="nik" name="nik" placeholder="Masukkan NIK" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-1 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700" required>
+                                                    <input required type="text" id="nik" name="nik" placeholder="Masukkan NIK" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-1 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700" required>
                                                 </div>
 
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-3 self-center text-right mr-2">
                                                     <label for="no" class="font-medium text-sm text-slate-600 dark:text-slate-400">Nomor Telepon</label>
                                                 </div>
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
-                                                    <input type="text" id="no" name="no" placeholder="08xxxxxxxx" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-1 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700" required>
+                                                    <input required type="text" id="no" name="no" placeholder="08xxxxxxxx" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-1 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700" required>
                                                 </div>
 
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-3 self-center text-right mr-2">
                                                     <label for="prodi" class="font-medium text-sm text-slate-600 dark:text-slate-400">Prodi</label>
                                                 </div>
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
-                                                    <select id="prodi" name="prodi" class="w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-[6.5px] focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700">
+                                                    <select required id="prodi" name="prodi" class="w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-[6.5px] focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700">
                                                         <option value="">-- Select --</option>
                                                         @foreach($prodi as $x)
                                                         <option value="{{$x->id}}">{{$x->name}}</option>
@@ -59,7 +59,7 @@
                                                     <label for="jl" class="font-medium text-sm text-slate-600 dark:text-slate-400">Jenis Kelamin</label>
                                                 </div>
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
-                                                    <select id="jl" name="jl" class="w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-[6.5px] focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700">
+                                                    <select required id="jl" name="jl" class="w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-[6.5px] focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700">
                                                         <option value="">-- Select --</option>
                                                         <option value="laki-laki">Laki-Laki</option>
                                                         <option value="perempuan">Perempuan</option>
@@ -81,7 +81,7 @@
                                                     <label for="addr" class="font-medium text-sm text-slate-600 dark:text-slate-400">Alamat</label>
                                                 </div>
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
-                                                    <textarea id="addr" name="addr" cols="30" rows="3" placeholder="Masukkan Alamat" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-1 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700"></textarea>
+                                                    <textarea required id="addr" name="addr" cols="30" rows="3" placeholder="Masukkan Alamat" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-1 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700"></textarea>
                                                 </div>
 
                                                 <div class="col-start-4 col-end-13 mb-2">

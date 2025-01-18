@@ -12,7 +12,14 @@ class ECObserver
      */
     public function created(ECDocument $eCDocument): void
     {
-        //
+        if ($eCDocument->isDirty('ec_status')) {
+            ECLog::create([
+                'ec_id' => $eCDocument->id,
+                'old_status' => $eCDocument->getOriginal('ec_status'),
+                'new_status' => $eCDocument->ec_status,
+                'changed_at' => now(),
+            ]);
+        }
     }
 
     /**

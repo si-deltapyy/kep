@@ -103,11 +103,27 @@ class DocRevController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update Status Review dokumen tanpa mengirim feedback
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+
+        // Validasi input
+        $validated = $request->validate([
+            'doc_id' => 'required|integer|exists:submission,log_id',
+        ]);
+
+        // Lakukan update pada tabel Submission
+        $updated = Submission::where('log_id', $validated['doc_id'])
+            ->where('reviewer', Auth::id())
+            ->update(['reviewer_status' => 'done']);
+
+        // Periksa apakah data berhasil diperbarui
+        if ($updated) {
+            return redirect()->back()->with('success', 'Dokumen berhasil diperbarui!');
+        } else {
+            return redirect()->back()->with('error', 'Gagal memperbarui dokumen. Pastikan Anda memiliki akses yang sesuai.');
+        }
     }
 
     /**

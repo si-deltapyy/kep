@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Dummy;
 use App\Models\Pesan;
 use App\Models\Feedback;
 use App\Models\Submission;
@@ -147,6 +148,27 @@ class FeedbackController extends Controller
             'admin' => $admin,
         ]);
     }
+
+
+    /**
+     * Sekertaris menyelesaikan proses review
+     */
+    public function selesaiReview(string $id)
+    {
+        $dummy = Dummy::find($id);
+
+        if (!$dummy) {
+            return redirect()->back()->with('error', 'Data Dummy tidak ditemukan.');
+        }
+
+        $dummy->update([
+            'doc_status' => 'approved',
+            'doc_flag' => 'done',
+        ]);
+
+        return redirect()->back()->with('success', 'Review selesai. Status dokumen telah diperbarui.');
+    }
+
 
     /**
      * Update the specified resource in storage.

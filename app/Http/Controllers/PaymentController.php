@@ -11,7 +11,8 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $payment = Payment::all();
+        $payment = Payment::with('dummy.document.ajuanType')->get();
+
         return view('pages.payment.index', compact('payment'));
     }
 
@@ -34,12 +35,13 @@ class PaymentController extends Controller
         $payment->description = $request->description;
         $payment->save();
 
+
         return redirect()->route('payment.index')->with('success', 'Payment created successfully.');
     }
 
     public function edit($id)
     {
-        $payment = Payment::find($id)->first();
+        $payment = Payment::find($id);
 
         return view('pages.payment.edit', compact('payment'));
     }
@@ -65,7 +67,7 @@ class PaymentController extends Controller
         } else {
             return redirect()->back()->with(['error' => 'File Error']);
         }
-        
+
 
         return redirect()->route('user.payment.index')->with('success', 'Payment updated successfully. Waiting from Validate');
     }
@@ -76,7 +78,7 @@ class PaymentController extends Controller
         $payment->delete();
 
         return redirect()->route('payment.index')->with('success', 'Payment deleted successfully.');
-    } 
+    }
 
     public function validatePayment($id)
     {
