@@ -23,7 +23,7 @@ $actions1 = $doc->mapWithKeys(function ($doc) {
         }
         elseif ($doc->review_status == "1") {
             $actions .= '
-            done bang
+            Reviewed
             ';
         }
         else{

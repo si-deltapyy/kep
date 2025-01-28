@@ -126,7 +126,7 @@
         <h2 class="bold" style="text-align: center;">ETHICAL APPROVAL</h2>
         <div class="approval-number">
             <p><strong>Number:</strong>  {{ $data['ethical_number'] ?? 'ditulis admin' }}</p>
-            <p><strong>Date:</strong>  {{ $data['tanggal'] }}</p>
+            <p><strong>Date:</strong>  {{ $data['tanggal'] ? \Carbon\Carbon::parse($data['tanggal'])->translatedFormat('j F, Y') : '-'}}</p>
         </div>
         <p>
             The undersigned, Chair of the Research Ethics Commission, after a series of discussions and assessments, hereby decides on the research protocol entitled:
@@ -143,7 +143,7 @@
 
     <!-- SIGNATURE -->
     <div class="signature">
-        <p>Surakarta, {{ $data['signed_date'] ?? 'ditulis admin' }}</p>
+        <p>Surakarta, {{ $data['signed_date'] ? \Carbon\Carbon::parse($data['tanggal'])->translatedFormat('j F, Y') : '-' }}</p>
         <p><strong>Chair of the Research Ethics Commission</strong></p>
         <br><br><br><br>
         <p><strong>Dr.rer.nat. Sri Mulyani, M.Si.</strong></p>

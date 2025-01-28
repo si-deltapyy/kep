@@ -166,7 +166,7 @@ class FeedbackController extends Controller
             'doc_flag' => 'done',
         ]);
 
-        return redirect()->back()->with('success', 'Review selesai. Status dokumen telah diperbarui.');
+        return redirect()->route('sekertaris.pengajuan.index')->with('success', 'Review selesai. Status dokumen telah diperbarui.');
     }
 
 

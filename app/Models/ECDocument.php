@@ -14,6 +14,7 @@ class ECDocument extends Model
         'title',
         'user_id',
         'doc_path',
+        'doc_name',
         'doc_group',
         'ec_status',
         'ethical_number',

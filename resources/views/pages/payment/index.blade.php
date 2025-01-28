@@ -53,7 +53,7 @@
                             @role('admin')
                             <form action="{{ route('admin.payment.validate' , $x->id ) }}" method="POST">
                                 @csrf
-                                <button type="submit">validasi</button>
+                                <button type="submit" style="margin-left: 30%" class="mt-2 block text-primary-500  font-semibold  focus:outline-none">Validasi<i class="fas fa-arrow-right-long self-center"></i></button>
                             </form>
                             @endrole
                           </div>

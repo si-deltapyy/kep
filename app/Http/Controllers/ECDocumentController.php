@@ -137,6 +137,7 @@ class ECDocumentController extends Controller
     //Preview Role Sekertaris
     public function show($id)
     {
+
         $doc = Document::find($id);
 
         $data = [
@@ -157,6 +158,7 @@ class ECDocumentController extends Controller
     //Preview Khusus Role Admin dan KPPM
     public function previewPDF($id)
     {
+        $user = Auth::user();
         $doc = ECDocument::find($id);
         $data = [
             'nama' => $doc->User->name ?? 'Tidak ada nama pengguna',
@@ -165,6 +167,14 @@ class ECDocumentController extends Controller
             'signed_date' => $doc->signed_at ?? '......',
             'tanggal' => $doc->Dummy->ec_proceed_at ?? '......',
         ];
+
+        if ($user->hasRole('kppm')) {
+            $doc->update([
+                'signed_at' => now(),
+            ]);
+        }
+
+
 
         $pdf = Pdf::loadView('pages.ec.preview', ['data' => $data])
             ->setOption('isRemoteEnabled', true)

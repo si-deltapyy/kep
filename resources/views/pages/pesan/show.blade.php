@@ -25,7 +25,7 @@
                         <form action="{{ route('messages.selesaiReview', $dummy_id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <button data-fc-type="modal" data-fc-target="compose_msg"  class="px-3 py-2 lg:px-4 block text-center w-full mb-4 bg-primary-500 text-white text-sm font-semibold rounded hover:bg-primary-600">Compose</button>
+                            <button type="submit"  class="px-3 py-2 lg:px-4 block text-center w-full mb-4 bg-primary-500 text-white text-sm font-semibold rounded hover:bg-primary-600">Selesai Review</button>
                         </form>
                     </div>
                     <div id="UserChat" role="tabpanel" aria-labelledby="UserChat-tab">

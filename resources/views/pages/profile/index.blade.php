@@ -33,7 +33,7 @@
                                             <h4 class="font-medium">Personal Information</h4>
                                         </div><!--end card-header-->
                                         <div class="flex-auto p-4">
-                                            <form method="POST" action="{{ route('user.profile.edit', Auth::user()->id) }}">
+                                            <form method="POST" action="{{ route('user.profile.change', Auth::user()->id) }}">
                                                 @csrf
                                                 <div class="grid md:grid-cols-12 lg:grid-cols-12">
                                                     <!-- Nama Lengkap -->
