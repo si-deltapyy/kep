@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
 
+
 class SekertarisController extends Controller
 {
 
