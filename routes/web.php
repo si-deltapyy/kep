@@ -18,6 +18,7 @@ Route::get('/maintenance/check', [ManageWebsiteController::class, 'checkMaintena
 Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
+//Route Feedback untuk semua role
 Route::middleware('auth')->group(function () {
     Route::get('/messages', [FeedbackController::class, 'index'])->name('messages.index');
     Route::get('/messages/create', [FeedbackController::class, 'create'])->name('messages.create');
@@ -25,13 +26,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/messages/{id}', [FeedbackController::class, 'show'])->name('messages.show');
     Route::get('/messages/detail/{id}', [FeedbackController::class, 'detail'])->name('messages.detail');
     Route::post('/messages/{id}/reply', [FeedbackController::class, 'reply'])->name('messages.reply');
+    Route::put('/messages/{id}/done', [FeedbackController::class, 'selesaiReview'])->name('messages.selesaiReview');
 });
 
 
-// Test Route
-Route::get('/chat', function () {
-    return view('pages.pesan.index');
-});
 
 
 

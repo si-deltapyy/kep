@@ -2,11 +2,12 @@
 
 @php
 // Data
-$head1 = ['Id','Nama Template'];
+$head1 = ['Id','Nama Template', 'Type'];
 $data1 = $temp->map(function($temp) {
     return [
         'id' => $temp->id,
         'Name' => $temp->template_name,
+        'Type' => $temp->typeAjuan->ajuan_name,
     ];
 });
 
@@ -22,7 +23,7 @@ $actions1 = $temp->mapWithKeys(function ($temp) {
 
 @extends('layouts.app')
 @section('title')
-<x-page-tittle :title="'Review'" :slash1="'Pengajuan'" :slash2="'Dokumen'" :slash3="''"></x-page-tittle>
+<x-page-tittle :title="'Template'" :slash1="'Ajuan'" :slash2="'Template'" :slash3="''"></x-page-tittle>
 @endsection
 
 @section('content')
@@ -36,7 +37,11 @@ $actions1 = $temp->mapWithKeys(function ($temp) {
 <div class="grid grid-cols-1 p-0 md:p-4">
     <div class="sm:-mx-6 lg:-mx-8">
         @if ($temp->isEmpty())
-        <p>Belum ada template</p>
+        <div class="mb-4 justify-center">
+            <div class="active p-4 bg-gray-50 rounded-lg dark:bg-gray-700/20">
+                <h1 class="font-medium text-center text-red-600"><i data-lucide="ban" class="w-4 h-4 inline-block me-2"></i>Belum ada Template</h1>
+            </div>
+        </div>
         @else
         <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
             {{-- table --}}

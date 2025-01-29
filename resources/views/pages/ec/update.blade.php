@@ -35,7 +35,7 @@
                     <x-input title="Judul Usulan " id="title" name="title" type="text" value="{{ $data->title }}" class="form-control" readonly muted/>
 
                     <div class="col-span-1">
-                        <x-file-upload title="Upload File" id="file" name="fileEc" type="file" accept=".pdf" class="file-input"/><br>
+                        <x-file-upload title="Upload File" id="fileEc" name="fileEc" type="file" accept=".pdf" class="file-input"/><br>
                     </div>
 
                     <x-button>Submit</x-button>

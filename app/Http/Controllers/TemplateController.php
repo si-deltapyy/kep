@@ -17,7 +17,7 @@ class TemplateController extends Controller
     public function index()
     {
         $temp = Template::with('typeAjuan')->get();
-        
+
         return view('pages.template.index', compact('temp'));
     }
 
@@ -47,7 +47,7 @@ class TemplateController extends Controller
         if ($request->hasFile('tempFile')) {
             $file = $request->file('tempFile');
             $fileName = 'Template'.'-'. $types->ajuan_name . '-' . $request->tempName . '.' . $file->getClientOriginalExtension();
-            $pathDoc = $file->storeAs('/template', $fileName ,['disks' => 'save_upload']); // Simpan di 'storage/app/public/template'
+            $pathDoc = $file->storeAs('template', $fileName, 'public');
 
             if ($pathDoc > 0) {// Simpan di 'storage/app/public/template'
                 Template::create([
@@ -55,7 +55,7 @@ class TemplateController extends Controller
                     'type_ajuan' => $request->ajuan,
                     'template_path' => $pathDoc,
                 ]);
-                
+
                 return redirect()->route('admin.template.index');
             }else{
                 return redirect()->back()->with(['error' => 'File not found']);
@@ -64,10 +64,7 @@ class TemplateController extends Controller
             return redirect()->back()->with(['error' => 'File tidak sesuai']);
         }
         // Simpan data ke database
-        
-
-        
-    }       
+    }
 
     /**
      * Display the specified resource.
@@ -119,7 +116,7 @@ class TemplateController extends Controller
                     'type_ajuan' => $request->ajuan,
                     'template_path' => $pathDoc,
                 ]);
-                
+
                 return redirect()->route('admin.template.index');
             }else{
                 return redirect()->back()->with('error', 'File not found');

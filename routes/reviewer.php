@@ -19,6 +19,8 @@ Route::middleware(['auth', 'verified', 'role:reviewer'])->name('reviewer.')->pre
     Route::get('/dokumen/feedback/{id}', [DocRevController::class, 'feedback'])->name('dokRev.feedback');
     Route::get('/dokumen/review/{id}/doc/show', [DocRevController::class, 'pils'])->name('dokRev.pils');
 
+    // Route::post('/dokumen/review/{id}/update', [DocRevController::class, 'update'])->name('dokRev.update');
+
     //Finish Review
     Route::post('/ajuan/{id}/finish-review', [ReviewerController::class, 'finishReview'])->name('finishReview');
 });

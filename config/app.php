@@ -213,6 +213,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
+        'Zip' => ZanySoft\Zip\Facades\Zip::class,
     ])->toArray(),
 
 ];

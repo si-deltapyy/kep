@@ -17,10 +17,13 @@ Route::middleware(['auth', 'verified', 'role:user'])->name('user.')->prefix('use
         Route::resource('ECDokumen', ECDocumentController::class)->names('ec');
 
         Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
-        Route::post('profile/edit/{id}', [ProfileController::class, 'update'])->name('profile.edit');
+        Route::post('profile/change/{id}', [ProfileController::class, 'update'])->name('profile.change');
 
         //Payment Method
         Route::resource('payment', PaymentController::class)->names('payment');
+
+        Route::get('/download-templates/{type}', [DocumentController::class, 'downloadZip'])->name('download.templates');
+        Route::match(['get', 'post'],'ec/preview/{id}', [ECDocumentController::class, 'previewPDF'])->name('ec.previewPDF');
     });
 
     Route::middleware(['permission:update-profile' , 'permission:sso'])->group(function () {

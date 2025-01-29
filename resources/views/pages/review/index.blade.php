@@ -45,7 +45,17 @@ $actions1 = $doc->mapWithKeys(function ($doc) use ($submissionStatuses) {
             >
                 Message
             </button>
-        '
+
+            <form action="' . route('reviewer.dokRev.update', $doc->id) . '" method="POST" style="display:inline;">
+            ' . csrf_field() . '
+            ' . method_field('PUT') . '
+            <input type="hidden" name="doc_id" value="' . $doc->id . '">
+            <button type="submit" class="tippy-btn inline-block focus:outline-none text-slate-500 hover:bg-slate-500 hover:text-white bg-transparent border border-gray-200 dark:bg-transparent dark:text-slate-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-slate-500 text-sm font-medium py-1 px-3 rounded mb-1"
+                data-tippy-content="My Tooltip!" data-tippy-arrow="false" data-tippy-interactive="true">
+                Dokumen Benar
+            </button>
+            </form>
+            '
     ];
 })->toArray();
 

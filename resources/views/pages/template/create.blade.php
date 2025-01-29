@@ -36,7 +36,7 @@
                         @endforeach
                     </select>
                     <div class="mt-4">
-                        <x-file-upload title="Upload Template " type="file" name="tempFile" id="tempFile" class="file-input" accept=".docx, .pdf, .doc"/>
+                        <x-file-upload title="Upload Template " type="file" name="tempFile" id="tempFile" class="file-input" accept=".docx, .doc"/>
                     </div>
 
                     <x-button>Submit</x-button>

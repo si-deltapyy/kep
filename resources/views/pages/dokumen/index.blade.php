@@ -14,7 +14,10 @@
             return [
                 $doc->id => '
                 <a href="' . route('user.ajuan.show', $doc->id) . '"><button type="button" class="px-2 py-1 lg:px-4 bg-transparent  text-primary text-sm  rounded transition hover:bg-primary-500 hover:text-white order border-primary font-medium">Lacak Dokumen</button></a>
+                <a href="' . route('user.ajuan.edit', $doc->id) . '"><button type="button" class="px-2 py-1 lg:px-4 bg-transparent  text-primary text-sm  rounded transition hover:bg-primary-500 hover:text-white order border-primary font-medium">Revisi Dokumen</button></a>
+
                 '
+
             ];
         })->toArray();
     @endphp

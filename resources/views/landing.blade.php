@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>KPPM FKIP UNS</title>
+    <title>KEP FKIP UNS</title>
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
     <meta name="author" content="Themeholy" />
     <meta
@@ -260,11 +260,11 @@ Hero Area
       <div class="container">
         <div class="hero-style1">
           <span class="hero-subtitle">Solusi untuk Penelitian anda</span>
-          <h1 class="hero-title">Komisi Kode Etik</h1>
+          <h1 class="hero-title">Komisi Etik</h1>
           <h1 class="hero-title">
-            Yang <span class="text-theme fw-medium">Mudah & Efisien</span>
+            <span class="text-theme fw-medium">Mudah & Efisien</span>
           </h1>
-          <p class="hero-text">
+          <p class="hero-text" style="background-color: rgba(123,104,238,0.9);color: whitesmoke; border-radius: 5px 5px 5px 5px;padding:3px 5px 3px 5px">
             Komisi Etik Penelitian FKIP UNS hadir untuk memastikan bahwa
             setiap penelitian yang dilakukan di FKIP UNS menjunjung tinggi
             nilai-nilai etika dan menghasilkan temuan yang kredibel dan bermanfaat.
@@ -296,7 +296,7 @@ Feature Area
               <h3 class="box-title">Layanan Pengelolaan Data</h3>
               <p class="feature-card_text">
                 Kami mempermudah pengelolaan data akademis dengan sistem yang
-                aman dan terintegrasi, memastikan data jurnal tersimpan dengan
+                aman dan terintegrasi, memastikan ethical clearance anda tersimpan dengan
                 baik.
               </p>
             </div>
@@ -309,7 +309,7 @@ Feature Area
               <h3 class="box-title">Strategi & Konsultasi Evaluasi</h3>
               <p class="feature-card_text">
                 Memberikan bimbingan dan strategi untuk membantu dosen dalam
-                proses evaluasi jurnal, memastikan setiap langkah sesuai dengan
+                proses evaluasi penelitian, memastikan setiap langkah sesuai dengan
                 standar akademis.
               </p>
             </div>
@@ -322,7 +322,7 @@ Feature Area
               <h3 class="box-title">Dukungan Kelas Dunia</h3>
               <p class="feature-card_text">
                 Kami menyediakan layanan dukungan terbaik untuk memastikan
-                setiap tahap evaluasi jurnal berjalan dengan lancar.
+                setiap tahap evaluasi proposal penelitian anda berjalan dengan lancar.
               </p>
             </div>
           </div>
@@ -347,12 +347,12 @@ Feature Area
               <div class="title-area mb-35">
                 <span class="sub-title">Tentang Platform</span>
                 <h2 class="sec-title">
-                  Mendukung Proses Evaluasi Jurnal Selama Bertahun-tahun.
+                  Mendukung Proses Evaluasi Proposal Penelitian.
                 </h2>
               </div>
               <p class="mt-n2 mb-25">
                 Kami menghadirkan solusi digital yang mempermudah dosen dalam
-                mengajukan jurnal untuk evaluasi. Dengan integrasi teknologi
+                mengajukan ethical clearance. Dengan integrasi teknologi
                 yang efisien, kami membantu meningkatkan transparansi dan
                 kecepatan proses persetujuan.
               </p>
@@ -360,7 +360,7 @@ Feature Area
                 <ul>
                   <li>
                     <img src="{{asset('assets1/img/icon/check_1.png')}}" alt="icon" />
-                    Mempermudah pengajuan jurnal melalui sistem digital
+                    Mempermudah pengajuan ethical melalui sistem digital
                     terintegrasi
                   </li>
                   <li>
@@ -399,7 +399,7 @@ Infographic Area
                   <h2 class="counter-card_number text-title">
                     <span class="counter-number">986</span>+
                   </h2>
-                  <p class="counter-card_text text-body">Jurnal Disetujui</p>
+                  <p class="counter-card_text text-body">Proposal Disetujui</p>
                 </div>
               </div>
             </div>
@@ -426,7 +426,7 @@ Infographic Area
                   <h2 class="counter-card_number text-title">
                     <span class="counter-number">496</span>+
                   </h2>
-                  <p class="counter-card_text text-body">Jurnal Rilis</p>
+                  <p class="counter-card_text text-body">Ethical Clearance Rilis</p>
                 </div>
               </div>
             </div>
@@ -443,7 +443,7 @@ Process Area
       <div class="title-area text-center">
         <span class="sub-title">ALUR PENGAJUAN</span>
         <h2 class="sec-title">
-          Proses Pengajuan Ethical Clearance di <span class="text-theme">KPPM FKIP UNS</span>
+          Proses Pengajuan Ethical Clearance di <span class="text-theme">KEP FKIP UNS</span>
         </h2>
       </div>
       <div class="process-card-area">
@@ -461,7 +461,7 @@ Process Area
               </div>
               <h2 class="box-title">Pendaftaran dan Pengajuan Protokol Ethical Clearance</h2>
               <p class="process-card_text">
-                Melakukan pendaftaran dan melengkapi informasi serta dokumen di aplikasi <strong>KPPM FKIP UNS</strong>.
+                Melakukan pendaftaran dan melengkapi informasi serta dokumen di aplikasi <strong>KEP FKIP UNS</strong>.
               </p>
             </div>
           </div>
@@ -489,7 +489,7 @@ Process Area
               </div>
               <h2 class="box-title">Pengumuman Hasil Reviu</h2>
               <p class="process-card_text">
-                Hasil reviu diumumkan melalui sistem <strong>KPPM FKIP UNS</strong>.
+                Hasil reviu diumumkan melalui sistem <strong>KEP FKIP UNS</strong>.
               </p>
             </div>
           </div>

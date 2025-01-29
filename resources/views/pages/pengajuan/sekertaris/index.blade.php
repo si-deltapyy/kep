@@ -7,7 +7,7 @@
         return [
             'id' => $docs->id,
             'Judul Usulan' => $docs->title,
-            'Type Ajuan' => $docs->ajuan_name,
+            'Type Ajuan' => $docs->firstDocument->ajuanType->ajuan_name,
             'Status' => $docs->doc_status,
         ];
     });

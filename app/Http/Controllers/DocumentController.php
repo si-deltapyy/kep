@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AnswerKuisioner;
-use App\Models\Document;
-use App\Models\Dummy;
-use App\Models\Kuisioner;
-use App\Models\LogDocument;
+use ZipArchive;
 use App\Models\Logs;
-use App\Models\Payment;
-use App\Models\Submission;
-use App\Models\Template;
-use App\Models\TypeAjuan;
-use App\Models\TypeDoc;
 use App\Models\User;
+use App\Models\Dummy;
+use App\Models\Payment;
+use App\Models\TypeDoc;
+use App\Models\Document;
+use App\Models\Template;
+use App\Models\AjuanType;
+use App\Models\Kuisioner;
+use App\Models\TypeAjuan;
+use App\Models\Submission;
+use PHPUnit\Event\TypeMap;
+use App\Models\LogDocument;
 use Illuminate\Http\Request;
+use App\Models\AnswerKuisioner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use PHPUnit\Event\TypeMap;
+use ZanySoft\Zip\Facades\Zip;
+
 
 class DocumentController extends Controller
 {
@@ -31,7 +35,9 @@ class DocumentController extends Controller
             ['kuisioner_status', '=', 'upload']
         ])->count();
 
-        return view('pages.dokumen.index', compact('doc', 'kuis'));
+        $types = TypeAjuan::with('template')->get();
+
+        return view('pages.dokumen.index', compact('doc', 'kuis', 'types'));
     }
 
     public function create(){
@@ -111,7 +117,7 @@ class DocumentController extends Controller
                     'ajuan_type' => $request->typeajuan, // Save the doc type based on the Type model
                 ]);
 
-                
+
             }
         }
 
@@ -125,6 +131,80 @@ class DocumentController extends Controller
 
         return redirect()->route('user.ajuan.index')->with('success', 'Berhasil Mengajukan Dokumen. Harap segera membayar biaya pengajuan.');
     }
+
+    public function edit($id)
+    {
+        // Ambil data dokumen berdasarkan ID
+        $document = Document::findOrFail($id);
+
+        // Ambil daftar tipe dokumen dan ajuan
+        $types = TypeDoc::all();
+        $ajuan = TypeAjuan::all();
+
+        return view('pages.dokumen.user.update', compact('document', 'types', 'ajuan'));
+    }
+
+    public function update(Request $request, $id)
+{
+    // Validasi data yang masuk (tanpa memaksa unggah file)
+    $request->validate([
+        'pengusul' => 'required|string|max:255',
+        'typeajuan' => 'required|integer',
+    ]);
+
+    // Ambil dokumen berdasarkan ID
+    $document = Document::findOrFail($id);
+
+    // Update data dokumen (tanpa mengubah file)
+    $document->update([
+        'doc_name' => 'berkas-'.$document->doc_group.'-'.Auth::user()->name,
+        'ajuan_type' => $request->typeajuan,
+    ]);
+
+    // Ambil daftar type dokumen untuk memproses file yang diunggah
+    $types = TypeDoc::all();
+
+    $updated = false; // Penanda apakah ada file yang diperbarui
+
+    foreach ($types as $x) {
+        $inputName = 'doc' . $x->id;
+
+        // Jika file diunggah, baru diproses
+        if ($request->hasFile($inputName)) {
+            // Validasi file PDF
+            $request->validate([
+                $inputName => 'mimes:pdf|max:2048',
+            ]);
+
+            // Generate nama file baru
+            $file = $request->file($inputName);
+            $fileName = Auth::user()->name . '_' . $x->name . '_' . $document->doc_group . '.' . $file->getClientOriginalExtension();
+
+            // Simpan file baru
+            $pathDoc = $file->storeAs('/document', $fileName, ['disk' => 'save_upload']);
+
+            // Hapus file lama jika ada
+            if (!empty($document->doc_path)) {
+                \Storage::disk('save_upload')->delete($document->doc_path);
+            }
+
+            // Update hanya kolom file yang diperbarui
+            $document->update([
+                'doc_path' => $pathDoc,
+            ]);
+
+            $updated = true; // Set penanda bahwa setidaknya satu file diperbarui
+        }
+    }
+
+    // Jika tidak ada file yang diupdate, tetap beri pesan sukses
+    if (!$updated) {
+        return redirect()->route('user.ajuan.index')->with('info', 'Dokumen diperbarui tanpa perubahan file.');
+    }
+
+    return redirect()->route('user.ajuan.index')->with('success', 'Dokumen berhasil diperbarui.');
+}
+
 
 
     public function destroy($id)
@@ -146,4 +226,43 @@ class DocumentController extends Controller
             ->header('Content-Type', 'application/pdf');
     }
 
+    /*
+    //Download Template as ZiP
+    */
+    public function downloadZip($type)
+    {
+        // Ambil data ajuan berdasarkan type
+        $ajuan = AjuanType::find($type);
+
+        if (!$ajuan) {
+            return back()->with('error', 'Jenis ajuan tidak ditemukan.');
+        }
+
+        // Ambil semua template yang sesuai dengan type_ajuan
+        $templates = Template::where('type_ajuan', $type)->get();
+
+        if ($templates->isEmpty()) {
+            return back()->with('error', "Belum ada template untuk ajuan {$ajuan->ajuan_name}.");
+        }
+
+        // Simpan ZIP di `public/storage/`
+        $zipFileName = "templates_type_{$type}.zip";
+        $zipPath = public_path("storage/{$zipFileName}");
+
+        // Buat ZIP baru
+        $zip = \ZanySoft\Zip\Facades\Zip::create($zipPath);
+
+        foreach ($templates as $template) {
+            $filePath = storage_path("app/public/{$template->template_path}");
+
+            if (file_exists($filePath)) {
+                $zip->add($filePath);
+            }
+        }
+
+        $zip->close();
+
+        // Kirim ZIP ke user
+        return response()->download($zipPath)->deleteFileAfterSend(true);
+    }
 }
