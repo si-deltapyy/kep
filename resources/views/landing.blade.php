@@ -264,7 +264,7 @@ Hero Area
           <h1 class="hero-title">
             <span class="text-theme fw-medium">Mudah & Efisien</span>
           </h1>
-          <p class="hero-text">
+          <p class="hero-text" style="background-color: rgba(123,104,238,0.9);color: whitesmoke; border-radius: 5px 5px 5px 5px;padding:3px 5px 3px 5px">
             Komisi Etik Penelitian FKIP UNS hadir untuk memastikan bahwa
             setiap penelitian yang dilakukan di FKIP UNS menjunjung tinggi
             nilai-nilai etika dan menghasilkan temuan yang kredibel dan bermanfaat.
