@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>KPPM FKIP UNS</title>
+    <title>KEP FKIP UNS</title>
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
     <meta name="author" content="Themeholy" />
     <meta
@@ -443,7 +443,7 @@ Process Area
       <div class="title-area text-center">
         <span class="sub-title">ALUR PENGAJUAN</span>
         <h2 class="sec-title">
-          Proses Pengajuan Ethical Clearance di <span class="text-theme">KPPM FKIP UNS</span>
+          Proses Pengajuan Ethical Clearance di <span class="text-theme">KEP FKIP UNS</span>
         </h2>
       </div>
       <div class="process-card-area">
@@ -461,7 +461,7 @@ Process Area
               </div>
               <h2 class="box-title">Pendaftaran dan Pengajuan Protokol Ethical Clearance</h2>
               <p class="process-card_text">
-                Melakukan pendaftaran dan melengkapi informasi serta dokumen di aplikasi <strong>KPPM FKIP UNS</strong>.
+                Melakukan pendaftaran dan melengkapi informasi serta dokumen di aplikasi <strong>KEP FKIP UNS</strong>.
               </p>
             </div>
           </div>
@@ -489,7 +489,7 @@ Process Area
               </div>
               <h2 class="box-title">Pengumuman Hasil Reviu</h2>
               <p class="process-card_text">
-                Hasil reviu diumumkan melalui sistem <strong>KPPM FKIP UNS</strong>.
+                Hasil reviu diumumkan melalui sistem <strong>KEP FKIP UNS</strong>.
               </p>
             </div>
           </div>
