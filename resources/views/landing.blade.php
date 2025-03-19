@@ -263,7 +263,7 @@ Hero Area
                 </div>
                 <div class="modal-body">
                     <ul>
-                        <li>Persetujuan etika harus diperoleh sebelum proyek penelitian dimulai. Peneliti tidak boleh mendekati atau merekrut peserta maupun mengumpulkan data untuk tujuan apa pun (termasuk studi pendahuluan) sebelum menerima persetujuan etika.</li>
+                        <li>Ethical Clearance harus diperoleh sebelum proyek penelitian dimulai. Peneliti tidak boleh mendekati atau merekrut peserta maupun mengumpulkan data untuk tujuan apa pun (termasuk studi pendahuluan) sebelum menerima Ethical Clearance.</li>
                         <li>Kami tidak menyediakan tinjauan retrospektif. Ajuan penelitian yang pengumpulan datanya sudah dimulai atau selesai tidak akan diterima.</li>
                         <li>Kami sangat menyarankan pengajuan lebih awal, karena penerimaan untuk bulan tertentu akan dilakukan berdasarkan prinsip "siapa cepat, dia dapat."</li>
                         <li>Kami tidak menyediakan tinjauan mendesak. Oleh karena itu, harap rencanakan penelitian Anda dengan baik, karena permintaan untuk tinjauan yang dipercepat tidak akan dipertimbangkan.</li>
