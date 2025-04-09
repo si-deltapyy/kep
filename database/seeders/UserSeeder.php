@@ -62,19 +62,19 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'reviewer 1',
             'email' => 'rev@a',
-            'password' => Hash::make(env('USER_PASSWORD', '123')),
+            'password' => Hash::make(env('USER_PASSWORD', 'kep-12345')),
         ])->assignRole('reviewer')->givePermissionTo('update-password');
 
         User::create([
             'name' => 'reviewer 2',
             'email' => 'rev@aa',
-            'password' => Hash::make(env('USER_PASSWORD', '123')),
+            'password' => Hash::make(env('USER_PASSWORD', 'kep-12345')),
         ])->assignRole('reviewer')->givePermissionTo('update-password');
 
         User::create([
             'name' => 'reviewer 3',
             'email' => 'rev@aaa',
-            'password' => Hash::make(env('USER_PASSWORD', '123')),
+            'password' => Hash::make(env('USER_PASSWORD', 'kep-12345')),
         ])->assignRole('reviewer')->givePermissionTo('update-password');
     }
 }
