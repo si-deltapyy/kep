@@ -34,10 +34,10 @@
 
                             <!-- Tampilkan preview PDF jika dokumen ada -->
                             @if($document->doc_path)
-                                <p class="text-gray-500">File saat ini: <a href="{{ asset('/app/' . $document->doc_path) }}" target="_blank" class="text-blue-500 underline">Lihat</a></p>
+                                <p class="text-gray-500">File saat ini: <a href="{{ asset('/public/app/' . $document->doc_path) }}" target="_blank" class="text-blue-500 underline">Lihat</a></p>
 
                                 <!-- Preview PDF -->
-                                <iframe class="pdf-preview" src="{{ asset('/app/' . $document->doc_path) }}" frameborder="0" width="100%" height="400px"></iframe>
+                                <iframe class="pdf-preview" src="{{ asset('/public/app/' . $document->doc_path) }}" frameborder="0" width="100%" height="400px"></iframe>
                             @endif
                         </div>
                     @endforeach
