@@ -220,6 +220,29 @@
     <!--==============================
 Hero Area
 ==============================-->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"> <!-- Centered Modal -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Catatan Penting tentang Ethical Clearance</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>Ethical Clearance harus diperoleh sebelum proyek penelitian dimulai. Peneliti tidak boleh mendekati atau merekrut peserta maupun mengumpulkan data untuk tujuan apa pun (termasuk studi pendahuluan) sebelum menerima Ethical Clearance.</li>
+                        <li>Kami tidak menyediakan tinjauan retrospektif. Ajuan penelitian yang pengumpulan datanya sudah dimulai atau selesai tidak akan diterima.</li>
+                        <li>Kami sangat menyarankan pengajuan lebih awal, karena penerimaan untuk bulan tertentu akan dilakukan berdasarkan prinsip "siapa cepat, dia dapat."</li>
+                        <li>Kami tidak menyediakan tinjauan mendesak. Oleh karena itu, harap rencanakan penelitian Anda dengan baik, karena permintaan untuk tinjauan yang dipercepat tidak akan dipertimbangkan.</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="th-hero-wrapper hero-1" id="hero">
       <div class="hero-img tilt-active">
         <img src="{{asset('assets1/img/fkip3.png')}}" alt="Hero Image" />
@@ -780,6 +803,8 @@ Price Area
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+    myModal.show();
     // Fungsi untuk memeriksa status maintenance
     function checkMaintenanceStatus() {
         fetch('{{ route('maintenance.check') }}', {

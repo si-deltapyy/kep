@@ -183,7 +183,7 @@ class SuperAdminController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:user',
-            'password' => 'required|min:value',
+            'password' => 'required|min:8',
         ]);
 
         $user = User::create([
@@ -207,7 +207,7 @@ class SuperAdminController extends Controller
     // Security Function
     public function manageRole()
     {
-        
+
         return view('superAdmin.manageSecurity.role');
     }
 

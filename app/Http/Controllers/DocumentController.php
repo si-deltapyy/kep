@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Validator;
 use ZipArchive;
 use App\Models\Logs;
 use App\Models\User;
@@ -67,6 +68,14 @@ class DocumentController extends Controller
 
         $types = TypeDoc::all();  // Fetch the same types as used in the view
 
+        $validator = Validator::make($request->all(), [
+            'pengusul' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('user.ajuan.index')->with('error', 'Judul belum diinputkan!');
+        }
+
         Dummy::create([
             'title' => $request->pengusul,
             'user_id' => Auth::user()->id,
@@ -100,8 +109,6 @@ class DocumentController extends Controller
                 ]);
 
                 $type = $x->id;
-
-
 
                 // Handle the file upload
                 $file = $request->file($inputName);
@@ -157,75 +164,79 @@ class DocumentController extends Controller
     public function edit($id)
     {
         // Ambil data dokumen berdasarkan ID
-        $document = Document::findOrFail($id);
-
+        $draft = Dummy::findOrFail($id);
+        $documentsTemp = $draft->Document;
         // Ambil daftar tipe dokumen dan ajuan
         $types = TypeDoc::all();
         $ajuan = TypeAjuan::all();
+        $document = [];
+        foreach ($types as $x) {
+            $document[$x->id] = $documentsTemp->firstWhere('doc_type', $x->id);
+        }
 
-        return view('pages.dokumen.user.update', compact('document', 'types', 'ajuan'));
+        return view('pages.dokumen.user.update', compact('draft','document', 'types', 'ajuan'));
     }
 
     public function update(Request $request, $id)
-{
-    // Validasi data yang masuk (tanpa memaksa unggah file)
-    $request->validate([
-        'pengusul' => 'required|string|max:255',
-        'typeajuan' => 'required|integer',
-    ]);
+    {
+        // Validasi data yang masuk (tanpa memaksa unggah file)
+        $request->validate([
+            'pengusul' => 'required|string|max:255',
+            'typeajuan' => 'required|integer',
+        ]);
 
-    // Ambil dokumen berdasarkan ID
-    $document = Document::findOrFail($id);
+        // Ambil dokumen berdasarkan ID
+        $document = Document::findOrFail($id);
 
-    // Update data dokumen (tanpa mengubah file)
-    $document->update([
-        'doc_name' => 'berkas-'.$document->doc_group.'-'.Auth::user()->name,
-        'ajuan_type' => $request->typeajuan,
-    ]);
+        // Update data dokumen (tanpa mengubah file)
+        $document->update([
+            'doc_name' => 'berkas-'.$document->doc_group.'-'.Auth::user()->name,
+            'ajuan_type' => $request->typeajuan,
+        ]);
 
-    // Ambil daftar type dokumen untuk memproses file yang diunggah
-    $types = TypeDoc::all();
+        // Ambil daftar type dokumen untuk memproses file yang diunggah
+        $types = TypeDoc::all();
 
-    $updated = false; // Penanda apakah ada file yang diperbarui
+        $updated = false; // Penanda apakah ada file yang diperbarui
 
-    foreach ($types as $x) {
-        $inputName = 'doc' . $x->id;
+        foreach ($types as $x) {
+            $inputName = 'doc' . $x->id;
 
-        // Jika file diunggah, baru diproses
-        if ($request->hasFile($inputName)) {
-            // Validasi file PDF
-            $request->validate([
-                $inputName => 'mimes:pdf|max:2048',
-            ]);
+            // Jika file diunggah, baru diproses
+            if ($request->hasFile($inputName)) {
+                // Validasi file PDF
+                $request->validate([
+                    $inputName => 'mimes:pdf|max:2048',
+                ]);
 
-            // Generate nama file baru
-            $file = $request->file($inputName);
-            $fileName = Auth::user()->name . '_' . $x->name . '_' . $document->doc_group . '.' . $file->getClientOriginalExtension();
+                // Generate nama file baru
+                $file = $request->file($inputName);
+                $fileName = Auth::user()->name . '_' . $x->name . '_' . $document->doc_group . '.' . $file->getClientOriginalExtension();
 
-            // Simpan file baru
-            $pathDoc = $file->storeAs('/document', $fileName, ['disk' => 'save_upload']);
+                // Simpan file baru
+                $pathDoc = $file->storeAs('/document', $fileName, ['disk' => 'save_upload']);
 
-            // Hapus file lama jika ada
-            if (!empty($document->doc_path)) {
-                \Storage::disk('save_upload')->delete($document->doc_path);
+                // Hapus file lama jika ada
+                if (!empty($document->doc_path)) {
+                    \Storage::disk('save_upload')->delete($document->doc_path);
+                }
+
+                // Update hanya kolom file yang diperbarui
+                $document->update([
+                    'doc_path' => $pathDoc,
+                ]);
+
+                $updated = true; // Set penanda bahwa setidaknya satu file diperbarui
             }
-
-            // Update hanya kolom file yang diperbarui
-            $document->update([
-                'doc_path' => $pathDoc,
-            ]);
-
-            $updated = true; // Set penanda bahwa setidaknya satu file diperbarui
         }
-    }
 
-    // Jika tidak ada file yang diupdate, tetap beri pesan sukses
-    if (!$updated) {
-        return redirect()->route('user.ajuan.index')->with('info', 'Dokumen diperbarui tanpa perubahan file.');
-    }
+        // Jika tidak ada file yang diupdate, tetap beri pesan sukses
+        if (!$updated) {
+            return redirect()->route('user.ajuan.index')->with('info', 'Dokumen diperbarui tanpa perubahan file.');
+        }
 
-    return redirect()->route('user.ajuan.index')->with('success', 'Dokumen berhasil diperbarui.');
-}
+        return redirect()->route('user.ajuan.index')->with('success', 'Dokumen berhasil diperbarui.');
+    }
 
 
 

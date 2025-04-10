@@ -13,16 +13,16 @@
             </div>
 
             <div class="flex-auto p-4">
-                <x-form-input method="POST" action="{{ route('user.ajuan.update', $document->id) }}" has-file class="p-4">
+                <x-form-input method="POST" action="{{ route('user.ajuan.update', $draft->id) }}" has-file class="p-4">
                     @method('PUT')
                     @csrf
 
-                    <x-input title="Judul Usulan " id="pengusul" type="text" class="form-control" name="pengusul" value="{{ old('pengusul', $document->doc_name) }}"/>
+                    <x-input title="Judul Usulan " id="pengusul" type="text" class="form-control" name="pengusul" value="{{ old('pengusul', $draft->title) }}"/>
 
                     <select name="typeajuan" id="at">
                         <option value="0">-- Pilih Type Ajuan --</option>
                         @foreach ($ajuan as $s)
-                            <option value="{{ $s->id }}" {{ $s->id == $document->ajuan_type ? 'selected' : '' }}>
+                            <option value="{{ $s->id }}" {{ $s->id == $document[1]->ajuan_type ? 'selected' : '' }}>
                                 {{ $s->ajuan_name }}
                             </option>
                         @endforeach
@@ -30,14 +30,19 @@
 
                     @foreach ($types as $input)
                         <div class="col-span-1">
-                            <x-file-upload :required="false" title="Upload {{$input->name}}: " type="file" id="doc{{$input->id}}" name="doc{{$input->id}}" value="{{ asset('/app/' . $document->doc_path) }}" class="file-input" accept=".pdf"/>
-
-                            <!-- Tampilkan preview PDF jika dokumen ada -->
-                            @if($document->doc_path)
-                                <p class="text-gray-500">File saat ini: <a href="{{ asset('/app/' . $document->doc_path) }}" target="_blank" class="text-blue-500 underline">Lihat</a></p>
-
+                            @if (isset($document[$input->id]))
+                                <x-file-upload :required="false" title="Upload {{$input->name}}: " type="file" id="doc{{$input->id}}" name="doc{{$input->id}}" value="{{ asset('/app/' . $document[$input->id]->doc_path) }}" class="file-input" accept=".pdf"/>
+                                <!-- Tampilkan preview PDF jika dokumen ada -->
+                                @if($document[$input->id]->doc_path)
+                                    <p class="text-gray-500">File saat ini: <a href="{{ asset('/app/' . $document[$input->id]->doc_path) }}" target="_blank" class="text-blue-500 underline">Lihat</a></p>
+                                    <!-- Preview PDF -->
+                                    <iframe class="pdf-preview" src="{{ asset('/app/' . $document[$input->id]->doc_path) }}" frameborder="0" width="100%" height="400px"></iframe>
+                                @endif
+                            @else
+                                <x-file-upload :required="false" title="Upload {{$input->name}}: " type="file" id="doc{{$input->id}}" name="doc{{$input->id}}" value="" class="file-input" accept=".pdf"/>
+                                <p class="text-gray-500">File saat ini: <a href="#" target="_blank" class="text-blue-500 underline">Lihat</a></p>
                                 <!-- Preview PDF -->
-                                <iframe class="pdf-preview" src="{{ asset('/app/' . $document->doc_path) }}" frameborder="0" width="100%" height="400px"></iframe>
+                                <iframe class="pdf-preview" src="#" frameborder="0" width="100%" height="400px"></iframe>
                             @endif
                         </div>
                     @endforeach
