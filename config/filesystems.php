@@ -45,7 +45,7 @@ return [
         ],
 
         'save_upload' => [
-            'driver' => 'save_upload',
+            'driver' => 'local',
             'root' => public_path('app'),
             'visibility' => 'public',
         ],
