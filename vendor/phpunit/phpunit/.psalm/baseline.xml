@@ -585,6 +585,11 @@
       <code><![CDATA[assert($testSuite instanceof TestSuiteForTestMethodWithDataProvider)]]></code>
     </RedundantCondition>
   </file>
+  <file src="src/Logging/TestDox/NamePrettifier.php">
+    <LessSpecificReturnStatement>
+      <code><![CDATA[(string) $value->value]]></code>
+    </LessSpecificReturnStatement>
+  </file>
   <file src="src/Logging/TestDox/TestResult/TestResultCollection.php">
     <PropertyTypeCoercion>
       <code><![CDATA[$testResults]]></code>
@@ -718,6 +723,10 @@
     </ArgumentTypeCoercion>
   </file>
   <file src="src/Metadata/Parser/AttributeParser.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$e->getMessage()]]></code>
+      <code><![CDATA[$e->getMessage()]]></code>
+    </ArgumentTypeCoercion>
     <DeprecatedClass>
       <code><![CDATA[IgnoreClassForCodeCoverage::class]]></code>
       <code><![CDATA[IgnoreFunctionForCodeCoverage::class]]></code>

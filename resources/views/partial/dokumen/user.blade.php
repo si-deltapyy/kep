@@ -30,19 +30,19 @@
     </div>
 @endif
 
-<a href="javascript:void(0);"
-   onclick="showModal()"
-   class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
-    <i class="ti ti-plus me-1"></i>
-    Ajukan
-    <span data-lucide="plus" class="w-4 h-4 inline-block me-2"></span>
-</a>
-
-
-<button type="button" data-fc-type="modal" data-fc-target="modalcenter" class="inline-block focus:outline-none bg-green-500/10 text-green hover:bg-green hover:text-black border border-gray-200 dark:bg-transparent dark:text-slate-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-slate-500  text-sm font-medium py-1 px-3 rounded ">
-    <i data-lucide="download" class="w-4 h-4 inline-block me-2"></i>
-    Download Template
-</button>
+<div class="flex-auto p-6 text-left">
+    <div class="flex justify-left gap-4 mt-4">
+        <a href="javascript:void(0);" onclick="showModal()" 
+            class="px-2 py-1 bg-primary-500/10 border border-transparent text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
+            <i class="ti ti-plus me-1"></i> Ajukan
+            <span data-lucide="plus" class="w-4 h-4 inline-block me-2"></span>
+        </a>
+        <button type="button" data-fc-type="modal" data-fc-target="modalcenter" 
+            class="inline-block focus:outline-none bg-green-500/10 text-green hover:bg-green-500 hover:text-white border border-gray-200 dark:bg-transparent dark:text-slate-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-slate-500 text-sm font-medium py-1 px-3 rounded">
+            <i data-lucide="download" class="w-4 h-4 inline-block me-2"></i> Download Template
+        </button>
+    </div>
+</div>
 
 
 <div class="grid grid-cols-1 p-0 md:p-4">
@@ -98,7 +98,7 @@
 <div class="modal animate-ModalSlide hidden" id="modalcenter">
     <div class="relative w-auto pointer-events-none sm:max-w-lg sm:my-0 sm:mx-auto z-[99] flex items-center h-[calc(100%-3.5rem)]">
         <div class="relative flex flex-col w-full pointer-events-auto bg-white dark:bg-slate-800 bg-clip-padding rounded">
-            <div class="flex shrink-0 items-center justify-between py-2 px-4 rounded-t border-b border-solid dark:border-gray-700 bg-green-500">
+            <div class="flex shrink-0 items-center justify-between py-2 px-4 rounded-t border-b border-solid dark:border-gray-700 bg-[#603dc3] dark:bg-[#603dc3] dark:text-white text-white">
                 <h6 class="mb-0 leading-4 text-base font-semibold text-white mt-0" id="staticBackdropLabel1">Unduh Template</h6>
                 <button type="button" class="box-content w-4 h-4 p-1 bg-green-700/60 rounded-full text-slate-300 leading-4 text-xl close" aria-label="Close" data-fc-dismiss>&times;</button>
             </div>

@@ -5,18 +5,7 @@ weight: 4
 
 ## Laravel Version Compatibility
 
-Choose the version of this package that suits your Laravel version.
-
-Package Version | Laravel Version
-----------------|-----------
-   ^6.0         |  8,9,10,11 (PHP 8.0+)
-   ^5.8         |  7,8,9,10
-   ^5.7         |  7,8,9
-   ^5.4-^5.6    |  7,8
-   5.0-5.3      |  6,7,8
-   ^4           |  6,7,8
-   ^3           |  5.8
-   
+See the "Prerequisites" documentation page for compatibility details.
 
 ## Installing
 
@@ -28,14 +17,8 @@ Package Version | Laravel Version
 
         composer require spatie/laravel-permission
 
-4. Optional: The service provider will automatically get registered. Or you may manually add the service provider in your `config/app.php` file:
+4. The Service Provider will automatically be registered; however, if you wish to manually register it, you can manually add the `Spatie\Permission\PermissionServiceProvider::class` service provider to the array in `bootstrap/providers.php` (`config/app.php` in Laravel 10 or older).
 
-    ```
-    'providers' => [
-        // ...
-        Spatie\Permission\PermissionServiceProvider::class,
-    ];
-    ```
 
 5. **You should publish** [the migration](https://github.com/spatie/laravel-permission/blob/main/database/migrations/create_permission_tables.php.stub) and the [`config/permission.php` config file](https://github.com/spatie/laravel-permission/blob/main/config/permission.php) with:
 
@@ -51,7 +34,7 @@ Package Version | Laravel Version
        - must set `'teams' => true,`
        - and (optional) you may set `team_foreign_key` name in the config file if you want to use a custom foreign key in your database for teams
 
-   - **If you are using MySQL 8**, look at the migration files for notes about MySQL 8 to set/limit the index key length, and edit accordingly. If you get `ERROR: 1071 Specified key was too long` then you need to do this.
+   - **If you are using MySQL 8+**, look at the migration files for notes about MySQL 8+ to set/limit the index key length, and edit accordingly. If you get `ERROR: 1071 Specified key was too long` then you need to do this.
 
    - **If you are using CACHE_STORE=database**, be sure to [install Laravel's cache migration](https://laravel.com/docs/cache#prerequisites-database), else you will encounter cache errors.
 

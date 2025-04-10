@@ -75,39 +75,6 @@
     <div class="cursor2"></div>
 
 
-    <div class="color-scheme-wrap active">
-      <button class="switchIcon"><i class="fa-solid fa-palette"></i></button>
-      <h4 class="color-scheme-wrap-title">
-        <i class="far fa-palette me-2"></i>Style Swicher
-      </h4>
-      <div class="color-switch-btns">
-        <button data-color="#3E66F3">
-          <i class="fa-solid fa-droplet"></i>
-        </button>
-        <button data-color="#684DF4">
-          <i class="fa-solid fa-droplet"></i>
-        </button>
-        <button data-color="#008080">
-          <i class="fa-solid fa-droplet"></i>
-        </button>
-        <button data-color="#323F7C">
-          <i class="fa-solid fa-droplet"></i>
-        </button>
-        <button data-color="#FC3737">
-          <i class="fa-solid fa-droplet"></i>
-        </button>
-        <button data-color="#8a2be2">
-          <i class="fa-solid fa-droplet"></i>
-        </button>
-      </div>
-      <a
-        href="https://themeforest.net/user/themeholy"
-        class="th-btn text-center w-100"
-        ><i class="fa fa-shopping-cart me-2"></i> Purchase</a
-      >
-    </div>
-
-
 
     <!--==============================
     Mobile Menu
@@ -260,11 +227,11 @@ Hero Area
       <div class="container">
         <div class="hero-style1">
           <span class="hero-subtitle">Solusi untuk Penelitian anda</span>
-          <h1 class="hero-title">Komisi Etik</h1>
+          <h1 class="hero-title">Komisi Etik <br>Penelitian</h1>
           <h1 class="hero-title">
-            <span class="text-theme fw-medium">Mudah & Efisien</span>
+            <h2 class="text-theme fw-medium">Mudah & Efisien</h2>
           </h1>
-          <p class="hero-text" style="background-color: rgba(123,104,238,0.9);color: whitesmoke; border-radius: 5px 5px 5px 5px;padding:3px 5px 3px 5px">
+          <p class="hero-text" style="background-color: rgba(123,104,238,0.9); font-size: 25px; color: whitesmoke; border-radius: 5px 5px 5px 5px;padding:3px 5px 3px 5px">
             Komisi Etik Penelitian FKIP UNS hadir untuk memastikan bahwa
             setiap penelitian yang dilakukan di FKIP UNS menjunjung tinggi
             nilai-nilai etika dan menghasilkan temuan yang kredibel dan bermanfaat.
@@ -533,7 +500,7 @@ Price Area
                 <h3 class="box-title">Mahasiswa</h3>
               </div>
             </div>
-            <h4 class="price-box_price">IDR 100.000</h4>
+            <h4 class="price-box_price">IDR 75.000</h4>
             <p class="price-box_text">Biaya pengajuan untuk mahasiswa internal UNS.</p>
           </div>
         </div>
@@ -547,7 +514,7 @@ Price Area
                 <h3 class="box-title">Dosen</h3>
               </div>
             </div>
-            <h4 class="price-box_price">IDR 200.000</h4>
+            <h4 class="price-box_price">IDR 150.000</h4>
             <p class="price-box_text">Biaya pengajuan untuk dosen internal UNS.</p>
           </div>
         </div>
@@ -575,7 +542,7 @@ Price Area
                 <h3 class="box-title">Dosen/Peneliti</h3>
               </div>
             </div>
-            <h4 class="price-box_price">IDR 300.000</h4>
+            <h4 class="price-box_price">IDR 200.000</h4>
             <p class="price-box_text">Biaya pengajuan untuk dosen/peneliti eksternal.</p>
           </div>
         </div>

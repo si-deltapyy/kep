@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('group_id');
+            $table->integer('amount');
             $table->enum('payment_method', ['transfer', 'e-wallet', 'VA'])->nullable();
             $table->enum('payment_status', ['pending', 'success', 'waiting'])->default('pending');
+            $table->enum('payment_flag', ['accept', 'wait'])->default('wait');
             $table->timestamp('payment_date')->nullable();
             $table->string('path_proof')->nullable();
             $table->timestamps();

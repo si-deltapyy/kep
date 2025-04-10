@@ -18,6 +18,7 @@ use PHPUnit\Event\TypeMap;
 use App\Models\LogDocument;
 use Illuminate\Http\Request;
 use App\Models\AnswerKuisioner;
+use App\Models\ProfileUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use ZanySoft\Zip\Facades\Zip;
@@ -121,15 +122,36 @@ class DocumentController extends Controller
             }
         }
 
+        $users = ProfileUser::where('user_id', Auth::user()->id)->first();
+        $amount = 0; // Set the default amount to 0
+        switch($amount){
+            case $users->status == 'Mahasiswa' && $users->univ == NULL:
+                $amount = 75000;
+                break;
+            case $users->status == 'Mahasiswa' && $users->univ != NULL:
+                $amount = 150000;
+                break;
+            case $users->status == 'Dosen' && $users->univ == NULL:
+                $amount = 150000;
+                break;
+            case $users->status == 'Dosen' && $users->univ != NULL:
+                $amount = 200000;
+                break;
+            default:
+                $amount = 0;
+                break;
+        }
+
         Payment::create([
             'user_id' => Auth::user()->id,
             'group_id' => $group,
+            'amount' => $amount,
             'payment_method' => null,
             'payment_date' => null,
             'path_proof' => null,
         ]);
 
-        return redirect()->route('user.ajuan.index')->with('success', 'Berhasil Mengajukan Dokumen. Harap segera membayar biaya pengajuan.');
+        return redirect()->route('user.ajuan.index')->with('success', 'Pengajuan Dokumen Telah Berhasil');
     }
 
     public function edit($id)
@@ -247,13 +269,13 @@ class DocumentController extends Controller
 
         // Simpan ZIP di `public/storage/`
         $zipFileName = "templates_type_{$type}.zip";
-        $zipPath = public_path("storage/{$zipFileName}");
+        $zipPath = public_path("app/{$zipFileName}");
 
         // Buat ZIP baru
         $zip = \ZanySoft\Zip\Facades\Zip::create($zipPath);
 
         foreach ($templates as $template) {
-            $filePath = storage_path("app/public/{$template->template_path}");
+            $filePath = public_path("app/{$template->template_path}");
 
             if (file_exists($filePath)) {
                 $zip->add($filePath);

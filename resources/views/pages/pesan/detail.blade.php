@@ -320,15 +320,6 @@
                 <p class="text-sm text-slate-500 font-medium mt-3">{{$pesan->message}}</p>
 
                 <hr class="my-4 border-dashed dark:border-slate-700/50">
-
-                <div class="border rounded-md inline-block text-center dark:border-slate-700/50">
-                    <img src="assets/images/products/logos/ap.png" alt="" class="h-20 rounded-t-md">
-                    <a href="#" class="text-sm dark:text-slate-400">Download <i class="mdi mdi-arrow-collapse-down"></i></a>
-                </div>
-                <div class="border rounded-md inline-block text-center dark:border-slate-700/50">
-                    <img src="assets/images/products/logos/canon.png" alt="" class="h-20 rounded-t-md">
-                    <a href="#" class="text-sm dark:text-slate-400">Download <i class="mdi mdi-arrow-collapse-down"></i></a>
-                </div>
                 <div class="mt-4">
                     {{-- Reply --}}
                     <button class="inline-block focus:outline-none text-brand-500 hover:bg-brand-500 hover:text-white bg-transparent border border-brand-200 dark:bg-transparent dark:text-brand-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-brand-500  text-sm font-medium py-2 px-3"  type="button"

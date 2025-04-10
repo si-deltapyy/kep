@@ -1,6 +1,16 @@
 # Release Notes
 
-## [Unreleased](https://github.com/laravel/sail/compare/v1.39.0...1.x)
+## [Unreleased](https://github.com/laravel/sail/compare/v1.40.0...1.x)
+
+## [v1.40.0](https://github.com/laravel/sail/compare/v1.39.1...v1.40.0) - 2025-01-13
+
+* enable swoole php 8.4 by [@ariaieboy](https://github.com/ariaieboy) in https://github.com/laravel/sail/pull/766
+* Add Valkey support by [@ariaieboy](https://github.com/ariaieboy) in https://github.com/laravel/sail/pull/767
+* Update Ondrej PPA key by [@binaryfire](https://github.com/binaryfire) in https://github.com/laravel/sail/pull/768
+
+## [v1.39.1](https://github.com/laravel/sail/compare/v1.39.0...v1.39.1) - 2024-11-27
+
+* [1.x] Remove the default `ubuntu` user by [@rojtjo](https://github.com/rojtjo) in https://github.com/laravel/sail/pull/762
 
 ## [v1.39.0](https://github.com/laravel/sail/compare/v1.38.0...v1.39.0) - 2024-11-25
 

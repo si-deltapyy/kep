@@ -22,12 +22,12 @@
                                         <form action="{{route('user.profile.update', $data->id)}}" method="post">
                                             @csrf
                                             <div class="grid md:grid-cols-12 lg:grid-cols-12">
-                                                <div class="col-span-12 md:col-span-12 lg:col-span-3 self-center text-right mr-2">
+                                                {{-- <div class="col-span-12 md:col-span-12 lg:col-span-3 self-center text-right mr-2">
                                                     <label for="name" class="font-medium text-sm text-slate-600 dark:text-slate-400">Name</label>
                                                 </div>
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
                                                     <input required type="text" id="name" name="name" value="{{$data->name}}" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-1 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700" required>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="col-span-12 md:col-span-12 lg:col-span-3 self-center text-right mr-2">
                                                     <label for="nik" class="font-medium text-sm text-slate-600 dark:text-slate-400">NIK</label>

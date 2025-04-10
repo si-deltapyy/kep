@@ -1,10 +1,21 @@
 @can('waiting-acception')
-<div class="my-4">
-    <h5 class="text-xxl font-semibold text-slate-700 dark:text-gray-400 mb-4">
-    Harap menunggu Konfirmasi dari Admin KEP FKIP
-    </h5>
-    <p>Tunggu 1x24 Jam atau lebih cepat!</p>
+<div class="grid md:grid-cols-12 gap-4 mb-4">
+    <div class="col-span-12">
+        <div class="w-full relative overflow-hidden bg-white dark:bg-slate-800 shadow-md rounded-lg">
+            <div class="border-b border-dashed border-slate-200 dark:border-slate-700 py-4 px-6">
+                <h4 class="font-semibold text-lg text-slate-800 dark:text-slate-200 text-center">
+                    Harap Menunggu Konfirmasi dari Admin KEP FKIP
+                </h4>
+            </div>
+            <div class="flex-auto p-6 text-center">
+                <h3 class="text-lg font-medium text-slate-600 dark:text-slate-300">
+                    <i>Tunggu 1x24 Jam atau lebih cepat!</i>
+                </h3>
+            </div>
+        </div>
+    </div>
 </div>
+
 @endcan
 
 {{-- Alert Untuk Update profile --}}
@@ -32,14 +43,22 @@
 
 
 @can('update-profile')
-<div class="my-4">
-    <h5 class="text-xxl font-semibold text-slate-700 dark:text-gray-400 mb-4">
-    Harap Lengkapi Profil Dahulu !
-    </h5>
-    <a href="{{route('user.profile.make', Auth::user()->id)}}" class="px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
-        <i class="ti ti-plus me-1"></i>
-        Update Profile
-    </a>
+<div class="grid md:grid-cols-12 gap-4 mb-4">
+    <div class="col-span-12">
+        <div class="w-full relative overflow-hidden bg-white dark:bg-slate-800 shadow-md rounded-lg">
+            <div class="border-b border-dashed border-slate-200 dark:border-slate-700 py-4 px-6">
+                <h4 class="font-semibold text-lg text-slate-800 dark:text-slate-200 text-center">
+                    Harap Lengkapi Profil Dahulu !
+                </h4><br>
+                <center>
+                    <a href="{{route('user.profile.make', Auth::user()->id)}}" class="text-center px-2 py-1 bg-primary-500/10 border border-transparent collapse:bg-green-100 text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
+                        <i class="ti ti-plus me-1"></i>
+                        Update Profile
+                    </a>
+                </center>
+            </div>
+        </div>
+    </div>
 </div>
 @endcan
 @can('done-profile')

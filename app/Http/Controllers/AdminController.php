@@ -68,7 +68,7 @@ class AdminController extends Controller
 
         Logs::create([
             'title' => 'Konfirmasi Dokumen',
-            'description' => 'Sedang dalam pengecekan kelengkapan dokumen',
+            'description' => 'Sedang dalam pengecekan kelengkapan dokumen oleh Sekretaris',
             'action_label' => 'Pengecakan Dokumen',
             'action_link' => '',
             'doc_group' => $request->id,

@@ -47,7 +47,7 @@ class TemplateController extends Controller
         if ($request->hasFile('tempFile')) {
             $file = $request->file('tempFile');
             $fileName = 'Template'.'-'. $types->ajuan_name . '-' . $request->tempName . '.' . $file->getClientOriginalExtension();
-            $pathDoc = $file->storeAs('template', $fileName, 'public');
+            $pathDoc = $file->storeAs('/template', $fileName,['disks' => 'save_upload']);
 
             if ($pathDoc > 0) {// Simpan di 'storage/app/public/template'
                 Template::create([

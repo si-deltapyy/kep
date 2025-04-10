@@ -43,8 +43,7 @@
                         <div class="text-[9px] text-slate-600 dark:text-slate-500 group-data-[sidebar=dark]:text-slate-500 group-data-[sidebar=brand]:text-slate-400">
                             <span>Other</span>
                         </div>
-
-                        <x-navigation :route="'dashboard'" :text="'Message'" :icon="'message-square'"/>
+                        
                         <x-navigation :route="'user.profile.index'" :text="'Profile'" :icon="'user-cog'"/>
                     @endcan
 

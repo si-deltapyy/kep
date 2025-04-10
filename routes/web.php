@@ -40,13 +40,24 @@ Route::get('/message-show', function () {
 
 // Corn Job Routes
 
-Route::middleware('restrict.cornjob')->group(function () {
-    Route::get('/artisan/down', [Controller::class, 'down'])->name('app.down');
-    Route::get('/artisan/up', [Controller::class, 'up'])->name('app.live');
-    Route::get('/artisan/run', function () { Artisan::call('schedule:run'); return 'Optimize and Cache Clear Success';});
+// Route::middleware('restrict.cornjob')->group(function () {
+//     Route::get('/artisan/down', [Controller::class, 'down'])->name('app.down');
+//     Route::get('/artisan/up', [Controller::class, 'up'])->name('app.live');
+//     Route::get('/artisan/run', function () { Artisan::call('schedule:run'); return 'Optimize and Cache Clear Success';});
+// });
+
+Route::get('/artisan/op', function () { 
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('config:clear');
+    Artisan::call('optimize');
+    return 'Optimize Success';
 });
 
-Route::get('/artisan/db', function () { Artisan::call('migrate:fresh --seed'); return 'Optimize and Cache Clear Success';});
+    Route::get('/artisan/run', function () { 
+        Artisan::call('schedule:run'); return 'Maintenance';});
+
+Route::get('/artisan/db', function () { Artisan::call('migrate:fresh --seed'); return 'Migrate Fresh Success';});
 
 
 

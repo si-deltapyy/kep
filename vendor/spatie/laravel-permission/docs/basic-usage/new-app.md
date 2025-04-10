@@ -16,15 +16,17 @@ If you're new to Laravel or to any of the concepts mentioned here, you can learn
 ```sh
 cd ~/Sites
 laravel new mypermissionsdemo
-# (Choose Laravel Breeze, choose Blade with Alpine)
-# (choose your own dark-mode-support choice)
-# (choose your desired testing framework)
-# (say Yes to initialize a Git repo, so that you can track your code changes)
-# (Choose SQLite)
+# (No Starter Kit is needed, but you could go with Livewire or Breeze/Jetstream, with Laravel's Built-In-Auth; or use Bootstrap using laravel/ui described later, below)
+# (You might be asked to select a dark-mode-support choice)
+# (Choose your desired testing framework: Pest or PHPUnit)
+# (If offered, say Yes to initialize a Git repo, so that you can track your code changes)
+# (If offered a database selection, choose SQLite, because it is simplest for test scenarios)
+# (If prompted, say Yes to run default database migrations)
+# (If prompted, say Yes to run npm install and related commands)
 
 cd mypermissionsdemo
 
-# the following git commands are not needed if you Initialized a git repo while "laravel new" was running above:
+# The following git commands are not needed if you Initialized a git repo while "laravel new" was running above:
 git init
 git add .
 git commit -m "Fresh Laravel Install"
@@ -48,11 +50,12 @@ sed -i '' $'s/use HasApiTokens, HasFactory, Notifiable;/use HasApiTokens, HasFac
 git add . && git commit -m "Add HasRoles trait"
 ```
 
-If you didn't install Laravel Breeze or Jetstream, add Laravel's basic auth scaffolding:
+If you didn't install a Starter Kit like Livewire or Breeze or Jetstream, add Laravel's basic auth scaffolding:
+This Auth scaffolding will make it simpler to provide login capability for a test/demo user, and test roles/permissions with them.
 ```php
 composer require laravel/ui --dev
 php artisan ui bootstrap --auth
-# npm install && npm run prod
+# npm install && npm run build
 git add . && git commit -m "Setup auth scaffold"
 ```
 
@@ -160,7 +163,7 @@ If you are creating a demo app for reporting a bug or getting help with troubles
 
 If this is your first app with this package, you may want some quick permission examples to see it in action. If you've set up your app using the instructions above, the following examples will work in conjunction with the users and permissions created in the seeder.
 
-Three users were created: test@example.com, admin@example.com, superadmin@example.com and the password for each is "password".
+Three users were created: tester@example.com, admin@example.com, superadmin@example.com and the password for each is "password".
 
 `/resources/views/dashboard.php`
 ```diff

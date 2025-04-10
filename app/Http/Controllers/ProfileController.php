@@ -36,7 +36,7 @@ class ProfileController extends Controller
 
             $prodi = Prodi::all();
             if ($user->hasPermissionTo('sso')){
-                return view('pages.profile.edit.sso', compact('data', 'prodi'));
+                return view('pages.profile.edit', compact('data', 'prodi'));
             }else{
                 return view('pages.profile.edit', compact('data', 'prodi'));
             }
