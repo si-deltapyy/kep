@@ -64,10 +64,8 @@ class KppmController extends Controller
      */
     public function show($id)
     {
-        $data = Dummy::where('id', $id)->first();
-        $doc = Document::where('doc_group', $id)->first();
-        $user = User::find($doc->user_id)->first();
-
+        $data = Dummy::find($id);
+        $user = $data->User;
         return view('pages.ec.update', compact('data', 'user', 'id'));
     }
 
