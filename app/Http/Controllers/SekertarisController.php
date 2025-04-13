@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use App\Models\User;
 use App\Models\Dummy;
 use App\Mail\SendMail;
 use App\Models\Document;
 use App\Models\ECDocument;
 use App\Models\Submission;
+use App\Service\PricingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
@@ -21,6 +23,11 @@ use Illuminate\Http\RedirectResponse;
 
 class SekertarisController extends Controller
 {
+    protected $pricingService;
+
+    public function __construct(PricingService $pricingService){
+        $this->pricingService = $pricingService;
+    }
 
     public function index(){
         $doc = Dummy::where('sekertaris_id', Auth::id())->get();
@@ -165,7 +172,7 @@ class SekertarisController extends Controller
             'action_link' => '',
             'doc_group' => $id,
         ]);
-
+        $this->pricingService->executePayment($data->user_id, $data->id);//bayar
         return redirect()->route('sekertaris.upload.ec', $id)->with(['success' => 'Data Berhasil Diubah!']);
 
     }
@@ -178,6 +185,7 @@ class SekertarisController extends Controller
         ->where('doc_group', $id)->get();
 
         $dummy = Dummy::where('id', $id)->first();
+        $this->pricingService->executePayment($dummy->user_id, $dummy->id);//bayar
 
         return view('pages.pengajuan.sekertaris.assign', compact('doc', 'dummy', 'reviewer'));
     }
@@ -240,6 +248,7 @@ class SekertarisController extends Controller
                 Mail::to($reviewer_email->email)->send(new SendMail($mailData));
             }
         }
+        $this->pricingService->executePayment($data->user_id, $data->id);//bayar
         return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Dokumen berhasil diberikan ke reviewer bidang terkait!']);
     }
 
@@ -283,7 +292,7 @@ class SekertarisController extends Controller
             'link' => 'user/Ajuan',
         ];
         Mail::to($user->email)->send(new SendMail($mailData));
-
+        //gak bayar
         return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Dokumen telah berhasil ditolak!']);
     }
 

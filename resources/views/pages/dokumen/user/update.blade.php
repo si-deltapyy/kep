@@ -36,7 +36,7 @@
                                 @if($document[$input->id]->doc_path)
                                     <p class="text-gray-500">File saat ini: <a href="{{ asset('/app/' . $document[$input->id]->doc_path) }}" target="_blank" class="text-blue-500 underline">Lihat</a></p>
                                     <!-- Preview PDF -->
-                                    <iframe class="pdf-preview" src="{{ asset('/app/' . $document[$input->id]->doc_path) }}" frameborder="0" width="100%" height="400px"></iframe>
+                                    <iframe class="pdf-preview" src="{{ asset('/app/' . $document[$input->id]->doc_path) }}?v={{ time() }}" frameborder="0" width="100%" height="400px"></iframe>
                                 @endif
                             @else
                                 <x-file-upload :required="false" title="Upload {{$input->name}}: " type="file" id="doc{{$input->id}}" name="doc{{$input->id}}" value="" class="file-input" accept=".pdf"/>

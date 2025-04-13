@@ -138,12 +138,13 @@ class ECDocumentController extends Controller
     public function show($id)
     {
 
-        $doc = Document::find($id);
+        $doc = Dummy::find($id);
 
         $data = [
             'nama' => $doc->User->name ?? 'Tidak ada nama pengguna',
-            'judul' => $doc->Dummy->title ?? 'Tidak ada judul dokumen',
+            'judul' => $doc->title ?? 'Tidak ada judul dokumen',
             'tanggal' => Carbon::now()->translatedFormat('j F, Y'),
+            'signed_date' => $doc->signed_at ?? '......',
         ];
 
 

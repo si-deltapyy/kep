@@ -17,7 +17,7 @@
                      </h2>
                      <div class="text-base font-medium mb-10 sm:mb-8 lg:mb-10">
                          <span class="flex flex-col items-center justify-center">
-                             <ins class="text-2xl tracking-tight text-gray-800 font-normal no-underline mx-3 dark:text-slate-200">Rp. 70000</ins>
+                             <ins class="text-2xl tracking-tight text-gray-800 font-normal no-underline mx-3 dark:text-slate-200">{{'Rp ' . number_format($x->amount, 0, ',', '.').',00 '}}</ins>
                              <span class="text-gray-400">{{ $x->payment_method ?? 'Belum Memilih Metode Pembayaran'}}</span>
                          </span>
                      </div>
