@@ -11,7 +11,11 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $payment = Payment::with('dummy.document.ajuanType')->get();
+        if (Auth::user()->hasRole('admin')) {
+            $payment = Payment::with('dummy.document.ajuanType')->get();
+        } else if (Auth::user()->hasRole('user')) {
+            $payment = Payment::with('dummy.document.ajuanType')->where('user_id', Auth::user()->id)->get();
+        }
 
         return view('pages.payment.index', compact('payment'));
     }

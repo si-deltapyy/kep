@@ -13,8 +13,8 @@
         $actions1 = $doc->mapWithKeys(function ($doc) {
             return [
                 $doc->id => '
-                <a href="' . route('user.ajuan.show', $doc->id) . '"><button type="button" class="px-2 py-1 lg:px-4 bg-transparent  text-primary text-sm  rounded transition hover:bg-primary-500 hover:text-white order border-primary font-medium">Lacak Dokumen</button></a>
-                <a href="' . route('user.ajuan.edit', $doc->id) . '"><button type="button" class="px-2 py-1 lg:px-4 bg-transparent  text-primary text-sm  rounded transition hover:bg-primary-500 hover:text-white order border-primary font-medium">Revisi Dokumen</button></a>
+                <a href="' . route('user.ajuan.show', $doc->id) . '"><button type="button" class="px-2 py-1 lg:px-4 bg-blue-500  text-white text-sm  rounded transition hover:bg-transparent hover:text-blue-500 order hover:border-blue-500 border-blue-500 font-medium">Lacak Dokumen</button></a>
+                <a href="' . route('user.ajuan.edit', $doc->id) . '"><button type="button" class="px-2 py-1 lg:px-4 bg-blue-500  text-white text-sm  rounded transition hover:bg-transparent hover:text-blue-500 order hover:border-blue-500 border-blue-500  font-medium">Revisi Dokumen</button></a>
 
                 '
 

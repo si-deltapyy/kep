@@ -30,33 +30,42 @@ $actions1 = $doc->mapWithKeys(function ($doc) use ($submissionStatuses) {
 
     // Jika status tidak 'done', tampilkan tombol
     return [
-        $doc->id => '
-            <a href="' . asset('storage/' . $doc->doc_path) . '" class="ml-2 text-blue-500 hover:text-blue-700" download>Unduh</a>
-            <a href="' . route('reviewer.dokRev.show', $doc->id) . '" target="_blank" class="ml-2 text-blue-500 hover:text-blue-700">Lihat PDF</a>
-            <button
-                type="button"
-                data-fc-type="modal"
-                data-fc-target="modal-primary"
-                data-doc-id="' . ($doc->id ?? '') . '"
-                data-reviewer-id="' . (auth()->id() ?? '') . '"
-                data-dummy-id="' . ($doc->doc_group ?? '') . '"
-                data-receiver-id="' . ($doc->Dummy->sekertaris_id ?? '') . '"
-                class="px-2 py-1 lg:px-4 bg-transparent text-primary text-sm rounded transition hover:bg-primary-500 hover:text-white border border-primary font-medium"
-            >
-                Message
-            </button>
+    $doc->id => '
+    <div class="flex items-center gap-3 text-slate-800 dark:text-slate-400">
 
-            <form action="' . route('reviewer.dokRev.update', $doc->id) . '" method="POST" style="display:inline;">
+        <a href="' . asset('storage/' . $doc->doc_path) . '" class="hover:text-purple-600" download title="Download">
+            <span data-lucide="download" class="w-5 h-5"></span>
+        </a>
+
+        <a href="' . route('reviewer.dokRev.show', $doc->id) . '" target="_blank" class="hover:text-blue-600" title="Preview">
+            <span data-lucide="eye" class="w-5 h-5"></span>
+        </a>
+
+        <button
+            type="button"
+            data-fc-type="modal"
+            data-fc-target="modal-primary"
+            data-doc-id="' . ($doc->id ?? '') . '"
+            data-reviewer-id="' . (auth()->id() ?? '') . '"
+            data-dummy-id="' . ($doc->doc_group ?? '') . '"
+            data-receiver-id="' . ($doc->dummy->sekertaris_id ?? '') . '"
+            class="hover:text-blue-600"
+            title="Send">
+            <span data-lucide="send" class="w-5 h-5"></span>
+        </button>
+
+        <form action="' . route('reviewer.dokRev.update', $doc->id) . '" method="POST" class="inline">
             ' . csrf_field() . '
             ' . method_field('PUT') . '
             <input type="hidden" name="doc_id" value="' . $doc->id . '">
-            <button type="submit" class="tippy-btn inline-block focus:outline-none text-slate-500 hover:bg-slate-500 hover:text-white bg-transparent border border-gray-200 dark:bg-transparent dark:text-slate-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-slate-500 text-sm font-medium py-1 px-3 rounded mb-1"
-                data-tippy-content="My Tooltip!" data-tippy-arrow="false" data-tippy-interactive="true">
-                Dokumen Benar
+            <button type="submit" class="hover:text-green-500" title="Mark as Reviewed">
+                <span data-lucide="file-check" class="w-5 h-5"></span>
             </button>
-            </form>
-            '
-    ];
+        </form>
+        
+    </div>
+    '
+];
 })->toArray();
 
 

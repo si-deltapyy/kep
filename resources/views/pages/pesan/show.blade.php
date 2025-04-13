@@ -32,27 +32,17 @@
                         <div id="accordion-collapse" data-fc-type="accordion">
                             <div id="accordion-collapse-body-1" class="" aria-labelledby="accordion-collapse-heading-1">
                                 <div class="p-4 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                                    @foreach ($documents as $doc_id => $reviews)
-                                        @php
-                                            $firstReview = $reviews->first();
-                                        @endphp
-                                        <div data-tab="{{ $loop->iteration }}" class="tabflex items-center mb-3 cursor-pointer">
-                                            <div class="w-8 h-8 rounded">
-                                                <img class="w-full h-full overflow-hidden object-cover rounded object-center" src="{{ asset('assets/images/users/avatar-3.png') }}" alt="logo" />
-                                            </div>
-                                            <div class="ms-2">
-                                                <h5 class="font-medium text-sm">
-                                                    {{ $firstReview->Document->doc_name ?? 'Dokumen Tidak Ditemukan' }}
-                                                </h5>
-                                                <p tabindex="0" class="focus:outline-none text-gray-500 dark:text-gray-400 text-xs font-medium">
-                                                    Reviewer(s):
-                                                    @foreach ($reviews->pluck('reviewer_id')->unique() as $reviewer_id)
-                                                        {{ $reviewers[$reviewer_id] ?? 'Nama Tidak Ditemukan' }}@if (!$loop->last), @endif
-                                                    @endforeach
-                                                </p>
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                    @foreach ($documents->groupBy(fn($doc) => $doc->first()->reviewer_id) as $reviewer_id => $reviewGroup)
+                                    <li role="presentation">
+                                        <button 
+                                            class="flex items-center w-full py-2 px-4 text-sm font-medium text-left text-gray-500 rounded-lg hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300 reviewer-tab"
+                                            data-tab="{{ $reviewer_id }}"
+                                            type="button">
+                                            <i class="icofont-user me-2 text-lg"></i>
+                                            {{ $reviewers[$reviewer_id] ?? 'Reviewer Tidak Diketahui' }}
+                                        </button>
+                                    </li>
+                                @endforeach
                                 </div>
                             </div>
                         </div>

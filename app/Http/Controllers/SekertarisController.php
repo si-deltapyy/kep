@@ -137,6 +137,15 @@ class SekertarisController extends Controller
                 Mail::to($reviewer_email->email)->send(new SendMail($mailData));
             }
         }
+
+        Logs::create([
+            'title' => 'Accepted',
+            'description' => 'Dokumen anda sesuai, dokumen akan segera diproses Secara Langsung (Khusus)',
+            'action_label' => 'Dokumen Valid',
+            'action_link' => '',
+            'doc_group' => $id,
+        ]);
+        
         return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 

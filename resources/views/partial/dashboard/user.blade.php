@@ -373,7 +373,8 @@
                             // Data
                             $head1 = ['ID', 'Usulan', 'Status', 'Date'];
                             $data1 = $user->filter(function ($user) {
-                                return $user->doc_status === 'on-review'; // Filter hanya doc_status 'approved'
+                                return $user->doc_status === 'on-review' ||
+                                $user->doc_status === 'process' ; // Filter hanya doc_status 'approved'
                             })->map(function ($user) {
                                 return [
                                     'id' => $user->id,

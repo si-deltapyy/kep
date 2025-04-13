@@ -82,7 +82,7 @@
                             <div class="flex items-center space-x-4 mb-4">
                                 <!-- Timeline Dot -->
                                 @if ($loop->first)
-                                    <div class="w-4 h-4 rounded-full bg-blue-500 border-2 border-blue-500 dark:border-blue-700"><i data-lucide="check"></i></div>
+                                    <div class="w-4 h-4 rounded-full bg-blue-500 border-2 border-blue-500 dark:border-blue-700"></div>
                                 @else
                                     <div class="w-4 h-4 rounded-full bg-black-200 border-2 border-black-200 dark:border-black-700"></div>
                                 @endif

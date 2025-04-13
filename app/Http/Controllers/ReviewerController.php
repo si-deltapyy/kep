@@ -18,9 +18,21 @@ class ReviewerController extends Controller
     public function index(){
 
         $id = Submission::select('doc_group')->where('reviewer', Auth::id());
-        $doc = Dummy::whereIn('id', $id)->get();
-
-
+        $docs = Dummy::whereIn('id', $id)->get();
+        
+        // Gunakan hasil subquery untuk ambil data Submission lengkap
+        $doc = DB::table('submission')
+            ->join('dummy', 'submission.doc_group', '=', 'dummy.id')
+            ->select('submission.*', 'dummy.*') // sesuaikan field dummy
+            ->where('submission.reviewer', Auth::id())
+            ->whereIn('submission.id', function ($query) {
+                $query->select(DB::raw('MAX(submission.id)'))
+                    ->from('submission')
+                    ->where('submission.reviewer', Auth::id())
+                    ->groupBy('submission.doc_group');
+            })
+            ->get();
+        
         return view('pages.pengajuan.reviewer.index', compact('doc'));
     }
 

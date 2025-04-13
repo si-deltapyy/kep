@@ -31,7 +31,7 @@
             <a href="javascript:void(0);"
                 onclick="showModal()"
                 class="ml-3 px-2 py-1 bg-red-500/10 border border-transparent collapse:bg-red-100 text-red text-sm rounded hover:bg-red-600 hover:text-white"
-                >Tolak
+                >Tolak Ajuan
             </a>
 
             <div id="accessModal"

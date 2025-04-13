@@ -40,13 +40,13 @@ class HomeController extends Controller
         ->count();
 
         $jumlahUser = User::role('sekertaris')->count();
-        $jumlahOnReview = Dummy::whereNotIn('doc_status', ['process', 'on-review'])->count();
+        $jumlahOnReview = Dummy::whereIn('doc_status', ['process', 'on-review'])->where('user_id', Auth::user()->id)->count();
         $jumOnRevSek = Dummy::whereNotIn('doc_status', ['new-proposal', 'approved'])
         ->where('sekertaris_id', Auth::id())->count();
-        $jumDone = Dummy::where('doc_status', 'approved')->count();
-        $perbaikan = Dummy::where('doc_status', ['revised', 'resubmission'])->count();
+        $jumDone = Dummy::where('doc_status', 'approved')->where('user_id', Auth::user()->id)->count();
+        $perbaikan = Dummy::where('doc_status', ['revised', 'resubmission'])->where('user_id', Auth::user()->id)->count();
 
-        $newProposal = Dummy::whereIn('doc_status', ['new-proposal'])->count();
+        $newProposal = Dummy::whereIn('doc_status', ['new-proposal'])->where('user_id', Auth::user()->id)->count();
         $newProposalSek = Dummy::where('doc_status', 'new-proposal')->
         where('sekertaris_id', Auth::user()->id)->count();
 
