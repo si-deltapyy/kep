@@ -31,6 +31,11 @@ class Dummy extends Model
         return $this->hasMany(Submission::class, 'doc_group', 'doc_group');
     }
 
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
     public function Sekertaris()
     {
         return $this->belongsTo(User::class, 'sekertaris_id', 'id');
