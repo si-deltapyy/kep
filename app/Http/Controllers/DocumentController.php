@@ -122,36 +122,6 @@ class DocumentController extends Controller
 
             }
         }
-
-        $users = ProfileUser::where('user_id', Auth::user()->id)->first();
-        $amount = 0; // Set the default amount to 0
-        switch($amount){
-            case $users->status == 'Mahasiswa' && $users->univ == NULL:
-                $amount = 75000;
-                break;
-            case $users->status == 'Mahasiswa' && $users->univ != NULL:
-                $amount = 150000;
-                break;
-            case $users->status == 'Dosen' && $users->univ == NULL:
-                $amount = 150000;
-                break;
-            case $users->status == 'Dosen' && $users->univ != NULL:
-                $amount = 200000;
-                break;
-            default:
-                $amount = 0;
-                break;
-        }
-
-        Payment::create([
-            'user_id' => Auth::user()->id,
-            'group_id' => $group,
-            'amount' => $amount,
-            'payment_method' => null,
-            'payment_date' => null,
-            'path_proof' => null,
-        ]);
-
         return redirect()->route('user.ajuan.index')->with('success', 'Pengajuan Dokumen Telah Berhasil');
     }
 
