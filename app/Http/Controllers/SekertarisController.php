@@ -144,7 +144,6 @@ class SekertarisController extends Controller
                 Mail::to($reviewer_email->email)->send(new SendMail($mailData));
             }
         }
-
         Logs::create([
             'title' => 'Accepted',
             'description' => 'Dokumen anda sesuai, dokumen akan segera diproses Secara Langsung (Khusus)',
@@ -152,7 +151,7 @@ class SekertarisController extends Controller
             'action_link' => '',
             'doc_group' => $id,
         ]);
-        
+        $this->pricingService->executePayment($data->user_id, $data->id);//bayar
         return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
@@ -185,11 +184,16 @@ class SekertarisController extends Controller
         ->where('doc_group', $id)->get();
 
         $dummy = Dummy::where('id', $id)->first();
-        $this->pricingService->executePayment($dummy->user_id, $dummy->id);//bayar
 
         return view('pages.pengajuan.sekertaris.assign', compact('doc', 'dummy', 'reviewer'));
     }
 
+    public function all($id)
+    {
+        return $this->expedited($id);
+    }
+
+    /*
     public function all($id): RedirectResponse{
         $data = Dummy::where('id', $id);
         $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
@@ -251,6 +255,7 @@ class SekertarisController extends Controller
         $this->pricingService->executePayment($data->user_id, $data->id);//bayar
         return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Dokumen berhasil diberikan ke reviewer bidang terkait!']);
     }
+    */
 
     /**
      * @return Params int
