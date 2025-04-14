@@ -103,7 +103,7 @@ class SekertarisController extends Controller
      */
     public function update(Request $request, int $id): RedirectResponse{
 
-        $data = Dummy::where('id', $id);
+        $data = Dummy::find($id);
         $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
                 ->where('doc_group', $id)
                 ->select( '*' , 'ld.id as id_log')
