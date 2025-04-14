@@ -145,8 +145,8 @@ class SekertarisController extends Controller
             }
         }
         Logs::create([
-            'title' => 'Accepted',
-            'description' => 'Dokumen anda sesuai, dokumen akan segera diproses Secara Langsung (Khusus)',
+            'title' => 'Accepted for Review',
+            'description' => 'Dokumen anda sudah lengkap dan akan diteruskan untuk review protokol penelitian oleh reviewer',
             'action_label' => 'Dokumen Valid',
             'action_link' => '',
             'doc_group' => $id,
