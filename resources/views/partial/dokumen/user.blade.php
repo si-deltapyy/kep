@@ -32,12 +32,12 @@
 
 <div class="flex-auto p-6 text-left">
     <div class="flex justify-left gap-4 mt-4">
-        <a href="javascript:void(0);" onclick="showModal()" 
+        <a href="javascript:void(0);" onclick="showModal()"
             class="px-2 py-1 bg-primary-500/10 border border-transparent text-primary text-sm rounded hover:bg-blue-600 hover:text-white">
             <i class="ti ti-plus me-1"></i> Ajukan
             <span data-lucide="plus" class="w-4 h-4 inline-block me-2"></span>
         </a>
-        <button type="button" data-fc-type="modal" data-fc-target="modalcenter" 
+        <button type="button" data-fc-type="modal" data-fc-target="modalcenter"
             class="inline-block focus:outline-none bg-green-500/10 text-green hover:bg-green-500 hover:text-white border border-gray-200 dark:bg-transparent dark:text-slate-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-slate-500 text-sm font-medium py-1 px-3 rounded">
             <i data-lucide="download" class="w-4 h-4 inline-block me-2"></i> Download Template
         </button>
@@ -113,7 +113,11 @@
                   <div id="accordion-collapse-body-1" class="hidden overflow-hidden transition-[height] duration-300" aria-labelledby="accordion-collapse-heading-1">
                     <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
                       <p class="mb-2 text-gray-500 dark:text-gray-400">Unduh Template {{ $type->ajuan_name }}</p>
-                      <a href="{{ route('user.download.templates', $type->id) }}" class="inline-block focus:outline-none text-primary-500 hover:bg-primary-500 hover:text-white bg-transparent border border-gray-200 dark:bg-transparent dark:text-primary-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-primary-500  text-sm font-medium py-1 px-3 rounded mr-1 close" data-fc-dismiss>Unduh</a>
+                        @foreach($type->template as $template)
+                            {{$loop->index + 1}}. {{$template->template_name}}
+                            <a href="{{ asset('/app/' . $template->template_path) }}" class="inline-block focus:outline-none text-primary-500 hover:bg-primary-500 hover:text-white bg-transparent border border-gray-200 dark:bg-transparent dark:text-primary-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-primary-500  text-sm font-medium py-1 px-3 rounded mr-1 close" data-fc-dismiss>Unduh</a>
+                        @endforeach
+{{--                      <a href="{{ route('user.download.templates', $type->id) }}" class="inline-block focus:outline-none text-primary-500 hover:bg-primary-500 hover:text-white bg-transparent border border-gray-200 dark:bg-transparent dark:text-primary-500 dark:hover:text-white dark:border-gray-700 dark:hover:bg-primary-500  text-sm font-medium py-1 px-3 rounded mr-1 close" data-fc-dismiss>Unduh</a>--}}
                     </div>
                   </div>
                 @endforeach
