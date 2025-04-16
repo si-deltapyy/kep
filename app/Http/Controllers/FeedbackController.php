@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Document;
 use App\Models\User;
 use App\Models\Dummy;
 use App\Models\Pesan;
@@ -97,14 +98,16 @@ class FeedbackController extends Controller
     {
         // Ambil data berdasarkan dummy_id
         $rawDocuments = Feedback::where('receiver_id', Auth::id())
-        ->where('dummy_id', $dummy_id)
-        ->get()
-        ->groupBy('document_id');
+            ->where('dummy_id', $dummy_id)
+            ->get()
+            ->groupBy('document_id');
 
         //Order paling baru
         $documents = $rawDocuments->map(function ($group) {
             return $group->sortByDesc('created_at');
         });
+
+        $dum = Dummy::find($dummy_id);
 
         // Ambil reviewer_id
         $reviewerIds = $documents->flatten()->pluck('reviewer_id')->unique();
@@ -114,11 +117,15 @@ class FeedbackController extends Controller
             return redirect()->back()->with('error', 'Data tidak ditemukan untuk dummy_id: ' . $dummy_id);
         }
 
+        $allDoc = $dum->Document;
+
         // Kirim data ke view
         return view('pages.pesan.show', [
             'documents' => $documents,
             'dummy_id' => $dummy_id,
             'reviewers' => $reviewers,
+            'dum'       => $dum,
+            'allDoc'    => $allDoc,
         ]);
     }
 
@@ -141,11 +148,20 @@ class FeedbackController extends Controller
             return redirect()->back()->with('error', 'Pesan tidak ditemukan.');
         }
 
+        $specificDocument = Document::find($pesan->document_id);
+        $otherdocs = null;
+        if (null != $specificDocument) {
+            $dummy = $specificDocument->Dummy;
+            $otherdocs = $dummy->Document;
+        }
+
         return view('pages.pesan.detail', [
             'pesan' => $pesan,
             'reviewerEmail' => $reviewerEmail,
             'reviewerName' => $reviewerName,
             'admin' => $admin,
+            'document' => $specificDocument,
+            'otherdocs' => $otherdocs,
         ]);
     }
 
