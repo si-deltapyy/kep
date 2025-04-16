@@ -33,7 +33,7 @@ $actions1 = $doc->mapWithKeys(function ($doc) use ($submissionStatuses) {
     $doc->id => '
     <div class="flex items-center gap-3 text-slate-800 dark:text-slate-400">
 
-        <a href="' . asset('storage/' . $doc->doc_path) . '" class="hover:text-purple-600" download title="Download">
+        <a href="' . asset('/app/' . $doc->doc_path) . '" class="hover:text-purple-600" download title="Download">
             <span data-lucide="download" class="w-5 h-5"></span>
         </a>
 
@@ -62,7 +62,7 @@ $actions1 = $doc->mapWithKeys(function ($doc) use ($submissionStatuses) {
                 <span data-lucide="file-check" class="w-5 h-5"></span>
             </button>
         </form>
-        
+
     </div>
     '
 ];
