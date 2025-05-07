@@ -247,7 +247,7 @@
                                     ];
                                 });
 
-                                $actions1 = $user->mapWithKeys(function ($user) {
+                                $actions1 = auth()->user()->hasRole('user') ? [] : $user->mapWithKeys(function ($user) {
                                     return [
                                         $user->id => '<form action="' . route('sekertaris.review.destroy', $user->id) . '" method="post" style="display:inline;">
                                             ' . csrf_field() .
@@ -295,9 +295,9 @@
                             <x-table
                                 :head="$head1"
                                 :data="$data1->toArray()"
-                                :actionHeader="true"
-                                :actionSelect="true"
-                                :actionColumn="$actions1"
+                                :actionHeader="!auth()->user()->hasRole('user')"
+                                :actionSelect="!auth()->user()->hasRole('user')"
+                                :actionColumn="!auth()->user()->hasRole('user') ? $actions1 : []"
                                 :customColumns="$customColumns"
                             />
                         </div>
@@ -332,7 +332,7 @@
                                 ];
                             });
 
-                            $actions1 = $user->mapWithKeys(function ($user) {
+                            $actions1 = auth()->user()->hasRole('user') ? [] : $user->mapWithKeys(function ($user) {
                                 return [
                                     $user->id => '<form action="' . route('sekertaris.review.destroy', $user->id) . '" method="post" style="display:inline;">
                                         ' . csrf_field() .
@@ -346,9 +346,9 @@
                             <x-table
                                 :head="$head1"
                                 :data="$data1->toArray()"
-                                :actionHeader="true"
-                                :actionSelect="true"
-                                :actionColumn="$actions1"
+                                :actionHeader="!auth()->user()->hasRole('user')"
+                                :actionSelect="!auth()->user()->hasRole('user')"
+                                :actionColumn="!auth()->user()->hasRole('user') ? $actions1 : []"
                                 :customColumns="$customColumns"
                             />
                         </div>
@@ -384,7 +384,7 @@
                                 ];
                             });
 
-                            $actions1 = $user->mapWithKeys(function ($user) {
+                            $actions1 = auth()->user()->hasRole('user') ? [] : $user->mapWithKeys(function ($user) {
                                 return [
                                     $user->id => '<form action="' . route('sekertaris.review.destroy', $user->id) . '" method="post" style="display:inline;">
                                         ' . csrf_field() .
@@ -398,9 +398,9 @@
                             <x-table
                                 :head="$head1"
                                 :data="$data1->toArray()"
-                                :actionHeader="true"
-                                :actionSelect="true"
-                                :actionColumn="$actions1"
+                                :actionHeader="!auth()->user()->hasRole('user')"
+                                :actionSelect="!auth()->user()->hasRole('user')"
+                                :actionColumn="!auth()->user()->hasRole('user') ? $actions1 : []"
                                 :customColumns="$customColumns"
                             />
                         </div>
@@ -436,7 +436,7 @@
                                 ];
                             });
 
-                            $actions1 = $user->mapWithKeys(function ($user) {
+                            $actions1 = auth()->user()->hasRole('user') ? [] : $user->mapWithKeys(function ($user) {
                                 return [
                                     $user->id => '<form action="' . route('sekertaris.review.destroy', $user->id) . '" method="post" style="display:inline;">
                                         ' . csrf_field() .
@@ -450,9 +450,9 @@
                             <x-table
                                 :head="$head1"
                                 :data="$data1->toArray()"
-                                :actionHeader="true"
-                                :actionSelect="true"
-                                :actionColumn="$actions1"
+                                :actionHeader="!auth()->user()->hasRole('user')"
+                                :actionSelect="!auth()->user()->hasRole('user')"
+                                :actionColumn="!auth()->user()->hasRole('user') ? $actions1 : []"
                                 :customColumns="$customColumns"
                             />
                         </div>
