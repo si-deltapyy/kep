@@ -23,7 +23,7 @@ class ECDocumentController extends Controller
     public function index(){
 
         $doc = ECDocument::all();
-        $usDoc = ECDocument::where('user_id', Auth::id())->first();
+        $usDoc = ECDocument::where('user_id', Auth::id())->get();
         $docs = Dummy::where('doc_status', 'approved')->get();
 
         return view('pages.ec.index', compact('doc', 'docs', 'usDoc'));
@@ -143,7 +143,7 @@ class ECDocumentController extends Controller
         $data = [
             'nama' => $doc->User->name ?? 'Tidak ada nama pengguna',
             'judul' => $doc->title ?? 'Tidak ada judul dokumen',
-            'tanggal' => Carbon::now()->translatedFormat('j F, Y'),
+            'tanggal' => $this->formatDateUsingLocale($this->parseIndonesianDate(Carbon::now()->translatedFormat('j F, Y')), 'en'),
             'signed_date' => $doc->signed_at ?? '......',
         ];
 
@@ -174,8 +174,6 @@ class ECDocumentController extends Controller
                 'signed_at' => now(),
             ]);
         }
-
-
 
         $pdf = Pdf::loadView('pages.ec.preview', ['data' => $data])
             ->setOption('isRemoteEnabled', true)
@@ -316,6 +314,24 @@ class ECDocumentController extends Controller
         }
     }
 
+    private function parseIndonesianDate($tanggal)
+    {
+        $bulanIndo = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+        $bulanEng = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
+        $translated = str_ireplace($bulanIndo, $bulanEng, $tanggal);
+        return Carbon::parse($translated); // ✅ berhasil
+    }
+
+    private function formatDateUsingLocale(Carbon $tanggal, string $locale = 'en', string $format = 'j F, Y')
+    {
+        $oldLocale = Carbon::getLocale();         // Simpan locale sebelumnya
+        Carbon::setLocale($locale);              // Set locale sementara
+
+        $formatted = $tanggal->translatedFormat($format);
+
+        Carbon::setLocale($oldLocale);           // Kembalikan locale ke semula
+        return $formatted;
+    }
 
 }

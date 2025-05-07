@@ -106,14 +106,20 @@
                 <td class="logo">
                     <img src="{{ public_path('assets/images/logos/UNS-LOGO.png') }}" alt="Logo UNS">
                 </td>
+                <style>
+                    .no-bold {
+                        font-family: 'Times New Roman', Times, serif;
+                        line-height: 1; /* Single line spacing */
+                    }
+                </style>
                 <td class="details">
-                    <h1>MINISTRY OF EDUCATION, CULTURE, RESEARCH, AND TECHNOLOGY</h1>
-                    <h1>UNIVERSITAS SEBELAS MARET</h1>
-                    <h2>FACULTY OF TEACHER TRAINING AND EDUCATION</h2>
-                    <h2>RESEARCH ETHICS COMMISSION</h2>
-                    <p>Jalan Insinyur Sutami Nomor 36A Kentingan Surakarta</p>
-                    <p>Telepon (0271) 669124, Faksimile (0271) 648939</p>
-                    <p>Laman: <a href="https://fkip.uns.ac.id">https://fkip.uns.ac.id</a></p>
+                    <h1 class="no-bold" style="font-size: 19px;  font-weight: 400 !important;">MINISTRY OF HIGHER EDUCATION, SCIENCE, AND <br> TECHNOLOGY</h1>
+                    <h1 class="no-bold" style="font-size: 17px;  font-weight: 400 !important;">UNIVERSITAS SEBELAS MARET</h1>
+                    <h2 class="no-bold" style="font-size: 17px;  font-weight: 400 !important;">FACULTY OF TEACHER TRAINING AND EDUCATION</h2>
+                    <h2 class="no-bold" style="font-size: 17px;">RESEARCH ETHICS COMMISSION</h2>
+                    <p class="no-bold">Jl Ir. Sutami Nomor 36A Kentingan Surakarta 57126</p>
+                    <p class="no-bold" >Telephone (0271) 669124, Faximile (0271) 648939</p>
+                    <p class="no-bold" >Website: <a href="https://kepfkip.uns.ac.id">https://kepfkip.uns.ac.id</a> / Email: kep@fkip.uns.ac.id</p>
                 </td>
             </tr>
         </table>
@@ -122,11 +128,25 @@
     <hr>
 
     <!-- CONTENT -->
+    <style>
+        .num {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 400; /* Normal weight (not bold) */
+            line-height: 1; /* Single line spacing */
+            text-align: left; /* Align text to the left */
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+            align-items: center; /* Center content vertically */
+            height: 100vh; /* Full viewport height */
+            width: 100%; /* Full width */
+        }
+    </style>
     <div class="content">
-        <h2 class="bold" style="text-align: center;">ETHICAL APPROVAL</h2>
-        <div class="approval-number">
-            <p><strong>Number:</strong>  {{ $data['ethical_number'] ?? 'ditulis admin' }}</p>
-            <p><strong>Date:</strong>  {{ $data['tanggal'] ? \Carbon\Carbon::parse($data['tanggal'])->translatedFormat('j F, Y') : '-'}}</p>
+        <h2 class="bold" style="text-align: center;"><i><u>ETHICAL APPROVAL</u></i></h2>
+        <div class="approval-number num" style="text-align: center;">
+            <p>Number:  {{ $data['ethical_number'] ?? 'ditulis admin' }}</p>
+            <p>Date: {{ $data['tanggal'] ? $data['tanggal'] : '-'}}</p>
+
         </div>
         <p>
             The undersigned, Chair of the Research Ethics Commission, after a series of discussions and assessments, hereby decides on the research protocol entitled:
@@ -143,7 +163,7 @@
 
     <!-- SIGNATURE -->
     <div class="signature">
-        <p>Surakarta, {{ $data['signed_date'] ? \Carbon\Carbon::parse($data['tanggal'])->translatedFormat('j F, Y') : '-' }}</p>
+        <p>Surakarta, {{ $data['signed_date'] ? $data['tanggal'] : '-' }}</p>
         <p><strong>Chair of the Research Ethics Commission</strong></p>
         <br><br><br><br>
         <p><strong>Dr.rer.nat. Sri Mulyani, M.Si.</strong></p>
