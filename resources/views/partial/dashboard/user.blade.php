@@ -9,7 +9,7 @@
             </div>
             <div class="flex-auto p-6 text-center">
                 <h3 class="text-lg font-medium text-slate-600 dark:text-slate-300">
-                    <i>Tunggu 1x24 Jam atau lebih cepat!</i>
+                    <i>Ajuan akun baru anda akan diproses oleh Admin KEP</i>
                 </h3>
             </div>
         </div>
