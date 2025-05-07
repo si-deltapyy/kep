@@ -69,12 +69,11 @@
                                 Kembali
 
                             </a>
-                            <a href="{{route('user.ajuan.index')}}"
-                               class="ml-2 px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white">
+                            <a href="{{asset('/app/'.$x->doc_path)}}"
+                               class="ml-2 px-2 py-1 bg-green-500/10 border border-transparent collapse:bg-green-100 text-green text-sm rounded hover:bg-green-600 hover:text-white" target="_blank">
                                 <i class="ti ti-plus me-1"></i>
                                 <span data-lucide="download" class="w-4 h-4 inline-block me-2"></span>
                                 Download
-
                             </a>
                         @endif
                         <a href="{{ route('admin.ec.previewPDF', ['id' => $x->id]) }}" target="blank"
