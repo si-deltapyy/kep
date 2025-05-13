@@ -47,6 +47,26 @@
     </div>
 </div>
 
+<div class="grid grid-cols-1 p-0 md:p-4">
+    <div class="col-span-12">
+        <div class="w-full relative overflow-hidden bg-white dark:bg-slate-800 shadow-md rounded-lg">
+            <div class="border-b border-dashed border-slate-200 dark:border-slate-700 py-4 px-6">
+                <h4 class="font-semibold text-lg text-slate-800 dark:text-slate-200 text-left">
+                    Instruksi Membuat Ajuan Baru [1]
+                </h4>
+            </div>
+            <div class="flex-auto p-6 text-left">
+                <ol class="list-decimal pl-6 space-y-1 text-gray-800">
+                    <li>Klik Tombol Download Template</li>
+                    <li>Pilih template dokumen ajuan ethical clearance sesuai dengan jenis ajuan (Saintek, Soshum, atau Pendidikan)!</li>
+                    <li>Download dan isi template yang telah disediakan, kemudian isi masing-masing template!  </li>
+                    <li>Export masing-masing dokumen dalam format PDF! dikelompokkan berdasarkan jenis dokumennya!</li>
+                    <li>Klik tombol ajukan, kemudian muncul kotak dialog "Perlu Diperhatikan", kemudian klik Ajukan Dokumen untuk membuat ajuan baru! </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="grid grid-cols-1 p-0 md:p-4">
     <div class="sm:-mx-6 lg:-mx-8">
