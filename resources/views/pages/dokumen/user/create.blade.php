@@ -1,69 +1,89 @@
 @extends('layouts.app')
 @section('title')
-<x-page-tittle :title="'Pengajuan'" :slash1="'Pengajuan'" :slash2="'Dokumen'" :slash3="'Create'"></x-page-tittle>
+    <x-page-tittle :title="'Pengajuan'" :slash1="'Pengajuan'" :slash2="'Dokumen'" :slash3="'Create'"></x-page-tittle>
 @endsection
 
 @if(session('error'))
     <div class="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
-        <span class="font-medium">alert!</span>  {{ session('error') }}
+        <span class="font-medium">alert!</span> {{ session('error') }}
     </div>
 @endif
 
 @section('content')
 
-        <div
-            class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4 mb-4"
-          >
-            <div
-              class="sm:col-span-12 md:col-span-12 lg:col-span-8 xl:col-span-6 xl:col-start-4"
-            >
-              <div
-                class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-slate-700/40 rounded-md w-full relative mb-4"
-              >
-                <div
-                  class="border-b border-slate-200 dark:border-slate-700/40 py-3 px-4 dark:text-slate-300/70"
-                >
-                  <div class="flex-none md:flex">
-                    <h4
-                      class="font-medium text-lg flex-1 self-center mb-2 md:mb-0"
-                    >
-                      Pengajuan Dokumen
-                    </h4>
-                  </div>
+    <div class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4 mb-4">
+
+        <div class="sm:col-span-12 md:col-span-12 lg:col-span-8 xl:col-span-6 xl:col-start-4">
+            <div class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-slate-700/40 rounded-md w-full relative mb-4">
+                <div class="border-b border-slate-200 dark:border-slate-700/40 py-3 px-4 dark:text-slate-300/70">
+                    <div class="flex-none md:flex">
+                        <h4 class="font-medium text-lg flex-1 self-center mb-2 md:mb-0">
+                            Instruksi Membuat Ajuan Baru [2]
+                        </h4>
+                    </div>
+                </div>
+                <div class="flex-auto p-8">
+                    <ol class="list-decimal pl-6 space-y-1 text-gray-800">
+                        <li>Pastikan nama anda sudah benar (cek pojok kanan atas)! Jika nama belum benar segera perbaiki dengan lewat menu Profile di sidebar!</li>
+                        <li>Pada kolom "Judul Usulan", isilah kolom tersebut dengan judul usulan yang sesuai menggunakan Bahasa Inggris yang baik dan benar!</li>
+                        <li>Pilih tipe ajuan (Saintek, Soshum, atau Pendidikan)!</li>
+                        <li>Upload file pdf yang sudah diexport sesuai/berdasarkan kolom yang disediakan!</li>
+                        <li>Untuk dokumen yang tidak disediakan templatenya, maka formatnya bebas (ditentukan sendiri oleh pengusul)!</li>
+                        <li>Untuk kolom dokumen dengan keterangan (opsional), anda dapat mengupload dokumen PDF kosong tanpa isi jika memang tidak memiliki dokumen yang dimaksud!</li>
+                        <li>Setelah seluruh kolom dokumen terisi, pastikan kembali bahwa judul ajuan dan nama anda sudah benar! Jika seluruh data dirasa sudah benar, klik "Submit" untuk mengunggah ajuan baru!</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:col-span-12 md:col-span-12 lg:col-span-8 xl:col-span-6 xl:col-start-4">
+            <div class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-slate-700/40 rounded-md w-full relative mb-4">
+                <div class="border-b border-slate-200 dark:border-slate-700/40 py-3 px-4 dark:text-slate-300/70">
+                    <div class="flex-none md:flex">
+                        <h4 class="font-medium text-lg flex-1 self-center mb-2 md:mb-0">
+                            Pengajuan Dokumen
+                        </h4>
+                    </div>
                 </div>
                 <!--end header-title-->
                 <div class="flex-auto p-4">
-                  <x-form-input method="POST" action="{{ route('user.ajuan.store') }}" has-file class="p-4">
-                    <x-input title="Judul Usulan (Dalam Bahasa Inggris)" id="pengusul" type="text" class="form-control" name="pengusul"/>
-                    <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
-                      <select required name="typeajuan" id="at" class="w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-[6.5px] focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700">
-                        <option value="0">-- Pilih Type Ajuan -- </option>
-                        @foreach ($ajuan as $s)
-                          <option value="{{$s->id}}">{{$s->ajuan_name}}</option>
+                    <x-form-input method="POST" action="{{ route('user.ajuan.store') }}" has-file class="p-4">
+                        <x-input title="Judul Usulan (Dalam Bahasa Inggris)" id="pengusul" type="text"
+                                 class="form-control" name="pengusul"/>
+                        <div class="col-span-12 md:col-span-12 lg:col-span-9 mb-2">
+                            <select required name="typeajuan" id="at"
+                                    class="w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-[6.5px] focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500 dark:hover:border-slate-700">
+                                <option value="0">-- Pilih Type Ajuan --</option>
+                                @foreach ($ajuan as $s)
+                                    <option value="{{$s->id}}">{{$s->ajuan_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @foreach ($type as $input)
+                            <div class="col-span-1">
+                                <x-file-upload title="Upload {{$input->name}}: " type="file" id="doc{{$input->id}}"
+                                               name="doc{{$input->id}}" required="{{ $input->is_required }}"
+                                               class="file-input" accept=".pdf"/>
+                                <br>
+                            </div>
                         @endforeach
-                      </select>
-                  </div>
-                  @foreach ($type as $input)
-                  <div class="col-span-1">
-                      <x-file-upload title="Upload {{$input->name}}: " type="file" id="doc{{$input->id}}" name="doc{{$input->id}}" required="{{ $input->is_required }}"  class="file-input" accept=".pdf" /><br>
-                  </div>
-                  @endforeach
-                  
-                  <!-- Tombol Next, awalnya disembunyikan -->
-                  <div class="col-span-1" style="display: none; text-align: center; margin-top: 10px;" id="nextButton">
-                      <button type="button" class="btn btn-primary">Next</button>
-                  </div>
-                    <x-button>Submit</x-button>
-                  </x-form-input>
+
+                        <!-- Tombol Next, awalnya disembunyikan -->
+                        <div class="col-span-1" style="display: none; text-align: center; margin-top: 10px;"
+                             id="nextButton">
+                            <button type="button" class="btn btn-primary">Next</button>
+                        </div>
+                        <x-button>Submit</x-button>
+                    </x-form-input>
                 </div>
                 <!--end card-body-->
-              </div>
-              <!--end card-->
             </div>
-            <!--end col-->
-          </div>
-          <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            <!--end card-->
+        </div>
+        <!--end col-->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
             const fileInputs = document.querySelectorAll('.file-input');
             const maxSize = 2 * 1048576; // Batas ukuran file dalam bytes (2MB)
             const nextButton = document.getElementById('nextButton');
@@ -111,6 +131,6 @@
             checkNextButton();
         });
 
-        </script>
+    </script>
 
 @endsection

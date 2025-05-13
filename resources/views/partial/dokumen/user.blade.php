@@ -55,7 +55,7 @@
                     Instruksi Membuat Ajuan Baru [1]
                 </h4>
             </div>
-            <div class="flex-auto p-6 text-left">
+            <div class="flex-auto p-8 text-left">
                 <ol class="list-decimal pl-6 space-y-1 text-gray-800">
                     <li>Klik Tombol Download Template</li>
                     <li>Pilih template dokumen ajuan ethical clearance sesuai dengan jenis ajuan (Saintek, Soshum, atau Pendidikan)!</li>
