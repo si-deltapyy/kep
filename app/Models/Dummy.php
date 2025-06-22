@@ -66,5 +66,9 @@ class Dummy extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public function rejections()
+    {
+        return $this->hasMany(Rejection::class);
+    }
 
 }

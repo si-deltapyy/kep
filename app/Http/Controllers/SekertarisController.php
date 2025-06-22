@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\Rejection;
 use App\Models\User;
 use App\Models\Dummy;
 use App\Mail\SendMail;
@@ -10,6 +11,7 @@ use App\Models\Document;
 use App\Models\ECDocument;
 use App\Models\Submission;
 use App\Service\PricingService;
+use App\Service\WorkflowService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
@@ -19,6 +21,7 @@ use App\Models\Reviewer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Validator;
 
 
 class SekertarisController extends Controller
@@ -100,6 +103,7 @@ class SekertarisController extends Controller
     /**
      * @return Params int
      * @return RedirectRespons
+     * dipanggil ketika memilih reviewer di fullboard dan expedited review.
      */
     public function update(Request $request, int $id): RedirectResponse{
 
@@ -117,8 +121,8 @@ class SekertarisController extends Controller
 
         $mailData = [
             'title' => 'Mail from KEP FKIP',
-            'body' => 'This is for testing email using smtp.',
-            'subject' => 'Review Bos',
+            'body' => 'Anda mendapatkan tugas baru untuk mereview protokol dengan judul'.$data->title.'.',
+            'subject' => 'Tugas Review',
             'view' => 'pages.email.sendReviewer',
             'link' => 'reviewer/pengajuan',
         ];
@@ -151,7 +155,7 @@ class SekertarisController extends Controller
             'action_link' => '',
             'doc_group' => $id,
         ]);
-        $this->pricingService->executePayment($data->user_id, $data->id);//bayar
+        $this->pricingService->executePayment($data->user_id, $data->id);//bayar expedited & full board
         return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
@@ -193,78 +197,27 @@ class SekertarisController extends Controller
         return $this->expedited($id);
     }
 
-    /*
-    public function all($id): RedirectResponse{
-        $data = Dummy::where('id', $id);
-        $doc = Document::join('log_document as ld', 'ld.doc_id', '=', 'document.id')
-                ->where('doc_group', $id)
-                ->select( '*' , 'ld.id as id_log')
-                ->get();
-
-        $data->update([
-            'doc_status' => 'on-review',
-            'updated_at' => now()
-        ]);
-
-        $idtype = $doc->map(function ($item) {
-            return $item->ajuan_type;
-        });
-
-
-        $mailData = [
-            'title' => 'Mail from KEP FKIP',
-            'body' => 'This is for testing email using smtp.',
-            'subject' => 'a',
-            'view' => 'pages.email.sendReviewer',
-            'link' => 'reviewer/pengajuan',
-        ];
-
-        if ($doc) {
-            $typeRev = Reviewer::where('type', 1)->get();
-            $idRev = $typeRev->map(function ($item) {
-                return $item->user_id;
-            });
-            $reviewer = User::whereIn('id', $idRev)->get();
-
-            foreach ($doc as $d) {
-                foreach ($reviewer as $singleReviewer) {
-                    Submission::create([
-                        'log_id' => $d->id_log,
-                        'reviewer' => $singleReviewer->id,
-                        'doc_group' => $id
-                    ]);
-                }
-            }
-
-            Logs::create([
-                'title' => 'Accepted',
-                'description' => 'Dokumen anda sesuai, dokumen akan segera diproses reviewer',
-                'action_label' => 'Dokumen Valid',
-                'action_link' => '',
-                'doc_group' => $id,
-            ]);
-
-            foreach ($reviewer as $singleReviewer) {
-                $reviewer_email = User::role('reviewer')
-                ->where('id', $singleReviewer->id)
-                ->select('email')
-                ->first();
-                Mail::to($reviewer_email->email)->send(new SendMail($mailData));
-            }
-        }
-        $this->pricingService->executePayment($data->user_id, $data->id);//bayar
-        return redirect()->route('sekertaris.pengajuan.index')->with(['success' => 'Dokumen berhasil diberikan ke reviewer bidang terkait!']);
-    }
-    */
-
     /**
      * @return Params int
      * Assign Reviewer Untuk Melakukan reviewer Ajuan
      */
 
-    public function rejected($id): RedirectResponse{
+    public function rejected(Request $request, $id): RedirectResponse{
+        $validator = Validator::make($request->all(), [
+            'reason' => 'required|string|max:1000',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput(); // Agar textarea tetap terisi
+        }
 
         $data = Dummy::find($id);
+        $data->rejections()->create([
+            'reason' => $request->reason
+        ]);
+
         $user = User::find($data->user_id);
 
         $data->update([
@@ -289,10 +242,12 @@ class SekertarisController extends Controller
             'doc_group' => $id,
         ]);
 
+
+
         $mailData = [
             'title' => 'Dokumen Tidak Sesuai',
             'body' => 'Rejected Request Ethical Clearance Document',
-            'subject' => 'datamu ditolak ayo ajukan lagi',
+            'subject' => '<p>Permintaan Ethical Clearance ditolak dengan alasan:<br>'.$request->reason.'<br> Silahkan hubungi admin!</p>',
             'view' => 'pages.email.sendReviewer',
             'link' => 'user/Ajuan',
         ];

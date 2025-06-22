@@ -15,7 +15,7 @@ Route::get('/', [Controller::class, 'index'])->name('home');
 Route::get('/maintenance/check', [ManageWebsiteController::class, 'checkMaintenance'])->name('maintenance.check');
 
 
-Route::get('/dashboard',  [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 
 //Route Feedback untuk semua role
@@ -29,14 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/messages/{id}/done', [FeedbackController::class, 'selesaiReview'])->name('messages.selesaiReview');
 });
 
-
-
-
-
 Route::get('/message-show', function () {
     return view('pages.pesan.show');
 })->name('message-show');
-
 
 // Corn Job Routes
 
@@ -46,7 +41,7 @@ Route::get('/message-show', function () {
 //     Route::get('/artisan/run', function () { Artisan::call('schedule:run'); return 'Optimize and Cache Clear Success';});
 // });
 
-Route::get('/artisan/op', function () { 
+Route::get('/artisan/op', function () {
     Artisan::call('cache:clear');
     Artisan::call('view:clear');
     Artisan::call('config:clear');
@@ -54,17 +49,12 @@ Route::get('/artisan/op', function () {
     return 'Optimize Success';
 });
 
-    Route::get('/artisan/run', function () { 
-        Artisan::call('schedule:run'); return 'Maintenance';});
+Route::get('/artisan/run', function () {
+    Artisan::call('schedule:run');
+    return 'Maintenance';
+});
 
-Route::get('/artisan/db', function () { Artisan::call('migrate:fresh --seed'); return 'Migrate Fresh Success';});
-
-
-
-
-
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 require __DIR__ . '/user.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/reviewer.php';
