@@ -67,6 +67,7 @@ class ProfileController extends Controller
         } else {
             if ($user->hasPermissionTo('done-profile')) {
                 // Validasi untuk user dengan 'done-profile' permission
+
                 $this->validate($request, [
                     'name'         => 'required',
                     'phone_number' => 'required',

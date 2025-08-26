@@ -1,4 +1,5 @@
 # Ignore .env file
+.idea
 .env
+/public/app
 /vendor/
-

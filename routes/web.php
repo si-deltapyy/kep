@@ -54,6 +54,18 @@ Route::get('/artisan/run', function () {
     return 'Maintenance';
 });
 
+Route::get('/test-email', function () {
+    try {
+        Mail::raw("Ini email percobaan dari Laravel via Gmail SMTP.", function ($message) {
+            $message->to('yusfia.hafid@staff.uns.ac.id')
+                ->subject('📧 Test Email Laravel');
+        });
+        return "✅ Email berhasil dikirim.";
+    } catch (\Exception $e) {
+        return "❌ Gagal mengirim email: " . $e->getMessage();
+    }
+});
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/user.php';
 require __DIR__ . '/admin.php';

@@ -13,33 +13,33 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 /**
  * @return void
  */
-function administrativeTools(): void
-{
-    Route::get('/artisan/db', function () {
-        Artisan::call('migrate:fresh --seed');
-        return 'Migrate Fresh Success';
-    });
-
-    Route::get('/artisan/link', function () {
-        Artisan::call('storage:link');
-        return 'Link Success';
-    });
-
-    Route::get('/artisan/migrate', function () {
-        Artisan::call('migrate');
-        return 'Migrate Success';
-    });
-
-    Route::get('/artisan-tools', function () {
-        // Jalankan semua Artisan command
-        Artisan::call('route:clear');
-        Artisan::call('optimize:clear');
-        Artisan::call('route:list');
-
-        // Tampilkan hasil route:list
-        return nl2br(e(Artisan::output()));
-    });
-}
+//function administrativeTools(): void
+//{
+//    Route::get('/artisan/db', function () {
+//        Artisan::call('migrate:fresh --seed');
+//        return 'Migrate Fresh Success';
+//    });
+//
+//    Route::get('/artisan/link', function () {
+//        Artisan::call('storage:link');
+//        return 'Link Success';
+//    });
+//
+//    Route::get('/artisan/migrate', function () {
+//        Artisan::call('migrate');
+//        return 'Migrate Success';
+//    });
+//
+//    Route::get('/artisan-tools', function () {
+//        // Jalankan semua Artisan command
+//        Artisan::call('route:clear');
+//        Artisan::call('optimize:clear');
+//        Artisan::call('route:list');
+//
+//        // Tampilkan hasil route:list
+//        return nl2br(e(Artisan::output()));
+//    });
+//}
 
 Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')->prefix('administrator')->group(function(){
     // Common
@@ -98,6 +98,6 @@ Route::middleware(['auth', 'verified', 'role:super_admin'])->name('superadmin.')
     Route::post('/maintenance/update', [ManageWebsiteController::class, 'update'])->name('maintenance.update');
 
     //Administrative Tools
-    administrativeTools();
+//    administrativeTools();
 
 });

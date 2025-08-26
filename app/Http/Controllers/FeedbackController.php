@@ -21,19 +21,23 @@ class FeedbackController extends Controller
     public function index()
     {
 
-        $pesan = Feedback::where('receiver_id', Auth::id())
-        ->when(Auth::user()->hasRole('sekertaris'), function ($query) {
-            // Tambahkan kondisi `is_review` untuk role `sekretaris`
-            return $query->whereHas('dummy', function ($subQuery) {
-                $subQuery->where('review_status', 1);
-            });
-        })
-        ->get()
-        ->groupBy('dummy_id')
-        ->map(function ($group) {
-            return $group->first();
-        });
+//        $pesan = Feedback::where('receiver_id', Auth::id())
+//        ->when(Auth::user()->hasRole('sekertaris'), function ($query) {
+//            // Tambahkan kondisi `is_review` untuk role `sekretaris`
+//            return $query->whereHas('dummy', function ($subQuery) {
+//                $subQuery->where('review_status', 1);
+//            });
+//        })
+//        ->get()
+//        ->groupBy('dummy_id')
+//        ->map(function ($group) {
+//            return $group->first();
+//        });
 
+
+        $pesan = Dummy::where('review_status', 1)
+            ->where('sekertaris_id', Auth::user()->id)
+            ->get();
         return view('pages.pesan.sekertaris.index', [
             'pesan' => $pesan,
         ]);
@@ -101,22 +105,15 @@ class FeedbackController extends Controller
             ->where('dummy_id', $dummy_id)
             ->get()
             ->groupBy('document_id');
-
         //Order paling baru
         $documents = $rawDocuments->map(function ($group) {
             return $group->sortByDesc('created_at');
         });
-
         $dum = Dummy::find($dummy_id);
-
         // Ambil reviewer_id
         $reviewerIds = $documents->flatten()->pluck('reviewer_id')->unique();
+
         $reviewers = User::whereIn('id', $reviewerIds)->pluck('name', 'id');
-
-        if ($documents->isEmpty()) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan untuk dummy_id: ' . $dummy_id);
-        }
-
         $allDoc = $dum->Document;
 
         // Kirim data ke view
